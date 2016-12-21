@@ -1,0 +1,55 @@
+body,.tabcontent      {color:#999999; background-color:black; }
+
+a {color:#bbbbaa;}
+
+table          { border-color:#cccccc; }
+table.clear    { background-color:#aaaaaa; color:black; }
+
+th        {background-color:#777777; color:black; border-color:#aaaaaa; }
+th.good   {background-color:#99aa99; color:black; }
+
+.trow:hover { background-color:#eebbee; color:black; }
+
+.ua_day,.ua_day,.world_day,.world_night,.gray,.usr,.lnk,.dis,
+  .hlight,.warn,.good,.norm,.black {color:black;}
+
+.ua_day      {background-color:#99aa99; }
+.ua_night    {background-color:#889988; }
+.world_day   {background-color:#aaaaaa; }
+.world_night {background-color:#999999; }
+.gray        {background-color:#aa6666; }
+.usr         {background-color:#339933; }
+.lnk         {background-color:#66bb66; }
+.dis         {background-color:#666666; }
+.hlight      {background-color:#cccccc; }
+.warn        {background-color:#cccc99; }
+.good        {background-color:#99aa99; }
+.norm        {background-color:#999999; }
+.black,.sblack {background-color:black; color:#cccccc; }
+.big         {background-color:#bbbbbb; }
+
+h2,h3,h4 { color:white; }
+
+.italic { color:#eeeecc; }
+.sep { background-color:#666666; color:#cccccc; }
+.act,.pbl { color:#00cc00; }
+
+select,textarea,input {background-color:inherit; }
+select,textarea,input {background-color:#889988; border: 1px solid #eeeeee; color:black; }
+option { background-color:#99aa99; padding: 0px 0px; }
+input[type=submit],input[type=button] { background-color:#999999; width:auto; border: 4px double black; padding: 0px 0px; }
+input[disabled] { color:#555555; }
+input[type=submit]:hover,input[type=button]:hover { background-color:#777777; color:white; }
+
+pre { background-color:#aaaa99; color:black; }
+pre.shell { background-color:inherit; color:inherit; font-weight:inherit; }
+pre a { color:#ffff66; }
+
+.news-date { color:#ffff99; }
+
+.tab label.tb { background: #777777; color:black; }
+[type=radio]:checked ~ label.tb { background: #aa9999; color:black; }
+
+.ddmenu ul li:hover { background:#eeeeee; }
+.ddmenu ul ul { background:#fff; border-color:#cccccc; }
+

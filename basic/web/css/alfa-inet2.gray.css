@@ -1,0 +1,73 @@
+body,.tabcontent	{ color:#333333; background-color:#bbbbbb; }
+
+a {color:#665555;}
+a:hover {color:red;}
+a.blnk {color:#bbffbb;}
+a.usr,a.lnk {color:black;}
+
+table	{ border: 1px solid #333333; }
+table.clear	{ background-color:#aaaaaa; color:#333333; }
+
+
+th	{background-color:#777777; color:white; border-color:#333333; }
+th.good	{background-color:#99aa99;}
+
+td.black	{ border-color:#cccccc; }
+
+.trow:hover { background-color:#bbeebb; color:black; }
+
+.ua_day	{background-color:#ccddcc; }
+.ua_night	{background-color:#bbddbb; }
+.world_day	{background-color:#cccccc; }
+.world_night	{background-color:#bbbbbb; }
+.gray	{background-color:#ddbbbb; }
+.usr	{background-color:#99bb99; }
+.lnk	{background-color:#bbddbb; }
+a.lnk:hover	{color:red; }
+.dis	{background-color:#bbbbbb; }
+.hlight	{background-color:#cccccc; }
+.warn	{background-color:#ddddbb; }
+.good	{background-color:#bbddbb; }
+.norm	{background-color:#dddddd; }
+.black,.sblack {background-color:#999999; }
+.big	{background-color:#dddddd; }
+
+
+.italic { color:#666666;  }
+.sep { background-color:#999999; color:black; }
+.red,.att { color:red; }
+.act { color:#33dd33; }
+.ok  { color:green; }
+.dup { color:gray; }
+.bright { color:#ffeeee; }
+.adm { color:#ff6666; }
+.pbl { color:#3333cc; }
+
+select,textarea,input {background-color:inherit; }
+input,select,textarea {background-color:#889988; color:#333333; }
+select { padding:0; }
+option { background-color:#99aa99; }
+input[type=submit],input[type=button] {background-color:#999999; width:auto; }
+input[disabled] { color:#555555; }
+input[type=submit]:hover,input[type=button]:hover { background-color:#777777; color:white; }
+
+.news-date { color:#ffeeee; }
+pre, code { font-weight:inherit; margin:inherit; padding: 6px; font-family:courier new; background-color:#ffffe0; color:#333333; text-align:left; margin-top:2px; }
+
+
+.ymap_balloon { background-color:black; color:white; padding: 3px; line-height:1.2; white-space:nowrap; }
+
+.tab label.tb { background: #777777; color:white; }
+[type=radio]:checked ~ label.tb { background: #aa9999; color:black; }
+
+.ddmenu ul li, .ddmenu ul a { background:#777777; color:white; }
+.ddmenu ul li:hover, .ddmenu ul a:hover { background: #aa9999; color:black; }
+.ddmenu ul ul { background: #777777; color:white; border-color:black; }
+
+
+#wikileft a { color:white; }
+#wikileft a:hover { color:red; }
+.sidehead a { color:#505050; }
+#wikibody { background-color:#889988; color:#333333; }
+#wikibody a { color:black; }
+#wikicmds li a:hover { color:red; }

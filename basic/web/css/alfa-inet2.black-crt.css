@@ -1,0 +1,105 @@
+body,.tabcontent {color:white; background-color:#555555; }
+
+a {color:#eeeedd;}
+a.blnk  {color:#eeffee;}
+
+table	{ border-color:#eeeeee; padding: 2px; padding-top:1px; }
+table.clear	{ background-color:#aaaaaa; color:black; }
+
+th	{background-color:#999999; color:white; border-color:#eeeeee; }
+th.good	{background-color:#99aa99; color:black; }
+
+td.black	{ border-color:#cccccc; }
+.trow:hover { background-color:#996699; color:white; }
+
+world_day,.world_night,.gray,.dis,.usr,.lnk,.hlight,.warn,.good,.norm,.big
+	{color:black; }
+
+.ua_day	{background-color:#bbeebb; }
+.ua_night	{background-color:#99dd99; }
+.world_day	{background-color:#eeeeee; }
+.world_night	{background-color:#bbbbbb; }
+.gray	{background-color:#dd9999; }
+.usr	{background-color:#88bb88; }
+.lnk	{background-color:#99ee99; }
+.dis	{background-color:#aaaaaa; }
+.hlight	{background-color:#bbbbbb; }
+.warn	{background-color:#eeeebb; }
+.good	{background-color:#bbeebb; }
+.norm	{background-color:#bbbbbb; }
+.black,.sblack {background-color:black; color:#eeeeee; }
+.big	{background-color:#eeeeee; }
+
+h2,h3,h4 { color:white; }
+
+.italic { color:#eeeecc; }
+.sep { background-color:#999999; color:#eeeeee; }
+.ok { color:#66cc66; }
+.dup { color:#bbbbbb; }
+.red,.dup,.ok,.italic { font-weight:bold; }
+.pbl { color:#33cc33; }
+
+select,textarea,input {background-color:#99aa99; border: 1px solid #eeeeee; color:black;}
+select { border: 0 none; padding: 0px 0px; }
+option { background-color:#aabbaa; }
+input[type=submit],input[type=button] { background-color:#aaaaaa; border: 4px double #555555; padding: 0px 0px; }
+input[disabled] {color:#555555;}
+input[type=submit]:hover,input[type=button]:hover { background-color:#999999; color:white; }
+
+pre { background-color:#bbbbaa; color:black; }
+pre.shell { background-color:inherit; color:inherit; font-weight:inherit; }
+pre a { color:#ffff00; }
+
+.ymap_balloon { background-color:black; color:white; padding: 3px; line-height:1.2; white-space:nowrap; }
+
+.news-date { color:#ffff99; }
+
+.tab label.tb { background: #999999; color:white; }
+[type=radio]:checked ~ label.tb { background: #aa9999; color:black; }
+
+.ddmenu ul li:hover { background: #aa9999; color:black; }
+.ddmenu ul ul { background: #999999; color:white; border-color:#eeeeee; }
+
+/* Horiszontal menu */
+.multi-menu-ul { color:#000;}
+.multi-menu-ul a{color:#000;}
+.multi-menu-ul a:hover{color:#CC1111;}
+
+/* phone number (top-right), support */
+.top-rrt span, .top-rrt a { text-decoration:underline; font-size:17px; /*color:#fff;*/ }
+
+.top-rrt a:hover { color:#777; }
+
+/* Left menu */
+	/* Common menu headers */
+        .left-menu .content .border div{ background-color:transparent; color:white; }
+	.left-menu .title-even,.left-menu .title-uneven{ /*color:#fff;*/ }
+	.left-menu  .title a{ /*color:#fff;*/ font-size:20px; text-decoration:none; font-family:times new roman; }
+	.left-menu  .title a:hover{ color:#777; }
+	.left-menu  .title-even .title{ background-color:#444; }
+	.left-menu  .title-uneven  .title{ background-color:#666; }
+	.left-menu .content { background-color:transparent; }
+	
+	/*News*/
+	.widget-news-list .n-title { background-color:#ddd; font-weight:bold; border-bottom:1px solid #000; border-top:1px solid #000; 	}
+	
+/* Content */
+#content { color:white; background-color:#555555; }
+
+.tariff thead th { background-color:#ddd; }
+.tariff tbody tr:hover { background-color:#ccc; }
+.price { font-weight:bold; color:#cc1111; text-align:center; }
+p.info { color:#444; }
+
+/* Content top Alfa-inet */
+#content-logo { background-color:#444; color:#fff; }
+
+/* Footer */
+
+/* Feedback */
+#feedback a{ color:inherit;}
+#feedback a:hover{ color:#777;}
+
+/* Social networks */
+#footer-left table tr td{ color:#fff; background-color:#434343; text-decoration:underline; }
+#footer-right { background-color:#434343; color:#fff; }

@@ -1,0 +1,82 @@
+
+.test_color_size{
+    width: 50px;
+    height: 50px;
+}
+
+/*****************************/
+.test_color_test_1{
+    background-color: #286090;
+}
+.test_color_test_2{
+    background-color: #00619D;
+}
+
+.test_color_test_3{
+    background-color: #2e6da4;
+}
+
+.test_color_test_4{
+    background-color: #337ab7;
+}
+
+.test_color_test_5{
+    background-color: #0076BF;
+}
+.test_color_test_6{
+    background-color: #4876FF;
+}
+.test_color_test_7{
+    background-color: #0093d7;
+}
+.test_color_test_8{
+    background-color: #a94442;
+}
+.test_color_test_9{
+    background-color: #777;
+}
+.test_color_test_10{
+    background-color: #ddd;
+}
+.test_color_test_11{
+    background-color: #F8F8FF;
+}
+
+/********************************/
+
+.test_color_alfa_black_ctr_1{
+    background-color: #363636;
+}
+.test_color_alfa_black_ctr_2{
+    background-color: #364F4F;
+}
+
+.test_color_alfa_black_ctr_3{
+    background-color: #4F4F4F;
+}
+
+.test_color_alfa_black_ctr_4{
+    background-color: #4F6969;
+}
+
+.test_color_alfa_black_ctr_5{
+    background-color: #696969;
+}
+.test_color_alfa_black_ctr_6{
+    background-color: #698282;
+}
+.test_color_alfa_black_ctr_7{
+    background-color: #828282;
+}
+.test_color_alfa_black_ctr_8{
+    background-color: #a94442;
+}
+.test_color_alfa_black_ctr_9{
+    background-color: #777;
+}
+.test_color_alfa_black_ctr_10{
+    background-color: #889988;
+}
+.test_color_alfa_black_ctr_11{
+    background-color: #CFCFCF;
+}
