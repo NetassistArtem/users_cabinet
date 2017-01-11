@@ -43,7 +43,7 @@ class MessageTypeChangeForm extends Model
 
            // die();
 
-            Yii::$app->session->setFlash('messageTypeChanged', ['value' => 'Новые настройки уведомлений сохранены.']);
+            Yii::$app->session->setFlash('messageTypeChanged', ['value' => Yii::t('flash-message', 'notification_settings_saved')]);
 
         //    Yii::$app->session->set('selected_options', );
 
@@ -53,7 +53,7 @@ class MessageTypeChangeForm extends Model
         }else {
 
 
-            Yii::$app->session->setFlash('messageTypeChanged', ['value' => 'Новые настройки уведомлений не были сохранены']);
+            Yii::$app->session->setFlash('messageTypeChanged', ['value' => Yii::t('flash-message', 'notification_settings_not_saved')]);
             return false;
         }
     }
@@ -101,8 +101,8 @@ class MessageTypeChangeForm extends Model
 
             }
         }
-
-        $request_vars = $_POST;
+global $request_vars;
+      //  $request_vars = $_POST;
 
        // Debugger::PrintR($request_vars);
        $sm_flags = get_sm_options($request_vars, $input_name="sm_flag");

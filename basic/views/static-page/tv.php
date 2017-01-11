@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 
-$this->title = 'Телевидение';
+$this->title = Yii::t('tv','tv');
 
 ?>
 <div class="site-about">
@@ -12,10 +12,10 @@ $this->title = 'Телевидение';
     <div class="content_tv">
         <div>
             <p>
-                <i class="message_main_text">Телевидение в сети!</i>
+                <i class="message_main_text"><?= Yii::t('tv','tv_on_net')?></i>
             </p>
-            <p>Компания Кузя совместно с парнером, предоставляет 150 каналов цифрового телевидения в формате IPTV.</p>
-            <p>В список каналов входят "Канал 5", "TBi", "Громадське.ТВ" и многие другие.</p>
+            <p><?= Yii::t('site',Yii::$app->session->get('sites_data')['company_name']['lang_key'])?>    <?= Yii::t('tv','provide_ip_tv')?></p>
+            <p><?= Yii::t('tv','channel_sample')?></p>
         </div>
 
     </div>
@@ -25,18 +25,18 @@ $this->title = 'Телевидение';
         <table class="table table-bordered  table-border-custom" >
             <thead>
             <tr>
-                <th colspan="2">Загрузки</th>
+                <th colspan="2"><?= Yii::t('tv','downloading')?></th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td>Проигрыватель</td>
-                <td class="btn-custom" ><a  href="http://iptv.alfa-inet.net/files/alfa-IpTvPlayer-setup.exe">Загрузить</a></td>
+                <td><?= Yii::t('tv','player')?></td>
+                <td class="btn-custom" ><a  href="http://iptv.alfa-inet.net/files/alfa-IpTvPlayer-setup.exe"><?= Yii::t('tv','download')?></a></td>
 
             </tr>
             <tr>
-                <td>Плэй лист для проигрывателя или приставки</td>
-                <td class="btn-custom" ><a  href="http://kuzia.net.ua/tv_playlist.m3u">Загрузить</a></td>
+                <td><?= Yii::t('tv','playlist')?></td>
+                <td class="btn-custom" ><a  href="http://kuzia.net.ua/tv_playlist.m3u"><?= Yii::t('tv','download')?></a></td>
 
             </tr>
 

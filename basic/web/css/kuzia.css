@@ -43,7 +43,7 @@ a, a:hover, a:focus {
     transition: all 0.25s ease-out 0s;
 }
 a:hover, a:focus {
-    color: #00619D;
+    color: #ed7f02;
 }
 h4, .h4 {
     font-size:16px;
@@ -53,6 +53,7 @@ h4, .h4 {
 .footer {
     margin-top: 20px;
     width: 100%;
+    background-color: #529017;
 }
 
 
@@ -91,6 +92,7 @@ div.title_custom {
     text-align: center;
     margin-bottom: 30px;
     background-color: #F5F5F5;
+    border-radius: 10px;
 
 }
 
@@ -105,6 +107,31 @@ i.message_main_text{
     font-size: 18px;
     font-weight: bold;
 }
+
+.btn-primary{
+    background-color: #529017;
+    border-color: #529017;
+    border-radius: 10px;
+}
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus{
+    background-color: #ed7f02;
+    border-color: #ed7f02;
+    border-radius: 10px;
+}
+
+
+
+
+h1, h2 {
+    color: rgb(255, 144, 0);
+}
+input:active, textarea:active {
+    border-radius: 10px;
+    border-color: #ed7f02;
+}
+
+
+
 
 
 /* Верхнее меню */
@@ -124,7 +151,7 @@ i.message_main_text{
 }
 
 #w1.nav > li {
-    background-color: #0093d7;
+    background-color: #529017;
     border-left: 4px solid white;
     cursor: pointer;
     display: inline;
@@ -137,7 +164,7 @@ i.message_main_text{
 }
 
 .navbar-default {
-    background-color: #0093d7;
+    background-color: #529017;
     height: 64px;
     padding-left: 0;
     padding-right: 0;
@@ -188,7 +215,7 @@ div.navbar-header > a.navbar-brand {
 }
 .navbar-default #w1.navbar-nav > li > a:hover {
 
-    background-color: #0093d7;
+    background-color: #ed7f02;
     color: white;
 }
 .navbar-default #w1.navbar-nav > li.active > a{
@@ -200,12 +227,12 @@ div.navbar-header > a.navbar-brand {
 }
 
 #w1.nav > li > form > button.logout:hover {
-    color: red;
+
     padding-top: 20px;
     padding-bottom: 23px;
-    background-color: #0076BF;
+    background-color: #ed7f02;
     padding-left: 16px;
-    padding-right: 18px;
+    padding-right: 21px;
 }
 
 .navbar-default .navbar-toggle {
@@ -388,25 +415,30 @@ div.navbar-header > a.navbar-brand {
 
     }
     .navbar-header {
-        background-color: #0093d7;
+        background-color: #529017;
 
 
     }
     .navbar-default .navbar-nav > li > a:hover {
 
-        background-color: #0076BF;
+        background-color: #ed7f02;
     }
 
     #w1.nav > li.li_en{
         width: 100%;
         background-image: none;
-        background-color: #0093d7;
+        background-color: #529017;
 
     }
     #w1.nav > li.li_uk{
         width: 100%;
         background-image: none;
-        background-color: #0093d7;
+        background-color: #529017;
+    }
+    #w1.nav > li.li_ru{
+        width: 100%;
+        background-image: none;
+        background-color: #529017;
     }
 
     /*Меню в сайтбаре*/
@@ -423,21 +455,18 @@ div.navbar-header > a.navbar-brand {
 
 /* форма регистрации */
 
-button.btn-submit-custom{
-    border-radius: 0;
-}
 
 input.form-control, select.form-control{
     height: 44px;
     font-size: 16px;
-    border: 2px solid #286090;
-    border-radius: 0;
+    border: 2px solid #d5780b;
+    border-radius: 10px;
 }
 
 textarea.form-control{
     font-size: 16px;
-    border: 2px solid #286090;
-    border-radius: 0;
+    border: 2px solid #d5780b;
+    border-radius: 10px;
 }
 
 .login-title-position{
@@ -454,13 +483,20 @@ textarea.form-control{
 
 
 #w2.nav > li {
-    background-color: #0093d7;
+    background-color: #529017;
     height: 50px;
     margin-top: 10px;
+    border-radius: 10px;
+}
+
+#w2.nav > li.active > a {
+    background-color: #ed7f02;
+
 }
 
 #w2.nav-pills > li > a{
-    border-radius: 0;
+
+    border-radius: 10px;
 
 }
 
@@ -470,19 +506,21 @@ textarea.form-control{
 }
 
 #w2.nav > li > a:hover, #w2.nav > li > a:focus{
-    background-color: #0076BF;
+    background-color: #ed7f02;
+    border-radius: 10px;
 }
 
 /*Блок с данными аккаунта*/
 
 .account-data-block{
-    background-color: #FAEBD7; /* #f5f5f5; /*#8c8c8c;*/
+    background-color: #fffad0; /* #f5f5f5; /*#8c8c8c;*/
     margin-top: 20px;
+    border-radius: 10px;
 }
 
 
 .account-data-block > p{
-
+    padding-top: 10px;
     margin-top: 10px;
     font-size: 30px;
 
@@ -494,12 +532,13 @@ textarea.form-control{
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    background-color: #CD5C5C;
+    background-color: #d5780b;
     color: white;
+    border-radius: 10px 10px 0 0;
 
 }
 .account-data-block > div > div >a >div:hover{
-    background-color: #E9867A;
+    background-color: #ed7f02;
 }
 .account-data-block > div > div > a > div > p{
 
@@ -509,8 +548,9 @@ textarea.form-control{
 }
 
 .account-data-block-1 div, .account-data-block-2 div,.account-data-block-3 div,.account-data-block-4 div, .account-data-block-5 div, .account-data-block-6 div{
-    background-color:#E9967A;
+    background-color:#529017;
     height: 100px;
+    border-radius: 10px;
 }
 
 .account-data-block-1, .account-data-block-2,.account-data-block-3,.account-data-block-4, .account-data-block-5, .account-data-block-6{
@@ -531,18 +571,21 @@ textarea.form-control{
 /* таблицы */
 
 
+.table-responsive {
+    border-radius: 10px;
 
+}
 
 
 table.table-border-custom > thead > tr >th, table.table.table-border-custom > thead:first-child > tr:first-child >th, table.table-border-custom > tbody > tr >td, table.table-border-custom {
-    border: 2px solid #ddd;  /* #286090; */
+    border: 1px solid #FF9000;  /* #286090; */
     height: 44px;
     background-color: white;
 
 }
 
 table.table-border-custom > thead > tr >th, table.table.table-border-custom > thead:first-child > tr:first-child >th{
-    background-color: #4876FF;
+    background-color: #FF9000;
     color: white;
 }
 
@@ -555,32 +598,35 @@ table.table-border-custom > tbody > tr >td.btn-custom{
 }
 
 .btn-custom > a{
-    background-color:#0093d7;
+    background-color:#529017;
     color: white;
     padding: 10px 25px;
+    border-radius: 10px;
 
 }
 .btn-custom > a:hover{
-    background-color: #0076BF;
+    background-color: #ed7f02;
+    border-radius: 10px;
 
 }
 
 /* Управление кабинетом */
 
 div.cabinet_change_forms > div.panel-heading {
-    background-color: #4876FF;
+    background-color: #FF9000;
     color: white;
     height: 44px;
-    border-radius: 0px;
-    border-bottom: solid 2px #ddd;
+    border-radius: 10px 10px 0 0;
+    border-bottom: solid 2px #FF9000;
     font-weight: bold;
 }
 div.cabinet_change_forms {
-    border-radius: 0px;
+    border-radius: 10px;
 }
 
 div.cabinet_change_forms > div.panel-body{
     background-color: #F8F8FF;
+    border: solid 1px #FF9000;
 }
 
 div.empty_div_form{
@@ -598,6 +644,7 @@ div.empty_div_form{
 .content_tv{
     background-color: white;
     margin-bottom: 30px;
+    border-radius: 10px;
 }
 .content_tv > div{
     padding: 20px;
@@ -644,7 +691,7 @@ div.modal_1_wrapper{
     top: 35%;
 }
 div.modal_1_wrapper >div >div.modal-content, div.modal_2_wrapper >div >div.modal-content{
-    border-radius: 0;
+    border-radius: 10px;
 }
 
 div.modal_1_wrapper >div > div> div.modal-body, div.modal_2_wrapper >div > div> div.modal-body{
@@ -653,8 +700,9 @@ div.modal_1_wrapper >div > div> div.modal-body, div.modal_2_wrapper >div > div> 
     padding: 40px;
 }
 div.modal_1_header, div.modal_2_header{
-    background-color: #4876FF;
+    background-color: #FF9000;
     border: 0px;
+    border-radius: 10px 10px 0 0;
 }
 div.modal_1_header > button.close, div.model_2_header > button.close{
     font-size: 29px;
@@ -695,9 +743,10 @@ div.pagination-custom{
 }
 div.todo-custom-view{
     background-color: #F8F8FF;
+    border-radius: 10px;
 }
 div.sep{
-    background-color: #4876FF;
+    background-color: #FF9000;
     color: white;
     height: 44px;
     border-radius: 0px;
@@ -709,6 +758,7 @@ div.sep{
     padding-left: 10px;
     padding-right: 10px;
     border-top: solid 2px #ddd;
+    border-radius: 10px 10px 0 0;
 }
 .message-history-support{
     margin-top: 30px;
@@ -719,23 +769,22 @@ div.sep{
 div.table_payment >table {
 
     width: 100% !important;
-    border: 0px solid #ddd !important;
+    border: 1px solid #FF9000 !important;
     height: 44px !important;
     background-color: white !important;
     max-width: 100% !important;
     margin-bottom: 20px !important;
     border-spacing: 0;
     border-collapse: collapse;
+
 }
 
 div.table_payment >table >tbody>tr>td>form>p{
     padding-right: 15px;
     padding-left: 15px;
     padding-bottom: 15px;
-    border-bottom: 2px solid #ddd;
-    border-top: 4px solid #ddd;
 
-    background-color: #4876FF;
+    background-color: #FF9000;
     color: white;
     font: 16px/21px "Open Sans", Calibri, Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -745,11 +794,12 @@ div.table_payment >table >tbody>tr>td>form>p{
 div.table_payment >table >tbody>tr>td>form>p>input{
     height: 44px;
     font-size: 16px;
-    border: 2px solid #286090;
-    border-radius: 0;
+    border: 2px solid #d5780b;
+    border-radius: 10px;
     text-align: center;
     color: black;
 }
+
 
 table.invis{
     width: 100% !important;
@@ -761,8 +811,8 @@ table.invis{
 }
 
 table.invis>tbody>tr>td{
-    border-left: 2px solid #ddd;
-    border-bottom: 2px solid #ddd;
+    border-left: 1px solid #FF9000;
+    border-bottom: 1px solid #FF9000;
     height: 44px;
     background-color: white;
     padding-left: 2%;
@@ -773,7 +823,6 @@ table.invis>tbody>tr.trow>td{
 }
 
 table.invis>tbody>tr.trow>td>input[type="submit"]{
-    border-radius: 0;
     display: block;
     width: 30%;
     margin-left: 34%;
@@ -781,24 +830,31 @@ table.invis>tbody>tr.trow>td>input[type="submit"]{
     font-size: 18px;
     line-height: 1.3333333;
     color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4;
+    background-color: #529017;
+
     margin-bottom: 0;
     font-weight: normal;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
     background-image: none;
+    border-radius: 10px;
+    border: 1px solid transparent;
+}
+table.invis>tbody>tr.trow>td>input[type="submit"]:hover, div.payment_next_information > form > div > input[type="submit"]:hover, div.payment_next_information > form > input[type="submit"]:hover{
+    background-color: #ed7f02;
+    border-color: #ed7f02;
 }
 
 .payment_next_information{
     background-color: white;
+    border: 1px solid #FF9000;
 }
 .red {
     color: red;
 }
-div.payment_next_information > form > div > input[type="submit"]{
-    border-radius: 0;
+div.payment_next_information > form > div > input[type="submit"], div.payment_next_information > form > input[type="submit"]{
+    border-radius: 10px;
     display: block;
     width: 30%;
     margin-left: 34%;
@@ -806,18 +862,44 @@ div.payment_next_information > form > div > input[type="submit"]{
     font-size: 18px;
     line-height: 1.3333333;
     color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4;
-    margin-bottom: 0;
+    background-color: #529017;
     font-weight: normal;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
     background-image: none;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border: 1px solid transparent;
+
 
 }
 div.payment_next_information > form >div{
     text-align: center;
     margin-bottom: 20px;
     margin-top: 20px;
+}
+
+div.payment_next_information > form > select{
+
+    height: 44px;
+    font-size: 16px;
+    border: 2px solid #d5780b;
+    border-radius: 10px;
+    display: block;
+    width: 30%;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    margin-left: 34%;
+
+}
+
+/******************Скрытые поля************************/
+
+div.hiden-fields > div.form-group > div.message-history-support, div.hiden-fields > div.form-group, div.hiden-fields > div.form-group >div >div.help-block {
+    margin-top: 0px;
+    margin-bottom: 0px;
 }

@@ -53,6 +53,8 @@ h4, .h4 {
 .footer {
     margin-top: 20px;
     width: 100%;
+    background-color: #828282;
+    color: white;
 }
 
 
@@ -416,6 +418,11 @@ div.navbar-header > a.navbar-brand {
         background-image: none;
         background-color: #828282;
     }
+    #w1.nav > li.li_ru{
+        width: 100%;
+        background-image: none;
+        background-color: #828282;
+    }
 
     /*Меню в сайтбаре*/
     div.sitebar-right #w2.nav > li > a, #w2.nav > li > a:hover, #w2.nav > li > a:focus, #w2.nav > li.active > a{
@@ -467,6 +474,11 @@ textarea.form-control{
     margin-top: 10px;
 }
 
+#w2.nav > li.active > a {
+    background-color: #696969;
+
+}
+
 #w2.nav-pills > li > a{
     border-radius: 0;
 
@@ -493,6 +505,7 @@ textarea.form-control{
 
     margin-top: 10px;
     font-size: 30px;
+    padding-top: 10px;
 
 
 }
@@ -790,13 +803,17 @@ table.invis>tbody>tr.trow>td>input[type="submit"]{
     line-height: 1.3333333;
     color: #fff;
     background-color: #4F6969;
-    border-color: #4F4F4F;
     margin-bottom: 0;
     font-weight: normal;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
     background-image: none;
+    border: 1px solid transparent;
+}
+table.invis>tbody>tr.trow>td>input[type="submit"]:hover, div.payment_next_information > form > div > input[type="submit"]:hover, div.payment_next_information > form > input[type="submit"]:hover{
+    background-color: #696969;
+    border-color: #696969;
 }
 
 .payment_next_information{
@@ -805,7 +822,7 @@ table.invis>tbody>tr.trow>td>input[type="submit"]{
 .red {
     color: #a94442;
 }
-div.payment_next_information > form > div > input[type="submit"]{
+div.payment_next_information > form > div > input[type="submit"], div.payment_next_information > form > input[type="submit"]{
     border-radius: 0;
     display: block;
     width: 30%;
@@ -815,13 +832,14 @@ div.payment_next_information > form > div > input[type="submit"]{
     line-height: 1.3333333;
     color: #fff;
     background-color: #4F6969;
-    border-color: #4F4F4F;
-    margin-bottom: 0;
     font-weight: normal;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
     background-image: none;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border: 1px solid transparent;
 
 }
  div.payment_next_information > form >div{
@@ -829,3 +847,26 @@ div.payment_next_information > form > div > input[type="submit"]{
      margin-bottom: 20px;
      margin-top: 20px;
  }
+
+div.payment_next_information > form > select{
+
+    height: 44px;
+    font-size: 16px;
+    border: 2px solid #4F6969;
+    border-radius: 0;
+    display: block;
+    width: 30%;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    margin-left: 34%;
+
+}
+/******************Серытые поля************************/
+
+div.hiden-fields > div.form-group > div.message-history-support, div.hiden-fields > div.form-group, div.hiden-fields > div.form-group >div >div.help-block {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}

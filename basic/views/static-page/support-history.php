@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
-$this->title = 'История обращений';
+$this->title = Yii::t('support_history','support_history');
 
 
 
@@ -17,18 +17,18 @@ $this->title = 'История обращений';
         <table class="table table-bordered table-border-custom table_support_history" >
             <thead>
             <tr>
-                <th colspan="7">История обращений в техническую поддержку</th>
+                <th colspan="7"><?= Yii::t('support_history','history_appeals') ?></th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <td>№</td>
                 <td>TODO id</td>
-                <td>Статус</td>
-                <td>Время инициализации</td>
-                <td>Время окончания</td>
-                <td>Исполнитель</td>
-                <td>Тема</td>
+                <td><?= Yii::t('support_history','status') ?></td>
+                <td><?= Yii::t('support_history','initialization_time') ?></td>
+                <td><?= Yii::t('support_history','end_time') ?></td>
+                <td><?= Yii::t('support_history','executor') ?></td>
+                <td><?= Yii::t('support_history','subject') ?></td>
             </tr>
 
             <?php foreach($todo_history_array as $k => $v): ?>
@@ -37,7 +37,7 @@ $this->title = 'История обращений';
                 <tr>
 
                     <td><?= $k+1 ?></td>
-                    <td class="btn-custom" ><a href="/basic/web/istoriya-obrascheniy/<?= $v['todo_id'] ?>"><?= $v['todo_id'] ?></a></td>
+                    <td class="btn-custom" ><a href="/istoriya-obrascheniy/<?= $v['todo_id'] ?>"><?= $v['todo_id'] ?></a></td>
                     <td><?= $v['todo_state'] ?></td>
                     <td><?= $v['todo_init_time'] ?></td>
                     <td><?= $v['todo_end_time'] ?></td>

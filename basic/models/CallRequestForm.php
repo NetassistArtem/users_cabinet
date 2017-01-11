@@ -37,8 +37,9 @@ class CallRequestForm extends Model
 
 
             //if($this->sendPhone()){
-                Yii::$app->session->setFlash('flash_message', ['value' => 'Звонок заказан']);
             $this->sendPhone();
+
+
           //  Debugger::VarDamp($t);
           //  }else{
             //    Yii::$app->session->setFlash('flash_message', ['value' => 'Ошибка заказа звонка']);
@@ -59,10 +60,11 @@ class CallRequestForm extends Model
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
         $user_name = isset($user_data['username']) ? $user_data['username'] : '';
         $acc_id = isset($user_data['account_id']) ? $user_data['account_id'] : -1;
+/*
         $new_ctx = array(
             "subj" => "TEST user $user_name, запрос call-back",
-            "ref-acc_id" => $acc_id,
-            "todo_desc" => "(TEST)перезвоните мне на номер $phone_number",
+            "ref_acc_id" => $acc_id,
+            "todo_desc" =>  transcode_utf8_to_internal("(TEST)Перезвоните мне на номер").$phone_number, //  transcode_utf8_to_internal("(TEST)Перезвоните мне на номер").$phone_number,  // iconv_safe('utf-8','koi8-u',  "(TEST)Перезвоните мне на номер").$phone_number,
             "todo_type" => TODO_SUPPORT,
             "todo_state" => REQ_TYPE_CALL,
             "exec_list" => "@duty",
@@ -80,8 +82,21 @@ class CallRequestForm extends Model
             );
 
 
-        $t = todo_ctx_save(0, $todo_ctx, 0);
-        Debugger::VarDamp($t);
+        todo_ctx_save(0, $todo_ctx, 0);
+*/
+        $todo_ctx = array(
+            "subj" => transcode_utf8_to_internal('Обращение в тех-поддержку').' user: '. $user_name. ', ' .transcode_utf8_to_internal('запрос call-back'),
+            "ref_acc_id" => $acc_id,
+            "todo_desc" =>  transcode_utf8_to_internal("Перезвоните мне на номер ").$phone_number, //  transcode_utf8_to_internal("(TEST)Перезвоните мне на номер").$phone_number,  // iconv_safe('utf-8','koi8-u',  "(TEST)Перезвоните мне на номер").$phone_number,
+            "todo_type" => TODO_SUPPORT,
+            "todo_state" => REQ_TYPE_CALL,
+            "exec_list" => "@duty",
+
+        );
+
+        new_todo_simple(0, TODO_SUPPORT, $todo_ctx,
+            -1, $acc_id, -1);
+
         return '';
     }
 

@@ -51,43 +51,54 @@ foreach(Yii::$app->params['domains'] as $k=>$v){
         $styles = $k;
     }
 }
+$testt = 1;
+$styles = 'kuzia';
+global $sites_data;
 switch($styles){
     case 'alfa':
-      switch(get_skin(Yii::$app->user->identity->username)){
+      switch($testt){ //get_skin(Yii::$app->user->identity->username)
           case 0 :
               AlfaGrayAsset::register($this);
               $asset = 'app\assets\AlfaGrayAsset';
+              $sites_data = Yii::$app->params['sites_data']['alfa'];
+              Yii::$app->session->set('sites_data', $sites_data);
               break;
           case 1 :
-              //AppAsset::register($this);
               AlfaBlackAsset::register($this);
               $asset = 'app\assets\AlfaBlackAsset';
+              $sites_data = Yii::$app->params['sites_data']['alfa'];
               break;
           case 2 :
               AlfaBlackCrtAsset::register($this);
               $asset = 'app\assets\AlfaBlackCrtAsset';
+              $sites_data = Yii::$app->params['sites_data']['alfa'];
               break;
           case 3 :
               AlfaWhiteAsset::register($this);
               $asset = 'app\assets\AlfaWhiteAsset';
+              $sites_data = Yii::$app->params['sites_data']['alfa'];
               break;
           case -1 :
               switch(Yii::$app->params['alfa-styles-default']){
                   case 0 :
                       AlfaGrayAsset::register($this);
                       $asset = 'app\assets\AlfaGrayAsset';
+                      $sites_data = Yii::$app->params['sites_data']['alfa'];
                       break;
                   case 1 :
                       AlfaBlackAsset::register($this);
                       $asset = 'app\assets\AlfaBlackAsset';
+                      $sites_data = Yii::$app->params['sites_data']['alfa'];
                       break;
                   case 2 :
                       AlfaBlackCrtAsset::register($this);
                       $asset = 'app\assets\AlfaBlackCrtAsset';
+                      $sites_data = Yii::$app->params['sites_data']['alfa'];
                       break;
                   case 3 :
                       AlfaWhiteAsset::register($this);
                       $asset = 'app\assets\AlfaWhiteAsset';
+                      $sites_data = Yii::$app->params['sites_data']['alfa'];
                       break;
               }
       }
@@ -96,6 +107,8 @@ switch($styles){
     case 'kuzia':
         KuziaAsset::register($this);
         $asset = 'app\assets\KuziaAsset';
+        $sites_data = Yii::$app->params['sites_data']['kuzia'];
+        Yii::$app->session->set('sites_data', $sites_data);
         break;
     default:
         AppAsset::register($this);
@@ -158,7 +171,7 @@ $this->registerJsFile(
 //'javascript:void(0);'
             "<li class='li_call_request'><a class='request_call' id ='request_call' href='/call-request'>".Yii::t('top_menu','request_call')."</a></li>",
             //['label' => Yii::t('top_menu','request_call'), 'url' => ['javascript:void(0);'], 'active' => (Yii::$app->request->url == ""), 'options' => ['class' => 'li_call_request', 'id' =>'request_call', 'onclick' => 'testt()']],
-            ['label' => Yii::$app->params['phone_1'], 'url' => ['#'], 'active' => (Yii::$app->request->url == "#"), 'options' => ['class' => 'li_phone']],
+            ['label' => $sites_data['phone_1'], 'url' => ['#'], 'active' => (Yii::$app->request->url == "#"), 'options' => ['class' => 'li_phone']],
             Yii::$app->user->isGuest ? (
             ['label' => Yii::t('top_menu','login'), 'url' => ['/login'], 'active' => (Yii::$app->request->url == "/login"), 'options' => ['class' => 'li_login']]
             ) : (
@@ -190,7 +203,7 @@ $this->registerJsFile(
                     <p><?= $user_data['fio'] ?></p>
                     <div class="row">
                         <div class="col-lg-2 col-md-2 col-sm-2 account-data-block-1">
-                            <a href="/basic/web/cabinet">
+                            <a href="/cabinet">
                                 <div>
                                     <h4><?= Yii::t('top_info_block','login') ?></h4>
                                     <p><?= $user_data['username'] ?></p>
@@ -198,7 +211,7 @@ $this->registerJsFile(
                             </a>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 account-data-block-2">
-                            <a href="/basic/web/cabinet#finance">
+                            <a href="/cabinet#finance">
                                 <div>
                                     <h4><?= Yii::t('top_info_block','account_balance') ?></h4>
                                     <p> <?= $user_data['account_balance'].' '. $user_data['account_currency'] ?></p>
@@ -206,7 +219,7 @@ $this->registerJsFile(
                             </a>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 account-data-block-3">
-                            <a href="/basic/web/oplata-uslug">
+                            <a href="/oplata-uslug">
                                 <div>
                                     <h4><?= Yii::t('top_info_block','payment_code') ?></h4>
                                     <p> <?= Yii::$app->params['payment_code'] ?></p>
@@ -214,7 +227,7 @@ $this->registerJsFile(
                             </a>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 account-data-block-4">
-                            <a href="/basic/web/cabinet#finance">
+                            <a href="/cabinet#finance">
                                 <div>
                                     <h4><?= Yii::t('top_info_block','services') ?></h4>
                                     <?php if (count($user_data['services']) <= 2):
@@ -231,7 +244,7 @@ $this->registerJsFile(
                             </a>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 account-data-block-5">
-                            <a href="/basic/web/cabinet#finance">
+                            <a href="/cabinet#finance">
                                 <div>
                                     <h4><?= Yii::t('top_info_block','active') ?></h4>
                                     <?php if (count($user_data['services_date']) <= 2):
@@ -248,10 +261,10 @@ $this->registerJsFile(
                             </a>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 account-data-block-6">
-                            <a href="/basic/web/cabinet#network">
+                            <a href="/cabinet#network">
                                 <div>
                                     <h4><?= Yii::t('top_info_block','ip') ?></h4>
-                                    <p> <?= isset($user_data['ip_1']) ? $user_data['ip_1'] : $user_data['ip_real_constant'] ?></p><br>
+                                    <p> <?= isset($user_data['ip_1']) ? $user_data['ip_1'] : $user_data['ip_real_constant'] ?></p>
                                     <p><?= $user_data['ip_2'] ?></p>
                                 </div>
                             </a>
@@ -275,7 +288,7 @@ $this->registerJsFile(
                             ['label' => Yii::t('sidebar_menu','total_data'), 'url' => ['/cabinet'], 'active' => (Yii::$app->request->url == "/cabinet")],
                             ['label' => Yii::t('sidebar_menu','account_manager'), 'url' => ['/upravlenie-kabinetom'], 'active' => (Yii::$app->request->url == "/upravlenie-kabinetom")],
                             ['label' => Yii::t('sidebar_menu','payment'), 'url' => ['/oplata-uslug'], 'active' => (Yii::$app->request->url == "/oplata-uslug")],
-                            ['label' => Yii::t('sidebar_menu','payment history'), 'url' => ['/istoriya-platezhey'], 'active' => (Yii::$app->request->url == "/istoriya-platezhey")],
+                            ['label' => Yii::t('sidebar_menu','payment_history'), 'url' => ['/istoriya-platezhey'], 'active' => (Yii::$app->request->url == "/istoriya-platezhey")],
                             ['label' => Yii::t('sidebar_menu','technical_support'), 'url' => ['/tehnicheskaya-podderzhka'], 'active' => (Yii::$app->request->url == "/tehnicheskaya-podderzhka")],
                             ['label' => Yii::t('sidebar_menu','support_history'), 'url' => ['/istoriya-obrascheniy'], 'active' => (Yii::$app->request->url == "/istoriya-obrascheniy" || Yii::$app->request->url == "/istoriya-obrascheniy/*")],
                             ['label' => Yii::t('sidebar_menu','feedback'), 'url' => ['/ostavit-otzyiv'], 'active' => (Yii::$app->request->url == "/ostavit-otzyiv")],
@@ -298,9 +311,9 @@ $this->registerJsFile(
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <?= Yii::t('site',$sites_data['company_name']['lang_key']);    ?> <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right"></p>
     </div>
 </footer>
 

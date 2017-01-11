@@ -158,6 +158,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                 'password' => $user_data_by_billing['2'],
                 'email' => $user_data_by_billing['3'],
                 'address' => iconv_safe('koi8-u', 'utf-8', $user_data_by_billing['4']),
+                'address_id' => $user_data_by_billing[UINFO_BASE_LOC_ID_IDX],
                 'phone_1' => $user_data_by_billing['10'],
                 'phone_2' => $user_data_by_billing['11'],
                 'account_id' => $user_data_by_billing[UINFO_ACC_ID_IDX],
@@ -207,13 +208,14 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
 
     public static function SupportData()
     {
+
+        $data = get_lang_opt_list("support_classes");//функция из api биллинга
+        $data[0] =  Yii::t('support','select_option');
+
         $support_data = array(
-            'problem-type' => array(
-                0 => 'Выберите вариант ответа',
-                1 => 'Тестовая проблема 1',
-                2 => 'Тестовая проблема 2',
-                3 => 'Тестовая проблема 3'
-            ),
+
+            'problem-type' => $data,
+
         );
 
         return $support_data;
@@ -235,7 +237,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                         'todo_end_time' => itimestamp_to_str($k[TODO_REQ_TIME_IDX], $sep = " ", $dsep = "-", $isep = ":"),
                         'todo_admin_id' => get_user_info_by_ids(UID_ANY, $k[TODO_ACC_ID_IDX])[UINFO_NAME_IDX],//$k[TODO_ADMIN_ID_IDX],
                         'todo_state' => Yii::t('support_history_todo_status', Yii::$app->params['todo_status'][$k[TODO_STATE_IDX]]['lang_key']),
-                        'todo_subj' => iconv_safe('koi8-u', 'utf-8', $k[TODO_SUBJ_IDX]),
+                        'todo_subj' =>  iconv_safe('koi8-u', 'utf-8', $k[TODO_SUBJ_IDX]),//web_encode($k[TODO_SUBJ_IDX]),
                     );
                 }
                 // $todo_records = iconv_safe('koi8-u','utf-8',$todo_records);
@@ -250,14 +252,14 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         $todo_data = load_todo_simple($todo_id, 0, $account_id);
 
         /*
-                echo '</br>';
-                echo '</br>';
-                echo '</br>';
-                echo '</br>';
-                echo $todo_data;
+                       echo '</br>';
+                       echo '</br>';
+                       echo '</br>';
+                       echo '</br>';
+                       echo $todo_data;
 
-                Debugger::PrintR($todo_data);
-        */
+                       Debugger::PrintR($todo_data);
+              */
         /*
                 $todo_filters = array( "target_todo_id" => '$todo_id',"user_name" => $user_name, "user_only" => 1, "all" => 1 );
                 $todo_records_result = list_todo(0, false, false, "upd", "upd", 2,   $todo_filters);

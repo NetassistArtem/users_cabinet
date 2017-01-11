@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use app\components\debugger\Debugger;
 
-$this->title = 'Оплата услуг';
+$this->title =  Yii::t('payment','payment');
 
 
 
@@ -19,6 +19,10 @@ $this->title = 'Оплата услуг';
 
     <div class="table-responsive table_payment payment_next_information">
         <?php
+
+
+
+
         $included = 1;
     //    $verbose = 1;
 
@@ -46,7 +50,8 @@ $this->title = 'Оплата услуг';
        // Debugger::Eho('</br>/n');
        // Debugger::PrintR($_SESSION);
 
-        include (dirname(dirname(__DIR__)) . '/components/billing_api/admin/wm.php')
+        include (dirname(dirname(__DIR__)) . '/components/billing_api/admin/wm.php');
+
 
         ?>
     </div>

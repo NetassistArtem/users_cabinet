@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\ContactChangeForm;
 use app\models\FeedbackForm;
+use app\models\UpdateTodoForm;
 use app\models\MessageTypeChangeForm;
 use app\models\TechnicalSupportForm;
 use app\models\CallRequestForm;
@@ -127,7 +128,6 @@ class StaticPageController extends Controller
     {
         User::UserData();
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
-        $cabinet_management = 'Тестовый текст страници - Управление кабинетом';
         $modelPasswordChange = new PasswordChangeForm();
 /*
         if (Yii::$app->request->isAjax && $modelCabinetChange->load(Yii::$app->request->post())) {
@@ -181,7 +181,6 @@ class StaticPageController extends Controller
 
         return $this->render('cabinet-management', [
             'user_data' =>$user_data,
-            'cabinet_management' => $cabinet_management,
             'modelPasswordChange' => $modelPasswordChange,
             'modelContactChange' => $modelContactChange,
             'modelMessageTypeChange' => $modelMessageTypeChange,
@@ -217,28 +216,46 @@ class StaticPageController extends Controller
     public function actionSupport()
     {
         User::UserData();
-        $support = 'Тестовый текст страници - Техническая поддержка';
-      //  $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
+
+        $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
         $modelTechnicalSupport = new TechnicalSupportForm();
+
 
         if ($modelTechnicalSupport->load(Yii::$app->request->post()) && $modelTechnicalSupport->sendTechnicalInfo()) {
             if (!Yii::$app->request->isPjax) {
                 return $this->redirect(['/tehnicheskaya-podderzhka']);
             }
         }
+        /*
         $swith = array();
         foreach(Yii::$app->params['swith'] as $k => $v){
             $swith[$k] = Yii::t('support',$v['lang_key']);
-        }
+        } */
+        global $request_vars;
+        //$request_vars['submit_add'] = 1;
+        //$request_vars['TechnicalSupportForm']['submit_add'] = 1;
+       // Debugger::PrintR($request_vars);
+
+
+
+
+        todo_ctx_preload_from_vars($request_vars, 0, TODO_INIT_SUPPORT );//функция API биллинга
+
+
+        $swith = get_lang_opt_list('user_router_types'); //функция из api биллинга
+        $swith[0] = Yii::t('support','select_option');
+        /*
         $operation_systems = array();
         foreach(Yii::$app->params['operation_systems'] as $k => $v){
             $operation_systems[$k] = Yii::t('support',$v['lang_key']);
-        }
+        } */
+        //Debugger::PrintR( get_lang_opt_list('user_router_types'));
+        $operation_systems = get_lang_opt_list('os_types'); //функция из api биллинга
+        $operation_systems[0] = Yii::t('support','select_option');
 
 
         return $this->render('support', [
-            'support' => $support,
-          //  'user_data' =>$user_data,
+            'user_data' =>$user_data,
             'modelTechnicalSupport' =>$modelTechnicalSupport,
             'swith' => $swith,
             'operation_systems' => $operation_systems,
@@ -249,7 +266,6 @@ class StaticPageController extends Controller
     {
         User::UserData();
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
-        $support_history = 'Тестовый текст страници - История обращения';
        // User::TodoHistory($user_data['username']);
 
       //  Debugger::PrintR($test);
@@ -262,9 +278,7 @@ class StaticPageController extends Controller
         $todo_history_page = array_slice($todo_history_array, $pages->offset,$pages->limit,$preserve_keys = true);
 
 
-
         return $this->render('support-history', [
-            'support_history' => $support_history,
             'todo_history_array' => $todo_history_page,
             'pages' => $pages,
         ]);
@@ -279,12 +293,14 @@ class StaticPageController extends Controller
         $url_array = explode('/', $url_cl[0]);
         $todo_id = array_pop($url_array);
 
+
         $todo_history = User::TodoHistoryNode($user_data['username'],$todo_id, $user_data['account_id']);
         $todo_history_node = iconv_safe('koi8-u','utf-8',$todo_history['todo_desc_web']);
 
-        $modelFeedback = new FeedbackForm();
 
-        if ($modelFeedback->load(Yii::$app->request->post()) && $modelFeedback->setFeedback()) {
+        $modelUpdateTodo = new UpdateTodoForm();
+
+        if ($modelUpdateTodo->load(Yii::$app->request->post()) && $modelUpdateTodo->setUpdate()) {
             if (!Yii::$app->request->isPjax) {
                 return $this->redirect(['/istoriya-obrascheniy/'.$todo_id]);
             }
@@ -294,7 +310,8 @@ class StaticPageController extends Controller
         return $this->render('support-history-todo', [
             'todo_history_node' => $todo_history_node,
             'todo_id' => $todo_id,
-            'modelFeedback'=>$modelFeedback
+            'todo_history' => $todo_history,
+            'modelUpdateTodo'=>$modelUpdateTodo
         ]);
 
 
@@ -303,19 +320,20 @@ class StaticPageController extends Controller
     public function actionFeedback()
     {
         User::UserData();
-        $feedback = 'Тестовый текст страници - Оставить отзыв';
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
         $modelFeedback = new FeedbackForm();
        // $modelFeedback->files = UploadedFile::getInstances($modelFeedback, 'files');
 
         if ($modelFeedback->load(Yii::$app->request->post()) && $modelFeedback->setFeedback()) {
+           // Debugger::PrintR($_POST);
+
+          //  Debugger::testDie();
             if (!Yii::$app->request->isPjax) {
                 return $this->redirect(['/ostavit-otzyiv']);
             }
         }
 
         return $this->render('feedback', [
-            'feedback' => $feedback,
             'user_data' => $user_data,
             'modelFeedback'=>$modelFeedback,
 

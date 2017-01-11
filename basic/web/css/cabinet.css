@@ -10,12 +10,7 @@
     font-weight: 300;
     font-style: normal;
 }
-@font-face {
-    font-family: 'Open Sans';
-    src: url('fonts/OpenSans-Semibold.ttf') format('truetype');
-    font-weight: 600;
-    font-style: normal;
-}
+
 
 html, body {
     color: #333;
@@ -38,15 +33,7 @@ body {
 
 
 }
-body:not(.side_menu-open) {
-    overflow-y: scroll;
-}
-/*.side_menu-open {
-    overflow:hidden;
-}*/
-article, aside, details, figcaption, figure, .footer, header, hgroup, nav, section {
-    display: block;
-}
+
 a, a:hover, a:focus {
     text-decoration: none;
     outline: none;
@@ -59,35 +46,15 @@ h4, .h4 {
     font-size:16px;
 }
 
-.link-ext:after {
-    content: url("../images/link-ext.png");
-}
 
 
 .footer {
     margin-top: 20px;
     width: 100%;
+    background-color: #0093d7;
+    color: white;
 }
-.login-label {
-    background: url('../images/bg-login1.png');
-    height: 32px;
-    width: 32px;
-    display: block;
-    position: absolute;
-    top: 4px;
-    left: 2px;
-    box-shadow: 3px 0 0 2px #EFEFEF;
-}
-.password-label {
-    background: url('../images/bg-login2.png');
-    height: 32px;
-    width: 32px;
-    display: block;
-    position: absolute;
-    top: 4px;
-    left: 2px;
-    box-shadow: 3px 0 0 2px #EFEFEF;
-}
+
 .clearfix:before,
 .clearfix:after {
     content: "";
@@ -99,20 +66,7 @@ h4, .h4 {
 }
 
 /* For IE 6/7 (trigger hasLayout) */
-.clearfix {
-    zoom: 1;
-}
 
-.footer div.wrapper {
-    background: url(../images/footer_bg.png) repeat top left;
-    padding: 1px 0 10px;
-
-}
-
-.footer div.copyright {
-    color: #666666;
-    margin: 13px 20px 0 20px;
-}
 
 img {
     border: 0 none;
@@ -441,6 +395,11 @@ div.navbar-header > a.navbar-brand {
         background-image: none;
         background-color: #0093d7;
     }
+    #w1.nav > li.li_ru{
+        width: 100%;
+        background-image: none;
+        background-color: #0093d7;
+    }
 
     /*Меню в сайтбаре*/
     div.sitebar-right #w2.nav > li > a, #w2.nav > li > a:hover, #w2.nav > li > a:focus, #w2.nav > li.active > a{
@@ -490,6 +449,11 @@ textarea.form-control{
     background-color: #0093d7;
     height: 50px;
     margin-top: 10px;
+}
+
+#w2.nav > li.active > a {
+    background-color: #0076BF;
+
 }
 
 #w2.nav-pills > li > a{
@@ -798,8 +762,8 @@ table.invis>tbody>tr.trow>td{
     width: auto;
 }
 
-table.invis>tbody>tr.trow>td>input[type="submit"]{
-    border-radius: 0;
+table.invis>tbody>tr.trow>td>input[type="submit"], div.payment_next_information > form > input[type="submit"]{
+    border-radius: 10px;
     display: block;
     width: 30%;
     margin-left: 34%;
@@ -809,10 +773,39 @@ table.invis>tbody>tr.trow>td>input[type="submit"]{
     color: #fff;
     background-color: #337ab7;
     border-color: #2e6da4;
-    margin-bottom: 0;
     font-weight: normal;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
     background-image: none;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+div.payment_next_information > form >div{
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+div.payment_next_information > form > select{
+
+    height: 44px;
+    font-size: 16px;
+    border: 2px solid #337ab7;
+    border-radius: 0;
+    display: block;
+    width: 30%;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    margin-left: 34%;
+
+}
+/******************Серытые поля************************/
+
+div.hiden-fields > div.form-group > div.message-history-support, div.hiden-fields > div.form-group, div.hiden-fields > div.form-group >div >div.help-block {
+    margin-top: 0px;
+    margin-bottom: 0px;
 }

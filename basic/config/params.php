@@ -2,11 +2,28 @@
 
 return [
     'adminEmail' => 'admin@example.com',
+    'sites_data' => array(
+        'alfa' => array(
+            'phone_1' => '223-333-7',
+            'company_name' => array(
+                0 => 'Альфа инет',
+                'lang_key' => 'alfa',
+            ),
+        ),
+
+        'kuzia' => array(
+            'phone_1' => '223-333-7',
+            'company_name' => array(
+                0 => 'Кузя',
+                'lang_key' => 'kuzia',
+            ),
+        ),
+    ),
     'phone_1' => '223-333-7',
     'payment_code' => '39481498',
     'domains' => array(
         'alfa' => 'lk.alfa-inet.net',
-        'kuzia'=> 'kuzia.alfa-inet.net',
+        'kuzia' => 'kuzia.alfa-inet.net',
     ),
     'alfa-styles' => array(
         -1 => 'Default',
@@ -24,7 +41,7 @@ return [
             'local' => 'ru-RU',
             'default' => 1,
             'name' => 'Русский',
-            'symbol' =>'RU'
+            'symbol' => 'RU'
         ),
         2 => array(
             'id' => 2,
@@ -32,7 +49,7 @@ return [
             'local' => 'en-EN',
             'default' => 0,
             'name' => 'English',
-            'symbol' =>'EN'
+            'symbol' => 'EN'
         ),
         3 => array(
             'id' => 3,
@@ -40,7 +57,7 @@ return [
             'local' => 'uk-UK',
             'default' => 0,
             'name' => 'Українська',
-            'symbol' =>'UK'
+            'symbol' => 'UK'
         ),
 
     ),
@@ -48,74 +65,74 @@ return [
     'swith' => array(
         0 => array(
             0 => 'Выберите вариант ответа',
-            'lang_key' =>'select_option'
+            'lang_key' => 'select_option'
         ),
         1 => array(
             0 => 'Нет',
-            'lang_key' =>'no'
+            'lang_key' => 'no'
         ),
         2 => array(
             0 => 'WiFi-роутер (беспроводной)',
-            'lang_key' =>'wifi'
+            'lang_key' => 'wifi'
         ),
         3 => array(
             0 => 'WiFi-точка',
-            'lang_key' =>'wifi_point'
+            'lang_key' => 'wifi_point'
         ),
         4 => array(
             0 => 'Проводной роутер',
-            'lang_key' =>'wired_router'
+            'lang_key' => 'wired_router'
         ),
         5 => array(
             0 => 'Свитч',
-            'lang_key' =>'swith'
+            'lang_key' => 'swith'
         ),
     ),
 
     'operation_systems' => array(
         0 => array(
             0 => 'Выберите вариант ответа',
-            'lang_key' =>'select_option'
+            'lang_key' => 'select_option'
         ),
         9 => array(
             0 => 'MacOS',
-            'lang_key' =>'macos'
+            'lang_key' => 'macos'
         ),
         7 => array(
             0 => 'Linux',
-            'lang_key' =>'linux'
+            'lang_key' => 'linux'
         ),
         8 => array(
             0 => 'FreeBSD',
-            'lang_key' =>'freebsd'
+            'lang_key' => 'freebsd'
         ),
         12 => array(
             0 => 'Windows 10',
-            'lang_key' =>'windows_10'
+            'lang_key' => 'windows_10'
         ),
         6 => array(
             0 => 'Windows 8',
-            'lang_key' =>'windows_8'
+            'lang_key' => 'windows_8'
         ),
         8 => array(
             0 => 'Windows 7',
-            'lang_key' =>'windows_7'
+            'lang_key' => 'windows_7'
         ),
         4 => array(
             0 => 'Vista',
-            'lang_key' =>'vista'
+            'lang_key' => 'vista'
         ),
         2 => array(
             0 => 'Windows XP',
-            'lang_key' =>'windows_xp'
+            'lang_key' => 'windows_xp'
         ),
         3 => array(
             0 => 'Windows XP Home',
-            'lang_key' =>'windows_xp_home'
+            'lang_key' => 'windows_xp_home'
         ),
         11 => array(
             0 => 'Прочие Windows',
-            'lang_key' =>'another_windows'
+            'lang_key' => 'another_windows'
         ),
     ),
 
@@ -160,95 +177,95 @@ return [
     'todo_status' => array(
         0 => array(
             0 => 'New',
-            'lang_key' =>'new'
+            'lang_key' => 'new'
         ),
         5 => array(
             0 => 'Подготовить',
-            'lang_key' =>'prepare'
+            'lang_key' => 'prepare'
         ),
         6 => array(
             0 => 'Утверждено',
-            'lang_key' =>'approved'
+            'lang_key' => 'approved'
         ),
         10 => array(
             0 => 'Проверить',
-            'lang_key' =>'check'
+            'lang_key' => 'check'
         ),
         15 => array(
             0 => 'Перезвонить (support)',
-            'lang_key' =>'call_back_support'
+            'lang_key' => 'call_back_support'
         ),
         16 => array(
             0 => 'Перезвонить (исполн.)',
-            'lang_key' =>'call_back_executed'
+            'lang_key' => 'call_back_executed'
         ),
         20 => array(
             0 => 'В очереди',
-            'lang_key' =>'queue'
+            'lang_key' => 'queue'
         ),
         21 => array(
             0 => 'Забрать',
-            'lang_key' =>'pick_up'
+            'lang_key' => 'pick_up'
         ),
         30 => array(
             0 => 'Уже делаем',
-            'lang_key' =>'already_done'
+            'lang_key' => 'already_done'
         ),
         40 => array(
             0 => 'Перекур',
-            'lang_key' =>'smoko'
+            'lang_key' => 'smoko'
         ),
         42 => array(
             0 => 'Перекур по просьбе',
-            'lang_key' =>'smoke_to_request'
+            'lang_key' => 'smoke_to_request'
         ),
         50 => array(
             0 => 'Скоро',
-            'lang_key' =>'soon'
+            'lang_key' => 'soon'
         ),
         60 => array(
             0 => 'Когда-нибудь',
-            'lang_key' =>'someday'
+            'lang_key' => 'someday'
         ),
         61 => array(
             0 => 'Интересовались',
-            'lang_key' =>'interested'
+            'lang_key' => 'interested'
         ),
         90 => array(
             0 => 'Готовим отчет',
-            'lang_key' =>'prepare_report'
+            'lang_key' => 'prepare_report'
         ),
         92 => array(
             0 => 'Отчет готов',
-            'lang_key' =>'report_ready'
+            'lang_key' => 'report_ready'
         ),
         100 => array(
             0 => 'Complete',
-            'lang_key' =>'complete'
+            'lang_key' => 'complete'
         ),
         110 => array(
             0 => 'Архив',
-            'lang_key' =>'archive'
+            'lang_key' => 'archive'
         ),
         200 => array(
             0 => 'Lost',
-            'lang_key' =>'lost'
+            'lang_key' => 'lost'
         ),
         210 => array(
             0 => 'Не актуально',
-            'lang_key' =>'not_relevant'
+            'lang_key' => 'not_relevant'
         ),
         250 => array(
             0 => 'Дубликат',
-            'lang_key' =>'duplicate'
+            'lang_key' => 'duplicate'
         ),
         900 => array(
             0 => 'Тема закрыта',
-            'lang_key' =>'close'
+            'lang_key' => 'close'
         ),
         901 => array(
             0 => 'spam',
-            'lang_key' =>'spam'
+            'lang_key' => 'spam'
         ),
     ),
 
@@ -256,34 +273,32 @@ return [
     'email_message_types' => array(
         1 => array(
             0 => 'Уведомления',
-            'lang_key' =>'notice'
+            'lang_key' => 'notice'
         ),
         2 => array(
             0 => 'Обновления обращения в техническую поддержку',
-            'lang_key' =>'treatment_updates_technical_support'
+            'lang_key' => 'treatment_updates_technical_support'
         ),
         3 => array(
             0 => 'Напоминания об оплате',
-            'lang_key' =>'reminders_payment'
+            'lang_key' => 'reminders_payment'
         ),
         4 => array(
             0 => 'Уведомление о поступлении средств',
-            'lang_key' =>'notice_payment_receipt'
+            'lang_key' => 'notice_payment_receipt'
         ),
 
     ),
 
 
-
-
     'sms_message_types' => array(
         1 => array(
             0 => 'Напоминания об оплате',
-            'lang_key' =>'reminders_payment'
+            'lang_key' => 'reminders_payment'
         ),
         2 => array(
             0 => 'Не звонить',
-            'lang_key' =>'do_not_call'
+            'lang_key' => 'do_not_call'
         ),
 
 

@@ -27,7 +27,9 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '78356617613d60e9f33',
-            'class' => 'app\components\LangRequest'
+            'class' => 'app\components\LangRequest',
+            'baseUrl' => '',
+
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -143,6 +145,11 @@ $config = [
                 ],
                 [
                     'pattern' => 'call-request',
+                    'route' => 'static-page/call-request',
+
+                ],
+                [
+                    'pattern' => 'istoriya-obrascheniy/call-request',
                     'route' => 'static-page/call-request',
 
                 ],

@@ -18,6 +18,32 @@ return [
     'vista' => 'Vista',
     'another_windows' => 'Прочие Windows',
 
+    'technical_support' => 'Техническая поддержка',
+    'appl_form_support' => 'Форма заявки в техническую поддержку',
+
+    'problem_type' => 'Характер проблмы',
+    'when_problem' => 'Когда началас проблема?',
+    'operating_system' => 'Операционная система',
+    'which_antivirus' => 'Какой антивирус установлен?',
+    'install_update_anti-virus' => 'Устанавливали или обновляли антивирус?',
+    'yes' => 'Да',
+    'unknown' => 'Нет данных',
+    'new_computer' => 'Меняли ли компьютер?',
+    'computer_wifi_connected' => 'Компьютер подключен по Wi-Fi?',
+    'connection_our_website_without_router' => 'Есть ли выход на наш сайт БЕЗ роутера?',
+    'restarting_computer' => 'Перезагружали ли компьютер?',
+    'restarting_wifi_router' => 'Перезагружали ли WiFi/роутер/свитч?',
+    'wifi_route_indication' => 'На WiFi/роутер/свитч есть индикация WAN/Internet?',
+    'message' => 'Сообщение',
+    'download_speed_without_router' => 'Какая скорость скачивания с film.alfa-inet.net БЕЗ роутера?',
+    'is_there_switch' => 'Есть ли роутер/свитч?',
+    'low_speed' => 'Низкая скорость?',
+    'kilobyte_downloading' =>'Килобайт, то что показывает браузер при скачивании.',
+    'send_request' => 'Отправить заявку',
+    'clear_form' => 'Очистить форму',
+
+
+
 
 
 ];

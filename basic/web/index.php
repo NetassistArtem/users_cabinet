@@ -20,6 +20,7 @@ switch ($path[1]) {
 }
 
 require(__DIR__ . '/../components/billing_api/_.php');
+
 require_once(__DIR__ . '/../components/billing_api/inc/common.todo_list.inc.php');
 
 //$config = require(__DIR__ . '/../config/frontend.php');

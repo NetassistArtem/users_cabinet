@@ -42,7 +42,7 @@ class PasswordChangeForm extends Model
         if($this->validate()){
             $password_change = $this->insertNewPassword();
             if($password_change === 0){ //валидация пароля на уровне биллинга
-                Yii::$app->session->setFlash('passwordChanged',['value' => 'Новый пароль сохранен.']);
+                Yii::$app->session->setFlash('passwordChanged',['value' => Yii::t('flash-message', 'password_saved')]);
             }else{
                 Yii::$app->session->setFlash('bad_password',['value' => $password_change]);
             }
@@ -50,7 +50,7 @@ class PasswordChangeForm extends Model
 
             return true;
         }else{
-            Yii::$app->session->setFlash('passwordChanged',['value' => 'Пароль не изменен']);
+            Yii::$app->session->setFlash('passwordChanged',['value' => Yii::t('flash-message', 'password_not_changed')]);
             return false;
         }
     }

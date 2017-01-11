@@ -18,45 +18,45 @@ $this->title =  Yii::t('cabinet','cabinet');
     <table class="table table-bordered  table-border-custom" >
         <thead>
         <tr>
-            <th colspan="3">Учетные данные</th>
+            <th colspan="3"><?= Yii::t('cabinet','user_info')?></th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>ФИО</td>
+            <td><?= Yii::t('cabinet','full_name')?></td>
             <td colspan="2"><?= $user_data['fio'] ?></td>
 
         </tr>
         <tr>
-            <td>Адрес</td>
+            <td><?= Yii::t('cabinet','address')?></td>
             <td colspan="2" ><?= $user_data['address'] ?></td>
 
         </tr>
         <tr>
-            <td>Телефон № 1</td>
+            <td><?= Yii::t('cabinet','phone_1')?></td>
             <td><?= $user_data['phone_1'] ?></td>
-            <td rowspan="3" class="btn-custom"  ><a  href="/basic/web/upravlenie-kabinetom#contact_change"> Изменить контактные данные</a></td>
+            <td rowspan="3" class="btn-custom"  ><a  href="/upravlenie-kabinetom#contact_change"><?= Yii::t('cabinet','edit_contact_details')?></a></td>
         </tr>
 
         <tr  >
-            <td>Телефон № 2</td>
+            <td><?= Yii::t('cabinet','phone_2')?></td>
             <td><?= $user_data['phone_2'] ?></td>
 
         </tr>
         <tr>
-            <td>Email</td>
+            <td><?= Yii::t('cabinet','email')?></td>
             <td><?= $user_data['email'] ?></td>
 
         </tr>
         <tr>
-            <td>Логин</td>
+            <td><?= Yii::t('cabinet','login')?></td>
             <td colspan="2" ><?= $user_data['username'] ?></td>
 
         </tr>
         <tr id="finance" >
-            <td>Пароль</td>
+            <td><?= Yii::t('cabinet','password')?></td>
             <td><?= $user_data['password'] ?></td>
-            <td class="btn-custom"  ><a  href="/basic/web/upravlenie-kabinetom#password_change"> Изменить пароль</a></td>
+            <td class="btn-custom"  ><a  href="/upravlenie-kabinetom#password_change"><?= Yii::t('cabinet','change_password')?></a></td>
         </tr>
         </tbody>
     </table>
@@ -66,33 +66,33 @@ $this->title =  Yii::t('cabinet','cabinet');
         <table class="table table-bordered  table-border-custom" >
             <thead>
             <tr>
-                <th colspan="4">Услуги</th>
+                <th colspan="4"><?= Yii::t('cabinet','services')?></th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td rowspan="2" colspan="2">Баланс</td>
-                <td>Личные средства</td>
+                <td rowspan="2" colspan="2"><?= Yii::t('cabinet','account_balance')?></td>
+                <td><?= Yii::t('cabinet','account_balance')?></td>
                 <td><?= $user_data['account_balance'] ?> <?= $user_data['account_currency'] ?></td>
             </tr>
             <tr>
-                <td >Кредитные средства</td>
+                <td ><?= Yii::t('cabinet','credit')?></td>
                 <td><?= $user_data['account_credit'] ?> <?= $user_data['account_currency'] ?></td>
             </tr>
             <tr>
-                <td rowspan="2">Тарифы</td>
+                <td rowspan="2"><?= Yii::t('cabinet','tariffs') ?></td>
                 <td>Пакет "Безлимитный"</td>
-                <td> активен до:</td>
+                <td><?= Yii::t('cabinet','active_to')?></td>
                 <td> 25.08.17</td>
             </tr>
             <tr>
                 <td>IPTV</td>
-                <td> активен до:</td>
+                <td> <?= Yii::t('cabinet','active_to')?></td>
                 <td> 16.12.17</td>
             </tr>
             <tr id="network" >
-                <td class="btn-custom" colspan="2"><a  href="#"> Поменять тариф</a></td>
-                <td class="btn-custom" colspan="2"><a  href="/basic/web/oplata-uslug"> Взять кредит</a></td>
+                <td class="btn-custom" colspan="2"><a  href="#"><?= Yii::t('cabinet','change_rate') ?></a></td>
+                <td class="btn-custom" colspan="2"><a  href="/oplata-uslug"><?= Yii::t('cabinet','take_credit')?></a></td>
             </tr>
             </tbody>
         </table>
@@ -102,7 +102,7 @@ $this->title =  Yii::t('cabinet','cabinet');
         <table class="table table-bordered  table-border-custom" >
             <thead>
             <tr>
-                <th colspan="3">Настройки сети</th>
+                <th colspan="3"><?= Yii::t('cabinet','network_settings')?></th>
             </tr>
             </thead>
             <tbody>
@@ -116,15 +116,15 @@ $this->title =  Yii::t('cabinet','cabinet');
                 <td><?= $user_data['ip_2'] ?></td>
             </tr>
             <tr>
-                <td>Маска сети №1</td>
+                <td><?= Yii::t('cabinet','netmask_1')?></td>
                 <td><?= $user_data['netmask'] ?></td>
             </tr>
             <tr>
-                <td>Маска сети №2</td>
+                <td><?= Yii::t('cabinet','netmask_2')?></td>
                 <td><?= $user_data['netmask2'] ?></td>
             </tr>
             <tr>
-                <td>Шлюз</td>
+                <td><?= Yii::t('cabinet','gateway')?></td>
                 <td><?= $user_data['gw'] ?></td>
             </tr>
             <tr>
@@ -134,28 +134,32 @@ $this->title =  Yii::t('cabinet','cabinet');
 
             <tr>
                 <td rowspan="2">DNS</td>
-                <td>Основной DNS</td>
+                <td><?= Yii::t('cabinet','primary_dns')?></td>
                 <td><?= $user_data['dns1_ip'] ?></td>
             </tr>
             <tr>
-                <td>Дополнительный DNS</td>
+                <td><?= Yii::t('cabinet','secondary_dns')?></td>
                 <td><?= $user_data['dns2_ip'] ?></td>
             </tr>
             <tr>
                 <td rowspan="5">IPv6</td>
-                <td>Правильный IPv6</td>
+                <td>IPv6 №1</td>
                 <td></td>
             </tr>
             <tr>
-                <td>Установленный IPv6</td>
+                <td>IPv6 №2</td>
                 <td><?= $user_data['ipv6'] ?></td>
             </tr>
             <tr>
-                <td>Маска сети</td>
+                <td><?= Yii::t('cabinet','netmask_1')?></td>
                 <td></td>
             </tr>
             <tr>
-                <td>Шлюз</td>
+                <td><?= Yii::t('cabinet','netmask_2')?></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><?= Yii::t('cabinet','gateway')?></td>
                 <td></td>
             </tr>
             <tr>
@@ -165,9 +169,5 @@ $this->title =  Yii::t('cabinet','cabinet');
             </tbody>
         </table>
     </div>
-
-
-
-
 
 </div>

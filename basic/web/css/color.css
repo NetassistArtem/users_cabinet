@@ -4,7 +4,7 @@
     height: 50px;
 }
 
-/*****************************/
+/************* TEST ****************/
 .test_color_test_1{
     background-color: #286090;
 }
@@ -42,7 +42,7 @@
     background-color: #F8F8FF;
 }
 
-/********************************/
+/**************** BLACK-CTR ****************/
 
 .test_color_alfa_black_ctr_1{
     background-color: #363636;
@@ -78,5 +78,121 @@
     background-color: #889988;
 }
 .test_color_alfa_black_ctr_11{
+    background-color: #CFCFCF;
+}
+
+/**************** BLACK ********************/
+
+.test_color_alfa_black_1{
+    background-color: #282828;
+}
+.test_color_alfa_black_2{
+    background-color: #323232;
+}
+
+.test_color_alfa_black_3{
+    background-color: #404040;
+}
+
+.test_color_alfa_black_4{
+    background-color: #4a4a4a;
+}
+
+.test_color_alfa_black_5{
+    background-color: #505050;
+}
+.test_color_alfa_black_6{
+    background-color: #5f5f5f;
+}
+.test_color_alfa_black_7{
+    background-color: #636363;
+}
+.test_color_alfa_black_8{
+    background-color: #a94442;
+}
+.test_color_alfa_black_9{
+    background-color: #777;
+}
+.test_color_alfa_black_10{
+    background-color: #889988;
+}
+.test_color_alfa_black_11{
+    background-color: #CFCFCF;
+}
+
+/*************** WHITE *******************/
+
+.test_color_alfa_white_1{
+    background-color: #818181;
+}
+.test_color_alfa_white_2{
+    background-color: #8a8a8a;
+}
+
+.test_color_alfa_white_3{
+    background-color: #909090;
+}
+
+.test_color_alfa_white_4{
+    background-color: #9b9b9b;
+}
+
+.test_color_alfa_white_5{
+    background-color: #a8a7a7;
+}
+.test_color_alfa_white_6{
+    background-color: #b4b4b4;
+}
+.test_color_alfa_white_7{
+    background-color: #b8b8b8;
+}
+.test_color_alfa_white_8{
+    background-color: #a94442;
+}
+.test_color_alfa_white_9{
+    background-color: #777;
+}
+.test_color_alfa_white_10{
+    background-color: #889988;
+}
+.test_color_alfa_white_11{
+    background-color: #CFCFCF;
+}
+/***************** GRAY ********************/
+
+.test_color_alfa_gray_1{
+    background-color: #5f5f5f;
+}
+.test_color_alfa_gray_2{
+    background-color: #686868;
+}
+
+.test_color_alfa_gray_3{
+    background-color: #727272;
+}
+
+.test_color_alfa_gray_4{
+    background-color: #7d7d7d;
+}
+
+.test_color_alfa_gray_5{
+    background-color: #8d8d8d;
+}
+.test_color_alfa_gray_6{
+    background-color: #9c9c9c;
+}
+.test_color_alfa_gray_7{
+    background-color: #afafaf;
+}
+.test_color_alfa_gray_8{
+    background-color: #a94442;
+}
+.test_color_alfa_gray_9{
+    background-color: #777;
+}
+.test_color_alfa_gray_10{
+    background-color: #889988;
+}
+.test_color_alfa_gray_11{
     background-color: #CFCFCF;
 }

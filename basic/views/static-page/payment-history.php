@@ -1,15 +1,14 @@
 <?php
 use yii\helpers\Html;
 
-$this->title = 'История платежей';
+$this->title =  Yii::t('payment_history','payment_history');
 
 ?>
 <div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="title_custom">
+        <h1><?= Html::encode($this->title) ?></h1>
+    </div>
 
-    <p>
-        <?= $payment_history ?>
-    </p>
 
 
 

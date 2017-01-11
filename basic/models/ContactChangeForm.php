@@ -35,11 +35,11 @@ class ContactChangeForm extends Model
     public function setNewContact()
     {
         if ($this->validate()) {
-            Yii::$app->session->setFlash('contactChanged', ['value' => 'Контактные данные были успешно изменены.']);
+            Yii::$app->session->setFlash('contactChanged', ['value' => Yii::t('flash-message', 'contact_details_updated')]);
             $this->insertNewContact();
             return true;
         } else {
-            Yii::$app->session->setFlash('contactChanged', ['value' => 'Не удалось изменить контактные данные']);
+            Yii::$app->session->setFlash('contactChanged', ['value' => Yii::t('flash-message', 'unable_change_contact')]);
             return false;
         }
     }

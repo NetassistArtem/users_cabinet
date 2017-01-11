@@ -9,7 +9,7 @@ use \yii\widgets\MaskedInput;
 
 ?>
 
-<div id="success" class="view_message view_message_padding" >Вам перезвонят в ближайшее время.</div>
+<div id="success" class="view_message view_message_padding" ><?= Yii::t('call-request', 'call_you_back') ?></div>
 <div class="call-request-user-form">
 
  <?php
@@ -28,12 +28,12 @@ $form_call_request = ActiveForm::begin([
 
 
     <?= $form_call_request->field($modelCallRequest, 'phone')->
-    widget(MaskedInput::className(), ['mask' => '+380 (99) 999 99 99'])->label('Введите номер телефона в формате 099-999-99-99')->input('phone') ?>
+    widget(MaskedInput::className(), ['mask' => '+380 (99) 999 99 99'])->label(Yii::t('call-request', 'enter_phone'))->input('phone') ?>
 
 
     <div class="form-group">
         <div class="col-lg-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-8 col-md-8 col-sm-8">
-            <?= Html::submitButton('Заказать звонок', ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom', 'name' => 'call-request-button']) ?>
+            <?= Html::submitButton(Yii::t('call-request', 'request_call'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom', 'name' => 'call-request-button']) ?>
         </div>
     </div>
 

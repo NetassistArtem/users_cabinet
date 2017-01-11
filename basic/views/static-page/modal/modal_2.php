@@ -7,7 +7,7 @@ use yii\bootstrap\Modal;
 
 
 Modal::begin([
-    'header' => '<h3>Заказ звонка</h3>',
+    'header' => '<h3>'.Yii::t('call-request', 'order_call').'</h3>',
     'headerOptions' => ['id' => 'modalHeader','class'=>'modal_2_header'],
     'id' => 'modal-contact',
     //   'size' => 'modal-lg',
