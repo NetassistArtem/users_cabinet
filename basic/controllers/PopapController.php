@@ -1,15 +1,28 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: artem
- * Date: 05.12.16
- * Time: 17:10
- */
+
 
 namespace app\controllers;
 
+use app\models\PhoneFirstChangeConfirmForm;
+use Yii;
+use app\components\debugger\Debugger;
+use yii\web\Controller;
 
-class PopapController
+
+class PopapController extends Controller
 {
+
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+
+        ];
+    }
+
+
+
 
 }

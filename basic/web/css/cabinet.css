@@ -151,7 +151,7 @@ i.message_main_text{
 }
 
 
-#w1.nav > li > a , #w1.nav li > form > button.logout{
+#w1.nav > li > a , #w1.nav li > form > button.logout, .text-center{
     text-align: center;
 
 }
@@ -225,6 +225,12 @@ div.navbar-header > a.navbar-brand {
     border-radius: 0;
     background-color:white;
     border-color: #777;
+}
+
+/**********Страница проверки кода***********/
+div.text-center{
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 /* адаптивность */

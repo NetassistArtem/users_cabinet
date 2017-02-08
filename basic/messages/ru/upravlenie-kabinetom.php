@@ -14,13 +14,20 @@ return [
     'change_password' => 'Изменить пароль',
     'change_password_title' => 'Изменение пароля',
     'change_contact_inf' => 'Изменение контактной информации',
-    'phone_1' => 'Телефон 1',
+    'phone_1' => 'Телефоны',
     'phone_2' => 'Телефон 2',
     'change_data' =>'Изменить данные',
     'notification_settings' => 'Настройки уведомлений',
     'save_settings' => 'Сохранить настройки',
     'mail_receiving' => 'Получать на почту',
     'receive_sms' => 'Получать SMS',
+    'delete_phone_1' => 'Удалить телефон',
+    'change_phone_1' => 'Изменить телефон',
+    'add_phone_1' => 'Добавить телефон',
+    'add_phone_2' => 'Добавить телефон',
+    'delete_phone_2' => 'Удалить телефон',
+    'change_phone_2' => 'Изменить телефон',
+    'select_phone' => 'Выберите телефон',
 
 
 ];

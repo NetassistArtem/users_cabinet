@@ -28,6 +28,8 @@ if (!Yii::$app->user->isGuest) {
     }
 }
 
+$lang_arr = explode('-',Yii::$app->language);
+$lang = $lang_arr[0];
 
 
                     //if(isset($flash_message)):
@@ -44,6 +46,7 @@ if (!Yii::$app->user->isGuest) {
 
 
 // Переключение стилей в зависимости от сайта
+
 $asset = 'app\assets\AppAsset';
 $styles = 'default';
 foreach(Yii::$app->params['domains'] as $k=>$v){
@@ -51,30 +54,36 @@ foreach(Yii::$app->params['domains'] as $k=>$v){
         $styles = $k;
     }
 }
-$testt = 1;
-$styles = 'kuzia';
+
+$testt = 3;
+$server_name = Yii::$app->params['server_name'];
+$styles =  Yii::$app->params['domains'][$server_name];
 global $sites_data;
 switch($styles){
     case 'alfa':
       switch($testt){ //get_skin(Yii::$app->user->identity->username)
           case 0 :
               AlfaGrayAsset::register($this);
+              global $asset;
               $asset = 'app\assets\AlfaGrayAsset';
               $sites_data = Yii::$app->params['sites_data']['alfa'];
               Yii::$app->session->set('sites_data', $sites_data);
               break;
           case 1 :
               AlfaBlackAsset::register($this);
+              global $asset;
               $asset = 'app\assets\AlfaBlackAsset';
               $sites_data = Yii::$app->params['sites_data']['alfa'];
               break;
           case 2 :
               AlfaBlackCrtAsset::register($this);
+              global $asset;
               $asset = 'app\assets\AlfaBlackCrtAsset';
               $sites_data = Yii::$app->params['sites_data']['alfa'];
               break;
           case 3 :
               AlfaWhiteAsset::register($this);
+              global $asset;
               $asset = 'app\assets\AlfaWhiteAsset';
               $sites_data = Yii::$app->params['sites_data']['alfa'];
               break;
@@ -82,21 +91,25 @@ switch($styles){
               switch(Yii::$app->params['alfa-styles-default']){
                   case 0 :
                       AlfaGrayAsset::register($this);
+                      global $asset;
                       $asset = 'app\assets\AlfaGrayAsset';
                       $sites_data = Yii::$app->params['sites_data']['alfa'];
                       break;
                   case 1 :
                       AlfaBlackAsset::register($this);
+                      global $asset;
                       $asset = 'app\assets\AlfaBlackAsset';
                       $sites_data = Yii::$app->params['sites_data']['alfa'];
                       break;
                   case 2 :
                       AlfaBlackCrtAsset::register($this);
+                      global $asset;
                       $asset = 'app\assets\AlfaBlackCrtAsset';
                       $sites_data = Yii::$app->params['sites_data']['alfa'];
                       break;
                   case 3 :
                       AlfaWhiteAsset::register($this);
+                      global $asset;
                       $asset = 'app\assets\AlfaWhiteAsset';
                       $sites_data = Yii::$app->params['sites_data']['alfa'];
                       break;
@@ -106,12 +119,14 @@ switch($styles){
         break;
     case 'kuzia':
         KuziaAsset::register($this);
+        global $asset;
         $asset = 'app\assets\KuziaAsset';
         $sites_data = Yii::$app->params['sites_data']['kuzia'];
         Yii::$app->session->set('sites_data', $sites_data);
         break;
     default:
         AppAsset::register($this);
+        global $asset;
         $asset = 'app\assets\AppAsset';
 }
 
@@ -126,6 +141,17 @@ $this->registerJsFile(
     'scripts/insert.js',
     ['depends'=>$asset]
 );
+//подтверждение изменения пароля перед сохранением
+$this->registerJsFile(
+    'scripts/password_change_confirm.js',
+    ['depends'=>$asset]
+);
+$this->registerJsFile(
+    'scripts/phone_delete_confirm.js',
+    ['depends'=>$asset]
+);
+
+
 
 //echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_2.php');
 
@@ -147,6 +173,7 @@ $this->registerJsFile(
 <body>
 <?php $this->beginBody() ?>
 <?= Yii::$app->view->renderFile('@app/views/static-page/modal/modal_2.php'); ?>
+
 
 <div class="wrap">
     <?php
@@ -202,7 +229,7 @@ $this->registerJsFile(
                 <div class="col-lg-12 col-md-12 col-sm-12 account-data-block">
                     <p><?= $user_data['fio'] ?></p>
                     <div class="row">
-                        <div class="col-lg-2 col-md-2 col-sm-2 account-data-block-1">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 account-data-block-1">
                             <a href="/cabinet">
                                 <div>
                                     <h4><?= Yii::t('top_info_block','login') ?></h4>
@@ -210,7 +237,7 @@ $this->registerJsFile(
                                 </div>
                             </a>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 account-data-block-2">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 account-data-block-2">
                             <a href="/cabinet#finance">
                                 <div>
                                     <h4><?= Yii::t('top_info_block','account_balance') ?></h4>
@@ -218,7 +245,7 @@ $this->registerJsFile(
                                 </div>
                             </a>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 account-data-block-3">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 account-data-block-3">
                             <a href="/oplata-uslug">
                                 <div>
                                     <h4><?= Yii::t('top_info_block','payment_code') ?></h4>
@@ -226,7 +253,7 @@ $this->registerJsFile(
                                 </div>
                             </a>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 account-data-block-4">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 account-data-block-4">
                             <a href="/cabinet#finance">
                                 <div>
                                     <h4><?= Yii::t('top_info_block','services') ?></h4>
@@ -243,7 +270,7 @@ $this->registerJsFile(
                                 </div>
                             </a>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 account-data-block-5">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 account-data-block-5">
                             <a href="/cabinet#finance">
                                 <div>
                                     <h4><?= Yii::t('top_info_block','active') ?></h4>
@@ -260,7 +287,7 @@ $this->registerJsFile(
                                 </div>
                             </a>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 account-data-block-6">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 account-data-block-6">
                             <a href="/cabinet#network">
                                 <div>
                                     <h4><?= Yii::t('top_info_block','ip') ?></h4>
@@ -285,14 +312,14 @@ $this->registerJsFile(
                         'options' => ['class' => 'nav nav-pills nav-stacked'],
                         'items' => [
 
-                            ['label' => Yii::t('sidebar_menu','total_data'), 'url' => ['/cabinet'], 'active' => (Yii::$app->request->url == "/cabinet")],
-                            ['label' => Yii::t('sidebar_menu','account_manager'), 'url' => ['/upravlenie-kabinetom'], 'active' => (Yii::$app->request->url == "/upravlenie-kabinetom")],
-                            ['label' => Yii::t('sidebar_menu','payment'), 'url' => ['/oplata-uslug'], 'active' => (Yii::$app->request->url == "/oplata-uslug")],
-                            ['label' => Yii::t('sidebar_menu','payment_history'), 'url' => ['/istoriya-platezhey'], 'active' => (Yii::$app->request->url == "/istoriya-platezhey")],
-                            ['label' => Yii::t('sidebar_menu','technical_support'), 'url' => ['/tehnicheskaya-podderzhka'], 'active' => (Yii::$app->request->url == "/tehnicheskaya-podderzhka")],
-                            ['label' => Yii::t('sidebar_menu','support_history'), 'url' => ['/istoriya-obrascheniy'], 'active' => (Yii::$app->request->url == "/istoriya-obrascheniy" || Yii::$app->request->url == "/istoriya-obrascheniy/*")],
-                            ['label' => Yii::t('sidebar_menu','feedback'), 'url' => ['/ostavit-otzyiv'], 'active' => (Yii::$app->request->url == "/ostavit-otzyiv")],
-                            ['label' => Yii::t('sidebar_menu','tv'), 'url' => ['/televidenie'], 'active' => (Yii::$app->request->url == "/televidenie")],
+                            ['label' => Yii::t('sidebar_menu','total_data'), 'url' => ['/cabinet'], 'active' => (Yii::$app->request->url == "/$lang/cabinet" || Yii::$app->request->url == "/cabinet")],
+                            ['label' => Yii::t('sidebar_menu','account_manager'), 'url' => ['/upravlenie-kabinetom'], 'active' => (Yii::$app->request->url == "/$lang/upravlenie-kabinetom" || Yii::$app->request->url == "/upravlenie-kabinetom")],
+                            ['label' => Yii::t('sidebar_menu','payment'), 'url' => ['/oplata-uslug'], 'active' => (Yii::$app->request->url == "/$lang/oplata-uslug" || Yii::$app->request->url == "/oplata-uslug")],
+                            ['label' => Yii::t('sidebar_menu','payment_history'), 'url' => ['/istoriya-platezhey'], 'active' => (Yii::$app->request->url == "/$lang/istoriya-platezhey" || Yii::$app->request->url == "/istoriya-platezhey")],
+                            ['label' => Yii::t('sidebar_menu','technical_support'), 'url' => ['/tehnicheskaya-podderzhka'], 'active' => (Yii::$app->request->url == "/$lang/tehnicheskaya-podderzhka" || Yii::$app->request->url == "/tehnicheskaya-podderzhka")],
+                            ['label' => Yii::t('sidebar_menu','support_history'), 'url' => ['/istoriya-obrascheniy'], 'active' => (Yii::$app->request->url == "/$lang/istoriya-obrascheniy" || Yii::$app->request->url == "/$lang/istoriya-obrascheniy/*" || Yii::$app->request->url == "/istoriya-obrascheniy" || Yii::$app->request->url == "/istoriya-obrascheniy/*")],
+                            ['label' => Yii::t('sidebar_menu','feedback'), 'url' => ['/ostavit-otzyiv'], 'active' => (Yii::$app->request->url == "/$lang/ostavit-otzyiv" || Yii::$app->request->url == "/ostavit-otzyiv")],
+                            ['label' => Yii::t('sidebar_menu','tv'), 'url' => ['/televidenie'], 'active' => (Yii::$app->request->url == "/$lang/televidenie" || Yii::$app->request->url == "/televidenie")],
                         ],
                     ]);
 

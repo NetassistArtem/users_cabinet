@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'server_name' => $_SERVER['SERVER_NAME'],
     'adminEmail' => 'admin@example.com',
     'sites_data' => array(
         'alfa' => array(
@@ -22,8 +23,8 @@ return [
     'phone_1' => '223-333-7',
     'payment_code' => '39481498',
     'domains' => array(
-        'alfa' => 'lk.alfa-inet.net',
-        'kuzia' => 'kuzia.alfa-inet.net',
+        'lk.alfa-inet.net' => 'kuzia',
+        'kuzia.alfa-inet.net' => 'alfa',
     ),
     'alfa-styles' => array(
         -1 => 'Default',
@@ -303,5 +304,12 @@ return [
 
 
     ),
+    'sms_send_conf' => array(
+        'transliteration' =>1, //транслитерация sms - 1 - да, 0 - нет
+        'verification_cod_length' => 8,//количество символов в коде подтверждения отправляемого пользователю (при изменении контактов)
+        'verification_cod_num' =>1, // использовать цифры для формирования кода подтверждения отпрвляемого пользователю, 1- использовать, 0 - не использовать
+        'verification_cod_down_chars' =>0, //использовать буквы нижнего регистра для формирования кода подтверждения, 1- использовать, 0 - не использовать
+        'verification_cod_up_chars' =>0, //использовать буквы верхнего регистра для формирования кода подтверждения, 1- использовать, 0 - не использовать
+    )
 
 ];

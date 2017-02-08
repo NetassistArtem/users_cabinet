@@ -113,7 +113,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
 
 
 
-       $mx_string = get_access_mxs_str($access_mx, $lang_id=-1);
+       $mx_string = iconv_safe('koi8-u', 'utf-8', get_access_mxs_str($access_mx, $lang_id=-1));
 
 
         $sm_flags = get_acc_options($user_data_by_billing[UINFO_ACC_ID_IDX], -1); //функции api биллинга
@@ -151,21 +151,41 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         //   Debugger::Eho('</br>');
         //  Debugger::PrintR($user_data_by_billing);
         //  Debugger::Eho($test);
+        global $user_acc_offset;
+
+        // преобразование контактов из строки в массив
+        $phone_1_array = !empty($user_data_by_billing[UINFO_PHONE_IDX]) ? explode(',',$user_data_by_billing[UINFO_PHONE_IDX] ) : array();
+      //  $phone_1_array = explode(',',$user_data_by_billing[UINFO_PHONE_IDX] );
+        $phone_2_array = !empty($user_data_by_billing[UINFO_PHONE2_IDX]) ? explode(',',$user_data_by_billing[UINFO_PHONE2_IDX] ) : array();
+      //  $phone_2_array = explode(',',$user_data_by_billing[UINFO_PHONE2_IDX] );
+        $email_array = !empty($user_data_by_billing[UINFO_EMAIL_IDX]) ? explode(',',$user_data_by_billing[UINFO_EMAIL_IDX] ) : array();
+        //$email_array = explode(',',$user_data_by_billing[UINFO_EMAIL_IDX] );
+        $phone_all_a = array_merge($phone_1_array, $phone_2_array);
+        $phone_all_array = array();
+        foreach($phone_all_a as $k=>$v){
+            $phone_all_array[$k+1] = $v;
+        }
+
+
         $user_data = array(
             Yii::$app->session->get('user-data-id')['id'] => array(
                 'username' => Yii::$app->user->identity->username,
-                'fio' => iconv_safe('koi8-u', 'utf-8', $user_data_by_billing['33']),
-                'password' => $user_data_by_billing['2'],
-                'email' => $user_data_by_billing['3'],
-                'address' => iconv_safe('koi8-u', 'utf-8', $user_data_by_billing['4']),
+                'fio' => iconv_safe('koi8-u', 'utf-8', $user_data_by_billing[$user_acc_offset+AINFO_CONTRACT_NAME_IDX]),
+                'password' => $user_data_by_billing[UINFO_PWD_IDX],
+                'email' => $user_data_by_billing[UINFO_EMAIL_IDX],
+                'email_array' => $email_array,
+                'address' => iconv_safe('koi8-u', 'utf-8', $user_data_by_billing[UINFO_ADDR_IDX]),
                 'address_id' => $user_data_by_billing[UINFO_BASE_LOC_ID_IDX],
-                'phone_1' => $user_data_by_billing['10'],
-                'phone_2' => $user_data_by_billing['11'],
+                'phone_1' => $user_data_by_billing[UINFO_PHONE_IDX],
+                'phone_1_array' => $phone_1_array,
+                'phone_2' => $user_data_by_billing[UINFO_PHONE2_IDX],
+                'phone_2_array' => $phone_2_array,
+                'phone_all_array' =>$phone_all_array,
                 'account_id' => $user_data_by_billing[UINFO_ACC_ID_IDX],
-                'account_balance' => $user_data_by_billing['22'],
-                'account_credit' => $user_data_by_billing['28'],
-                'account_currency' => iconv_safe('koi8-u', 'utf-8', get_curr_name_by_cid($user_data_by_billing['43'])),
-                'services' => array('Пакет "Безлимитный"', 'IpTV'),
+                'account_balance' => $user_data_by_billing[$user_acc_offset+AINFO_MONEY_IDX],
+                'account_credit' => $user_data_by_billing[$user_acc_offset+AINFO_DEBT_IDX],
+                'account_currency' => iconv_safe('koi8-u', 'utf-8', get_curr_name_by_cid($user_data_by_billing[$user_acc_offset+AINFO_C_ID_IDX])),
+                'services' => array('"Безлимитный"', 'IpTV'),
                 'services_date' => array('20.08.17', '21.09.17'),
                 'ip_real_constant' => $user_data_by_billing[UINFO_REAL_IP4_IDX],
                 'ip_local_constant' => $user_data_by_billing[UINFO_LOCAL_IP4_IDX],
@@ -178,8 +198,12 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                 'netmask2' => $netmask2,
                 'external_smtp' => $external_smtp,
                 'mx_string' => $mx_string,
-                'ipv6' => $user_data_by_billing['16'],
+                'ipv6' => $user_data_by_billing[UINFO_IP6_IDX],
                 'net_id' => $user_data_by_billing[UINFO_NET_ID_IDX],
+                'org_id' => iconv_safe('koi8-u', 'utf-8', $user_data_by_billing[$user_acc_offset+AINFO_ORG_ID_IDX]),
+                'real_name' => $user_data_by_billing[UINFO_REAL_NAME_IDX],
+                'req_id' => $user_data_by_billing[$user_acc_offset+AINFO_REQ_ID_IDX],
+                'loc_id' => $user_data_by_billing[UINFO_BASE_LOC_ID_IDX],
 
 
                 'email_message_type' => $array_mail_flags,
@@ -195,7 +219,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                     'o' => 'Иванович',
                 ),
                 'account_balance' => '5,7',
-                'services' => array('Пакет "Безлимитный"'),
+                'services' => array('"Безлимитный"'),
                 'services_date' => array('03.08.17'),
                 'ip' => '94.154.293.84',
             ),

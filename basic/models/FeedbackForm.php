@@ -74,6 +74,8 @@ class FeedbackForm extends Model
     {
         if ($this->validate()) {
             $this->sendFeedback();
+          //  Debugger::PrintR($_FILES);
+          //  Debugger::testDie();
             Yii::$app->session->setFlash('feedback', ['value' => Yii::t('flash-message', 'message_sent')]);
 
             return true;
@@ -85,7 +87,8 @@ class FeedbackForm extends Model
 
     public function sendFeedback()
     {
-        $this->files = UploadedFile::getInstances($this, 'files');
+        //Сохранение файлов методами Yii, раскоментить в случае когда не работает загрузка из аппи биллинга
+     /*   $this->files = UploadedFile::getInstances($this, 'files');
 
 
         if($this->files){
@@ -94,12 +97,12 @@ class FeedbackForm extends Model
                 $file->saveAs(Yii::$app->getBasePath().'/web/upload/' . $file->baseName . '.' . $file->extension);
             }
 
-          //  Debugger::Eho('</br>');
-         //   Debugger::Eho('</br>');
-          //  Debugger::Eho('</br>');
-           // Debugger::PrintR($_FILES);
-           // Debugger::testDie();
-        }
+           Debugger::Eho('</br>');
+            Debugger::Eho('</br>');
+            Debugger::Eho('</br>');
+            Debugger::PrintR($_FILES);
+            Debugger::testDie();
+        } */
 
         global $opt_vars;
         global $todo_ctx;
@@ -129,7 +132,7 @@ class FeedbackForm extends Model
         );
         $edit = $send_data['edit_req'] ? $send_data['edit_req'] : 0;
 
-      todo_ctx_save(0, $todo_ctx, $edit);
+      todo_ctx_save(0, $todo_ctx, $edit,0,'FeedbackForm[files]');
 
 
 

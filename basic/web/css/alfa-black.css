@@ -163,7 +163,7 @@ i.message_main_text{
 }
 
 
-#w1.nav > li > a , #w1.nav li > form > button.logout{
+#w1.nav > li > a , #w1.nav li > form > button.logout, .text-center{
     text-align: center;
 
 }
@@ -243,197 +243,7 @@ div.navbar-header > a.navbar-brand {
 
 }
 
-/* адаптивность */
 
-@media (min-width: 768px){
-
-
-    /* Верхнее меню*/
-    div.container > div.navbar-collapse {
-        border-left: 4px solid white;
-        border-right: 4px solid white;
-    }
-
-    #w1.nav > li.li_admin{
-        width: 200px;
-    }
-    #w1.nav > li.li_en{
-        width: 80px;
-        background:center url(images/united-kingdom-flag_8214.ico) no-repeat;
-
-    }
-    #w1.nav > li.li_en > a{
-        color: transparent;
-    }
-    #w1.nav > li.li_uk > a{
-        color: transparent;
-    }
-    #w1.nav > li.li_ru > a{
-        color: transparent;
-    }
-    #w1.nav > li.li_uk{
-        width: 80px;
-        background:center url(images/ukraine-flag_4674.ico) no-repeat;
-    }
-    #w1.nav > li.li_ru{
-        width: 80px;
-        background:center url(images/russia-flag_3417.ico) no-repeat;
-    }
-    #w1.nav > li.li_call_request{
-        width: 170px;
-    }
-    #w1.nav > li.li_login{
-        width: 80px;
-    }
-    #w1.nav > li.li_phone{
-        width: 110px;
-    }
-    #w1.nav > li.li_logout{
-        width: 90px;
-        text-align: center;
-    }
-    .navbar-header {
-        background-color: #cb251f;
-        border-left: 4px solid white;
-    }
-
-
-
-
-
-}
-
-@media (max-width: 1200px ) {
-    /*Меню в сайтбаре*/
-    div.sitebar-right #w2.nav > li > a, #w2.nav > li > a:hover, #w2.nav > li > a:focus, #w2.nav > li.active > a{
-
-        font-size: 15px;
-    }
-
-    table.table_support_history{
-        font-size: 10px;
-    }
-
-}
-
-
-@media (max-width: 992px){
-
-    /* Верхнее меню*/
-    #w1.nav > li.li_en{
-        width: 40px;
-        background:center url(images/united-kingdom-flag_1527.ico) no-repeat;
-
-    }
-    #w1.nav > li.li_uk{
-        width: 40px;
-        background:center url(images/ukraine-flag_6156.ico) no-repeat;
-    }
-    #w1.nav > li.li_ru{
-        width: 40px;
-        background:center url(images/russia-flag_8498.ico) no-repeat;
-    }
-    #w1.nav > li.li_en > a{
-        padding-left: 8px;
-
-    }
-    #w1.nav > li.li_uk > a{
-        padding-left: 8px;
-
-    }
-    #w1.nav > li.li_ru > a{
-        padding-left: 8px;
-
-    }
-    #w1.nav > li {
-        height: inherit;
-        border-bottom: 4px solid white;
-    }
-
-    /* меню в сайтбаре */
-
-    div.sitebar-right #w2.nav > li > a, #w2.nav > li > a:hover, #w2.nav > li > a:focus, #w2.nav > li.active > a{
-        padding: 15px 5px;
-        font-size: 12px;
-    }
-
-    /* Блок с данными аккаунта */
-
-    div.account-data-block-4{
-        padding-left: 6px;
-
-    }
-
-    div.account-data-block-3{
-        padding-right: 6px;
-
-    }
-
-}
-
-
-
-@media (max-width: 768px ) {
-
-    /* Верхнее меню*/
-    #w1.nav {
-
-        height: inherit;
-        width: 100%;
-    }
-
-    #w1.nav > li {
-        display: block;
-        float: right;
-        border-bottom: 4px solid white;
-        border-right: 4px solid white;
-        border-left: 4px solid white;
-        width: 100%;
-    }
-
-    .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-        height: inherit;
-    }
-    div.navbar-header > a.navbar-brand{
-        background-color: #777;
-
-    }
-    .navbar-header {
-        background-color: #636363;
-
-
-    }
-    .navbar-default .navbar-nav > li > a:hover {
-
-        background-color: #282828;
-    }
-
-    #w1.nav > li.li_en{
-        width: 100%;
-        background-image: none;
-        background-color: #636363;
-
-    }
-    #w1.nav > li.li_uk{
-        width: 100%;
-        background-image: none;
-        background-color: #636363;
-    }
-    #w1.nav > li.li_ru{
-        width: 100%;
-        background-image: none;
-        background-color: #636363;
-    }
-
-    /*Меню в сайтбаре*/
-    div.sitebar-right #w2.nav > li > a, #w2.nav > li > a:hover, #w2.nav > li > a:focus, #w2.nav > li.active > a{
-        padding: 15px 15px;
-        font-size: 16px;
-    }
-
-
-
-}
 
 
 
@@ -853,4 +663,478 @@ div.payment_next_information > form >div{
 div.hiden-fields > div.form-group > div.message-history-support, div.hiden-fields > div.form-group, div.hiden-fields > div.form-group >div >div.help-block {
     margin-top: 0px;
     margin-bottom: 0px;
+}
+
+/**********Страница проверки кода***********/
+div.text-center{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+/* адаптивность */
+
+@media (min-width: 768px){
+
+
+    /* Верхнее меню*/
+    div.container > div.navbar-collapse {
+        border-left: 4px solid white;
+        border-right: 4px solid white;
+    }
+
+    #w1.nav > li.li_admin{
+        width: 200px;
+    }
+    #w1.nav > li.li_en{
+        width: 80px;
+        background:center url(images/united-kingdom-flag_8214.ico) no-repeat;
+
+    }
+    #w1.nav > li.li_en > a{
+        color: transparent;
+    }
+    #w1.nav > li.li_uk > a{
+        color: transparent;
+    }
+    #w1.nav > li.li_ru > a{
+        color: transparent;
+    }
+    #w1.nav > li.li_uk{
+        width: 80px;
+        background:center url(images/ukraine-flag_4674.ico) no-repeat;
+    }
+    #w1.nav > li.li_ru{
+        width: 80px;
+        background:center url(images/russia-flag_3417.ico) no-repeat;
+    }
+    #w1.nav > li.li_call_request{
+        width: 170px;
+    }
+    #w1.nav > li.li_login{
+        width: 80px;
+    }
+    #w1.nav > li.li_phone{
+        width: 110px;
+    }
+    #w1.nav > li.li_logout{
+        width: 90px;
+        text-align: center;
+    }
+    .navbar-header {
+        background-color: #cb251f;
+        border-left: 4px solid white;
+    }
+
+
+
+
+
+}
+
+@media (max-width: 1200px ) {
+    /*Меню в сайтбаре*/
+    div.sitebar-right #w2.nav > li > a, #w2.nav > li > a:hover, #w2.nav > li > a:focus, #w2.nav > li.active > a{
+
+        font-size: 15px;
+    }
+
+    table.table_support_history{
+        font-size: 10px;
+    }
+
+}
+
+
+@media (max-width: 992px){
+
+    body {
+        font-size: 13px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+    h3 {
+        font-size: 19px;
+    }
+    h4 {
+        font-size: 16px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+
+    div > p{
+        margin: 2px;
+    }
+
+    div.title_custom > h1 {
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+    .sitebar-right {
+        margin-top: 75px;
+    }
+
+    /* Верхнее меню*/
+
+    div.title_custom {
+
+        margin-bottom: 20px;
+
+    }
+
+    #w1.nav > li > form > button.logout {
+        font-size: 13px;
+    }
+
+
+    #w1.nav > li.li_en{
+        width: 40px;
+        background:center url(images/united-kingdom-flag_1527.ico) no-repeat;
+
+    }
+    #w1.nav > li.li_uk{
+        width: 40px;
+        background:center url(images/ukraine-flag_6156.ico) no-repeat;
+    }
+    #w1.nav > li.li_ru{
+        width: 40px;
+        background:center url(images/russia-flag_8498.ico) no-repeat;
+    }
+    #w1.nav > li.li_en > a{
+        padding-left: 8px;
+
+    }
+    #w1.nav > li.li_uk > a{
+        padding-left: 8px;
+
+    }
+    #w1.nav > li.li_ru > a{
+        padding-left: 8px;
+
+    }
+    #w1.nav > li {
+        height: inherit;
+        border-bottom: 4px solid white;
+    }
+
+    /* меню в сайтбаре */
+
+    div.sitebar-right #w2.nav > li > a, #w2.nav > li > a:hover, #w2.nav > li > a:focus, #w2.nav > li.active > a{
+        padding: 10px 5px;
+        font-size: 12px;
+    }
+
+    #w2.nav > li, #w2.nav > li > a:hover {
+        margin-top: 5px;
+        height: 40px;
+    }
+
+    /*Таблици */
+
+    table.table-border-custom > thead > tr >th, table.table.table-border-custom > thead:first-child > tr:first-child >th, table.table-border-custom > tbody > tr >td, table.table-border-custom {
+        height: 45px !important;
+    }
+    .btn-custom > a {
+
+        padding: 10px 15px;
+    }
+
+    /*Панели */
+    .panel-heading {
+        padding: 5px 15px;
+    }
+
+    div.cabinet_change_forms > div.panel-heading {
+        height: 37px;
+    }
+
+    /* Формы */
+    .btn-lg, .btn-group-lg > .btn {
+        padding: 10px 15px;
+        font-size: 12px;
+    }
+    input.form-control, select.form-control {
+        height: 35px;
+        font-size: 12px;
+
+    }
+    .form-group {
+        margin-bottom: 5px;
+    }
+
+    /* Модальное окно */
+
+    div.modal_1_wrapper >div > div> div.modal-body, div.modal_2_wrapper >div > div> div.modal-body {
+        font-size: 14px;
+        padding: 20px;
+    }
+    .modal-header {
+        padding: 13px;
+    }
+    /* Блок с данными аккаунта */
+
+    div.account-data-block-4{
+        padding-left: 6px;
+    }
+
+    div.account-data-block-3{
+        padding-right: 6px;
+    }
+
+
+    .account-data-block {
+        margin-top: 0;
+    }
+
+    .account-data-block > p {
+        padding-top: 5px;
+        margin-top: 5px;
+        font-size: 17px;
+    }
+
+    .account-data-block-1 div, .account-data-block-2 div, .account-data-block-3 div, .account-data-block-4 div, .account-data-block-5 div, .account-data-block-6 div {
+        height: 82px;
+    }
+
+
+    .account-data-block-1, .account-data-block-2, .account-data-block-3, .account-data-block-4, .account-data-block-5, .account-data-block-6 {
+        padding-bottom: 4px;
+    }
+
+    /*Оплата */
+
+    div.table_payment >table >tbody>tr>td>form>p{
+        font-size: 14px;
+    }
+    div.table_payment >table >tbody>tr>td>form>p>input {
+        height: 37px;
+        font-size: 14px;
+    }
+
+    table.invis>tbody>tr.trow>td>input[type="submit"] {
+
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    div.payment_next_information > form > div > input[type="submit"], div.payment_next_information > form > input[type="submit"] {
+
+        padding: 10px 16px;
+        font-size: 14px;
+        margin-bottom: 7px;
+        margin-top: 7px;
+    }
+    div.payment_next_information > form > select {
+        height: 37px;
+        font-size: 14px;
+    }
+
+}
+
+
+
+@media (max-width: 768px ) {
+
+    body {
+        font-size: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+    h3 {
+        font-size: 16px;
+    }
+    h4 {
+        font-size: 12px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    p{
+        margin: 0;
+    }
+
+    div.title_custom > h1 {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .sitebar-right {
+        margin-top: 0;
+    }
+
+    /* Верхнее меню*/
+    #w1.nav {
+
+        height: inherit;
+        width: 100%;
+    }
+
+    #w1.nav > li {
+        display: block;
+        float: right;
+        border-bottom: 4px solid white;
+        border-right: 4px solid white;
+        border-left: 4px solid white;
+        width: 100%;
+    }
+
+    div.title_custom {
+
+        margin-bottom: 15px;
+        border-radius: 8px;
+    }
+
+    .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+        height: inherit;
+    }
+    div.navbar-header > a.navbar-brand{
+        background-color: #777;
+
+    }
+    .navbar-header {
+        background-color: #636363;
+
+
+    }
+    .navbar-default .navbar-nav > li > a:hover {
+
+        background-color: #282828;
+    }
+
+    #w1.nav > li.li_en{
+        width: 100%;
+        background-image: none;
+        background-color: #636363;
+
+    }
+    #w1.nav > li.li_uk{
+        width: 100%;
+        background-image: none;
+        background-color: #636363;
+    }
+    #w1.nav > li.li_ru{
+        width: 100%;
+        background-image: none;
+        background-color: #636363;
+    }
+
+    /*Меню в сайтбаре*/
+    div.sitebar-right #w2.nav > li > a, #w2.nav > li > a:hover, #w2.nav > li > a:focus, #w2.nav > li.active > a{
+        padding: 5px 15px;
+        font-size: 12px;
+    }
+
+    #w2.nav > li, #w2.nav > li >a:hover {
+        margin-top: 5px;
+        height: 30px;
+    }
+
+
+    /*Таблици */
+
+    table.table-border-custom > thead > tr >th, table.table.table-border-custom > thead:first-child > tr:first-child >th, table.table-border-custom > tbody > tr >td, table.table-border-custom {
+        height: auto !important;
+    }
+    .btn-custom > a {
+
+        padding: 6px 15px;
+    }
+    /*
+    #cabinet-table > .table-responsive > .table > thead > tr > th, #cabinet-table > .table-responsive > .table > tbody > tr > th, #cabinet-table > .table-responsive > .table > tfoot > tr > th, #cabinet-table > .table-responsive > .table > thead > tr > td, #cabinet-table > .table-responsive > .table > tbody > tr > td{
+        white-space: normal;
+    }
+    */
+    .table-responsive > .table > thead > tr > th, .table-responsive > .table > tbody > tr > th, .table-responsive > .table > tfoot > tr > th, .table-responsive > .table > thead > tr > td, .table-responsive > .table > tbody > tr > td{
+        white-space: normal;
+    }
+    /*Информационный блок */
+
+    .account-data-block {
+        margin-top: 0;
+    }
+
+    .account-data-block > p {
+        padding-top: 5px;
+        margin-top: 5px;
+        font-size: 12px;
+    }
+
+    .account-data-block-1 div, .account-data-block-2 div, .account-data-block-3 div, .account-data-block-4 div, .account-data-block-5 div, .account-data-block-6 div {
+        height: 70px;
+    }
+
+
+    .account-data-block-1, .account-data-block-2, .account-data-block-3, .account-data-block-4, .account-data-block-5, .account-data-block-6 {
+        padding-bottom: 4px;
+    }
+
+    /*Панели */
+    .panel-heading {
+        padding: 5px 15px;
+    }
+
+    div.cabinet_change_forms > div.panel-heading {
+        height: 30px;
+    }
+
+    /* Формы */
+    .btn-lg, .btn-group-lg > .btn {
+        padding: 6px 15px;
+        font-size: 12px;
+    }
+    input.form-control, select.form-control {
+        height: 35px;
+        font-size: 10px;
+    }
+    .form-group {
+        margin-bottom: 5px;
+    }
+
+    #tehnical-support-reset-btn {
+        padding-top: 5px;
+    }
+
+    /* Модальное окно */
+
+    div.modal_1_wrapper >div > div> div.modal-body, div.modal_2_wrapper >div > div> div.modal-body {
+        font-size: 12px;
+        padding: 20px;
+    }
+    .modal-header {
+        padding: 10px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    /*Оплата */
+
+    div.table_payment >table >tbody>tr>td>form>p{
+        padding-bottom: 8px;
+        font-size: 12px;
+    }
+    div.table_payment >table >tbody>tr>td>form>p>input {
+        height: 30px;
+        font-size: 12px;
+    }
+
+    table.invis>tbody>tr.trow>td>input[type="submit"] {
+
+        padding: 6px 16px;
+        font-size: 12px;
+    }
+    div.payment_next_information > form > div > input[type="submit"], div.payment_next_information > form > input[type="submit"] {
+        padding: 6px 16px;
+        font-size: 12px;
+        margin-bottom: 7px;
+        margin-top: 7px;
+
+    }
+    div.payment_next_information > form > select {
+        height: 30px;
+        font-size: 12px;
+
+    }
+
 }

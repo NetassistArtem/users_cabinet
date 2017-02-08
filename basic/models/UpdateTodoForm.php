@@ -85,6 +85,8 @@ class UpdateTodoForm extends Model
 
     public function sendUpdate()
     {
+        //Сохранение файлов методами Yii, раскоментить в случае когда не работает загрузка из аппи биллинга
+
         $this->files = UploadedFile::getInstances($this, 'files');
 
         if($this->files){
@@ -114,6 +116,10 @@ class UpdateTodoForm extends Model
             "exec_list" => $send_data['exec_list'],
 
         );
+
+      //  $err_str ='';
+       // $todo_desc = '';
+       // upd_image_files_ex('UpdateTodoForm[files]', $todo_id.'_id', 'todo', $err_str, $todo_desc);
 
         update_todo_simple($todo_id, 0, $new_ctx);
 

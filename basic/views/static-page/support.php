@@ -117,7 +117,7 @@ $this->title = Yii::t('support','technical_support');
                     <?= Html::submitButton(Yii::t('support','send_request'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom', 'name' => 'technical-support-button']) ?>
 
                 </div>
-                <div class=" col-lg-4 col-md-4 col-sm-4" >
+                <div id="tehnical-support-reset-btn" class=" col-lg-4 col-md-4 col-sm-4" >
                     <?= Html::resetButton(Yii::t('support','clear_form'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom', 'name' => 'technical-support-reset-button']) ?>
                 </div>
             </div>

@@ -7,21 +7,25 @@
 
 use yii\helpers\Html;
 
-$this->title = $name;
-?>
-<div class="site-error">
+if($name == 'Not Found (#404)'|| $name == 'Not Found (#404)'){
+    $name = Yii::t('error',$name);
+}
 
-    <h1><?= Html::encode($this->title) ?></h1>
+
+
+$this->title = $name;
+//$this->title = Yii::t('tv','tv');
+
+?>
+<div class="site-about">
+    <div class="title_custom" >
+        <h1><?= Html::encode($this->title) ?></h1>
+    </div>
+
+
 
     <div class="alert alert-danger">
         <?= nl2br(Html::encode($message)) ?>
     </div>
-
-    <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
 
 </div>

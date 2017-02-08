@@ -13,7 +13,7 @@ $this->title = Yii::t('login','title_login');
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1 class="col-lg-offset-4 col-md-offset-4 col-sm-offset-3 login-title-position"><?= Html::encode($this->title) ?></h1>
+    <h1 class="col-lg-offset-4 col-md-offset-4 col-sm-offset-3  login-title-position"><?= Html::encode($this->title) ?></h1>
 
 
     <?php $form = ActiveForm::begin([

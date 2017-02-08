@@ -4,7 +4,7 @@ return [
     'user_info' => 'Облікові дані',
     'full_name' => 'П.І.Б.',
     'address' => 'Адреса',
-    'phone_1' =>'Телефон №1',
+    'phone_1' =>'Телефони',
     'phone_2' => 'Телефон №2',
     'email' => 'E-mail',
     'login' =>'Логін',
@@ -24,7 +24,7 @@ return [
     'gateway' => 'Шлюз',
     'primary_dns' => 'Основний DNS',
     'secondary_dns' => 'Додатковий DNS',
-    'edit_contact_details' => 'Змінити контактні дані',
+    'edit_contact_details' => 'Змінити контактни',
 
 
 

@@ -169,6 +169,16 @@ $config = [
                     'route' => 'static-page/color',
 
                 ],
+                [
+                    'pattern' => 'phone-first-change-confirm',
+                    'route' => 'static-page/phone-first-change-confirm',
+
+                ],
+                [
+                    'pattern' => 'phone-change',
+                    'route' => 'static-page/phone-change',
+
+                ],
 
 
             ],

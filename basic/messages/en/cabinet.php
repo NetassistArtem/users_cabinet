@@ -4,7 +4,7 @@ return [
     'user_info' => 'User information',
     'full_name' => 'Full name',
     'address' => 'Address',
-    'phone_1' =>'Phone №1',
+    'phone_1' =>'Phones',
     'phone_2' => 'Phone №2',
     'email' => 'E-mail',
     'login' =>'Login',
@@ -24,7 +24,7 @@ return [
     'gateway' => 'Gateway',
     'primary_dns' => 'Primary DNS',
     'secondary_dns' => 'Secondary DNS',
-    'edit_contact_details' => 'Edit contact details',
+    'edit_contact_details' => 'Edit contacts',
 
 
 

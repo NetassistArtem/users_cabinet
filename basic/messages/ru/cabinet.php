@@ -4,7 +4,7 @@ return [
     'user_info' => 'Учетные данные',
     'full_name' => 'Ф.И.О.',
     'address' => 'Адрес',
-    'phone_1' =>'Телефон №1',
+    'phone_1' =>'Телефоны',
     'phone_2' => 'Телефон №2',
     'email' => 'E-mail',
     'login' =>'Логин',
@@ -24,7 +24,7 @@ return [
     'gateway' => 'Шлюз',
     'primary_dns' => 'Основной DNS',
     'secondary_dns' => 'Вторичный DNS',
-    'edit_contact_details' => 'Изменить контактные данные',
+    'edit_contact_details' => 'Изменить контакты',
 
 
 
