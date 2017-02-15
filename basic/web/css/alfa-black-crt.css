@@ -1108,7 +1108,7 @@ div.text-center{
         margin-bottom: 5px;
     }
 
-    #tehnical-support-reset-btn {
+    #tehnical-support-reset-btn,#btn-delete-email-change,#btn-delete-phone-change {
         padding-top: 5px;
     }
 

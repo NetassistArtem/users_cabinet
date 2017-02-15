@@ -16,6 +16,7 @@ return [
     'change_contact_inf' => 'Изменение контактной информации',
     'phone_1' => 'Телефоны',
     'phone_2' => 'Телефон 2',
+    'phone' => 'Телефон',
     'change_data' =>'Изменить данные',
     'notification_settings' => 'Настройки уведомлений',
     'save_settings' => 'Сохранить настройки',
@@ -26,8 +27,13 @@ return [
     'add_phone_1' => 'Добавить телефон',
     'add_phone_2' => 'Добавить телефон',
     'delete_phone_2' => 'Удалить телефон',
+    'delete_email' => 'Удалить E-mail',
     'change_phone_2' => 'Изменить телефон',
     'select_phone' => 'Выберите телефон',
+    'email' => 'E-mail',
+    'select_email' => 'Выберите E-mail',
+    'change_email' => 'Изменить E-mail',
+    'add_email' => 'Добавить E-mail',
 
 
 ];

@@ -8,7 +8,7 @@ use app\components\debugger\Debugger;
 use \yii\widgets\MaskedInput;
 use app\assets\AppAsset;
 
-$this->title = Yii::t('change-phone', 'change_phone');
+$this->title = Yii::t('change-email', 'change_email');
 
 
 ?>
@@ -20,19 +20,19 @@ $this->title = Yii::t('change-phone', 'change_phone');
 
     <div class=" panel panel-default cabinet_change_forms">
         <div class="panel-heading">
-            <p><?= Yii::t('change-phone', 'change_phone') ?></p>
+            <p><?= Yii::t('change-email', 'change_email') ?></p>
         </div>
         <div class="panel-body">
 
 
 
 
-            <?php Pjax::begin(['id' => 'phone-change']); ?>
+            <?php Pjax::begin(['id' => 'email-change']); ?>
 
             <div>
 
                 <?php
-                $flash_message = Yii::$app->session->getFlash('phoneDeleteChanged')['value'];
+                $flash_message = Yii::$app->session->getFlash('emailDeleteChanged')['value'];
                 if(isset($flash_message)):
 
 
@@ -49,8 +49,8 @@ $this->title = Yii::t('change-phone', 'change_phone');
             </div>
 
 
-            <?php $form_phone_1_change = ActiveForm::begin([
-                'id' => 'phoneFirstChangeForm',
+            <?php $form_email_change = ActiveForm::begin([
+                'id' => 'emailChangeForm',
                 'options' => ['data-pjax' => false],
                 'layout' => 'horizontal',
                 'fieldConfig' => [
@@ -61,24 +61,24 @@ $this->title = Yii::t('change-phone', 'change_phone');
 
             ]); ?>
 
-            <?php if(Yii::$app->session->hasFlash('phoneNotDelete')): ?>
+            <?php if(Yii::$app->session->hasFlash('emailNotDelete')): ?>
                 <div class="alert alert-danger" >
-                    <p><?= Yii::$app->session->getFlash('phoneNotDelete')['value']; ?></p>
+                    <p><?= Yii::$app->session->getFlash('emailNotDelete')['value']; ?></p>
                 </div>
             <?php endif; ?>
 
 
-            <?= $form_phone_1_change->field($modelPhoneFirstChange, 'phone1')->label(Yii::t('upravlenie-kabinetom', 'phone_1'))->
-            widget(\yii\widgets\MaskedInput::className(), ['mask' => '+380 (99) 999 99 99'])->input('phone', ['value' => (int)substr(Yii::$app->session->get('phone_to_change'), -9)]) ?>
+            <?= $form_email_change->field($modelEmailChange, 'email')->label(Yii::t('upravlenie-kabinetom', 'email'))->
+            input('email', ['value' => Yii::$app->session->get('email_to_change')]) ?>
 
             <div class="form-group">
 
 
                     <div class="col-lg-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-4 col-md-4 col-sm-4">
-                        <?= Html::submitButton(Yii::t('upravlenie-kabinetom', 'change_phone_1'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom phone-1-change', 'name' => 'phone-first-change-button', 'value' => 2]) ?>
+                        <?= Html::submitButton(Yii::t('upravlenie-kabinetom', 'change_email'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom phone-1-change', 'name' => 'email-change-button', 'value' => 2]) ?>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4" id="btn-delete-phone-change">
-                        <?= Html::submitButton(Yii::t('upravlenie-kabinetom', 'delete_phone_1'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom', 'name' => 'phone-first-delete-button', 'value' => 1, 'onclick' => 'return destroy_submit_phone()']) ?>
+                    <div class="col-lg-4 col-md-4 col-sm-4" id = "btn-delete-email-change">
+                        <?= Html::submitButton(Yii::t('upravlenie-kabinetom', 'delete_email'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom', 'name' => 'email-delete-button', 'value' => 1, 'onclick' => 'return destroy_submit_phone()']) ?>
                     </div>
             </div>
 

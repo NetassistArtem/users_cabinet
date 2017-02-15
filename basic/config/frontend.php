@@ -179,6 +179,16 @@ $config = [
                     'route' => 'static-page/phone-change',
 
                 ],
+                [
+                    'pattern' => 'email-change',
+                    'route' => 'static-page/email-change',
+
+                ],
+                [
+                    'pattern' => 'email-change-confirm',
+                    'route' => 'static-page/email-change-confirm',
+
+                ],
 
 
             ],

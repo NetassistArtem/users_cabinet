@@ -1,9 +1,7 @@
 <?php
 
 
-namespace app\components\sms_handler;
 
-use app\components\debugger\Debugger;
 
 
 class UserSms
@@ -39,6 +37,7 @@ class UserSms
 
     public function __construct($lang = 0)
     {
+
 
 
         $this->lang = $this->lang_code[$lang];

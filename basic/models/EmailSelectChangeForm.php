@@ -7,10 +7,10 @@ use yii\base\Model;
 use Yii;
 use app\components\debugger\Debugger;
 
-class PhoneSelectChangeForm extends Model
+class EmailSelectChangeForm extends Model
 {
 
-    public $phones;
+    public $emails;
 
     /**
      * @return array the validation rules.
@@ -19,13 +19,13 @@ class PhoneSelectChangeForm extends Model
     {
         return [
 
-            [['phones'], 'trim'],
+            [['emails'], 'trim'],
 
 
         ];
     }
 
-    public function setNewPhone()
+    public function setNewEmail()
     {
         if ($this->validate()) {
 
@@ -34,15 +34,15 @@ class PhoneSelectChangeForm extends Model
 
 
 
-                $phone_key = Yii::$app->request->post('PhoneSelectChangeForm')['phones'];
+                $email_key = Yii::$app->request->post('EmailSelectChangeForm')['emails'];
 
-                if ($phone_key) {
+                if ($email_key) {
 
-                    $phone_val = $user_data['phone_all_array'][$phone_key];
-                    Yii::$app->session->set('phone_to_change', $phone_val);
+                    $email_val = $user_data['email_array'][$email_key];
+                    Yii::$app->session->set('email_to_change', $email_val);
                     return 1;
                 } else {
-                    Yii::$app->session->setFlash('phoneSelectChanged', ['value' => Yii::t('flash-message', 'not_select')]);
+                    Yii::$app->session->setFlash('emailSelectChanged', ['value' => Yii::t('flash-message', 'not_select_email')]);
                     return 2;
                 }
 

@@ -2,8 +2,9 @@
 return [
     'contact_details_updated' => 'Contact details have been updated successfully.',
     'unable_change_contact' => 'Unable to change contact details.',
-    'phone_1_delete' => 'Phone number 1 have been delete successfully.',
-    'phone_2_delete' => 'Phone number 2 have been delete successfully.',
+    'phone_1_delete' => 'Phone number have been delete successfully.',
+    'phone_2_delete' => 'Phone number have been delete successfully.',
+    'email_delete' => 'E-mail address have been delete successfully.',
     'message_sent' => 'Message sent.',
     'unable_send_message' => 'Unable to send a message.',
     'notification_settings_saved' => 'New notification settings saved.',
@@ -14,7 +15,14 @@ return [
     'unable_send_data' => 'Unable to send data.',
     'change_message_confirm' => 'By sure you want to change your password?',
     'wrong_code' => 'Incorrect code.',
-    'phone_1_change' => 'Phone №1 was changed',
+    'phone_1_change' => 'Phone was changed',
+    'email_change' => 'E-mail was changed',
     'not_select' => 'Phone is not selected',
-
+    'not_select_email' => 'E-mail is not selected',
+    'incorrect_telephone' => 'Incorrect telephone number',
+    'phone_format' => 'The phone number should be in the format 099-999-99-99',
+    'phone_add' => 'The new phone number is added',
+    'email_add' => 'The new e-mail address is added',
+    'phone_not_delete' =>'The phone can not be removed. You do not have enough contact information. You must have at least one phone or e-mail addresses',
+    'email_not_delete' =>'The E-mail can not be removed. You do not have enough contact information. You must have at least one phone or e-mail addresses',
 ];

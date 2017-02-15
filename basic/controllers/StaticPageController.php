@@ -5,12 +5,17 @@ namespace app\controllers;
 use app\models\ContactChangeForm;
 use app\models\FeedbackForm;
 use app\models\PhoneFirstChangeForm;
+use app\models\EmailChangeForm;
 use app\models\PhoneSelectChangeForm;
+use app\models\EmailSelectChangeForm;
 use app\models\UpdateTodoForm;
 use app\models\MessageTypeChangeForm;
 use app\models\TechnicalSupportForm;
 use app\models\CallRequestForm;
 use app\models\PhoneFirstChangeConfirmForm;
+use app\models\EmailChangeConfirmForm;
+use app\models\PhoneAddForm;
+use app\models\EmailAddForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -139,10 +144,16 @@ class StaticPageController extends Controller
     {
 
         User::UserData();
+
         Yii::$app->session->remove('confirmcode');
         Yii::$app->session->remove('number_valid');
+        Yii::$app->session->remove('add');
 
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
+      //  Debugger::PrintR(Yii::$app->session->get('user-data'));
+      //  Debugger::Eho(Yii::$app->user->id);
+
+      //  Debugger::testDie();
 
         $modelPasswordChange = new PasswordChangeForm();
         /*
@@ -162,6 +173,7 @@ class StaticPageController extends Controller
                 return $this->redirect(['/upravlenie-kabinetom']);
             }
         }
+
 
         $modelContactChange = new ContactChangeForm();
 
@@ -194,6 +206,55 @@ class StaticPageController extends Controller
             }
         }
 
+        $modelPhoneAddForm = new PhoneAddForm();
+
+
+        if ($modelPhoneAddForm->load(Yii::$app->request->post()) && $modelPhoneAddForm->setNewPhone()) {
+
+            return $this->redirect(['/phone-first-change-confirm']);
+
+        }
+
+        $modelEmailSelectChange = new EmailSelectChangeForm();
+
+        if ($modelEmailSelectChange->load(Yii::$app->request->post())) {
+            $p_m_1 = $modelEmailSelectChange->setNewEmail();
+
+            if ($p_m_1) {
+                if ($p_m_1 === 2) {
+
+                    if (!Yii::$app->request->isPjax) {
+                        return $this->redirect(['/upravlenie-kabinetom#contact_change']);
+                    }
+                } elseif ($p_m_1 === 3) {
+                    if (!Yii::$app->request->isPjax) {
+                        //    return $this->redirect(['/upravlenie-kabinetom#contact_change']);
+                    }
+                } else {
+                    if (!Yii::$app->request->isPjax) {
+                        return $this->redirect(['/email-change']);
+                    }
+                }
+            }
+        }
+
+        $modelEmailAddForm = new EmailAddForm();
+
+
+        if ($modelEmailAddForm->load(Yii::$app->request->post()) && $modelEmailAddForm->setNewEmail()) {
+
+            return $this->redirect(['/email-change-confirm']);
+
+        }
+
+
+
+
+
+
+
+
+
         $modelMessageTypeChange = new MessageTypeChangeForm();
 
 
@@ -223,14 +284,14 @@ class StaticPageController extends Controller
             'modelContactChange' => $modelContactChange,
             'modelMessageTypeChange' => $modelMessageTypeChange,
             'modelPhoneSelectChange' => $modelPhoneSelectChange,
+            'modelEmailSelectChange' => $modelEmailSelectChange,
+            'modelPhoneAddForm' => $modelPhoneAddForm,
+            'modelEmailAddForm' => $modelEmailAddForm,
             'email_message_types' => $email_message_types,
             'sms_message_types' => $sms_message_types,
             'selected_email_message_types' => $selected_email_message_types,
             'selected_sms_message_types' => $selected_sms_message_types,
-
-
             // 'delete_phone_1_confirm' => $delete_phone_1_confirm,
-
         ]);
     }
 
@@ -441,13 +502,19 @@ class StaticPageController extends Controller
         $modelPhoneFirstChange = new PhoneFirstChangeForm();
 
         if ($modelPhoneFirstChange->load(Yii::$app->request->post())) {
+
             $p_m_1 = $modelPhoneFirstChange->setNewPhone1();
 
             if ($p_m_1) {
                 if ($p_m_1 === 2) {
 
-                  //  return $this->redirect(['/upravlenie-kabinetom']);
+                    return $this->redirect(['/upravlenie-kabinetom']);
+                } elseif($p_m_1 === 3) {
+                    return $this->redirect(['/phone-change']);
                 } else {
+                   // Debugger::PrintR($_POST);
+//Debugger::testDie();
+
                     return $this->redirect(['/phone-first-change-confirm']);
                 }
             }
@@ -459,6 +526,46 @@ class StaticPageController extends Controller
 
         ]);
     }
+
+
+
+    public function actionEmailChange()
+    {
+
+        User::UserData();
+
+        $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
+
+        $modelEmailChange = new EmailChangeForm();
+
+        if ($modelEmailChange->load(Yii::$app->request->post())) {
+
+            $p_m_1 = $modelEmailChange->setNewEmail();
+
+            if ($p_m_1) {
+                if ($p_m_1 === 2) {
+
+                    return $this->redirect(['/upravlenie-kabinetom']);
+                } elseif($p_m_1 === 3) {
+                    return $this->redirect(['/email-change']);
+                } else {
+                    // Debugger::PrintR($_POST);
+//Debugger::testDie();
+
+                    return $this->redirect(['/email-change-confirm']);
+                }
+            }
+        }
+
+        return $this->render('email-change', [
+            'user_data' => $user_data,
+            'modelEmailChange' => $modelEmailChange,
+
+        ]);
+    }
+
+
+
 
     public function actionPhoneFirstChangeConfirm()
     {
@@ -488,7 +595,7 @@ class StaticPageController extends Controller
             );
 
 
-            //  turbosms_send($normal_phone, $full_sms_text, $org_id, 0, $acc_id); //Открпвка смс, функция биллинга
+              turbosms_send($normal_phone, $full_sms_text, $org_id, 0, $acc_id); //Открпвка смс, функция биллинга
 
         }
 
@@ -502,7 +609,6 @@ class StaticPageController extends Controller
         global $phone;
         $phone = Yii::$app->session->get('new_user_phone_or_email');
 
-
         $modelPhoneFirstChangeConfirm = new PhoneFirstChangeConfirmForm();
         // $confirm = $modelPhoneFirstChangeConfirm->setConfirmCode();
         // Debugger::Eho('</br>');
@@ -513,19 +619,27 @@ class StaticPageController extends Controller
         //   Debugger::testDie();
 
         if ($modelPhoneFirstChangeConfirm->load(Yii::$app->request->post())) {
+
             $confirm = $modelPhoneFirstChangeConfirm->setConfirmCode();
-
+ //Debugger::Eho($confirm);
+   //          Debugger::Eho('test1');
+     //        Debugger::testDie();
             if ($confirm) {
-                // Debugger::Eho($confirm);
-                // Debugger::Eho('test1');
-                // Debugger::testDie();
-                if ($confirm === 2) {
 
+                if ($confirm === 2) {
+//Debugger::Eho('ttttttttt');
+                   // Debugger::testDie();
                     return $this->redirect(['/phone-first-change-confirm']);
                 } elseif ($confirm === true) {
+                    if(Yii::$app->session->has('add')){
+                        Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'phone_add')]);
+                        Yii::$app->session->remove('add');
+                    }else{
+                        Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'phone_1_change')]);
+                    }
 
 
-                    Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'phone_1_change')]);
+
                     return $this->redirect(['/upravlenie-kabinetom']);
                 }
                 return $this->redirect(['/upravlenie-kabinetom']);
@@ -539,6 +653,101 @@ class StaticPageController extends Controller
         return $this->render('phone-first-change-confirm',
             ['modelPhoneFirstChangeConfirm' => $modelPhoneFirstChangeConfirm,
                 'contact_type' => 'phone_1',
+                'lang' => $lang,
+            ]);
+
+
+    }
+
+
+
+
+
+
+
+    public function actionEmailChangeConfirm()
+    {
+
+        //User::UserData();
+        if (Yii::$app->session->has('new_user_phone_or_email') && Yii::$app->session->has('confirmcode') && Yii::$app->request->get('sms')) {
+            $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
+            $user_name = isset($user_data['username']) ? $user_data['username'] : '';
+            $acc_id = isset($user_data['account_id']) ? $user_data['account_id'] : -1;
+            $org_id = isset($user_data['org_id']) ? $user_data['org_id'] : '';
+
+            $email = Yii::$app->session->get('new_user_phone_or_email');
+
+
+            $user_email = new UserSms(Yii::$app->language);
+            $email_text = Yii::t('email_messages', 'change_email');
+            $full_email_text = $user_email->createSmsTextPasswordChange(
+                $email_text,
+                Yii::$app->params['email_send_conf']['transliteration'],
+                Yii::$app->params['email_send_conf']['verification_cod_length'],
+                Yii::$app->params['email_send_conf']['verification_cod_num'],
+                Yii::$app->params['email_send_conf']['verification_cod_down_chars'],
+                Yii::$app->params['email_send_conf']['verification_cod_up_chars']
+            );
+
+
+            //  turbosms_send($normal_phone, $full_sms_text, $org_id, 0, $acc_id); //Открпвка смс, функция биллинга
+
+        }
+
+        if ((!Yii::$app->session->has('new_user_phone_or_email') || !Yii::$app->session->has('confirmcode'))) {
+
+            Yii::$app->session->remove('new_user_phone_or_email');
+            Yii::$app->session->remove('confirmcode');
+            $this->redirect('/');
+        }
+
+        global $email;
+        $email = Yii::$app->session->get('new_user_phone_or_email');
+
+        $modelEmailChangeConfirm = new EmailChangeConfirmForm();
+        // $confirm = $modelPhoneFirstChangeConfirm->setConfirmCode();
+        // Debugger::Eho('</br>');
+        //  Debugger::Eho('</br>');
+        //  Debugger::Eho('</br>');
+        //  Debugger::Eho('</br>');
+        //   Debugger::Eho($confirm);
+        //   Debugger::testDie();
+
+        if ($modelEmailChangeConfirm->load(Yii::$app->request->post())) {
+
+            $confirm = $modelEmailChangeConfirm->setConfirmCode();
+            //Debugger::Eho($confirm);
+            //          Debugger::Eho('test1');
+            //        Debugger::testDie();
+            if ($confirm) {
+
+                if ($confirm === 2) {
+//Debugger::Eho('ttttttttt');
+                    // Debugger::testDie();
+                    return $this->redirect(['/email-change-confirm']);
+                } elseif ($confirm === true) {
+                    if(Yii::$app->session->has('add')){
+                        Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'email_add')]);
+                        Yii::$app->session->remove('add');
+                    }else{
+                        Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'email_change')]);
+                    }
+
+
+
+                    return $this->redirect(['/upravlenie-kabinetom']);
+                }
+                return $this->redirect(['/upravlenie-kabinetom']);
+            }
+
+
+        }
+        $lang_arr = explode('-', Yii::$app->language);
+        $lang = $lang_arr[0];
+
+        return $this->render('phone-first-change-confirm',
+            ['modelPhoneFirstChangeConfirm' => $modelEmailChangeConfirm,
+                'contact_type' => 'email',
                 'lang' => $lang,
             ]);
 

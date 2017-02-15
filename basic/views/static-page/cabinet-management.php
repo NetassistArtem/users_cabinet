@@ -121,63 +121,6 @@ $this->title = Yii::t('upravlenie-kabinetom','account_manage');
             <p><?= Yii::t('upravlenie-kabinetom','change_contact_inf') ?></p>
         </div>
         <div class="panel-body">
-            <?php Pjax::begin(['id' => 'contact-change']); ?>
-
-
-            <?php $form_contact_change = ActiveForm::begin([
-                'id' => 'contactChangeForm',
-                'options' => ['data-pjax' => true],
-                'layout' => 'horizontal',
-                'fieldConfig' => [
-                    'template' => "{label}\n<div class=\"col-lg-4 col-md-4 col-sm-4\">{input}</div>\n<div class=\"col-lg-4 col-md-4 col-sm-4\">{error}</div>",
-                    'labelOptions' => ['class' => 'col-lg-4 col-md-4 col-sm-4 control-label'],
-                ],
-
-            ]); ?>
-
-
-            <?= $form_contact_change->field($modelContactChange, 'phone1')->label(Yii::t('upravlenie-kabinetom','phone_1'))->
-            widget(\yii\widgets\MaskedInput::className(), ['mask' => '+380 (99) 999 99 99'])->input('phone',['value' =>  $user_data['phone_1']]) ?>
-
-            <?= $form_contact_change->field($modelContactChange, 'phone2')->label(Yii::t('upravlenie-kabinetom','phone_2'))->
-            widget(\yii\widgets\MaskedInput::className(), ['mask' => '+380 (99) 999 99 99'])->input('phone',['value' =>  $user_data['phone_2']]) ?>
-
-            <?= $form_contact_change->field($modelContactChange, 'email')->label('E-mail')->input('email',['value' => $user_data['email']]) ?>
-          <div id="message_type_change" ></div>
-            <div class="form-group">
-                <div class="col-lg-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-4" >
-                    <?= Html::submitButton(Yii::t('upravlenie-kabinetom','change_data'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom', 'name' => 'contact-change-button']) ?>
-                </div>
-            </div>
-
-            <?php ActiveForm::end(); ?>
-            <?php Pjax::end(); ?>
-
-            <div>
-
-                <?php
-                $flash_message = Yii::$app->session->getFlash('phoneDeleteChanged')['value'];
-                if(isset($flash_message)):
-
-
-                    $this->registerJsFile(
-                        'scripts/message.js',
-                        ['depends'=>'app\assets\KuziaAsset']
-                    );
-
-                    // $this->registerJs('$("#modal").modal("show");');
-                    echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_1.php',['flash_message' => $flash_message]);
-                endif;
-                ?>
-
-            </div>
-
-
-
-
-
-
-
 
 
             <?php $form_select_change = ActiveForm::begin([
@@ -202,22 +145,130 @@ $this->title = Yii::t('upravlenie-kabinetom','account_manage');
             <?= $form_select_change->field($modelPhoneSelectChange, 'phones')->dropDownList($user_data['phone_all_array'], ['prompt' => Yii::t('upravlenie-kabinetom','select_phone')])->label(Yii::t('upravlenie-kabinetom','phone_1')) ?>
 
             <div class="form-group">
-                <?php if($user_data['phone_1']):?>
 
-                <div class="col-lg-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-4 col-md-4 col-sm-4" >
+
+                <div class="col-lg-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-4" >
                     <?= Html::submitButton(Yii::t('upravlenie-kabinetom','change_phone_1'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom phone-1-change', 'name' => 'phone-change-button', 'value' => 2]) ?>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4" >
-                    <?= Html::submitButton(Yii::t('upravlenie-kabinetom','delete_phone_1'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom', 'name' => 'phone-delete-button', 'value' => 1, 'onclick' => 'return destroy_submit_phone()']) ?>
-                </div>
-                    <?php else: ?>
-                    <div class="col-lg-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-4" >
-                        <?= Html::submitButton(Yii::t('upravlenie-kabinetom','add_phone_1'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom phone-1-change', 'name' => 'phone-add-button', 'value' => 3]) ?>
-                    </div>
-                <?php endif; ?>
+
             </div>
 
             <?php ActiveForm::end(); ?>
+
+
+
+            <?php $form_add_phone = ActiveForm::begin([
+                'id' => 'phoneAddForm',
+                'options' => ['data-pjax' => true],
+                'layout' => 'horizontal',
+                'fieldConfig' => [
+                    'template' => "{label}\n<div class=\"col-lg-4 col-md-4 col-sm-4\">{input}</div>\n<div class=\"col-lg-4 col-md-4 col-sm-4\">{error}</div>",
+                    'labelOptions' => ['class' => 'col-lg-4 col-md-4 col-sm-4 control-label'],
+                ],
+
+
+            ]); ?>
+            <?php if(Yii::$app->session->hasFlash('phoneAdd')): ?>
+                <div class="alert alert-danger" >
+                    <p>
+                        <?= Yii::$app->session->getFlash('phoneAdd')['value']; ?>
+                    </p>
+                </div>
+            <?php endif; ?>
+
+            <?= $form_add_phone->field($modelPhoneAddForm, 'phone1')->label(Yii::t('upravlenie-kabinetom','phone'))->
+            widget(\yii\widgets\MaskedInput::className(), ['mask' => '+380 (99) 999 99 99'])->input('phone') ?>
+
+            <div class="form-group">
+
+
+                <div class="col-lg-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-4" >
+                    <?= Html::submitButton(Yii::t('upravlenie-kabinetom','add_phone_1'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom phone-1-change', 'name' => 'phone-change-button', 'value' => 2]) ?>
+                </div>
+
+            </div>
+
+            <?php ActiveForm::end(); ?>
+
+
+
+
+
+
+
+
+            <?php $form_email_select = ActiveForm::begin([
+                'id' => 'emailSelectChangeForm',
+                'options' => ['data-pjax' => true],
+                'layout' => 'horizontal',
+                'fieldConfig' => [
+                    'template' => "{label}\n<div class=\"col-lg-4 col-md-4 col-sm-4\">{input}</div>\n<div class=\"col-lg-4 col-md-4 col-sm-4\">{error}</div>",
+                    'labelOptions' => ['class' => 'col-lg-4 col-md-4 col-sm-4 control-label'],
+                ],
+
+
+            ]); ?>
+            <?php if(Yii::$app->session->hasFlash('emailSelectChanged')): ?>
+                <div class="alert alert-danger" >
+                    <p>
+                        <?= Yii::$app->session->getFlash('emailSelectChanged')['value']; ?>
+                    </p>
+                </div>
+            <?php endif; ?>
+
+            <?= $form_email_select->field($modelEmailSelectChange, 'emails')->dropDownList($user_data['email_array'], ['prompt' => Yii::t('upravlenie-kabinetom','select_email')])->label(Yii::t('upravlenie-kabinetom','email')) ?>
+
+            <div class="form-group">
+
+
+                <div class="col-lg-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-4" >
+                    <?= Html::submitButton(Yii::t('upravlenie-kabinetom','change_email'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom phone-1-change', 'name' => 'email-change-button', 'value' => 2]) ?>
+                </div>
+
+            </div>
+
+            <?php ActiveForm::end(); ?>
+
+
+
+            <?php $form_add_email = ActiveForm::begin([
+                'id' => 'emailAddForm',
+                'options' => ['data-pjax' => true],
+                'layout' => 'horizontal',
+                'fieldConfig' => [
+                    'template' => "{label}\n<div class=\"col-lg-4 col-md-4 col-sm-4\">{input}</div>\n<div class=\"col-lg-4 col-md-4 col-sm-4\">{error}</div>",
+                    'labelOptions' => ['class' => 'col-lg-4 col-md-4 col-sm-4 control-label'],
+                ],
+
+
+            ]); ?>
+            <?php if(Yii::$app->session->hasFlash('emailAdd')): ?>
+                <div class="alert alert-danger" >
+                    <p>
+                        <?= Yii::$app->session->getFlash('emailAdd')['value']; ?>
+                    </p>
+                </div>
+            <?php endif; ?>
+
+            <?= $form_add_email->field($modelEmailAddForm, 'email')->label(Yii::t('upravlenie-kabinetom','email'))->input('email') ?>
+
+            <div class="form-group">
+
+
+                <div class="col-lg-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-4" >
+                    <?= Html::submitButton(Yii::t('upravlenie-kabinetom','add_email'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom phone-1-change', 'name' => 'email-change-button', 'value' => 2]) ?>
+                </div>
+
+            </div>
+
+            <?php ActiveForm::end(); ?>
+
+
+
+
+
+
+
 
 
         </div>

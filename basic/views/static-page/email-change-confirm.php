@@ -60,7 +60,7 @@ $this->title = Yii::t('contacts-change-confirm', 'confirm_contact_info');
 
 
                 $form_code_confirm = ActiveForm::begin([
-                    'id' => 'phoneFirsteChangeConfirmForm',
+                    'id' => 'emailChangeConfirmForm',
                     'options' => ['data-pjax' => true],
                     'layout' => 'horizontal',
                     'fieldConfig' => [
@@ -80,8 +80,15 @@ $this->title = Yii::t('contacts-change-confirm', 'confirm_contact_info');
                 </div>
                 <?php endif; ?>
 
-<?php echo ''//Debugger::PrintR($_SESSION);
+<?php Debugger::PrintR($_SESSION);
 
+                echo '</br>';
+                echo '</br>';
+                echo '</br>';
+                echo '</br>';
+                echo '</br>';
+                echo '</br>';
+                echo $modelEmailChangeConfirm->confirmcode;
                 ?>
 
 
@@ -89,7 +96,7 @@ $this->title = Yii::t('contacts-change-confirm', 'confirm_contact_info');
 
 
 
-                <?= $form_code_confirm->field($modelPhoneFirstChangeConfirm, 'confirmcode')->label(Yii::t('contacts-change-confirm', 'verification_code'))->textInput(['size' => 10]) ?>
+                <?= $form_code_confirm->field($modelEmailChangeConfirm, 'confirmcode')->label(Yii::t('contacts-change-confirm', 'verification_code'))->textInput(['size' => 10]) ?>
 
 
                 <div class="form-group">
@@ -100,7 +107,7 @@ $this->title = Yii::t('contacts-change-confirm', 'confirm_contact_info');
 
                 <div class="form-group">
                     <div class="btn btn-block btn-lg btn-custom">
-                        <a href="/<?= $lang ?>/phone-first-change-confirm?sms=1"><?= Yii::t('contacts-change-confirm', 'resend_sms') ?></a>
+                        <a href="/<?= $lang ?>/email-change-confirm?sms=1"><?= Yii::t('contacts-change-confirm', 'resend_email') ?></a>
                     </div>
                 </div>
 
@@ -121,17 +128,6 @@ $this->title = Yii::t('contacts-change-confirm', 'confirm_contact_info');
                 <div class=text-center>
                     <p><?=Yii::t('contacts-change-confirm', 'information_not_change') ?></p>
                     <p><?=Yii::t('contacts-change-confirm', 'fill_fields') ?></p>
-                    <div class="form-group">
-                        <div class="btn btn-block btn-lg btn-custom">
-                            <a href="/<?= $lang ?>/upravlenie-kabinetom#contact_change"><?= Yii::t('contacts-change-confirm', 'return_upravlenie-kabinetom') ?></a>
-                        </div>
-                    </div>
-                </div>
-            <?php elseif(Yii::$app->session->has('new_user_phone_or_email') && !Yii::$app->session->has('confirmcode') && Yii::$app->session->has('number_valid')): ?>
-
-                <div class=text-center >
-                    <p><?=Yii::t('contacts-change-confirm', 'phone_not_sending_sms') ?></p>
-                    <p><?=Yii::t('contacts-change-confirm', 'confirm_call_support') ?></p>
                     <div class="form-group">
                         <div class="btn btn-block btn-lg btn-custom">
                             <a href="/<?= $lang ?>/upravlenie-kabinetom#contact_change"><?= Yii::t('contacts-change-confirm', 'return_upravlenie-kabinetom') ?></a>

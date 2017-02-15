@@ -25,7 +25,7 @@ class CallRequestForm extends Model
 
             [['phone'], 'required'],
 
-            ['phone', 'match', 'pattern' => '/^((0\d{2})-?)?(\d{3})(-?\d{2})(-?\d{2})$/', 'message' => 'Номер должен быть в формате 099-999-99-99'],// '/^((\+?38)(-?\d{3})-?)?(\d{3})(-?\d{2})(-?\d{2})$/'
+            ['phone', 'match', 'pattern' => '/^((0\d{2})-?)?(\d{3})(-?\d{2})(-?\d{2})$/', 'message' => Yii::t('flash-message', 'phone_format')],// '/^((\+?38)(-?\d{3})-?)?(\d{3})(-?\d{2})(-?\d{2})$/'
 
 
         ];

@@ -18,4 +18,5 @@ return [
     'phone_not_sending_sms' => 'The said your phone does not support the sending and receiving SMS messages',
     'confirm_call_support'=> 'To confirm the phone number you will call from technical support. ',
     'resend_sms' =>'Resend sms',
+    'resend_email' =>'Resend e-mail',
 ];

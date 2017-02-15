@@ -158,14 +158,19 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
       //  $phone_1_array = explode(',',$user_data_by_billing[UINFO_PHONE_IDX] );
         $phone_2_array = !empty($user_data_by_billing[UINFO_PHONE2_IDX]) ? explode(',',$user_data_by_billing[UINFO_PHONE2_IDX] ) : array();
       //  $phone_2_array = explode(',',$user_data_by_billing[UINFO_PHONE2_IDX] );
-        $email_array = !empty($user_data_by_billing[UINFO_EMAIL_IDX]) ? explode(',',$user_data_by_billing[UINFO_EMAIL_IDX] ) : array();
+        $email_a = !empty($user_data_by_billing[UINFO_EMAIL_IDX]) ? explode(',',$user_data_by_billing[UINFO_EMAIL_IDX] ) : array();
         //$email_array = explode(',',$user_data_by_billing[UINFO_EMAIL_IDX] );
         $phone_all_a = array_merge($phone_1_array, $phone_2_array);
         $phone_all_array = array();
         foreach($phone_all_a as $k=>$v){
             $phone_all_array[$k+1] = $v;
         }
-
+        $email_array = array();
+        foreach($email_a as $key=> $val){
+            $email_array[$key+1] = $val;
+        }
+//Debugger::Eho(Yii::$app->user->id);
+  //      Debugger::testDie();
 
         $user_data = array(
             Yii::$app->session->get('user-data-id')['id'] => array(
