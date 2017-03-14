@@ -34,4 +34,18 @@ return [
     'select_email' => 'Виберіть E-mail',
     'change_email' => 'Змінити E-mail',
     'add_email' => 'Додати E-mail',
+    'change_2_email' => 'Змінити наявні адреси електронної пошти',
+    'change_2_phone' => 'Змінити наявні телефони',
+    'add_new_phone' => 'Додати новий телефон',
+    'add_new_email' => 'Додати нову адресу електронної пошти',
+    'start_pause' => 'Поставити на паузу',
+    'pause_start_date' => 'Дата початку паузи',
+    'services_selected' => 'Послуга',
+    'select_services' => 'Виберіть послугу',
+    'services_change' => 'Змінити налаштування послуг',
+    'renew' => 'Відновити послугу',
+    'pause_start_title' => 'Поставити послуги на паузу',
+    'pause_finish_title' => 'Зняти послуги з паузи',
+    'no_data_to_change' => 'У вас немає можливості вносити зміни в підключені послуги.',
+
 ];

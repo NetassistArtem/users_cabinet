@@ -44,8 +44,9 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     {
 
         if (Yii::$app->request->isPost && isset(Yii::$app->request->post('LoginForm')['username'])) {
+            global $is_admin;
 
-            _is_admin(Yii::$app->request->post('LoginForm')['username'], Yii::$app->request->post('LoginForm')['password']);
+            $is_admin = _is_admin(Yii::$app->request->post('LoginForm')['username'], Yii::$app->request->post('LoginForm')['password']);
             $user_id_data = array(
                 'id' => $GLOBALS['auth_user_id'],
                 'username' => $GLOBALS['auth_user_name'],
@@ -54,7 +55,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
 
 
             Yii::$app->session->set('user-data-id', $user_id_data);
-            Yii::$app->session->set('u_name' , $GLOBALS['auth_user_name']);//нужно для работы billing api
+            Yii::$app->session->set('u_name', $GLOBALS['auth_user_name']);//нужно для работы billing api
         }
 
         $user_identity_data = array(
@@ -62,7 +63,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                 'id' => Yii::$app->session->get('user-data-id')['id'],
                 'username' => Yii::$app->session->get('user-data-id')['username'],
                 'password' => Yii::$app->session->get('user-data-id')['password'],
-               // 'u_name' => Yii::$app->session->get('user-data-id')['u_name'],
+                // 'u_name' => Yii::$app->session->get('user-data-id')['u_name'],
             ),
             '103' => array(
                 'id' => 103,
@@ -83,8 +84,12 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     {
 
         //   Debugger::PrintR(get_user_info_by_ids(Yii::$app->user->id));
+        global $is_admin;
 
-        _is_admin();//функция апи биллинга, проверяет пользователя сравнивая с сесией, при каждой загрузке страници
+
+        $is_admin = _is_admin();//функция апи биллинга, проверяет пользователя сравнивая с сесией, при каждой загрузке страници
+      // Debugger::Br();
+       // Debugger::VarDamp($is_admin);
         $user_data_by_billing = get_user_info_by_ids(Yii::$app->user->id);//iconv_safe('koi8','utf-8',get_user_info_by_ids(Yii::$app->user->id)) ;
         $test = iconv_safe('koi8-u', 'utf-8', $user_data_by_billing['34']);
         // $test2 = get_acc_options($user_data_by_billing[UINFO_ACC_ID_IDX], -1) ;//$user_data_by_billing[UINFO_ACC_ID_IDX]
@@ -104,6 +109,10 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         global $external_smtp;
         global $dns1_ip;
         global $dns2_ip;
+//$is_admin = 0;
+       // Debugger::Eho($is_admin);
+
+
         if (user_option_check(USER_OPT_HAVE_BLOCK_CTL, $user_data_by_billing[UINFO_NET_ID_IDX])) {  //функции api биллинга
             get_user_ipv4_settings($user_data_by_billing[UINFO_REAL_IP4_IDX], $user_data_by_billing[UINFO_LOCAL_IP4_IDX], $user_data_by_billing[UINFO_NET_ID_IDX], $gw, $ip_1, $ip_2, $netmask, $netmask2, $external_smtp, $dns1_ip, $dns2_ip);//функции api биллинга
         }
@@ -112,8 +121,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         $access_mx = get_user_mx_options(Yii::$app->user->id);
 
 
-
-       $mx_string = iconv_safe('koi8-u', 'utf-8', get_access_mxs_str($access_mx, $lang_id=-1));
+        $mx_string = iconv_safe('koi8-u', 'utf-8', get_access_mxs_str($access_mx, $lang_id = -1));
 
 
         $sm_flags = get_acc_options($user_data_by_billing[UINFO_ACC_ID_IDX], -1); //функции api биллинга
@@ -154,44 +162,145 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         global $user_acc_offset;
 
         // преобразование контактов из строки в массив
-        $phone_1_array = !empty($user_data_by_billing[UINFO_PHONE_IDX]) ? explode(',',$user_data_by_billing[UINFO_PHONE_IDX] ) : array();
-      //  $phone_1_array = explode(',',$user_data_by_billing[UINFO_PHONE_IDX] );
-        $phone_2_array = !empty($user_data_by_billing[UINFO_PHONE2_IDX]) ? explode(',',$user_data_by_billing[UINFO_PHONE2_IDX] ) : array();
-      //  $phone_2_array = explode(',',$user_data_by_billing[UINFO_PHONE2_IDX] );
-        $email_a = !empty($user_data_by_billing[UINFO_EMAIL_IDX]) ? explode(',',$user_data_by_billing[UINFO_EMAIL_IDX] ) : array();
+        $phone_1_array = !empty($user_data_by_billing[UINFO_PHONE_IDX]) ? explode(',', $user_data_by_billing[UINFO_PHONE_IDX]) : array();
+        //  $phone_1_array = explode(',',$user_data_by_billing[UINFO_PHONE_IDX] );
+        $phone_2_array = !empty($user_data_by_billing[UINFO_PHONE2_IDX]) ? explode(',', $user_data_by_billing[UINFO_PHONE2_IDX]) : array();
+        //  $phone_2_array = explode(',',$user_data_by_billing[UINFO_PHONE2_IDX] );
+        $email_a = !empty($user_data_by_billing[UINFO_EMAIL_IDX]) ? explode(',', $user_data_by_billing[UINFO_EMAIL_IDX]) : array();
         //$email_array = explode(',',$user_data_by_billing[UINFO_EMAIL_IDX] );
         $phone_all_a = array_merge($phone_1_array, $phone_2_array);
         $phone_all_array = array();
-        foreach($phone_all_a as $k=>$v){
-            $phone_all_array[$k+1] = $v;
+        foreach ($phone_all_a as $k => $v) {
+            $phone_all_array[$k + 1] = $v;
         }
         $email_array = array();
-        foreach($email_a as $key=> $val){
-            $email_array[$key+1] = $val;
+        foreach ($email_a as $key => $val) {
+            $email_array[$key + 1] = $val;
         }
+
+        $lang = explode('-', Yii::$app->language)[0];
+        // получение данных по услугам пользователей
+        global $svc_log_offs;//переменная биллинга
+        //  Debugger::Eho('</br>');
+        //  Debugger::Eho('</br>');
+        //  Debugger::Eho('</br>');
+        //  Debugger::Eho(get_tariff_name(3, $lang));
+
+        $svc_name = array();
+        $svc_enable_name = array();
+        $svc_enable_num = array();
+        $svc_time_to = array();
+        $svc_tariff_name = array();
+        $svc_price_monthly = array();
+        $svc_auto_activation = array();
+        $svc_activation_number = array();
+        $svc_pause_date_start = array();
+        $svc_tariff_info = array();
+        $svc_credit_allowed = array();
+        $svc_type_id = array();
+        $svc_subtype_id = array();
+        $svc_tariff_daily_price = array();
+        $svc = svc_get_list($user_data_by_billing[UINFO_ACC_ID_IDX], -1, -1, 2);//функция биллинга
+        foreach ($svc as $t => $v) {
+            $svc[$t] = svc_get_rec_info($v[SVC_LOG_REC_ID_IDX], $v[SVC_LOG_CHAIN_ID_IDX]); //функция биллинга
+            $svc_name_str = db_unquote($svc[$t][$svc_log_offs + SVC_LIST_NAME_IDX]);
+            $svc_enable_name_str = iconv_safe('koi8-u', 'utf-8', get_svc_state_name($svc[$t][SVC_LOG_ENABLE_IDX], $lang));// get_svc_state_name функция биллинга
+            $svc_time_to_str = !empty($svc[$t][SVC_LOG_PTS2_IDX]) ? date("d.m.Y", strtotime(ptimestamp_to_str($svc[$t][SVC_LOG_PTS2_IDX], $sep = " ", $dsep = "-", $isep = ":"))) : Yii::t('cabinet', 'end_time');// ptimestamp_to_str функция биллинга
+            $svc_tariff_name_str = get_tariff_name($v[SVC_LOG_TARIFF_ID_IDX], $lang);
+            $svc_tariff_info_str = parse_tariff_info($v[SVC_LOG_TARIFF_ID_IDX]);
+            $svc_activation_number_str = $v[SVC_LOG_PERIODS_IDX];
+            $svc_pause_date_start_str = !empty($v[SVC_LOG_PAUSE_PTS1_IDX]) ? date("d.m.Y", strtotime(ptimestamp_to_str($v[SVC_LOG_PAUSE_PTS1_IDX], $sep = " ", $dsep = "-", $isep = ":"))) : 0;
+
+            //   Debugger::Eho('</br>');
+            // Debugger::Eho('</br>');
+            //  Debugger::Eho('</br>');
+            // Debugger::Eho($svc_activation_number_str);
+            // Debugger::Eho($v[SVC_LOG_TARIFF_ID_IDX]);
+            //  Debugger::Eho('</br>');
+            //   Debugger::Eho(get_tariff_name($v[SVC_LOG_TARIFF_ID_IDX], $lang));
+
+
+            $svc_price_monthly_str = $v[SVC_LOG_MONTHLY_IDX] * 0.001;
+            $svc_auto_activation_str = $v[SVC_LOG_AUTO_IDX];
+            $svc_enable_num_str = $v[SVC_LOG_ENABLE_IDX];
+            $svc_type_id_str = $v[SVC_LOG_TYPE_IDX];
+            $svc_subtype_id_str = $v[SVC_LOG_SUBTYPE_IDX];
+            $svc_tariff_daily_price_str = $v[SVC_LOG_DAILY_IDX];
+            $svc_credit_allowed_str = $svc[$t][$svc_log_offs + SVC_LIST_ALLOW_CREDIT_IDX];
+            $svc[$t]['svc_name'] = $svc_name_str;
+            $svc_name[] = $svc_name_str;
+            $svc[$t]['enable_name'] = $svc_enable_name_str;
+            $svc_enable_name[] = $svc_enable_name_str;
+            $svc[$t]['time_to'] = $svc_time_to_str;
+            $svc_time_to[] = $svc_time_to_str;
+            $svc[$t]['tariff_name'] = $svc_tariff_name_str;
+            $svc_tariff_name[] = $svc_tariff_name_str;
+            $svc[$t]['price_monthly'] = $svc_price_monthly_str;
+            $svc_price_monthly[] = $svc_price_monthly_str;
+            $svc_tariff_daily_price[] = $svc_tariff_daily_price_str;
+            $svc[$t]['price_daily'] = $svc_tariff_daily_price_str;
+            $svc[$t]['auto_activation'] = $svc_auto_activation_str;
+            $svc_auto_activation[] = $svc_auto_activation_str;
+            $svc[$t]['enable_num'] = $svc_enable_num_str;
+            $svc_enable_num[] = $svc_enable_num_str;
+            $svc_tariff_info[] = $svc_tariff_info_str;
+            $svc[$t]['svc_tariff_info'] = $svc_tariff_info_str;
+            $svc_activation_number[] = $svc_activation_number_str;
+            $svc[$t]['svc_activation_number'] = $svc_activation_number_str;
+            $svc_pause_date_start[] = $svc_pause_date_start_str;
+            $svc[$t]['svc_pause_date_start'] = $svc_pause_date_start_str;
+            $svc_credit_allowed[] = $svc_credit_allowed_str;
+            $svc[$t]['svc_credit_allowed'] = $svc_credit_allowed_str;
+            $svc_subtype_id[] = $svc_subtype_id_str;
+            $svc[$t]['svc_subtype_id'] = $svc_subtype_id_str;
+            $svc_type_id[] = $svc_type_id_str;
+            $svc[$t]['svc_type_id'] = $svc_type_id_str;
+
+        }
+      //  Debugger::PrintR($svc);
+
+        // Debugger::Eho($user_a/cc_offset);
+        //  Debugger::Eho('</br>');
+        // Debugger::Eho($user_data_by_billing[$user_acc_offset+AINFO_MONEY_IDX]);
+        //  Debugger::PrintR($user_data_by_billing);
 //Debugger::Eho(Yii::$app->user->id);
-  //      Debugger::testDie();
+            //  Debugger::testDie();
 
         $user_data = array(
             Yii::$app->session->get('user-data-id')['id'] => array(
                 'username' => Yii::$app->user->identity->username,
-                'fio' => iconv_safe('koi8-u', 'utf-8', $user_data_by_billing[$user_acc_offset+AINFO_CONTRACT_NAME_IDX]),
+                'fio' => iconv_safe('koi8-u', 'utf-8', $user_data_by_billing[$user_acc_offset + AINFO_CONTRACT_NAME_IDX]),
                 'password' => $user_data_by_billing[UINFO_PWD_IDX],
                 'email' => $user_data_by_billing[UINFO_EMAIL_IDX],
                 'email_array' => $email_array,
+                'pin' => $user_data_by_billing[$user_acc_offset + AINFO_PIN_IDX],
                 'address' => iconv_safe('koi8-u', 'utf-8', $user_data_by_billing[UINFO_ADDR_IDX]),
                 'address_id' => $user_data_by_billing[UINFO_BASE_LOC_ID_IDX],
                 'phone_1' => $user_data_by_billing[UINFO_PHONE_IDX],
                 'phone_1_array' => $phone_1_array,
                 'phone_2' => $user_data_by_billing[UINFO_PHONE2_IDX],
                 'phone_2_array' => $phone_2_array,
-                'phone_all_array' =>$phone_all_array,
+                'phone_all_array' => $phone_all_array,
                 'account_id' => $user_data_by_billing[UINFO_ACC_ID_IDX],
-                'account_balance' => $user_data_by_billing[$user_acc_offset+AINFO_MONEY_IDX],
-                'account_credit' => $user_data_by_billing[$user_acc_offset+AINFO_DEBT_IDX],
-                'account_currency' => iconv_safe('koi8-u', 'utf-8', get_curr_name_by_cid($user_data_by_billing[$user_acc_offset+AINFO_C_ID_IDX])),
-                'services' => array('"Безлимитный"', 'IpTV'),
-                'services_date' => array('20.08.17', '21.09.17'),
+                'account_balance' => $user_data_by_billing[$user_acc_offset + AINFO_MONEY_IDX] * 0.001,
+                'account_credit' => $user_data_by_billing[$user_acc_offset + AINFO_DEBT_IDX] * 0.001,
+                'account_max_credit' => $user_data_by_billing[$user_acc_offset + AINFO_MAX_DEBT_IDX] * 0.001,
+                'account_currency' => iconv_safe('koi8-u', 'utf-8', get_curr_name_by_cid($user_data_by_billing[$user_acc_offset + AINFO_C_ID_IDX])),
+                'services' => $svc_name,
+                'services_status_num' => $svc_enable_num,
+                'services_tariff_info' => $svc_tariff_info,
+                'services_status' => $svc_enable_name,
+                'services_date' => $svc_time_to,
+                'services_tariff_name' => $svc_tariff_name,
+                'services_tariff_month_price' => $svc_price_monthly,
+                'services_tariff_daily_price' => $svc_tariff_daily_price,
+                'svc_auto_activation' => $svc_auto_activation,
+                'svc_activation_number' => $svc_activation_number,
+                'svc_pause_date_start' => $svc_pause_date_start,
+                'svc_credit_allowed' => $svc_credit_allowed,
+                'svc_type_id' => $svc_type_id,
+                'svc_subtype_id' => $svc_subtype_id,
+                'svc' => $svc,
                 'ip_real_constant' => $user_data_by_billing[UINFO_REAL_IP4_IDX],
                 'ip_local_constant' => $user_data_by_billing[UINFO_LOCAL_IP4_IDX],
                 'ip_1' => $ip_1,
@@ -205,9 +314,9 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                 'mx_string' => $mx_string,
                 'ipv6' => $user_data_by_billing[UINFO_IP6_IDX],
                 'net_id' => $user_data_by_billing[UINFO_NET_ID_IDX],
-                'org_id' => iconv_safe('koi8-u', 'utf-8', $user_data_by_billing[$user_acc_offset+AINFO_ORG_ID_IDX]),
+                'org_id' => iconv_safe('koi8-u', 'utf-8', $user_data_by_billing[$user_acc_offset + AINFO_ORG_ID_IDX]),
                 'real_name' => $user_data_by_billing[UINFO_REAL_NAME_IDX],
-                'req_id' => $user_data_by_billing[$user_acc_offset+AINFO_REQ_ID_IDX],
+                'req_id' => $user_data_by_billing[$user_acc_offset + AINFO_REQ_ID_IDX],
                 'loc_id' => $user_data_by_billing[UINFO_BASE_LOC_ID_IDX],
 
 
@@ -230,8 +339,8 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             ),
 
         );
-
-
+//Debugger::PrintR($user_data);
+//Debugger::PrintR($user_data_by_billing);
         Yii::$app->session->set('user-data', $user_data);
     }
 
@@ -239,7 +348,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     {
 
         $data = get_lang_opt_list("support_classes");//функция из api биллинга
-        $data[0] =  Yii::t('support','select_option');
+        $data[0] = Yii::t('support', 'select_option');
 
         $support_data = array(
 
@@ -266,7 +375,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                         'todo_end_time' => itimestamp_to_str($k[TODO_REQ_TIME_IDX], $sep = " ", $dsep = "-", $isep = ":"),
                         'todo_admin_id' => get_user_info_by_ids(UID_ANY, $k[TODO_ACC_ID_IDX])[UINFO_NAME_IDX],//$k[TODO_ADMIN_ID_IDX],
                         'todo_state' => Yii::t('support_history_todo_status', Yii::$app->params['todo_status'][$k[TODO_STATE_IDX]]['lang_key']),
-                        'todo_subj' =>  iconv_safe('koi8-u', 'utf-8', $k[TODO_SUBJ_IDX]),//web_encode($k[TODO_SUBJ_IDX]),
+                        'todo_subj' => iconv_safe('koi8-u', 'utf-8', $k[TODO_SUBJ_IDX]),//web_encode($k[TODO_SUBJ_IDX]),
                     );
                 }
                 // $todo_records = iconv_safe('koi8-u','utf-8',$todo_records);
@@ -313,6 +422,66 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                     }
                 } */
         return $todo_data;
+    }
+
+    public static function PaymentHistory($account_id)
+    {
+        $payment_array = array();
+
+        $payment_data_array = get_pay_info_ex('', 0, $account_id, 0, -1, -1, 0, 0, 0, "", 0);
+        if ($payment_data_array) {
+            if (is_array($payment_data_array)) {
+                foreach ($payment_data_array as $k => $v) {
+                    $add_date = '';
+                    $currency = iconv_safe('koi8-u', 'utf-8', get_curr_name_by_cid($v[PSTAT_C_ID_IDX]));
+                    $account_inc = $v[PSTAT_ACCOUNT_INC_IDX];
+                   // $payment_idx = $v[PSTAT_PAYMENT_IDX];
+                    $credit_inc = $v[PSTAT_CREDIT_INC_IDX];
+                    if($account_inc){
+                        $main_acc = $account_inc * 0.001 .$currency;
+                    }else{
+                        $main_acc = '';
+                    }
+                    if($credit_inc){
+                        $credit_acc = $credit_inc * 0.001 .$currency;
+                    }else{
+                        $credit_acc = '';
+                    }
+                    $payment_type_name = array(
+                        BN_ANY => '',
+                        BN_CASH => Yii::t('site', 'cash'),
+                        BN_WIRE => Yii::t('site', 'wire'),
+                        BN_WM => Yii::t('site', 'ww'),
+
+                    );
+                    /*
+                    if($account_inc > 0){
+                        $charge = '';
+                        $payment = $account_inc * 0.001 .$currency;
+                    }elseif($account_inc < 0){
+                        $charge = $account_inc * -0.001 .$currency;
+                        $payment = '';
+                    }else{
+                        $charge = '';
+                        $payment = '';
+                    }
+                    if($payment_idx){
+                        $charge = '';
+                        $payment = $payment_idx * 0.001 .$currency;
+                    }
+                    */
+                    $payment_array[$k] = array(
+                        'date' => date("d.m.Y", strtotime(ptimestamp_to_str($v[PSTAT_PTS_IDX], $sep = " ", $dsep = "-", $isep = ":"))),
+                        'payment_purpose' => iconv_safe('koi8-u', 'utf-8',make_up_pay_c($v[PSTAT_COMMENT_IDX], $add_date)),
+                        'main_acc' => $main_acc,
+                        'credit_acc' => $credit_acc,
+                        'type' => $payment_type_name[$v[PSTAT_BN_IDX]],
+                    );
+                }
+            }
+        }
+        return $payment_array;
+
     }
 
 

@@ -40,7 +40,7 @@ namespace app\components\debugger;
     public static function Eho($item)
     {
 
-            echo $item;
+            echo $item .'</br>';
 
 
     }
@@ -49,6 +49,26 @@ namespace app\components\debugger;
     {
         die('ups');
     }
+
+     public static function EhoBr($item)
+     {
+         echo '</br>';
+         echo '</br>';
+         echo '</br>';
+         echo '</br>';
+         echo '</br>';
+         echo '</br>';
+         echo $item .'</br>';
+     }
+     public static function Br()
+     {
+         echo '</br>';
+         echo '</br>';
+         echo '</br>';
+         echo '</br>';
+         echo '</br>';
+         echo '</br>';
+     }
 
 
 }

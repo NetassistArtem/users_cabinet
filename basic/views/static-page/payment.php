@@ -1,10 +1,13 @@
 <?php
 use yii\helpers\Html;
 use app\components\debugger\Debugger;
+use yii\bootstrap\ActiveForm;
+use yii\widgets\Pjax;
+use app\assets\AppAsset;
 
 $this->title =  Yii::t('payment','payment');
 
-
+$this->registerCssFile("/css/font-awesome-4.7.0/css/font-awesome.min.css");
 
 
 ?>
@@ -17,10 +20,10 @@ $this->title =  Yii::t('payment','payment');
         <input class="insert-test" name="_csrf" type="hidden" value="<?=Yii::$app->request->getCsrfToken()?>" />
     </div>
 
-    <div class="table-responsive table_payment payment_next_information">
+    <div class="table-responsive table_payment payment_next_information mergin_bottom">
         <?php
 
-
+$credit_limit = $user_data['account_max_credit'];
 
 
         $included = 1;
@@ -56,10 +59,127 @@ $this->title =  Yii::t('payment','payment');
         ?>
     </div>
 
-    <p>
-        <?= $payment ?>
-    </p>
 
+    <div class="table-responsive">
+        <table class="table table-bordered  table-border-custom">
+            <thead>
+            <tr>
+                <th colspan="3"><?= Yii::t('payment', 'other_pay_method') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="center">
+                <td class="btn-custom"><a href="/<?=$lang ?>/oplata-uslug/terminals"><?= Yii::t('payment', 'pay_by_terminals') ?></td>
+                <td >
+                    <img src="/images/wm/tyme-logo_s.gif" alt="tyme">
+                    <img src="/images/wm/citypay.gif" alt="citypay">
+                </td>
+                <td> 5-3% </td>
+            </tr>
+            <tr class="center">
+                <td class="btn-custom"><a href="/<?=$lang ?>/oplata-uslug/bank"><?= Yii::t('payment', 'pay_by_bank') ?></td>
+                <td><i class="fa fa-university fa-3x" aria-hidden="true"></i></td>
+                <td> 5-15 <?= Yii::t('payment', 'uan') ?> </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div id="credit"></div>
+    <div class=" panel panel-default cabinet_change_forms">
+        <div class="panel-heading">
+            <p><?= Yii::t('payment', 'credit_t') ?></p>
+        </div>
+        <div class="panel-body">
+
+
+
+                <?php Pjax::begin(['id' => 'credit_pay']); ?>
+                <div>
+
+                    <?php
+                    $flash_message = Yii::$app->session->getFlash('credit')['value'];
+
+                    if (isset($flash_message)):
+
+
+                        // $this->registerJs('$("#modal").modal("show");');
+                        echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_1.php', ['flash_message' => $flash_message]);
+                        $this->registerJsFile(
+                            'scripts/message.js',
+                            ['depends' => 'app\assets\AppAsset']
+                        );
+                    endif;
+                    ?>
+
+                </div>
+
+
+            <?php if($user_data['account_max_credit'] != 0): ?>
+            <div class="alert alert-success">
+                <p>
+                    <?= Yii::t('payment', 'amount_max_info'). $credit_limit.' '. $user_data['account_currency']; ?>
+                </p>
+            </div>
+
+                <?php $form_credit = ActiveForm::begin([
+                    'id' => 'creditForm',
+                    'options' => ['data-pjax' => true],
+                    'layout' => 'horizontal',
+                    'fieldConfig' => [
+                        'template' => "{label}\n<div class=\"col-lg-4 col-md-4 col-sm-4\">{input}</div>\n<div class=\"col-lg-4 col-md-4 col-sm-4\">{error}</div>",
+                        'labelOptions' => ['class' => 'col-lg-4 col-md-4 col-sm-4 control-label'],
+                    ],
+
+
+                ]); ?>
+
+
+                <?= $form_credit->field($modelCredit, 'many')->label(Yii::t('payment', 'credit_amount'))->input('number', ['max' => $credit_limit, 'min' => 1]) ?>
+
+                <div class="form-group">
+
+
+                    <div class="col-lg-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-4">
+                        <?= Html::submitButton(Yii::t('payment', 'take_credit'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom phone-1-change', 'name' => 'credit-button', 'value' => 1]) ?>
+                    </div>
+
+                </div>
+
+
+                <?php ActiveForm::end(); ?>
+
+                <?php else: ?>
+
+                <div class="alert alert-success">
+                    <p>
+                        <?= Yii::t('payment', 'no_credit_available'); ?>
+                    </p>
+                </div>
+
+            <?php endif; ?>
+                <?php Pjax::end(); ?>
+
+
+        </div>
+    </div>
 
 
 </div>
+
+<?php
+
+$this->registerJsFile(
+    'scripts/remove_credit_opt.js',
+    ['depends' => 'app\assets\AppAsset']
+);
+
+?>

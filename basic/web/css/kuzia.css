@@ -453,6 +453,25 @@ div.empty_div_form{
     margin-top: 10px;
     margin-bottom: 10px;
 }
+.change-contacts-section{
+    padding: 10px;
+    margin: 10px;
+    /* background-color: #00b3ee; */
+    background-color: #F5F5F5;
+    /* background-color: #fffad0; */
+    border-radius: 10px;
+    margin-top: 20px;
+   /* border: solid 1px #FF9000; */
+    box-shadow: 0 0 9px #FF9000; /*rgba(0,0,0,0.5); */
+}
+.change-contacts-title > p{
+    font-weight: bold;
+    text-align: center;
+}
+.change-contacts-title{
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
 
 
 /* TV */
@@ -708,6 +727,13 @@ div.payment_next_information > form > select{
     background-image: none;
     margin-left: 34%;
 
+}
+
+.mergin_bottom{
+    margin-bottom: 20px;
+}
+.center > td{
+    text-align: center;
 }
 
 /******************Скрытые поля************************/
@@ -1235,8 +1261,13 @@ div.text-center{
 
     }
 
+    /***Кабинет-менеджмент***/
 
 
+    .change-contacts-title{
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
 
 
 

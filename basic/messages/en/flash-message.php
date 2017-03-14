@@ -25,4 +25,16 @@ return [
     'email_add' => 'The new e-mail address is added',
     'phone_not_delete' =>'The phone can not be removed. You do not have enough contact information. You must have at least one phone or e-mail addresses',
     'email_not_delete' =>'The E-mail can not be removed. You do not have enough contact information. You must have at least one phone or e-mail addresses',
+    'pause_start' => 'The selected service is paused. Start date of pause: ',
+    'pause_start_fail' => 'The selected service failed to pause.',
+    'pause_finish' => 'Service renewed',
+    'pause_finish_fail' =>'Failed to renew service.',
+    'pause_information' => 'Attention! Your changes will take effect after 5 minutes.',
+
+    'credit_ok' => 'You took credit in the amount  ',
+    'autocredit' => 'Connected services you enable auto loans, so there is no need to take additional credit facilities.',
+    'credit_fail_condition' => 'Currently, you can not take the credit.',
+    'credit_limit' => 'Exceeding the credit limit. You can not take the credit in the amount of ',
+    'credit_fail' => 'Unable to get credit.'
+
 ];

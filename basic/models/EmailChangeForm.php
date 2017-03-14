@@ -104,7 +104,7 @@ class EmailChangeForm extends Model
         }
 
 
-        del_restore_contact($contact_id, 1);
+        del_restore_contact($contact_id, 1);//функция апи биллинга
 
         event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'], -1, -1, -1);//функция биллинга записывает инфу в лог
 
@@ -137,7 +137,6 @@ class EmailChangeForm extends Model
         // del_restore_contact($contact_id, 1); //функция биллинка - включает для сохраненного телефона пометку - ДОСТУПЕН
         //  Debugger::testDie();
         $update_emails_fields->updateEmailFields($acc_db_host, $acc_db, $acc_db_user, $acc_db_pwd);
-        // $new_phones = $update_phone_fields->getNewContacts();
 
         return true;
     }
@@ -163,32 +162,38 @@ class EmailChangeForm extends Model
         $user_name = isset($user_data['username']) ? $user_data['username'] : '';
         $acc_id = isset($user_data['account_id']) ? $user_data['account_id'] : -1;
         $org_id = isset($user_data['org_id']) ? $user_data['org_id'] : '';
-        //$popap_controller = new PopapController();
+
         $email = Yii::$app->request->post('EmailChangeForm')['email'];
         Yii::$app->session->set('new_user_phone_or_email', $email);
 
-            $user_sms = new UserSms(Yii::$app->language);
-            $sms_text = Yii::t('sms_messages', 'change_password');
-            $full_sms_text = $user_sms->createSmsTextPasswordChange(
-                $sms_text,
+            $user_message = new UserSms(Yii::$app->language);
+        $message_text = Yii::t('sms_messages', 'change_password');
+            $full_message_text = $user_message->createSmsTextPasswordChange(
+                $message_text,
                 Yii::$app->params['email_send_conf']['transliteration'],
                 Yii::$app->params['email_send_conf']['verification_cod_length'],
                 Yii::$app->params['email_send_conf']['verification_cod_num'],
                 Yii::$app->params['email_send_conf']['verification_cod_down_chars'],
                 Yii::$app->params['email_send_conf']['verification_cod_up_chars']
             );
-            // Debugger::Eho($normal_phone);
+        $subject = Yii::t('sms_messages', 'subject');
+        global $_admin_mail;
+        $from_mail = $_admin_mail;
+        $server_name = Yii::$app->params['server_name'];
+        $domains_key = Yii::$app->params['domains'][$server_name];
+        $from_user = Yii::t('site','admin') . Yii::t('site', Yii::$app->params['sites_data'][$domains_key]['company_name']['lang_key']);
+          //   Debugger::Eho(Yii::$app->params['sites_data'][$domains_key]['company_name']['lang_key']);
             // Debugger::Eho('</br>');
-            // Debugger::Eho($full_sms_text);
-            // Debugger::Eho('</br>');
-            // Debugger::Eho($org_id);
-            // Debugger::Eho('</br>');
-            // Debugger::Eho($acc_id);
-            // Debugger::testDie();
+           //  Debugger::Eho($server_name);
+           //  Debugger::Eho('</br>');
+
+          //   Debugger::Eho('</br>');
+          //   Debugger::Eho($from_mail);
+          //  Debugger::testDie();
 
             //  turbosms_send($normal_phone, $full_sms_text, $org_id, 0, $acc_id); //Открпвка смс, функция биллинга
 
-
+        my_mail( $email, $full_message_text, $subject, $from_mail, $from_user);
 
     }
 

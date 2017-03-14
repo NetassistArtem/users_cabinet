@@ -674,6 +674,13 @@ div.payment_next_information > form > select{
     margin-left: 34%;
 
 }
+
+.mergin_bottom{
+    margin-bottom: 20px;
+}
+.center > td{
+    text-align: center;
+}
 /******************Серытые поля************************/
 
 div.hiden-fields > div.form-group > div.message-history-support, div.hiden-fields > div.form-group, div.hiden-fields > div.form-group >div >div.help-block {

@@ -26,6 +26,19 @@ return [
     'secondary_dns' => 'Вторичный DNS',
     'edit_contact_details' => 'Изменить контакты',
 
+    'serv' => 'Услуга',
+    'tariff' => 'Тариф',
+    'price_monthly' => 'Цена за месяц',
+    'services_end' => 'Окончание действия',
+    'services_status' => 'Статус',
+    'auto_activation' => '(Авртопродление)',
+    'change_services' => 'Редактировать услуги',
+    'account_balance_title'=> 'Баланс счета',
+    'end_time' => 'Время истекло',
+    'auto_activation_number' => ', осталось:',
+    'with' => ' с ',
+
+
 
 
 ];

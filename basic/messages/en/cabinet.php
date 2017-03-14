@@ -26,6 +26,18 @@ return [
     'secondary_dns' => 'Secondary DNS',
     'edit_contact_details' => 'Edit contacts',
 
+    'serv' => 'Service',
+    'tariff' => 'Tariff',
+    'price_monthly' => 'Price per month',
+    'services_end' => 'End of service',
+    'services_status' => 'Status',
+    'auto_activation' => '(Auto renewal)',
+    'change_services' => 'Edit services',
+    'account_balance_title'=> 'Account balance',
+    'end_time' => 'Time is up',
+    'auto_activation_number' => ', left:',
+    'with' => ' with ',
+
 
 
 ];

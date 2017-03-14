@@ -26,6 +26,18 @@ return [
     'secondary_dns' => 'Додатковий DNS',
     'edit_contact_details' => 'Змінити контактни',
 
+    'serv' => 'Послуга',
+    'tariff' => 'Тариф',
+    'price_monthly' => 'Ціна за місяць',
+    'services_end' => 'Завершення дії',
+    'services_status' => 'Статус',
+    'auto_activation' => '(Автоподовження)',
+    'change_services' => 'Редагувати послуги',
+    'account_balance_title'=> 'Баланс рахунку',
+    'end_time' => 'Термін дії закінчився',
+    'auto_activation_number' => ', залишилось:',
+    'with' => ' з ',
+
 
 
 ];

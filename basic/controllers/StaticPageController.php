@@ -15,7 +15,13 @@ use app\models\CallRequestForm;
 use app\models\PhoneFirstChangeConfirmForm;
 use app\models\EmailChangeConfirmForm;
 use app\models\PhoneAddForm;
+use app\models\RtfPrintForm;
 use app\models\EmailAddForm;
+use app\models\CreditForm;
+use app\models\ServicesChangePauseStartForm;
+use app\models\ServicesChangePauseFinishForm;
+use app\models\ArhivNews;
+
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -150,10 +156,10 @@ class StaticPageController extends Controller
         Yii::$app->session->remove('add');
 
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
-      //  Debugger::PrintR(Yii::$app->session->get('user-data'));
-      //  Debugger::Eho(Yii::$app->user->id);
+        //  Debugger::PrintR(Yii::$app->session->get('user-data'));
+        //  Debugger::Eho(Yii::$app->user->id);
 
-      //  Debugger::testDie();
+        //  Debugger::testDie();
 
         $modelPasswordChange = new PasswordChangeForm();
         /*
@@ -196,7 +202,7 @@ class StaticPageController extends Controller
                     }
                 } elseif ($p_m_1 === 3) {
                     if (!Yii::$app->request->isPjax) {
-                    //    return $this->redirect(['/upravlenie-kabinetom#contact_change']);
+                        //    return $this->redirect(['/upravlenie-kabinetom#contact_change']);
                     }
                 } else {
                     if (!Yii::$app->request->isPjax) {
@@ -248,13 +254,6 @@ class StaticPageController extends Controller
         }
 
 
-
-
-
-
-
-
-
         $modelMessageTypeChange = new MessageTypeChangeForm();
 
 
@@ -263,6 +262,54 @@ class StaticPageController extends Controller
                 return $this->redirect(['/upravlenie-kabinetom']);
             }
         }
+
+        $modelServicesChangePauseStart = new ServicesChangePauseStartForm();
+        $active_services_array = array();
+        foreach ($user_data["services_status_num"] as $key => $val) {
+            if ($val != -2) {
+                if (isset($user_data['services_tariff_name'][$key])) {
+
+                    if ($user_data['services_tariff_info'][$key]['pause_allowed'] == 1) {
+                        $active_services_array[$key] = $user_data['services_tariff_name'][$key];
+                    }
+
+                }
+
+            }
+
+        }
+
+
+        if ($modelServicesChangePauseStart->load(Yii::$app->request->post()) && $modelServicesChangePauseStart->setPause()) {
+            //  if (!Yii::$app->request->isPjax) {
+
+            return $this->redirect(['/upravlenie-kabinetom']);
+            //  }
+        }
+
+
+        $modelServicesChangePauseFinish = new ServicesChangePauseFinishForm();
+        $paused_services_array = array();
+        foreach ($user_data["services_status_num"] as $key => $val) {
+            if ($val == -2) {
+                if (isset($user_data['services_tariff_name'][$key])) {
+                    $paused_services_array[$key] = $user_data['services_tariff_name'][$key];
+
+                }
+
+            }
+
+        }
+
+
+        if ($modelServicesChangePauseFinish->load(Yii::$app->request->post()) && $modelServicesChangePauseFinish->deletePause()) {
+
+            //  if (!Yii::$app->request->isPjax) {
+
+            return $this->redirect(['/upravlenie-kabinetom']);
+            //  }
+        }
+
 
         $email_message_types = array();
         foreach (Yii::$app->params['email_message_types'] as $k => $v) {
@@ -287,10 +334,14 @@ class StaticPageController extends Controller
             'modelEmailSelectChange' => $modelEmailSelectChange,
             'modelPhoneAddForm' => $modelPhoneAddForm,
             'modelEmailAddForm' => $modelEmailAddForm,
+            'modelServicesChangePauseStart' => $modelServicesChangePauseStart,
+            'modelServicesChangePauseFinish' => $modelServicesChangePauseFinish,
             'email_message_types' => $email_message_types,
             'sms_message_types' => $sms_message_types,
             'selected_email_message_types' => $selected_email_message_types,
             'selected_sms_message_types' => $selected_sms_message_types,
+            'active_services_array' => $active_services_array,
+            'paused_services_array' => $paused_services_array,
             // 'delete_phone_1_confirm' => $delete_phone_1_confirm,
         ]);
     }
@@ -300,12 +351,26 @@ class StaticPageController extends Controller
 
         User::UserData();
 
-        //  $this->enableCsrfValidation = false;
+        $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
 
-        $payment = '';
+
+        $lang_arr = explode('-', Yii::$app->language);
+        $lang = $lang_arr[0];
+
+        //  $this->enableCsrfValidation = false;
+        $modelCredit = new CreditForm();
+
+        if ($modelCredit->load(Yii::$app->request->post()) && $modelCredit->setCredit()) {
+            if (!Yii::$app->request->isPjax) {
+                return $this->redirect(['/oplata-uslug']);
+            }
+        }
+
 
         return $this->render('payment', [
-            'payment' => $payment,
+            'modelCredit' => $modelCredit,
+            'user_data' => $user_data,
+            'lang' => $lang,
 
         ]);
     }
@@ -313,9 +378,20 @@ class StaticPageController extends Controller
     public function actionPaymentHistory()
     {
         User::UserData();
-        $payment_history = 'Тестовый текст страници - История платежей';
 
-        return $this->render('payment-history', ['payment_history' => $payment_history]);
+        $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
+
+        $payment_history_data = array_reverse(User::PaymentHistory($user_data['account_id']));
+
+        $pages = new Pagination(['totalCount' => count($payment_history_data), 'pageSize' => Yii::$app->params['items_per_page']['payment_history']]);
+        $pages->pageSizeParam = false;
+
+        $payment_history_page = array_slice($payment_history_data, $pages->offset, $pages->limit, $preserve_keys = true);
+
+        return $this->render('payment-history', [
+            'payment_history_page' => $payment_history_page,
+            'pages' => $pages,
+        ]);
     }
 
     public function actionSupport()
@@ -376,7 +452,7 @@ class StaticPageController extends Controller
         //Debugger::PrintR(User::TodoHistory($user_data['username']));
 
         $todo_history_array = User::TodoHistory($user_data['username']);
-        $pages = new Pagination(['totalCount' => count($todo_history_array), 'pageSize' => 10]);
+        $pages = new Pagination(['totalCount' => count($todo_history_array), 'pageSize' => Yii::$app->params['items_per_page']['todo_history']]);
         $pages->pageSizeParam = false;
 
         $todo_history_page = array_slice($todo_history_array, $pages->offset, $pages->limit, $preserve_keys = true);
@@ -509,10 +585,10 @@ class StaticPageController extends Controller
                 if ($p_m_1 === 2) {
 
                     return $this->redirect(['/upravlenie-kabinetom']);
-                } elseif($p_m_1 === 3) {
+                } elseif ($p_m_1 === 3) {
                     return $this->redirect(['/phone-change']);
                 } else {
-                   // Debugger::PrintR($_POST);
+                    // Debugger::PrintR($_POST);
 //Debugger::testDie();
 
                     return $this->redirect(['/phone-first-change-confirm']);
@@ -526,7 +602,6 @@ class StaticPageController extends Controller
 
         ]);
     }
-
 
 
     public function actionEmailChange()
@@ -546,7 +621,7 @@ class StaticPageController extends Controller
                 if ($p_m_1 === 2) {
 
                     return $this->redirect(['/upravlenie-kabinetom']);
-                } elseif($p_m_1 === 3) {
+                } elseif ($p_m_1 === 3) {
                     return $this->redirect(['/email-change']);
                 } else {
                     // Debugger::PrintR($_POST);
@@ -563,8 +638,6 @@ class StaticPageController extends Controller
 
         ]);
     }
-
-
 
 
     public function actionPhoneFirstChangeConfirm()
@@ -595,7 +668,7 @@ class StaticPageController extends Controller
             );
 
 
-              turbosms_send($normal_phone, $full_sms_text, $org_id, 0, $acc_id); //Открпвка смс, функция биллинга
+            turbosms_send($normal_phone, $full_sms_text, $org_id, 0, $acc_id); //Открпвка смс, функция биллинга
 
         }
 
@@ -621,23 +694,22 @@ class StaticPageController extends Controller
         if ($modelPhoneFirstChangeConfirm->load(Yii::$app->request->post())) {
 
             $confirm = $modelPhoneFirstChangeConfirm->setConfirmCode();
- //Debugger::Eho($confirm);
-   //          Debugger::Eho('test1');
-     //        Debugger::testDie();
+            //Debugger::Eho($confirm);
+            //          Debugger::Eho('test1');
+            //        Debugger::testDie();
             if ($confirm) {
 
                 if ($confirm === 2) {
 //Debugger::Eho('ttttttttt');
-                   // Debugger::testDie();
+                    // Debugger::testDie();
                     return $this->redirect(['/phone-first-change-confirm']);
                 } elseif ($confirm === true) {
-                    if(Yii::$app->session->has('add')){
+                    if (Yii::$app->session->has('add')) {
                         Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'phone_add')]);
                         Yii::$app->session->remove('add');
-                    }else{
+                    } else {
                         Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'phone_1_change')]);
                     }
-
 
 
                     return $this->redirect(['/upravlenie-kabinetom']);
@@ -660,15 +732,10 @@ class StaticPageController extends Controller
     }
 
 
-
-
-
-
-
     public function actionEmailChangeConfirm()
     {
 
-        //User::UserData();
+        // User::UserData();
         if (Yii::$app->session->has('new_user_phone_or_email') && Yii::$app->session->has('confirmcode') && Yii::$app->request->get('sms')) {
             $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
             $user_name = isset($user_data['username']) ? $user_data['username'] : '';
@@ -726,13 +793,12 @@ class StaticPageController extends Controller
                     // Debugger::testDie();
                     return $this->redirect(['/email-change-confirm']);
                 } elseif ($confirm === true) {
-                    if(Yii::$app->session->has('add')){
+                    if (Yii::$app->session->has('add')) {
                         Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'email_add')]);
                         Yii::$app->session->remove('add');
-                    }else{
+                    } else {
                         Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'email_change')]);
                     }
-
 
 
                     return $this->redirect(['/upravlenie-kabinetom']);
@@ -752,6 +818,61 @@ class StaticPageController extends Controller
             ]);
 
 
+    }
+
+    public function actionTerminals()
+    {
+        User::UserData();
+        $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
+
+        return $this->render('terminals', [
+            'user_data' => $user_data,
+        ]);
+    }
+
+    public function actionBank()
+    {
+        User::UserData();
+        global $is_admin;
+       //Debugger::PrintR($_SESSION);
+       // Debugger::VarDamp($is_admin);
+        $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
+
+        $modelRtfPrint = new RtfPrintForm();
+
+
+        if ($modelRtfPrint->load(Yii::$app->request->post()) && $modelRtfPrint->createRtf()) {
+            if (!Yii::$app->request->isPjax) {
+                return $this->redirect(['/oplata-uslug/bank']);
+            }
+        }
+
+        return $this->render('bank', [
+            'user_data' => $user_data,
+            'modelRtfPrint' => $modelRtfPrint,
+        ]);
+    }
+
+    public function actionArhivNews()
+    {
+        User::UserData();
+        $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
+
+        $modelArhivNews = new ArhivNews();
+        $modelArhivNews->getArhiv();
+        if ($modelArhivNews->load(Yii::$app->request->post())) {
+
+            Debugger::testDie();
+         //   if (!Yii::$app->request->isPjax) {
+           //     return $this->redirect(['/arhiv-novastei']);
+           // }
+        }
+
+
+        return $this-> render('arhiv-news',[
+            'user_data' => $user_data,
+            'modelArhivNews' => $modelArhivNews,
+        ]);
     }
 
 

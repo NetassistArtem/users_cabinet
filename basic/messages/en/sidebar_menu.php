@@ -8,4 +8,5 @@ return [
     'support_history' => 'Support history',
     'feedback' => 'Feedback',
     'tv' => 'TV',
+    'news_arhiv' =>'User news',
 ];

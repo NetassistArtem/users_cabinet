@@ -114,6 +114,16 @@ $config = [
                     //'defaults' => ['page' => 1, 'tag' => '']
                 ],
                 [
+                    'pattern' => 'oplata-uslug/terminals',
+                    'route' => 'static-page/terminals',
+                    //'defaults' => ['page' => 1, 'tag' => '']
+                ],
+                [
+                    'pattern' => 'oplata-uslug/bank',
+                    'route' => 'static-page/bank',
+                    //'defaults' => ['page' => 1, 'tag' => '']
+                ],
+                [
                     'pattern' => 'istoriya-platezhey',
                     'route' => 'static-page/payment-history',
                     //'defaults' => ['page' => 1, 'tag' => ''
@@ -187,6 +197,11 @@ $config = [
                 [
                     'pattern' => 'email-change-confirm',
                     'route' => 'static-page/email-change-confirm',
+
+                ],
+                [
+                    'pattern' => 'arhiv-novostei',
+                    'route' => 'static-page/arhiv-news',
 
                 ],
 

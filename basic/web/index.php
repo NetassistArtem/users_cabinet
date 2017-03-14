@@ -24,6 +24,7 @@ require(__DIR__ . '/../components/billing_api/_.php');
 require_once(__DIR__ . '/../components/billing_api/inc/common.todo_list.inc.php');
 require_once(s_path("turbosms.php"));
 require_once(s_path("common.asterisk.php"));
+require_once(s_path("msg_log.inc.php"));
 //require_once(__DIR__ . '/../components/user_contacts_update/api/contacts_update_api.php');
 //require_once(__DIR__ . '/../components/user_contacts_update/UserContactsUpdate.php');
 

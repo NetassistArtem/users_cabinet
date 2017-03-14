@@ -249,7 +249,7 @@ $this->registerJsFile(
                             <a href="/oplata-uslug">
                                 <div>
                                     <h4><?= Yii::t('top_info_block','payment_code') ?></h4>
-                                    <p> <?= Yii::$app->params['payment_code'] ?></p>
+                                    <p> <?= $user_data['pin'] ?></p>
                                 </div>
                             </a>
                         </div>
@@ -320,6 +320,7 @@ $this->registerJsFile(
                             ['label' => Yii::t('sidebar_menu','support_history'), 'url' => ['/istoriya-obrascheniy'], 'active' => (Yii::$app->request->url == "/$lang/istoriya-obrascheniy" || Yii::$app->request->url == "/$lang/istoriya-obrascheniy/*" || Yii::$app->request->url == "/istoriya-obrascheniy" || Yii::$app->request->url == "/istoriya-obrascheniy/*")],
                             ['label' => Yii::t('sidebar_menu','feedback'), 'url' => ['/ostavit-otzyiv'], 'active' => (Yii::$app->request->url == "/$lang/ostavit-otzyiv" || Yii::$app->request->url == "/ostavit-otzyiv")],
                             ['label' => Yii::t('sidebar_menu','tv'), 'url' => ['/televidenie'], 'active' => (Yii::$app->request->url == "/$lang/televidenie" || Yii::$app->request->url == "/televidenie")],
+                            ['label' => Yii::t('sidebar_menu','news_arhiv'), 'url' => ['/arhiv-novostei'], 'active' => (Yii::$app->request->url == "/$lang/arhiv-novostei" || Yii::$app->request->url == "/arhiv-novastei")],
                         ],
                     ]);
 
