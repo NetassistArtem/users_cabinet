@@ -7,7 +7,7 @@ use app\assets\AppAsset;
 
 $this->title =  Yii::t('payment','payment');
 
-$this->registerCssFile("/css/font-awesome-4.7.0/css/font-awesome.min.css");
+
 
 
 ?>
@@ -69,7 +69,7 @@ $credit_limit = $user_data['account_max_credit'];
             </thead>
             <tbody>
             <tr class="center">
-                <td class="btn-custom"><a href="/<?=$lang ?>/oplata-uslug/terminals"><?= Yii::t('payment', 'pay_by_terminals') ?></td>
+                <td class="btn-custom"><a href="/<?=$lang ?>/oplata-uslug/terminals"><?= Yii::t('payment', 'pay_by_terminals') ?></a></td>
                 <td >
                     <img src="/images/wm/tyme-logo_s.gif" alt="tyme">
                     <img src="/images/wm/citypay.gif" alt="citypay">
@@ -77,7 +77,7 @@ $credit_limit = $user_data['account_max_credit'];
                 <td> 5-3% </td>
             </tr>
             <tr class="center">
-                <td class="btn-custom"><a href="/<?=$lang ?>/oplata-uslug/bank"><?= Yii::t('payment', 'pay_by_bank') ?></td>
+                <td class="btn-custom"><a href="/<?=$lang ?>/oplata-uslug/bank"><?= Yii::t('payment', 'pay_by_bank') ?></a></td>
                 <td><i class="fa fa-university fa-3x" aria-hidden="true"></i></td>
                 <td> 5-15 <?= Yii::t('payment', 'uan') ?> </td>
             </tr>

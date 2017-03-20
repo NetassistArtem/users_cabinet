@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 
 use app\components\debugger\Debugger;
+use app\models\ArhivNews;
 
 class User extends \yii\base\Object implements \yii\web\IdentityInterface
 {
@@ -266,6 +267,15 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
 //Debugger::Eho(Yii::$app->user->id);
             //  Debugger::testDie();
 
+        $modelArhivNews = new ArhivNews();
+        $archive_news_data = $modelArhivNews->getArhiv($user_data_by_billing[UINFO_ACC_ID_IDX]);
+
+        $archive_news_not_reade = array();
+        foreach($archive_news_data as $k => $v){
+            if(!$v['view']){
+                $archive_news_not_reade[] = $v;
+            }
+        }
         $user_data = array(
             Yii::$app->session->get('user-data-id')['id'] => array(
                 'username' => Yii::$app->user->identity->username,
@@ -318,6 +328,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                 'real_name' => $user_data_by_billing[UINFO_REAL_NAME_IDX],
                 'req_id' => $user_data_by_billing[$user_acc_offset + AINFO_REQ_ID_IDX],
                 'loc_id' => $user_data_by_billing[UINFO_BASE_LOC_ID_IDX],
+                'archive_news_not_reade' => $archive_news_not_reade,
 
 
                 'email_message_type' => $array_mail_flags,

@@ -21,6 +21,7 @@ class AlfaWhiteAsset extends AssetBundle
         'css/site.css',
         'css/alfa-white.css',
         'css/color.css',
+        '/css/font-awesome-4.7.0/css/font-awesome.min.css',
     ];
     public $js = [
         'css/js/site.js'

@@ -204,6 +204,16 @@ $config = [
                     'route' => 'static-page/arhiv-news',
 
                 ],
+                [
+                    'pattern' => 'arhiv-novostei/<news-id:([0-9]){1,7}>',
+                    'route' => 'static-page/arhiv-news-node',
+
+                ],
+                [
+                    'pattern' => 'arhiv-novostei/reade/<news-id:([0-9]){1,7}>',
+                    'route' => 'static-page/arhiv-news-node-reade',
+
+                ],
 
 
             ],

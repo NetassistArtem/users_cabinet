@@ -215,8 +215,10 @@ div.navbar-header > a.navbar-brand {
     padding-top: 20px;
     padding-bottom: 23px;
     background-color: #282828;
-    padding-left: 16px;
-    padding-right: 18px;
+    /* padding-left: 16px;
+    padding-right: 18px;*/
+    padding-left: 23%;
+    padding-right: 34%;
 }
 
 .navbar-default .navbar-toggle {
@@ -360,6 +362,52 @@ textarea.form-control{
 
 }
 
+/*********Блок с новостями****************/
+
+.news-data-block{
+    background-color: #F8F8FF;
+    border: solid 1px #5f5f5f;
+    margin-top: 20px;
+    border-radius: 10px !important;
+}
+
+.alert-custom-2{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    box-shadow: 0 0 9px #5f5f5f;
+    padding: 5px;
+}
+
+.message-position{
+    margin-top: 12px;
+    margin-left: 0.5%;
+
+}
+.alert-custom-2 > div{
+    display: inline-block;
+}
+.text_mwssage{
+    width: 90%;
+    vertical-align: top;
+}
+.batton_message{
+    vertical-align: text-bottom;
+    margin-left: 5%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.icon_info{
+    vertical-align: text-bottom;
+}
+div.batton_message{
+    display: block;
+}
+.battom_more_news{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align-last: right;
+}
+
 /* таблицы */
 
 
@@ -423,6 +471,25 @@ div.empty_div_form{
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+.change-contacts-section{
+    padding: 10px;
+    margin: 10px;
+    /* background-color: #00b3ee; */
+    background-color: #F5F5F5;
+    /* background-color: #fffad0; */
+    border-radius: 10px;
+    margin-top: 20px;
+    /* border: solid 1px #FF9000; */
+    box-shadow: 0 0 9px #5f5f5f; /*rgba(0,0,0,0.5); */
+}
+.change-contacts-title > p{
+    font-weight: bold;
+    text-align: center;
+}
+.change-contacts-title{
+    margin-top: 10px;
+    margin-bottom: 30px;
 }
 
 
@@ -629,6 +696,7 @@ table.invis>tbody>tr.trow>td>input[type="submit"]:hover, div.payment_next_inform
 
 .payment_next_information{
     background-color: white;
+    border: 1px solid #ddd;
 }
 .red {
     color: red;
@@ -662,6 +730,23 @@ div.payment_next_information > form >div{
     margin-bottom: 20px;
 }
 .center > td{
+    text-align: center;
+}
+/*************Архив новостей************************/
+
+h3.arhiv_news_title{
+    padding-top: 15px;
+    margin-left: 15px;
+    color: #ddd;
+}
+.alert-custom{
+    margin: 10px;
+    padding: 10px !important;
+    width: 45%;
+    position: absolute;
+    margin-left: 50%;
+}
+.alert-custom{
     text-align: center;
 }
 /******************Серытые поля************************/
@@ -716,13 +801,16 @@ div.text-center{
         width: 170px;
     }
     #w1.nav > li.li_login{
-        width: 80px;
+        /*  width: 80px; */
+        width: 15%;
     }
     #w1.nav > li.li_phone{
-        width: 110px;
+        width: 28%;
+        /*  width: 110px;*/
     }
     #w1.nav > li.li_logout{
-        width: 90px;
+        /* width: 90px;*/
+        width: 16%;
         text-align: center;
     }
     .navbar-header {
@@ -745,6 +833,11 @@ div.text-center{
 
     table.table_support_history{
         font-size: 10px;
+    }
+    #w1.nav > li > form > button.logout:hover {
+
+        padding-right: 23%;
+        padding-left: 24%;
     }
 
 }
@@ -822,6 +915,11 @@ div.text-center{
     #w1.nav > li {
         height: inherit;
         border-bottom: 4px solid white;
+    }
+    #w1.nav > li > form > button.logout:hover {
+
+        padding-right: 21%;
+        padding-left: 21%;
     }
 
     /* меню в сайтбаре */
@@ -934,6 +1032,21 @@ div.text-center{
     div.payment_next_information > form > select {
         height: 37px;
         font-size: 14px;
+    }
+    /************TV и Архив новостей***************/
+
+    .content_tv > div{
+        padding: 15px;
+    }
+    h3.arhiv_news_title {
+        padding-top: 10px;
+        margin-left: 10px;
+    }
+    .alert-custom {
+        margin: 10px;
+        padding: 4px !important;
+        width: 45%;
+        margin-left: 46%;
     }
 
 }
@@ -1141,6 +1254,21 @@ div.text-center{
         height: 30px;
         font-size: 12px;
 
+    }
+    /************TV и Архив новостей***************/
+
+    .content_tv > div{
+        padding: 7px;
+    }
+    h3.arhiv_news_title {
+        padding-top: 7px;
+        margin-left: 7px;
+    }
+    .alert-custom {
+        margin: 7px;
+        padding: 2px !important;
+        width: 50%;
+        margin-left: 40%;
     }
 
 }

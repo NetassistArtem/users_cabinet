@@ -858,21 +858,98 @@ class StaticPageController extends Controller
         User::UserData();
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
 
-        $modelArhivNews = new ArhivNews();
-        $modelArhivNews->getArhiv();
-        if ($modelArhivNews->load(Yii::$app->request->post())) {
+        $lang_arr = explode('-', Yii::$app->language);
+        $lang = $lang_arr[0];
 
-            Debugger::testDie();
-         //   if (!Yii::$app->request->isPjax) {
-           //     return $this->redirect(['/arhiv-novastei']);
-           // }
-        }
+        $modelArhivNews = new ArhivNews();
+        $arhiv_data = $modelArhivNews->getArhiv($user_data['account_id']);
+       // Debugger::PrintR($arhiv_data);
+
+
+
+
+
+        $pages = new Pagination(['totalCount' => count($arhiv_data), 'pageSize' => Yii::$app->params['items_per_page']['news_archive']]);
+        $pages->pageSizeParam = false;
+
+        $archive_data_page = array_slice($arhiv_data, $pages->offset, $pages->limit, $preserve_keys = true);
+
+   //     return $this->render('payment-history', [
+     //       'payment_history_page' => $payment_history_page,
+      //      'pages' => $pages,
+
+
+
+
 
 
         return $this-> render('arhiv-news',[
             'user_data' => $user_data,
             'modelArhivNews' => $modelArhivNews,
+            'archive_data_page' => $archive_data_page,
+            'lang' => $lang,
+            'pages' => $pages,
         ]);
+    }
+
+    public function actionArhivNewsNode()
+    {
+        User::UserData();
+
+        $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
+
+        $lang_arr = explode('-', Yii::$app->language);
+        $lang = $lang_arr[0];
+
+        $url = Yii::$app->request->url;
+
+        $url_cl = explode('?', $url);
+        $url_array = explode('/', $url_cl[0]);
+      //  Debugger::PrintR($url_array);
+        $news_id = array_pop($url_array);
+
+        $modelArhivNews = new ArhivNews();
+        $arhiv_data_total = $modelArhivNews->getArhiv($user_data['account_id']);
+        $arhiv_data_news = array();
+        foreach($arhiv_data_total as $k=>$v){
+            if($v['id'] == $news_id){
+                $arhiv_data_news[]= $v;
+            }
+        }
+
+        $modelArhivNews->newsReadeStatus($arhiv_data_news[0]['view'], $arhiv_data_news[0]['id']);
+
+        return $this->render('arhiv-news-node',[
+            'lang' => $lang,
+            'news_id' => $news_id,
+            'arhiv_data_news'=> $arhiv_data_news[0],
+
+            ]);
+    }
+    public function actionArhivNewsNodeReade()
+    {
+        User::UserData();
+
+        $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
+        $lang_arr = explode('-', Yii::$app->language);
+        $lang = $lang_arr[0];
+        $url = Yii::$app->request->url;
+
+        $url_cl = explode('?', $url);
+        $url_array = explode('/', $url_cl[0]);
+        $news_id = array_pop($url_array);
+
+        $modelArhivNews = new ArhivNews();
+        $arhiv_data_total = $modelArhivNews->getArhiv($user_data['account_id']);
+        $arhiv_data_news = array();
+        foreach($arhiv_data_total as $k=>$v){
+            if($v['id'] == $news_id){
+                $arhiv_data_news[]= $v;
+            }
+        }
+
+        $modelArhivNews->newsReadeStatus($arhiv_data_news[0]['view'], $arhiv_data_news[0]['id']);
+        return $this->redirect(["/arhiv-novostei"]);
     }
 
 

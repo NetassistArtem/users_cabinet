@@ -5,7 +5,8 @@ return [
     'adminEmail' => 'admin@example.com',
     'sites_data' => array(
         'alfa' => array(
-            'phone_1' => '223-333-7',
+            'phone_1' => '(044) 223-333-7',
+            'phone_fore_call' => '+380442233337',
             'company_name' => array(
                 0 => 'Альфа инет',
                 'lang_key' => 'alfa',
@@ -13,7 +14,8 @@ return [
         ),
 
         'kuzia' => array(
-            'phone_1' => '223-333-7',
+            'phone_1' => '(044) 223-333-7',
+            'phone_fore_call' => '+380442233337',
             'company_name' => array(
                 0 => 'Кузя',
                 'lang_key' => 'kuzia',
@@ -65,6 +67,7 @@ return [
     'items_per_page' => array(
         'todo_history' => 10,
         'payment_history' => 25,
+        'news_archive' => 10,
     ),
 
     'swith' => array(
@@ -322,5 +325,6 @@ return [
         'verification_cod_down_chars' =>1, //использовать буквы нижнего регистра для формирования кода подтверждения, 1- использовать, 0 - не использовать
         'verification_cod_up_chars' =>1, //использовать буквы верхнего регистра для формирования кода подтверждения, 1- использовать, 0 - не использовать
     ),
+    'user_message_length' => 250,
 
 ];

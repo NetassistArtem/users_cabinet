@@ -21,6 +21,7 @@ class AlfaBlackCrtAsset extends AssetBundle
         'css/site.css',
         'css/alfa-black-crt.css',
         'css/color.css',
+        '/css/font-awesome-4.7.0/css/font-awesome.min.css',
     ];
     public $js = [
         'css/js/site.js'
