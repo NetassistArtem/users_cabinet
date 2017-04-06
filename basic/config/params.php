@@ -26,7 +26,8 @@ return [
     'payment_code' => '39481498',
     'domains' => array(
         'lk.alfa-inet.net' => 'kuzia',
-        'kuzia.alfa-inet.net' => 'alfa',
+        'my.kuzia.net.ua' => 'kuzia',
+        'my.alfa.net.ua' => 'alfa',
     ),
     'alfa-styles' => array(
         -1 => 'Default',
@@ -311,6 +312,33 @@ return [
 
 
     ),
+
+    'skin_types' => array(
+
+        1 => array(
+            0 => 'Серый',
+            'lang_key' => 'gray',
+            'billing_key' => 0,
+        ),
+        2 => array(
+            0 => 'Черный',
+            'lang_key' => 'black',
+            'billing_key' => 1,
+        ),
+        3 => array(
+            0 => 'Черный-CRT',
+            'lang_key' => 'black_crt',
+            'billing_key' => 2,
+        ),
+        4 => array(
+            0 => 'Белый',
+            'lang_key' => 'white',
+            'billing_key' => 3,
+        ),
+
+    ),
+    'alfa_skin_default' => 2,
+
     'sms_send_conf' => array(
         'transliteration' =>1, //транслитерация sms - 1 - да, 0 - нет
         'verification_cod_length' => 8,//количество символов в коде подтверждения отправляемого пользователю (при изменении контактов)

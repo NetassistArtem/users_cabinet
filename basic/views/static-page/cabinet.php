@@ -122,8 +122,7 @@ $this->title = Yii::t('cabinet', 'cabinet');
                 <?php else: ?>
                     <?php $text = $user_data['services_status'][$k]; ?>
                 <?php endif; ?>
-
-                <?php if($user_data['svc_auto_activation'][$k] === 0): ?>
+                <?php if((int)$user_data['svc_auto_activation'][$k] === 0): ?>
                     <td><?= $text; ?></td>
                 <?php elseif($user_data['svc_auto_activation'][$k] == 1): ?>
                     <td><?= $text; ?> <?= Yii::t('cabinet', 'auto_activation'); ?></td>
@@ -187,30 +186,41 @@ $this->title = Yii::t('cabinet', 'cabinet');
                 <td><?= $user_data['dns2_ip'] ?></td>
             </tr>
             <tr>
-                <td rowspan="5">IPv6</td>
-                <td>IPv6 №1</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>IPv6 №2</td>
+                <td rowspan="6">IPv6</td>
+                <td>IPv6</td>
                 <td><?= $user_data['ipv6'] ?></td>
             </tr>
+
             <tr>
                 <td><?= Yii::t('cabinet', 'netmask_1') ?></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><?= Yii::t('cabinet', 'netmask_2') ?></td>
-                <td></td>
+                <td><?= $user_data['netmask6'] ?></td>
             </tr>
             <tr>
                 <td><?= Yii::t('cabinet', 'gateway') ?></td>
-                <td></td>
+                <td><?= $user_data['gw6'] ?></td>
             </tr>
             <tr>
-                <td colspan="2">DNS v6</td>
-                <td></td>
+                <td><?= Yii::t('cabinet', 'client_address') ?></td>
+                <td><?= $user_data['cli_v6_net'] ?></td>
             </tr>
+            <tr>
+                <td><?= Yii::t('cabinet', 'client_router_address') ?></td>
+                <td><?= $user_data['cli_v6_gw'] ?></td>
+            </tr>
+            <tr>
+                <td><?= Yii::t('cabinet', 'client_mask') ?></td>
+                <td><?= $user_data['cli_v6_mask'] ?></td>
+            </tr>
+            <?php foreach($user_data['ipv6_dns_array'] as $k=>$v ): ?>
+            <tr>
+
+                <?php if($k === 0): ?>
+                    <td rowspan="<?= count($user_data['ipv6_dns_array']) ?>" >DNS v6</td>
+               <?php endif; ?>
+                <td>DNS v6 №<?= $k+1 ?> </td>
+                <td><?= $v ?></td>
+            </tr>
+            <?php endforeach; ?>
             </tbody>
         </table>
     </div>

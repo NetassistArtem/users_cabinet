@@ -47,4 +47,13 @@ return [
     'pause_start_title' => 'Set services on pause',
     'pause_finish_title' => 'Renew service',
     'no_data_to_change' => 'You do not have the possibility to make changes in connected services.',
+    'skin_change' => 'Changing the User Style',
+    'skins' => 'Styles',
+    'save_skin' => 'Save new style',
+    'gray' => 'Gray',
+    'black' => 'Black',
+    'black_crt' => 'Black CRT',
+    'white' => 'White',
+
+
 ];

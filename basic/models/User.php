@@ -276,14 +276,26 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                 $archive_news_not_reade[] = $v;
             }
         }
+        $user_name = Yii::$app->user->identity->username;
+        $user_skin = get_skin($user_name);
+
+
+
+        $ipv6 = get_user_ipv6_settings(Yii::$app->user->id, $user_data_by_billing[UINFO_IP6_IDX],
+            /* OUTPUT */
+            $gw6, $netmask6, $cli_v6_net, $cli_v6_gw, $cli_v6_mask, $ipv6_dns, $rt_list);
+
+        
+
         $user_data = array(
             Yii::$app->session->get('user-data-id')['id'] => array(
-                'username' => Yii::$app->user->identity->username,
+              //  'test' => svc_get_avg_pay_rate($user_data_by_billing[UINFO_ACC_ID_IDX], SVC_SUM_SEPARATE),
+                'username' => $user_name,
                 'fio' => iconv_safe('koi8-u', 'utf-8', $user_data_by_billing[$user_acc_offset + AINFO_CONTRACT_NAME_IDX]),
                 'password' => $user_data_by_billing[UINFO_PWD_IDX],
                 'email' => $user_data_by_billing[UINFO_EMAIL_IDX],
                 'email_array' => $email_array,
-                'pin' => $user_data_by_billing[$user_acc_offset + AINFO_PIN_IDX],
+                'pin' => normalize_pay_pin($user_data_by_billing[$user_acc_offset + AINFO_PIN_IDX], $user_data_by_billing[UINFO_ACC_ID_IDX]) ,
                 'address' => iconv_safe('koi8-u', 'utf-8', $user_data_by_billing[UINFO_ADDR_IDX]),
                 'address_id' => $user_data_by_billing[UINFO_BASE_LOC_ID_IDX],
                 'phone_1' => $user_data_by_billing[UINFO_PHONE_IDX],
@@ -291,6 +303,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                 'phone_2' => $user_data_by_billing[UINFO_PHONE2_IDX],
                 'phone_2_array' => $phone_2_array,
                 'phone_all_array' => $phone_all_array,
+                'skin' => $user_skin == -1 ? Yii::$app->params['alfa_skin_default'] : $user_skin,
                 'account_id' => $user_data_by_billing[UINFO_ACC_ID_IDX],
                 'account_balance' => $user_data_by_billing[$user_acc_offset + AINFO_MONEY_IDX] * 0.001,
                 'account_credit' => $user_data_by_billing[$user_acc_offset + AINFO_DEBT_IDX] * 0.001,
@@ -322,7 +335,13 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                 'netmask2' => $netmask2,
                 'external_smtp' => $external_smtp,
                 'mx_string' => $mx_string,
-                'ipv6' => $user_data_by_billing[UINFO_IP6_IDX],
+                'ipv6' => $ipv6,
+                'gw6' => $gw6,
+                'netmask6' => $netmask6,
+                'cli_v6_net' => $cli_v6_net,
+                'cli_v6_gw' => $cli_v6_gw,
+                'cli_v6_mask' => $cli_v6_mask,
+                'ipv6_dns_array' => isset($ipv6_dns) ? explode(',',$ipv6_dns) : array(),
                 'net_id' => $user_data_by_billing[UINFO_NET_ID_IDX],
                 'org_id' => iconv_safe('koi8-u', 'utf-8', $user_data_by_billing[$user_acc_offset + AINFO_ORG_ID_IDX]),
                 'real_name' => $user_data_by_billing[UINFO_REAL_NAME_IDX],
@@ -353,6 +372,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
 //Debugger::PrintR($user_data);
 //Debugger::PrintR($user_data_by_billing);
         Yii::$app->session->set('user-data', $user_data);
+
     }
 
     public static function SupportData()

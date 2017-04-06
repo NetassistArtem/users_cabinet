@@ -50,6 +50,18 @@ $this->title = Yii::t('terminals','terminals_title');
         </div>
 
     </div>
+    <div class="row mergin_bottom terminals-img-style">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" >
+            <a href="https://tyme.ua/ru/clients/where/" target="_blank"><img src="/images/wm/otyme_new.png" alt=""></a>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" >
+            <a href="http://24nonstop.com.ua/Customers/TerminalMap/0" target="_blank"><img src="/images/wm/24nonstop24_new.png" alt="" ></a>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" >
+            <a href="http://map.city24.kiev.ua/" target="_blank" ><img src="/images/wm/city244_new.png" alt=""></a>
+        </div>
+
+    </div>
 
 
     <div class="table-responsive">

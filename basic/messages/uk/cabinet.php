@@ -37,6 +37,9 @@ return [
     'end_time' => 'Термін дії закінчився',
     'auto_activation_number' => ', залишилось:',
     'with' => ' з ',
+    'client_address' => 'Внутрішні адреси, LAN',
+    'client_router_address' => 'Внутрішній IPv6 адресу роутера',
+    'client_mask' => 'Внутрішня маска мережі'
 
 
 

@@ -19,7 +19,7 @@ return [
     'change_rate' => 'Изменить тариф',
     'take_credit' => 'Взять кредит',
     'network_settings' => 'Настройки сети',
-    'netmask_1' => 'Маска сети 1',
+    'netmask_1' => 'Маска сети',
     'netmask_2' => 'Маска сети 2',
     'gateway' => 'Шлюз',
     'primary_dns' => 'Основной DNS',
@@ -31,12 +31,15 @@ return [
     'price_monthly' => 'Цена за месяц',
     'services_end' => 'Окончание действия',
     'services_status' => 'Статус',
-    'auto_activation' => '(Авртопродление)',
+    'auto_activation' => '(Автопродление)',
     'change_services' => 'Редактировать услуги',
     'account_balance_title'=> 'Баланс счета',
     'end_time' => 'Время истекло',
     'auto_activation_number' => ', осталось:',
     'with' => ' с ',
+    'client_address' => 'Внутренние адреса, LAN',
+    'client_router_address' => 'Внутренний IPv6 адрес роутера',
+    'client_mask' => 'Внутренняя маска сети'
 
 
 

@@ -749,6 +749,12 @@ div.payment_next_information > form > select{
 .center > td{
     text-align: center;
 }
+
+.terminals-img-style > div >a> img{
+    border: 1px solid #ddd;
+    border-radius: 0;
+
+}
 /*************Архив новостей************************/
 
 h3.arhiv_news_title{
@@ -876,6 +882,10 @@ div.text-center{
         font-size: 16px;
         margin-top: 7px;
         margin-bottom: 7px;
+    }
+
+    i.message_main_text{
+        font-size: 13px;
     }
 
     div > p{
@@ -1086,6 +1096,9 @@ div.text-center{
         font-size: 12px;
         margin-top: 5px;
         margin-bottom: 5px;
+    }
+    i.message_main_text{
+        font-size: 10px;
     }
 
     p{

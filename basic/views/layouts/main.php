@@ -56,13 +56,13 @@ foreach (Yii::$app->params['domains'] as $k => $v) {
     }
 }
 
-$testt = 3;
+$alfa_style = $user_data['skin'];
 $server_name = Yii::$app->params['server_name'];
 $styles = Yii::$app->params['domains'][$server_name];
 global $sites_data;
 switch ($styles) {
     case 'alfa':
-        switch ($testt) { //get_skin(Yii::$app->user->identity->username)
+        switch ($alfa_style) { //get_skin(Yii::$app->user->identity->username)
             case 0 :
                 AlfaGrayAsset::register($this);
                 global $asset;

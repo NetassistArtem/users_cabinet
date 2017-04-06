@@ -37,6 +37,9 @@ return [
     'end_time' => 'Time is up',
     'auto_activation_number' => ', left:',
     'with' => ' with ',
+    'client_address' => 'Internal addresses, LAN',
+    'client_router_address' => 'Internal IPv6 router address',
+    'client_mask' => 'Internal network mask'
 
 
 

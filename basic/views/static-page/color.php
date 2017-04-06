@@ -10,6 +10,10 @@ $this->title = 'Цветовая гамма';
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
 
+    <div>
+        <p><?= $test7 ?></p>
+    </div>
+
 
 
     <div class="table-responsive">

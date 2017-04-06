@@ -8,6 +8,7 @@ use app\models\PhoneFirstChangeForm;
 use app\models\EmailChangeForm;
 use app\models\PhoneSelectChangeForm;
 use app\models\EmailSelectChangeForm;
+use app\models\SkinsChangeForm;
 use app\models\UpdateTodoForm;
 use app\models\MessageTypeChangeForm;
 use app\models\TechnicalSupportForm;
@@ -139,6 +140,9 @@ class StaticPageController extends Controller
 
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
 
+       // Debugger::EhoBr(get_skin($user_data['username']));//
+       // Debugger::EhoBr($user_data['org_id']);//7
+
         $lang_arr = explode('-', Yii::$app->language);
         $lang = $lang_arr[0];
 
@@ -263,6 +267,17 @@ class StaticPageController extends Controller
             }
         }
 
+        $modelSkinsChange = new SkinsChangeForm();
+
+
+        if ($modelSkinsChange->load(Yii::$app->request->post()) && $modelSkinsChange->setNewSkin()) {
+            if (!Yii::$app->request->isPjax) {
+                return $this->redirect(['/upravlenie-kabinetom']);
+            }
+        }
+
+
+
         $modelServicesChangePauseStart = new ServicesChangePauseStartForm();
         $active_services_array = array();
         foreach ($user_data["services_status_num"] as $key => $val) {
@@ -321,9 +336,21 @@ class StaticPageController extends Controller
             $sms_message_types[$k] = Yii::t('upravlenie-kabinetom', $v['lang_key']);
         }
 
+        $skin_types = array();
+        foreach (Yii::$app->params['skin_types'] as $k => $v) {
+            $skin_types[$k] = Yii::t('upravlenie-kabinetom', $v['lang_key']);
+        }
+
         $selected_email_message_types = $user_data['email_message_type'];
         $selected_sms_message_types = $user_data['sms_message_type'];
+        $selected_skin_type = -2;
+        foreach(Yii::$app->params['skin_types'] as $k => $v){
 
+            if($v['billing_key'] === $user_data['skin']){
+                $selected_skin_type = $k;
+
+            }
+        }
 
         return $this->render('cabinet-management', [
             'user_data' => $user_data,
@@ -334,12 +361,15 @@ class StaticPageController extends Controller
             'modelEmailSelectChange' => $modelEmailSelectChange,
             'modelPhoneAddForm' => $modelPhoneAddForm,
             'modelEmailAddForm' => $modelEmailAddForm,
+            'modelSkinsChange' => $modelSkinsChange,
             'modelServicesChangePauseStart' => $modelServicesChangePauseStart,
             'modelServicesChangePauseFinish' => $modelServicesChangePauseFinish,
             'email_message_types' => $email_message_types,
             'sms_message_types' => $sms_message_types,
+            'skin_types' => $skin_types,
             'selected_email_message_types' => $selected_email_message_types,
             'selected_sms_message_types' => $selected_sms_message_types,
+            'selected_skin_type' => $selected_skin_type,
             'active_services_array' => $active_services_array,
             'paused_services_array' => $paused_services_array,
             // 'delete_phone_1_confirm' => $delete_phone_1_confirm,
@@ -564,9 +594,52 @@ class StaticPageController extends Controller
 
     public function actionColor()
     {
+        $test7 = $this->test7('20 -March ,2017');
 
-        return $this->render('color');
+
+
+        return $this->render('color',[
+        'test7' => $test7,
+        ]);
     }
+
+
+
+    public function test7($date)
+    {
+      //  $serch = array()
+     // $date2 =  str_replace('[0-9]','', $date);
+        $cultureKey = 'ua';
+        $month_input = trim(preg_replace('/[0-9]/','',$date)," .,/-_*");
+
+
+        $def_monthes = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+
+        switch ($cultureKey) {
+            case 'en':
+                $monthes = $def_monthes;
+                break;
+            case 'ua':
+                $monthes = array('Січня', 'Лютого', 'Березня', 'Квітня', 'Травня', 'Червня', 'Липня', 'Серпня', 'Вересня', 'Жовтня', 'Листопада', 'Грудня');
+                break;
+            case 'ru':
+            default:
+                $monthes = array('Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря');
+                break;
+        }
+        if($month_input){
+            $month_num = array_search($month_input, $def_monthes);
+            $month_output = $monthes[$month_num];
+            $date_output = str_replace($month_input, $month_output, $date);
+        }else{
+            $date_output = $date;
+        }
+
+        return $date_output;
+
+    }
+
+
 
     public function actionPhoneChange()
     {
