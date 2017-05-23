@@ -130,6 +130,11 @@ input:active, textarea:active {
     border-color: #ed7f02;
 }
 
+.title_support_details{
+    text-align: center;
+    font-size: 18px;
+}
+
 
 
 
@@ -642,6 +647,9 @@ div.sep{
 }
 .message-history-support{
     margin-top: 30px;
+}
+.title_text > td{
+    font-weight: bold;
 }
 
 /* Оплата */

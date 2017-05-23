@@ -1,6 +1,6 @@
 <?php
 return [
-    'total_data' => 'User data',
+    'total_data' => 'Home',
     'account_manager' => 'User account manage',
     'payment' => 'Payment',
     'payment_history' => 'Payment history',

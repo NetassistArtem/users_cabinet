@@ -9,6 +9,7 @@ return[
     'subject' => 'Тема',
     'send_message' => 'Отправить сообщение',
     'request' => 'Заявка №',
+    'answer' => 'Ответить',
 
 
 ];

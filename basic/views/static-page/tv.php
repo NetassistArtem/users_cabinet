@@ -3,6 +3,10 @@ use yii\helpers\Html;
 
 $this->title = Yii::t('tv','tv');
 
+$server_name = Yii::$app->params['server_name'];
+$style = Yii::$app->params['domains'][$server_name];
+
+
 ?>
 <div class="site-about">
     <div class="title_custom">
@@ -31,12 +35,12 @@ $this->title = Yii::t('tv','tv');
             <tbody>
             <tr>
                 <td><?= Yii::t('tv','player')?></td>
-                <td class="btn-custom" ><a  href="http://iptv.alfa-inet.net/files/alfa-IpTvPlayer-setup.exe"><?= Yii::t('tv','download')?></a></td>
+                <td class="btn-custom" ><a  href="<?= Yii::$app->params['sites_data'][$style]['player_link'] ?>"><?= Yii::t('tv','download')?></a></td>
 
             </tr>
             <tr>
                 <td><?= Yii::t('tv','playlist')?></td>
-                <td class="btn-custom" ><a  href="http://kuzia.net.ua/tv_playlist.m3u"><?= Yii::t('tv','download')?></a></td>
+                <td class="btn-custom" ><a  href="<?= Yii::$app->params['sites_data'][$style]['tv_playlist'] ?>"><?= Yii::t('tv','download')?></a></td>
 
             </tr>
 

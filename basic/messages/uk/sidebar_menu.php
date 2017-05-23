@@ -1,6 +1,6 @@
 <?php
 return [
-    'total_data' => 'Огляд',
+    'total_data' => 'Головна',
     'account_manager' => 'Управління кабінетом',
     'payment' => 'Оплата послуг',
     'payment_history' => 'Історія платежів',

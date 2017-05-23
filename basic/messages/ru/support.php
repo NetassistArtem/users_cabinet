@@ -20,9 +20,9 @@ return [
 
     'technical_support' => 'Техническая поддержка',
     'appl_form_support' => 'Форма заявки в техническую поддержку',
-
+    'problem_type_title' => 'Возникшая проблема: ',
     'problem_type' => 'Характер проблмы',
-    'when_problem' => 'Когда началас проблема?',
+    'when_problem' => 'Когда началась проблема?',
     'operating_system' => 'Операционная система',
     'which_antivirus' => 'Какой антивирус установлен?',
     'install_update_anti-virus' => 'Устанавливали или обновляли антивирус?',
@@ -32,15 +32,47 @@ return [
     'computer_wifi_connected' => 'Компьютер подключен по Wi-Fi?',
     'connection_our_website_without_router' => 'Есть ли выход на наш сайт БЕЗ роутера?',
     'restarting_computer' => 'Перезагружали ли компьютер?',
-    'restarting_wifi_router' => 'Перезагружали ли WiFi/роутер/свитч?',
-    'wifi_route_indication' => 'На WiFi/роутер/свитч есть индикация WAN/Internet?',
+    'restarting_wifi_router' => 'Перезагружали ли роутер?',
+    'wifi_route_indication' => 'Есть ли индикация "WAN","Internet" на роутере?',
     'message' => 'Сообщение',
-    'download_speed_without_router' => 'Какая скорость скачивания с film.alfa-inet.net БЕЗ роутера?',
+    'download_speed_without_router' => 'Какая скорость скачивания БЕЗ роутера?',
     'is_there_switch' => 'Есть ли роутер/свитч?',
-    'low_speed' => 'Низкая скорость?',
     'kilobyte_downloading' =>'Килобайт, то что показывает браузер при скачивании.',
     'send_request' => 'Отправить заявку',
     'clear_form' => 'Очистить форму',
+
+    'state_account' => 'Состояние счета',
+    'no_connection' => 'Нет связи',
+    'low_speed' => 'Низкая скорость',
+    'home_redirecting' => 'Переадресация на главную страницу',
+    'unavailable_part_resources' => 'Недоступна часть ресурсов',
+    'unavailable_resource' => 'Недоступен ресурс/сайт',
+    'soft_problem' => 'Проблемы с ПО',
+    'organizational_issues' => 'Организационные вопросы',
+    'select_problem' => 'Выбор возникшей проблемы',
+    'next' => 'Далее',
+
+    'thru_router' => 'Через роутер, по Wi-Fi',
+    'thru_comp' => 'Напрямую, через компьютер',
+    'cable_thru_router' => 'Через роутер, по кабелю',
+    'net_connection' => 'Подключены к сети',
+    'network_cart_indication' => 'Есть ли индикация на порту, куда подключен сетевой кабель?',
+    'comp_ip' => 'Какой IP адрес получает компьютер?',
+
+    'user_speed' => 'Показания скорости',
+    '10_mb' => 'до 10 Мбит/с (1-2 Мбайт/с)',
+    '50_mb' => 'c 10 до 50 Мбит/с (2-4 Мбайт/с)',
+    '80_mb' => 'с 50 до 80 Мбит/с (4-8 Мбайт/с)',
+    '100_mb' => 'выше 100 Мбит/с (10-15 Мбайт/с)',
+    'new_equipment' => 'Подключали новое оборудование?',
+    'unavailable_sites' => 'Недоступные ресурсы:',
+    'available_sites' => 'Доступные ресурсы:',
+    'unavailable_site' => 'Недоступный ресурс:',
+    'ping_answer' => 'Ответ на пинг ресурса:',
+    'dns' => 'Какой DNS указан в настройках?',
+    'renew_os' => 'Обновляли операционную систему?',
+
+
 
 
 

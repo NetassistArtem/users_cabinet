@@ -54,12 +54,12 @@ class PhoneFirstChangeForm extends Model
                 $phone_del = $this->deletePhone1();
                 if ($phone_del) {
                     if ($phone_del === 2) {
-
+                        event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Error delete user contact (phone number)');//функция биллинга записывает инфу в лог
                         Yii::$app->session->setFlash('phoneNotDelete', ['value' => Yii::t('flash-message', 'phone_not_delete')]);
                         return 3;
                     }
 
-
+                    event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Delete user contact (phone number)');//функция биллинга записывает инфу в лог
                     Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'phone_1_delete')]);
                     return 2;
                 }
@@ -74,6 +74,7 @@ class PhoneFirstChangeForm extends Model
             //$this->insertNewPhone1();
             return true;
         } else {
+            event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Error change user contact (phone number)');//функция биллинга записывает инфу в лог
             Yii::$app->session->setFlash('phoneFirstChanged', ['value' => Yii::t('flash-message', 'unable_change_contact')]);
             return false;
         }
@@ -110,8 +111,10 @@ class PhoneFirstChangeForm extends Model
         $phones_active = array();
 
         foreach ($user_contact_info_all as $val) {
-            if ($val[CONTACTS_DEL_MARK_IDX] == 0) {
-                $phones_active[] = $val[CONTACTS_FAST_PHONE_IDX];
+            if($val[CONTACTS_DEL_MARK_IDX] == 0){
+                if($val[CONTACTS_FAST_PHONE_IDX] != 0){
+                    $phones_active[]= $val[CONTACTS_FAST_PHONE_IDX];
+                }
             }
         }
         $phones_active = array_unique($phones_active);

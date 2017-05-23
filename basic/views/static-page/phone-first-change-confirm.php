@@ -30,18 +30,26 @@ $this->title = Yii::t('contacts-change-confirm', 'confirm_contact_info');
                 case 'phone_1':
                     $title_text = Yii::t('contacts-change-confirm', 'change_phone_1');
                     $text_info = Yii::t('contacts-change-confirm', 'info_text_1_ph');
+                    $link_resend = "/phone-first-change-confirm?sms=1";
+                    $resend_btn_text = Yii::t('contacts-change-confirm', 'resend_sms');
                     break;
                 case 'phone_2':
                     $title_text = Yii::t('contacts-change-confirm', 'change_phone_2');
                     $text_info = Yii::t('contacts-change-confirm', 'info_text_1_ph');
+                    $link_resend = "/phone-first-change-confirm?sms=1";
+                    $resend_btn_text = Yii::t('contacts-change-confirm', 'resend_sms');
                     break;
                 case 'email':
                     $title_text = Yii::t('contacts-change-confirm', 'change_email');
                     $text_info = Yii::t('contacts-change-confirm', 'info_text_1_em');
+                    $link_resend = "/phone-first-change-confirm?email=1";
+                    $resend_btn_text = Yii::t('contacts-change-confirm', 'resend_email');
                     break;
                 default:
                     $title_text = '';
                     $text_info = '';
+                    $link_resend = '';
+                    $resend_btn_text = '';
             }
 
             ?>
@@ -100,7 +108,7 @@ $this->title = Yii::t('contacts-change-confirm', 'confirm_contact_info');
 
                 <div class="form-group">
                     <div class="btn btn-block btn-lg btn-custom">
-                        <a href="/<?= $lang ?>/phone-first-change-confirm?sms=1"><?= Yii::t('contacts-change-confirm', 'resend_sms') ?></a>
+                        <a href="/<?= $lang . $link_resend ?>"><?= $resend_btn_text ?></a>
                     </div>
                 </div>
 

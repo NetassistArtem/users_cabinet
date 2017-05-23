@@ -27,8 +27,8 @@ html {
 }
 body {
     padding-top: 0;
-    background: url(images/bg_body.gif) repeat top left;
     min-height: 100%;
+    background: #000000;
 
 
 
@@ -117,6 +117,11 @@ i.message_main_text{
     border-color: #282828;
 }
 
+.title_support_details{
+    text-align: center;
+    font-size: 18px;
+}
+
 
 /* Верхнее меню */
 
@@ -174,7 +179,7 @@ i.message_main_text{
 
 
 div.navbar-header > a.navbar-brand {
-    padding: 15px 60px;
+    padding: 15px 35px;
     font-size: 25px;
     font-weight: bold;
     color: white;
@@ -227,14 +232,14 @@ div.navbar-header > a.navbar-brand {
     border-color: white;
 }
 .navbar-default .navbar-toggle .icon-bar {
-    background-color: white;
+    background-color: #889988;
 }
 .navbar-default .navbar-toggle:hover .icon-bar {
     background-color: #777;
 }
 .navbar-default .navbar-toggle:hover {
     border-radius: 0;
-    background-color:white;
+    background-color:#889988;
     border-color: #777;
 }
 .navbar > .container .navbar-brand {
@@ -365,8 +370,8 @@ textarea.form-control{
 /*********Блок с новостями****************/
 
 .news-data-block{
-    background-color: #F8F8FF;
-    border: solid 1px #5f5f5f;
+    background-color: #889988;
+    border: solid 2px #ddd;
     margin-top: 20px;
     border-radius: 10px !important;
 }
@@ -417,7 +422,7 @@ div.batton_message{
 table.table-border-custom > thead > tr >th, table.table.table-border-custom > thead:first-child > tr:first-child >th, table.table-border-custom > tbody > tr >td, table.table-border-custom {
     border: 2px solid #ddd;  /* #286090; */
     height: 44px;
-    background-color: white;
+    background-color: #889988;
 
 }
 
@@ -460,7 +465,7 @@ div.cabinet_change_forms {
 }
 
 div.cabinet_change_forms > div.panel-body{
-    background-color: #F8F8FF;
+    background-color: #889988;
 }
 
 div.empty_div_form{
@@ -476,7 +481,7 @@ div.empty_div_form{
     padding: 10px;
     margin: 10px;
     /* background-color: #00b3ee; */
-    background-color: #F5F5F5;
+    background-color: #aaaa99;
     /* background-color: #fffad0; */
     border-radius: 10px;
     margin-top: 20px;
@@ -495,7 +500,7 @@ div.empty_div_form{
 
 /* TV */
 .content_tv{
-    background-color: white;
+    background-color: #889988;
     margin-bottom: 30px;
 }
 .content_tv > div{
@@ -593,7 +598,8 @@ div.pagination-custom{
     text-align: center;
 }
 div.todo-custom-view{
-    background-color: #F8F8FF;
+    background-color: #889988;
+    margin-bottom: 20px;
 }
 div.sep{
     background-color: #5f5f5f;
@@ -613,6 +619,10 @@ div.sep{
     margin-top: 30px;
 }
 
+.title_text > td{
+    font-weight: bold;
+}
+
 /* Оплата */
 
 div.table_payment >table {
@@ -620,7 +630,7 @@ div.table_payment >table {
     width: 100% !important;
     border: 0px solid #ddd !important;
     height: 44px !important;
-    background-color: white !important;
+    background-color: #889988 !important;
     max-width: 100% !important;
     margin-bottom: 20px !important;
     border-spacing: 0;
@@ -663,7 +673,7 @@ table.invis>tbody>tr>td{
     border-left: 2px solid #ddd;
     border-bottom: 2px solid #ddd;
     height: 44px;
-    background-color: white;
+    background-color: #889988;
     padding-left: 2%;
 
 }
@@ -695,7 +705,7 @@ table.invis>tbody>tr.trow>td>input[type="submit"]:hover, div.payment_next_inform
 }
 
 .payment_next_information{
-    background-color: white;
+    background-color: #889988;
     border: 1px solid #ddd;
 }
 .red {
@@ -754,7 +764,7 @@ h3.arhiv_news_title{
 .alert-custom{
     text-align: center;
 }
-/******************Серытые поля************************/
+/******************Скрытые поля************************/
 
 div.hiden-fields > div.form-group > div.message-history-support, div.hiden-fields > div.form-group, div.hiden-fields > div.form-group >div >div.help-block {
     margin-top: 0px;

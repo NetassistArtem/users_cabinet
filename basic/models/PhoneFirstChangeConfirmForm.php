@@ -57,6 +57,8 @@ class PhoneFirstChangeConfirmForm extends Model
 
                 if ($confirm === 2) {
 
+                    event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Error change/add user contacts (phone number).Wrong verification code.');//функция биллинга записывает инфу в лог
+
                     Yii::$app->session->setFlash('codeConfirm', ['value' => Yii::t('flash-message', 'wrong_code')]);
                     return 2;
                 }
@@ -91,7 +93,7 @@ class PhoneFirstChangeConfirmForm extends Model
                     CONTACT_USER . "," . CONTACT_REQ, CONTACT_USER, "", 0, UNDEL_CONTACT,
                     $this->user_data['username'], $this->user_data['real_name'], $this->user_data['address'], $this->user_data['account_id'], Yii::$app->user->id, $this->user_data['net_id'], $this->user_data['loc_id'], $this->user_data['req_id'], "", -1, $user_contact_info[0][CONTACTS_PERSON_ID_IDX]);
 
-                event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,-1);//функция биллинга записывает инфу в лог
+
 
 
                 $user_contact_info_all =  get_user_contacts('', -1, -1, Yii::$app->user->id, -1, -1, -1, -1, "", -1, "", 0, PRINT_CONTACTS_GET_LIST_EX); //функция апи биллинга
@@ -103,13 +105,17 @@ class PhoneFirstChangeConfirmForm extends Model
                 }
 //Debugger::PrintR($user_contact_info_all);
 
+
                 foreach($user_contact_info_all as $val){
                     if($val[CONTACTS_DEL_MARK_IDX] == 0){
-                        $phones_active[]= $val[CONTACTS_FAST_PHONE_IDX];
+                        if($val[CONTACTS_FAST_PHONE_IDX] != 0){
+                            $phones_active[]= $val[CONTACTS_FAST_PHONE_IDX];
+                        }
                     }
                 }
                 $phones_active = array_unique($phones_active);
                 //  Debugger::PrintR($phones_active);
+
               //  Debugger::PrintR($this->user_data);
               //  Debugger::testDie();
                 global $acc_db;

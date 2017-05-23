@@ -16,6 +16,7 @@ use app\models\CallRequestForm;
 use app\models\PhoneFirstChangeConfirmForm;
 use app\models\EmailChangeConfirmForm;
 use app\models\PhoneAddForm;
+use app\models\SupportForm;
 use app\models\RtfPrintForm;
 use app\models\EmailAddForm;
 use app\models\CreditForm;
@@ -60,7 +61,16 @@ class StaticPageController extends Controller
                     'tv',
                     'support-history-todo',
                     'phone-first-change-confirm',
-                    'change-phone'
+                    'change-phone',
+                    'arhiv-news-node-reade',
+                    'arhiv-news-node',
+                    'arhiv-news',
+                    'bank',
+                    'terminals',
+                    'email-change-confirm',
+                    'email-change',
+                    'submit-call-request',
+                    'support-details',
                 ],
 
 
@@ -78,7 +88,16 @@ class StaticPageController extends Controller
                             'tv',
                             'support-history-todo',
                             'phone-first-change-confirm',
-                            'change-phone'
+                            'change-phone',
+                            'arhiv-news-node-reade',
+                            'arhiv-news-node',
+                            'arhiv-news',
+                            'bank',
+                            'terminals',
+                            'email-change-confirm',
+                            'email-change',
+                            'submit-call-request',
+                            'support-details',
                         ],
                         'allow' => true,
                         'roles' => ['@'],
@@ -97,7 +116,16 @@ class StaticPageController extends Controller
                             'tv',
                             'support-history-todo',
                             'phone-first-change-confirm',
-                            'change-phone'
+                            'change-phone',
+                            'arhiv-news-node-reade',
+                            'arhiv-news-node',
+                            'arhiv-news',
+                            'bank',
+                            'terminals',
+                            'email-change-confirm',
+                            'email-change',
+                            'submit-call-request',
+                            'support-details',
                         ],
                         'allow' => false,
                         'roles' => ['?'],
@@ -427,14 +455,46 @@ class StaticPageController extends Controller
     public function actionSupport()
     {
         User::UserData();
+        $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
+        $modelSupport = new SupportForm();
+
+
+        if ($modelSupport->load(Yii::$app->request->post()) && $modelSupport->sendProblem()) {
+                return $this->redirect(['/tehnicheskaya-podderzhka/details']);
+        }
+
+
+        $problem_types = array();
+        foreach (Yii::$app->params['problem_types'] as $k => $v) {
+            $problem_types[$k] = Yii::t('support', $v['lang_key']);
+        }
+
+        return $this->render('support', [
+            'user_data' => $user_data,
+            'modelSupport' => $modelSupport,
+            'problem_types' => $problem_types,
+            //'operation_systems' => $operation_systems,
+            //'support_data' => User::SupportData(),
+        ]);
+    }
+
+    public function actionSupportDetails()
+    {
+        User::UserData();
 
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
         $modelTechnicalSupport = new TechnicalSupportForm();
 
+        $problem_type = Yii::$app->session->get('problem') ? Yii::$app->session->get('problem') : -1;
+        Yii::$app->session->remove('problem');
+        if($problem_type == -1){
+            return $this->redirect(['/tehnicheskaya-podderzhka']);
+        }
+
 
         if ($modelTechnicalSupport->load(Yii::$app->request->post()) && $modelTechnicalSupport->sendTechnicalInfo()) {
             if (!Yii::$app->request->isPjax) {
-                return $this->redirect(['/tehnicheskaya-podderzhka']);
+                return $this->redirect(['/tehnicheskaya-podderzhka/details']);
             }
         }
         /*
@@ -462,13 +522,20 @@ class StaticPageController extends Controller
         $operation_systems = get_lang_opt_list('os_types'); //функция из api биллинга
         $operation_systems[0] = Yii::t('support', 'select_option');
 
+        $user_speeds[0] = Yii::t('support', 'select_option');
+        foreach (Yii::$app->params['user_speed'] as $k => $v) {
+            $user_speeds[$k] = Yii::t('support', $v['lang_key']);
+        }
 
-        return $this->render('support', [
+
+        return $this->render('support-details', [
             'user_data' => $user_data,
             'modelTechnicalSupport' => $modelTechnicalSupport,
             'swith' => $swith,
             'operation_systems' => $operation_systems,
             'support_data' => User::SupportData(),
+            'problem_type' => $problem_type,
+            'user_speeds' => $user_speeds,
         ]);
     }
 
@@ -481,7 +548,7 @@ class StaticPageController extends Controller
         //  Debugger::PrintR($test);
         //Debugger::PrintR(User::TodoHistory($user_data['username']));
 
-        $todo_history_array = User::TodoHistory($user_data['username']);
+        $todo_history_array = User::TodoHistory($user_data['username'], $user_data['account_id']);
         $pages = new Pagination(['totalCount' => count($todo_history_array), 'pageSize' => Yii::$app->params['items_per_page']['todo_history']]);
         $pages->pageSizeParam = false;
 
@@ -506,7 +573,13 @@ class StaticPageController extends Controller
         $todo_id = array_pop($url_array);
 
 
+
         $todo_history = User::TodoHistoryNode($user_data['username'], $todo_id, $user_data['account_id']);
+        if(!$todo_history){
+            $this->redirect(['site/error']);
+          // return Yii::$app->errorHandler->errorAction;
+        }
+
         $todo_history_node = iconv_safe('koi8-u', 'utf-8', $todo_history['todo_desc_web']);
 
 
@@ -596,6 +669,11 @@ class StaticPageController extends Controller
     {
         $test7 = $this->test7('20 -March ,2017');
 
+     //  $test = get_all_address();
+
+//Debugger::PrintR($test);
+
+       // Debugger::PrintR(require_once (__DIR__ . '/../components/billing_api/all_addr_array.php'));
 
 
         return $this->render('color',[
@@ -763,6 +841,7 @@ class StaticPageController extends Controller
         //  Debugger::Eho('</br>');
         //   Debugger::Eho($confirm);
         //   Debugger::testDie();
+     //   Debugger::EhoBr(Yii::$app->session->get('confirmcode'));
 
         if ($modelPhoneFirstChangeConfirm->load(Yii::$app->request->post())) {
 
@@ -780,8 +859,10 @@ class StaticPageController extends Controller
                     if (Yii::$app->session->has('add')) {
                         Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'phone_add')]);
                         Yii::$app->session->remove('add');
+                        event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Add new user contact (phone number)');//функция биллинга записывает инфу в лог
                     } else {
                         Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'phone_1_change')]);
+                        event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Changed user contact (phone number)');//функция биллинга записывает инфу в лог
                     }
 
 
@@ -809,7 +890,7 @@ class StaticPageController extends Controller
     {
 
         // User::UserData();
-        if (Yii::$app->session->has('new_user_phone_or_email') && Yii::$app->session->has('confirmcode') && Yii::$app->request->get('sms')) {
+        if (Yii::$app->session->has('new_user_phone_or_email') && Yii::$app->session->has('confirmcode') && Yii::$app->request->get('email')) {
             $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
             $user_name = isset($user_data['username']) ? $user_data['username'] : '';
             $acc_id = isset($user_data['account_id']) ? $user_data['account_id'] : -1;
@@ -829,7 +910,15 @@ class StaticPageController extends Controller
                 Yii::$app->params['email_send_conf']['verification_cod_up_chars']
             );
 
+            $subject = Yii::t('sms_messages', 'subject');
+            global $_admin_mail;
+            $from_mail = $_admin_mail;
+            $server_name = Yii::$app->params['server_name'];
+            $domains_key = Yii::$app->params['domains'][$server_name];
+            $from_user = Yii::t('site','admin') . Yii::t('site', Yii::$app->params['sites_data'][$domains_key]['company_name']['lang_key']);
 
+
+            my_mail( $email, iconv_safe('utf-8','koi8-u',$full_email_text), iconv_safe('utf-8','koi8-u',$subject), $from_mail, $from_user);
             //  turbosms_send($normal_phone, $full_sms_text, $org_id, 0, $acc_id); //Открпвка смс, функция биллинга
 
         }
@@ -852,6 +941,7 @@ class StaticPageController extends Controller
         //  Debugger::Eho('</br>');
         //   Debugger::Eho($confirm);
         //   Debugger::testDie();
+       // Debugger::EhoBr(Yii::$app->session->get('confirmcode'));
 
         if ($modelEmailChangeConfirm->load(Yii::$app->request->post())) {
 
@@ -867,9 +957,11 @@ class StaticPageController extends Controller
                     return $this->redirect(['/email-change-confirm']);
                 } elseif ($confirm === true) {
                     if (Yii::$app->session->has('add')) {
+                        event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Add new user contact (e-mail)');//функция биллинга записывает инфу в лог
                         Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'email_add')]);
                         Yii::$app->session->remove('add');
                     } else {
+                        event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Changed user contact (e-mail)');//функция биллинга записывает инфу в лог
                         Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'email_change')]);
                     }
 

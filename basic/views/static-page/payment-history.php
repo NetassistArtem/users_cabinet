@@ -19,7 +19,7 @@ $this->title =  Yii::t('payment_history','payment_history');
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr class="title_text" >
                 <td>№</td>
                 <td><?= Yii::t('payment_history','date') ?></td>
                 <td><?= Yii::t('payment_history','payment_purpose') ?></td>

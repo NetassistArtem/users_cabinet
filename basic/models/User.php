@@ -14,6 +14,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public $password;
     public $authKey;
     public $accessToken;
+    public $orgId;
 
 
     private static $users = [
@@ -52,6 +53,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                 'id' => $GLOBALS['auth_user_id'],
                 'username' => $GLOBALS['auth_user_name'],
                 'password' => Yii::$app->request->post('LoginForm')['password'],
+                'orgId' => $GLOBALS['def_org_id'],
             );
 
 
@@ -59,11 +61,17 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             Yii::$app->session->set('u_name', $GLOBALS['auth_user_name']);//нужно для работы billing api
         }
 
+
+
+
+
         $user_identity_data = array(
             Yii::$app->session->get('user-data-id')['id'] => array(
                 'id' => Yii::$app->session->get('user-data-id')['id'],
                 'username' => Yii::$app->session->get('user-data-id')['username'],
                 'password' => Yii::$app->session->get('user-data-id')['password'],
+                'orgId' => Yii::$app->session->get('user-data-id')['orgId'],
+
                 // 'u_name' => Yii::$app->session->get('user-data-id')['u_name'],
             ),
             '103' => array(
@@ -202,6 +210,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         $svc_subtype_id = array();
         $svc_tariff_daily_price = array();
         $svc = svc_get_list($user_data_by_billing[UINFO_ACC_ID_IDX], -1, -1, 2);//функция биллинга
+      //  Debugger::PrintR($svc);
         foreach ($svc as $t => $v) {
             $svc[$t] = svc_get_rec_info($v[SVC_LOG_REC_ID_IDX], $v[SVC_LOG_CHAIN_ID_IDX]); //функция биллинга
             $svc_name_str = db_unquote($svc[$t][$svc_log_offs + SVC_LIST_NAME_IDX]);
@@ -391,29 +400,6 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     }
 
 
-    public static function TodoHistory($user_name)
-    {
-        $todo_array = array();
-        $todo_filters = array("user_name" => $user_name, "user_only" => 1, "all" => 1);
-        $todo_records_result = list_todo(0, false, false, "upd", "upd", 0, $todo_filters);
-        if ($todo_records_result) {
-            $todo_records = list_todo_enum($todo_records_result, $todo_filters, 0, 1000);
-            if (is_array($todo_records)) {
-                foreach ($todo_records as $v => $k) {
-                    $todo_array[$v] = array(
-                        'todo_id' => $k[TODO_ID_IDX],
-                        'todo_init_time' => itimestamp_to_str($k[TODO_INIT_TIME_IDX], $sep = " ", $dsep = "-", $isep = ":"),
-                        'todo_end_time' => itimestamp_to_str($k[TODO_REQ_TIME_IDX], $sep = " ", $dsep = "-", $isep = ":"),
-                        'todo_admin_id' => get_user_info_by_ids(UID_ANY, $k[TODO_ACC_ID_IDX])[UINFO_NAME_IDX],//$k[TODO_ADMIN_ID_IDX],
-                        'todo_state' => Yii::t('support_history_todo_status', Yii::$app->params['todo_status'][$k[TODO_STATE_IDX]]['lang_key']),
-                        'todo_subj' => iconv_safe('koi8-u', 'utf-8', $k[TODO_SUBJ_IDX]),//web_encode($k[TODO_SUBJ_IDX]),
-                    );
-                }
-                // $todo_records = iconv_safe('koi8-u','utf-8',$todo_records);
-            }
-        }
-        return $todo_array;
-    }
 
     public static function TodoHistoryNode($user_name, $todo_id, $account_id)
     {
@@ -454,6 +440,43 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                 } */
         return $todo_data;
     }
+
+
+    public static function TodoHistory($user_name, $account_id)
+    {
+        $todo_array = array();
+        $test= array();
+        $todo_filters = array("user_name" => $user_name, "user_only" => 1, "todo_type" => TODO_SUPPORT, "list_all" => 1 );
+        $todo_records_result = list_todo(0, false, false, "upd", "upd", 0, $todo_filters);
+        if ($todo_records_result) {
+            $todo_records = list_todo_enum($todo_records_result, $todo_filters, 0, 1000);
+            if (is_array($todo_records)) {
+
+
+                foreach ($todo_records as $v => $k) {
+                    $todo_exist = self::TodoHistoryNode($user_name,$k[TODO_ID_IDX], $account_id);
+                    if($todo_exist){
+                        $todo_array[$v] = array(
+                            'todo_id' => $k[TODO_ID_IDX],
+                            'todo_init_time' => itimestamp_to_str($k[TODO_INIT_TIME_IDX], $sep = " ", $dsep = "-", $isep = ":"),
+                            'todo_end_time' => itimestamp_to_str($k[TODO_REQ_TIME_IDX], $sep = " ", $dsep = "-", $isep = ":"),
+                            'todo_admin_id' => get_user_info_by_ids(UID_ANY, $k[TODO_EXEC_LIST_IDX])[UINFO_NAME_IDX],//$k[TODO_ADMIN_ID_IDX],
+                            'todo_state' => Yii::t('support_history_todo_status', Yii::$app->params['todo_status'][$k[TODO_STATE_IDX]]['lang_key']),
+                            'todo_subj' => iconv_safe('koi8-u', 'utf-8', $k[TODO_SUBJ_IDX]),//web_encode($k[TODO_SUBJ_IDX]),
+                        );
+                    }
+
+
+
+                }
+                // $todo_records = iconv_safe('koi8-u','utf-8',$todo_records);
+            }
+        }
+
+        return $todo_array;
+    }
+
+
 
     public static function PaymentHistory($account_id)
     {
@@ -586,6 +609,10 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public function getAuthKey()
     {
         return $this->authKey;
+    }
+    public function getOrgId()
+    {
+        return $this->orgId;
     }
 
     /**

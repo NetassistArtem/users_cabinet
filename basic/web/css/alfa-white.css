@@ -119,6 +119,11 @@ i.message_main_text{
     color: black;
 }
 
+.title_support_details{
+    text-align: center;
+    font-size: 18px;
+}
+
 
 /* Верхнее меню */
 
@@ -177,7 +182,7 @@ i.message_main_text{
 
 
 div.navbar-header > a.navbar-brand {
-    padding: 15px 60px;
+    padding: 15px 39px;
     font-size: 25px;
     font-weight: bold;
     color: black;
@@ -599,6 +604,7 @@ div.pagination-custom{
 }
 div.todo-custom-view{
     background-color: #F8F8FF;
+    margin-bottom: 20px;
 }
 div.sep{
     background-color: #b4b4b4;
@@ -616,6 +622,9 @@ div.sep{
 }
 .message-history-support{
     margin-top: 30px;
+}
+.title_text > td{
+    font-weight: bold;
 }
 
 /* Оплата */

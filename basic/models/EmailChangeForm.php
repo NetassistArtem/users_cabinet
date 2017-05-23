@@ -51,12 +51,12 @@ class EmailChangeForm extends Model
                 $email_del = $this->deleteEmail();
                 if ($email_del) {
                     if ($email_del === 2) {
-
+                        event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Error delete user contact (e-mail)');//функция биллинга записывает инфу в лог
                         Yii::$app->session->setFlash('emailNotDelete', ['value' => Yii::t('flash-message', 'email_not_delete')]);
                         return 3;
                     }
 
-
+                    event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Delete user contact (e-mail)');//функция биллинга записывает инфу в лог
                     Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'email_delete')]);
                     return 2;
                 }
@@ -71,6 +71,7 @@ class EmailChangeForm extends Model
             //$this->insertNewPhone1();
             return true;
         } else {
+            event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Error change user contact (e-mail)');//функция биллинга записывает инфу в лог
             Yii::$app->session->setFlash('phoneFirstChanged', ['value' => Yii::t('flash-message', 'unable_change_contact')]);
             return false;
         }
@@ -193,7 +194,8 @@ class EmailChangeForm extends Model
 
             //  turbosms_send($normal_phone, $full_sms_text, $org_id, 0, $acc_id); //Открпвка смс, функция биллинга
 
-        my_mail( $email, $full_message_text, $subject, $from_mail, $from_user);
+
+        my_mail( $email, iconv_safe('utf-8','koi8-u',$full_message_text), iconv_safe('utf-8','koi8-u',$subject), $from_mail, $from_user);
 
     }
 

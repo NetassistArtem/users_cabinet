@@ -151,28 +151,22 @@ $this->title = Yii::t('cabinet', 'cabinet');
             </thead>
             <tbody>
             <tr>
-                <td rowspan="5">IPv4</td>
-                <td>IP № 1</td>
+                <td rowspan="3">IPv4</td>
+                <td>IP</td>
                 <td><?= isset($user_data['ip_1']) ? $user_data['ip_1'] : $user_data['ip_real_constant'] ?></td>
             </tr>
-            <tr>
-                <td>IP № 2</td>
-                <td><?= $user_data['ip_2'] ?></td>
-            </tr>
+
             <tr>
                 <td><?= Yii::t('cabinet', 'netmask_1') ?></td>
                 <td><?= $user_data['netmask'] ?></td>
             </tr>
-            <tr>
-                <td><?= Yii::t('cabinet', 'netmask_2') ?></td>
-                <td><?= $user_data['netmask2'] ?></td>
-            </tr>
+
             <tr>
                 <td><?= Yii::t('cabinet', 'gateway') ?></td>
                 <td><?= $user_data['gw'] ?></td>
             </tr>
             <tr>
-                <td colspan="2">SNTP</td>
+                <td colspan="2">SMTP</td>
                 <td><?= $user_data['mx_string'] ?></td>
             </tr>
 

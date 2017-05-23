@@ -9,6 +9,7 @@ return[
     'subject' => 'Subject',
     'send_message' => 'Send message',
     'request' => 'Request №',
+    'answer' => 'Reply',
 
 
 ];

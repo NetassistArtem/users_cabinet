@@ -54,7 +54,7 @@ class EmailChangeConfirmForm extends Model
                 // Debugger::testDie();
 
                 if ($confirm === 2) {
-
+                    event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Error change/add user contacts (e-mail).Wrong verification code.');//функция биллинга записывает инфу в лог
                     Yii::$app->session->setFlash('codeConfirm', ['value' => Yii::t('flash-message', 'wrong_code')]);
                     return 2;
                 }
@@ -65,7 +65,7 @@ class EmailChangeConfirmForm extends Model
 
                 $email_new = $this->email;
 
-                //Debugger::Eho($user_phone_new);
+            //    Debugger::EhoBr($email_new);
                 //  Debugger::Eho($user_phone_new);
                 //  Debugger::testDie();
                 //  Debugger::Eho(Yii::$app->session->get('normal_phone'));
@@ -88,17 +88,34 @@ class EmailChangeConfirmForm extends Model
 
                 } else {
                     $user_contact_info = get_user_contacts('', -1, -1, Yii::$app->user->id, -1, -1, -1, -1, "", -1, "", 0, PRINT_CONTACTS_GET_LIST_EX);  //получить массив контактов ($contact_info)
+
                 }
-                //  Debugger::PrintR($user_contact_info);
+
+      //          $isset_history = 0;
+        //        foreach($user_contact_info as $k=>$v){
+          //          if($v[CONTACTS_EMAIL_IDX] == $email_new){
+            //            $isset_history = 1;
+              //          break;
+                //    }
+               // }
+
+//if($isset_history){
+  //  del_restore_contact($contact_id, 0);
+
+//}
 
                 update_user_contacts('',  //функция апи биллинга, добавляет контакт пользователя (но не добавляет в поле user_phone)
                     CONTACT_USER . "," . CONTACT_REQ, CONTACT_USER, "", 0, UNDEL_CONTACT,
                     $this->user_data['username'], $this->user_data['real_name'], $this->user_data['address'], $this->user_data['account_id'], Yii::$app->user->id, $this->user_data['net_id'], $this->user_data['loc_id'], $this->user_data['req_id'], $email_new, -1, $user_contact_info[0][CONTACTS_PERSON_ID_IDX]);
 
+
+
+
                 event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'], -1, -1, -1);//функция биллинга записывает инфу в лог
 
                 $user_contact_info_all = get_user_contacts('', -1, $this->user_data['account_id'], -1, -1, -1, -1, -1, "", -1, "", 0, PRINT_CONTACTS_GET_LIST_EX); //функция апи биллинга
 
+           //     Debugger::PrintR($user_contact_info_all);
                 $email_active = array();
 
 
@@ -112,9 +129,9 @@ class EmailChangeConfirmForm extends Model
                 }
 
                 $email_active = array_unique($email_active);
-               // Debugger::PrintR($email_active);
-                //  Debugger::PrintR($this->user_data);
-                //  Debugger::testDie();
+      //          Debugger::PrintR($email_active);
+                 // Debugger::PrintR($this->user_data);
+        //          Debugger::testDie();
                 global $acc_db;
                 global $acc_db_host;
                 global $acc_db_user;

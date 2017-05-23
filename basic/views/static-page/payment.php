@@ -71,10 +71,11 @@ $credit_limit = $user_data['account_max_credit'];
             <tr class="center">
                 <td class="btn-custom"><a href="/<?=$lang ?>/oplata-uslug/terminals"><?= Yii::t('payment', 'pay_by_terminals') ?></a></td>
                 <td >
-                    <img src="/images/wm/tyme-logo_s.gif" alt="tyme">
-                    <img src="/images/wm/citypay.gif" alt="citypay">
+                    <img src="/images/wm/otyme_small.png" alt="tyme">
+                    <img src="/images/wm/city244_small.png" alt="citypay">
+                    <img src="/images/wm/24nonstop24_small.gif" alt="citypay">
                 </td>
-                <td> 5-3% </td>
+                <td> 3-5% </td>
             </tr>
             <tr class="center">
                 <td class="btn-custom"><a href="/<?=$lang ?>/oplata-uslug/bank"><?= Yii::t('payment', 'pay_by_bank') ?></a></td>

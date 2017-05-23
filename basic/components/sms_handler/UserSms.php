@@ -141,9 +141,13 @@ class UserSms
     {
 
         if ($translit == 1) {
-            return $this->translit($text) . $this->codeCreate($code_length, $chars_num, $chars_down_chars, $chars_up_chars);
+            $testt = $this->translit($text) . $this->codeCreate($code_length, $chars_num, $chars_down_chars, $chars_up_chars);
+            $_SESSION['testt'] = $testt;
+            return $testt;
         } else {
-            return $text . $this->codeCreate($code_length, $chars_num, $chars_down_chars, $chars_up_chars);
+            $testt2 = $text . $this->codeCreate($code_length, $chars_num, $chars_down_chars, $chars_up_chars);
+            $_SESSION['testt'] = $testt2;
+            return $testt2;
         }
     }
 

@@ -66,6 +66,10 @@ class PhoneAddForm extends Model
     {
 
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
+       // Debugger::PrintR($user_data);
+      //  $user_contact_info = get_user_contacts('', -1, -1, Yii::$app->user->id, -1, -1, -1, -1, "", -1, "", 0, PRINT_CONTACTS_GET_LIST_EX);
+      //  Debugger::PrintR($user_contact_info);
+      //   Debugger::testDie();
         $user_name = isset($user_data['username']) ? $user_data['username'] : '';
         $acc_id = isset($user_data['account_id']) ? $user_data['account_id'] : -1;
         $org_id = isset($user_data['org_id']) ? $user_data['org_id'] : '';
@@ -104,14 +108,14 @@ class PhoneAddForm extends Model
                 Yii::$app->params['sms_send_conf']['verification_cod_down_chars'],
                 Yii::$app->params['sms_send_conf']['verification_cod_up_chars']
             );
-            // Debugger::Eho($normal_phone);
-            // Debugger::Eho('</br>');
-            // Debugger::Eho($full_sms_text);
-            // Debugger::Eho('</br>');
-            // Debugger::Eho($org_id);
-            // Debugger::Eho('</br>');
-            // Debugger::Eho($acc_id);
-            // Debugger::testDie();
+           //  Debugger::Eho($normal_phone);
+           //  Debugger::Eho('</br>');
+           //  Debugger::Eho($full_sms_text);
+           //  Debugger::Eho('</br>');
+           //  Debugger::Eho($org_id);
+           //  Debugger::Eho('</br>');
+           //  Debugger::Eho($acc_id);
+           //  Debugger::testDie();
 
              turbosms_send($normal_phone, $full_sms_text, $org_id, 0, $acc_id); //Открпвка смс, функция биллинга
         } else {

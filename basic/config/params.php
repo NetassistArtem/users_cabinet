@@ -5,12 +5,15 @@ return [
     'adminEmail' => 'admin@example.com',
     'sites_data' => array(
         'alfa' => array(
-            'phone_1' => '(044) 223-333-7',
-            'phone_fore_call' => '+380442233337',
+            'phone_1' => '(044) 239-89-89',
+            'phone_fore_call' => '+380442398989',
             'company_name' => array(
                 0 => 'Альфа инет',
                 'lang_key' => 'alfa',
             ),
+            'ico' => 'alfa.ico',
+            'player_link' =>'http://iptv.alfa-inet.net/files/alfa-IpTvPlayer-setup.exe',
+            'tv_playlist' => 'https://alfa-inet.net/files/tv_playlist.m3u',
         ),
 
         'kuzia' => array(
@@ -20,14 +23,17 @@ return [
                 0 => 'Кузя',
                 'lang_key' => 'kuzia',
             ),
+            'ico' => 'kuzia.ico',
+            'player_link' =>' http://kuzia.net.ua/IpTvPlayer-Kuzia-setup.exe',
+            'tv_playlist' => 'http://kuzia.net.ua/tv_playlist.m3u',
         ),
     ),
     'phone_1' => '223-333-7',
     'payment_code' => '39481498',
     'domains' => array(
-        'lk.alfa-inet.net' => 'kuzia',
+        'lk.alfa-inet.net' => 'alfa',
         'my.kuzia.net.ua' => 'kuzia',
-        'my.alfa.net.ua' => 'alfa',
+        'my.alfa-inet.net' => 'alfa',
     ),
     'alfa-styles' => array(
         -1 => 'Default',
@@ -337,18 +343,98 @@ return [
         ),
 
     ),
+    'problem_types' => array(
+        1 => array(
+            0 => 'Состояние счета',
+            'lang_key' => 'state_account',
+        ),
+        2 => array(
+            0 => 'Нет связи',
+            'lang_key' => 'no_connection',
+        ),
+        3 => array(
+            0 => 'Низкая скорость',
+            'lang_key' => 'low_speed',
+        ),
+        4 => array(
+            0 => 'Переадресация на главную',
+            'lang_key' => 'home_redirecting',
+        ),
+        5 => array(
+            0 => 'Недоступна часть ресурсов',
+            'lang_key' => 'unavailable_part_resources',
+        ),
+        6 => array(
+            0 => 'Недоступен ресурс/сайт',
+            'lang_key' => 'unavailable_resource',
+        ),
+        7 => array(
+            0 => 'Проблемы с ПО',
+            'lang_key' => 'soft_problem',
+        ),
+        8 => array(
+            0 => 'Организационные вопросы',
+            'lang_key' => 'organizational_issues',
+        ),
+    ),
+    'net_connection_type' => array(
+        1 => array(
+            0 => 'Напрямую, через комрьютер',
+            'lang_key' => 'thru_comp',
+        ),
+        2 => array(
+            0 => 'Через роутер, по Wi-Fi',
+            'lang_key' => 'thru_router',
+        ),
+        3 => array(
+            0 => 'Через роутер, по кабелю',
+            'lang_key' => 'cable_thru_router',
+        ),
+    ),
+    'short_answer' => array(
+        1 => array(
+            0 => 'Да',
+            'lang_key' => 'yes',
+        ),
+        -1 => array(
+            0 => 'Да',
+            'lang_key' => 'no',
+        ),
+        0 => array(
+            0 => 'Нет данных',
+            'lang_key' => 'unknown',
+        ),
+    ),
+    'user_speed' =>array(
+        1 => array(
+            0 => 'до 10 Мбит/с (1-2 Мбайт/с)',
+            'lang_key' => '10_mb',
+        ),
+        2 => array(
+            0 => 'c 10 до 50 Мбит/с (2-4 Мбайт/с)',
+            'lang_key' => '50_mb',
+        ),
+        3 => array(
+            0 => 'с 50 до 80 Мбит/с (4-8 Мбайт/с)',
+            'lang_key' => '80_mb',
+        ),
+        4 => array(
+            0 => 'выше 100 Мбит/с (10-15 Мбайт/с)',
+            'lang_key' => '100_mb',
+        ),
+    ),
     'alfa_skin_default' => 2,
 
     'sms_send_conf' => array(
         'transliteration' =>1, //транслитерация sms - 1 - да, 0 - нет
-        'verification_cod_length' => 8,//количество символов в коде подтверждения отправляемого пользователю (при изменении контактов)
+        'verification_cod_length' => 4,//количество символов в коде подтверждения отправляемого пользователю (при изменении контактов)
         'verification_cod_num' =>1, // использовать цифры для формирования кода подтверждения отпрвляемого пользователю, 1- использовать, 0 - не использовать
         'verification_cod_down_chars' =>0, //использовать буквы нижнего регистра для формирования кода подтверждения, 1- использовать, 0 - не использовать
         'verification_cod_up_chars' =>0, //использовать буквы верхнего регистра для формирования кода подтверждения, 1- использовать, 0 - не использовать
     ),
     'email_send_conf' => array(
-        'transliteration' =>1, //транслитерация текста - 1 - да, 0 - нет
-        'verification_cod_length' => 10,//количество символов в коде подтверждения отправляемого пользователю (при изменении контактов)
+        'transliteration' =>0, //транслитерация текста - 1 - да, 0 - нет
+        'verification_cod_length' => 8,//количество символов в коде подтверждения отправляемого пользователю (при изменении контактов)
         'verification_cod_num' =>1, // использовать цифры для формирования кода подтверждения отпрвляемого пользователю, 1- использовать, 0 - не использовать
         'verification_cod_down_chars' =>1, //использовать буквы нижнего регистра для формирования кода подтверждения, 1- использовать, 0 - не использовать
         'verification_cod_up_chars' =>1, //использовать буквы верхнего регистра для формирования кода подтверждения, 1- использовать, 0 - не использовать

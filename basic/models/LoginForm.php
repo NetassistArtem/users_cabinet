@@ -51,7 +51,18 @@ class LoginForm extends Model
            if (!$this->hasErrors()) {
             $user = $this->getUser();
 
-            if (!$user || !$user->validatePassword($this->password)) {
+               $host = Yii::$app->params['domains'][$_SERVER['SERVER_NAME']];
+
+               $user_org_id_check = 0;
+               if($host == 'kuzia' && $user->orgId == 7){
+                   $user_org_id_check = 1;
+               }elseif($host == 'alfa' && $user->orgId == 0){
+                   $user_org_id_check = 1;
+               }else{
+                   $user_org_id_check = 0;
+               }
+
+            if (!$user || !$user_org_id_check || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Incorrect username or password.');
             }
         }
@@ -79,6 +90,8 @@ class LoginForm extends Model
         if ($this->_user === false) {
             $this->_user = User::findByUsername($this->username);
         }
+
+
 
         return $this->_user;
     }

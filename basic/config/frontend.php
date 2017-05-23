@@ -74,6 +74,11 @@ $config = [
                     //'defaults' => ['page' => 1, 'tag' => ''],
                 ],
                 [
+                    'pattern' => 'error',
+                    'route' => 'site/error',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
                     'pattern' => 'about',
                     'route' => 'site/about',
                     //'defaults' => ['page' => 1, 'tag' => ''],
@@ -212,6 +217,11 @@ $config = [
                 [
                     'pattern' => 'arhiv-novostei/reade/<news-id:([0-9]){1,7}>',
                     'route' => 'static-page/arhiv-news-node-reade',
+
+                ],
+                [
+                    'pattern' => 'tehnicheskaya-podderzhka/details',
+                    'route' => 'static-page/support-details',
 
                 ],
 

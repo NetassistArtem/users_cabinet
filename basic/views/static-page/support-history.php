@@ -21,13 +21,13 @@ $this->title = Yii::t('support_history','support_history');
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr class="title_text">
                 <td>№</td>
                 <td>TODO id</td>
                 <td><?= Yii::t('support_history','status') ?></td>
                 <td><?= Yii::t('support_history','initialization_time') ?></td>
                 <td><?= Yii::t('support_history','end_time') ?></td>
-                <td><?= Yii::t('support_history','executor') ?></td>
+
                 <td><?= Yii::t('support_history','subject') ?></td>
             </tr>
 
@@ -41,7 +41,7 @@ $this->title = Yii::t('support_history','support_history');
                     <td><?= $v['todo_state'] ?></td>
                     <td><?= $v['todo_init_time'] ?></td>
                     <td><?= $v['todo_end_time'] ?></td>
-                    <td><?= $v['todo_admin_id'] ?></td>
+
                     <td><?= $v['todo_subj'] ?></td>
 
                 </tr>

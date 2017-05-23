@@ -48,7 +48,7 @@ class EmailAddForm extends Model
         if ($this->validate()) {
 
             $this->addNewEmail();
-            //Yii::$app->session->setFlash('phoneFirstChanged', ['value' => Yii::t('flash-message', 'contact_details_updated')]);
+           // Yii::$app->session->setFlash('phoneFirstChanged', ['value' => Yii::t('flash-message', 'contact_details_updated')]);
             //$this->insertNewPhone1();
             return true;
         } else {
@@ -90,17 +90,26 @@ class EmailAddForm extends Model
                 Yii::$app->params['email_send_conf']['verification_cod_down_chars'],
                 Yii::$app->params['email_send_conf']['verification_cod_up_chars']
             );
-            // Debugger::Eho($normal_phone);
+        $subject = Yii::t('sms_messages', 'subject');
+        global $_admin_mail;
+        $from_mail = $_admin_mail;
+        $server_name = Yii::$app->params['server_name'];
+        $domains_key = Yii::$app->params['domains'][$server_name];
+        $from_user = Yii::t('site','admin') . Yii::t('site', Yii::$app->params['sites_data'][$domains_key]['company_name']['lang_key']);
+
+        // Debugger::Eho($normal_phone);
             // Debugger::Eho('</br>');
             // Debugger::Eho($full_sms_text);
             // Debugger::Eho('</br>');
             // Debugger::Eho($org_id);
             // Debugger::Eho('</br>');
             // Debugger::Eho($acc_id);
-            // Debugger::testDie();
+       // Debugger::EhoBr($full_email_text);
+
 
             // turbosms_send($normal_phone, $full_sms_text, $org_id, 0, $acc_id); //Открпвка смс, функция биллинга
-
+        my_mail( $email, iconv_safe('utf-8','koi8-u',$full_email_text), iconv_safe('utf-8','koi8-u',$subject), $from_mail, $from_user);
+      //  Debugger::testDie();
     }
 
 }

@@ -20,7 +20,7 @@ switch ($path[1]) {
 }
 
 require(__DIR__ . '/../components/billing_api/_.php');
-
+require_once(__DIR__ . '/../components/billing_api/additional_api_functions.php');
 require_once(__DIR__ . '/../components/billing_api/inc/common.todo_list.inc.php');
 require_once(s_path("turbosms.php"));
 require_once(s_path("common.asterisk.php"));

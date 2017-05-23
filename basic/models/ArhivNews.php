@@ -34,7 +34,8 @@ class ArhivNews extends Model
 
 
             foreach ($log_message as $k => $v) {
-                if ($v[USER_MSG_LOG_REF_MSG_ID_IDX] || $v[USER_MSG_LOG_TXT_IDX]) {
+
+                if (($v[USER_MSG_LOG_REF_MSG_ID_IDX] && $v[USER_MSG_LOG_REF_MSG_ID_IDX] !==0) || $v[USER_MSG_LOG_TXT_IDX]) {
                     $message_data_array[$k]['date'] = date("d.m.Y", strtotime(ptimestamp_to_str($v[USER_MSG_LOG_PTS_IDX], $sep = " ", $dsep = "-", $isep = ":")));
                     // $message_data_array[$k]['date_fore_url'] = date("Y-m-d-h-i-s", strtotime(ptimestamp_to_str($v[USER_MSG_LOG_PTS_IDX], $sep = " ", $dsep = "-", $isep = ":")));
                     $message_data_array[$k]['id'] = $v[USER_MSG_LOG_REC_ID_IDX];
@@ -61,7 +62,7 @@ class ArhivNews extends Model
             }
         }
 
-        // Debugger::PrintR($log_message);
+         //Debugger::PrintR($log_message);
         //  Debugger::PrintR($message_data_array);
         //  Debugger::EhoBr($test2);
         //  Debugger::VarDamp($test2);

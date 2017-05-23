@@ -87,9 +87,9 @@ $this->title = Yii::t('feedback', 'feedback');
                 <?= $form_feedback->field($modelFeedback, 'sv_list')->hiddenInput(['value' => '@support-lan,@duty'])->label(false); ?>
                 <?= $form_feedback->field($modelFeedback, 'rsp_admin_id')->hiddenInput(['value' => 0, 'class' => 'hiden-fields'])->label(false); ?>
                 <?= $form_feedback->field($modelFeedback, 'severity')->hiddenInput(['value' => 1])->label(false); ?>
-                <?= $form_feedback->field($modelFeedback, 'subj')->hiddenInput(['value' => 'В техподдержку - user ' . $user_data['username'] . ' , ' . $user_data['address']])->label(false); ?>
+                <?= $form_feedback->field($modelFeedback, 'subj')->hiddenInput(['value' => 'Отзыв - ' . $user_data['username'] . ' , ' . $user_data['address']])->label(false); ?>
                 <?= $form_feedback->field($modelFeedback, 'user_net_id')->hiddenInput(['value' => $user_data['net_id']])->label(false); ?>
-                <?= $form_feedback->field($modelFeedback, 'todo_type')->hiddenInput(['value' => 12])->label(false); ?>
+                <?= $form_feedback->field($modelFeedback, 'todo_type')->hiddenInput(['value' => 3])->label(false); ?>
                 <?= $form_feedback->field($modelFeedback, 'ref_acc_id')->hiddenInput(['value' => $user_data['account_id']])->label(false); ?>
                 <?= $form_feedback->field($modelFeedback, 'orig_ref_acc_id')->hiddenInput(['value' => ''])->label(false); ?>
                 <?= $form_feedback->field($modelFeedback, 'orig_todo_state')->hiddenInput(['value' => ''])->label(false); ?>

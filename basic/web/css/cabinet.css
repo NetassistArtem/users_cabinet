@@ -29,6 +29,7 @@ body {
     padding-top: 0;
     background: url(images/bg_body.gif) repeat top left;
     min-height: 100%;
+   
 
 
 
@@ -103,6 +104,11 @@ div.title_custom > h1 {
 i.message_main_text{
     font-size: 18px;
     font-weight: bold;
+}
+
+.title_support_details{
+    text-align: center;
+    font-size: 18px;
 }
 
 
