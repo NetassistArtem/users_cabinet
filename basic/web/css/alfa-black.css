@@ -256,8 +256,12 @@ div.navbar-header > a.navbar-brand {
 
 /* форма регистрации */
 
-button.btn-submit-custom{
+button.btn-submit-custom, a.btn-submit-custom{
     border-radius: 0;
+}
+a.btn-submit-custom {
+    color: white;
+    margin-top: 20px;
 }
 
 input.form-control, select.form-control{
@@ -276,6 +280,7 @@ textarea.form-control{
 .login-title-position{
     margin-top: 50px;
     margin-bottom: 50px;
+
 }
 
 /* Сайтбар*/

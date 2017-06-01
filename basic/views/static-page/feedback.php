@@ -29,10 +29,7 @@ $this->title = Yii::t('feedback', 'feedback');
 
                     $this->registerJs('$("#modal").modal("show");');
                     echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_1.php', ['flash_message' => $flash_message]);
-                    $this->registerJsFile(
-                        'scripts/message.js',
-                        ['depends' => 'app\assets\AppAsset']
-                    );
+
 
                 endif;
                 ?>

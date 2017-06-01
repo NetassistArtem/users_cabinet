@@ -101,12 +101,16 @@ class MessageTypeChangeForm extends Model
 
             }
         }
-global $request_vars;
-      //  $request_vars = $_POST;
 
-       // Debugger::PrintR($request_vars);
+        $request_vars = $_POST;
+       // Debugger::PrintR($_POST);
+
+        //Debugger::PrintR($request_vars);
+
        $sm_flags = get_sm_options($request_vars, $input_name="sm_flag");
 
+      //  Debugger::EhoBr($sm_flags);
+        //Debugger::testDie();
         apply_sm_flags($user_data['account_id'], $sm_flags);
 
         Yii::$app->session->set('selected_options',$selected_array );

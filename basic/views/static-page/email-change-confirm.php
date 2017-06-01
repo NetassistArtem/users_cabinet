@@ -12,6 +12,9 @@ $styles =  Yii::$app->params['domains'][$server_name];
 $this->title = Yii::t('contacts-change-confirm', 'confirm_contact_info');
 
 
+
+
+
 ?>
 <div class="site-about">
 
@@ -56,6 +59,12 @@ $this->title = Yii::t('contacts-change-confirm', 'confirm_contact_info');
 
             <?php
 
+
+
+
+
+
+
             if (Yii::$app->session->has('new_user_phone_or_email') && !empty(Yii::$app->session->get('new_user_phone_or_email')) && Yii::$app->session->has('confirmcode')):
 
 
@@ -80,7 +89,7 @@ $this->title = Yii::t('contacts-change-confirm', 'confirm_contact_info');
                 </div>
                 <?php endif; ?>
 
-<?php Debugger::PrintR($_SESSION);
+<?php
 
                 echo '</br>';
                 echo '</br>';

@@ -131,26 +131,6 @@ switch ($styles) {
         $asset = 'app\assets\AppAsset';
 }
 
-// папап подтверждений
-
-$this->registerJsFile(
-    'scripts/index.js',
-    ['depends' => $asset]
-);
-
-$this->registerJsFile(
-    'scripts/insert.js',
-    ['depends' => $asset]
-);
-//подтверждение изменения пароля перед сохранением
-$this->registerJsFile(
-    'scripts/password_change_confirm.js',
-    ['depends' => $asset]
-);
-$this->registerJsFile(
-    'scripts/phone_delete_confirm.js',
-    ['depends' => $asset]
-);
 
 
 //echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_2.php');
@@ -164,7 +144,9 @@ $this->registerJsFile(
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <link rel="shortcut icon" href="<?php echo Yii::$app->request->baseUrl; ?>/<?= Yii::$app->params['sites_data'][$styles]['ico']?>" type="image/x-icon"/>
+    <link rel="shortcut icon"
+          href="<?php echo Yii::$app->request->baseUrl; ?>/<?= Yii::$app->params['sites_data'][$styles]['ico'] ?>"
+          type="image/x-icon"/>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
@@ -214,16 +196,55 @@ $this->registerJsFile(
     ]);
     NavBar::end();
     ?>
+    <!-- подключение скриптов именно после NavBar так как надо чтоб эти скритпы подключились после скриптов бустстрапа -->
+    <?php
+
+
+
+
+    // папап подтверждений
+
+    $this->registerJsFile(
+        'scripts/index.js',
+        ['depends' => $asset]
+    );
+
+    $this->registerJsFile(
+        'scripts/insert.js',
+        ['depends' => $asset]
+    );
+    //подтверждение изменения пароля перед сохранением
+    $this->registerJsFile(
+        'scripts/password_change_confirm.js',
+        ['depends' => $asset]
+    );
+    $this->registerJsFile(
+        'scripts/phone_delete_confirm.js',
+        ['depends' => $asset]
+    );
+    if(Yii::$app->session->hasFlash('servicesChangedPause')){
+        $this->registerJsFile(
+            'scripts/message_with_redirect_2.js',
+            ['depends' => $asset]
+        );
+    }else{
+        $this->registerJsFile(
+            'scripts/message.js',
+            ['depends' => $asset]
+        );
+    }
+
+    ?>
 
     <div class="container">
         <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
 
 
         <?php
-        if (!Yii::$app->user->isGuest):
-            ?>
+    if (!Yii::$app->user->isGuest):
+        ?>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 account-data-block">
                     <p><?= $user_data['fio'] ?></p>
@@ -257,12 +278,12 @@ $this->registerJsFile(
                                 <div>
                                     <h4><?= Yii::t('top_info_block', 'services') ?></h4>
                                     <?php if (count($user_data['services']) <= 2):
-                                        foreach ($user_data['services'] as $k => $v):
-                                            ?>
+        foreach ($user_data['services'] as $k => $v):
+            ?>
                                             <p><?= $v ?></p>
                                             <?php
-                                        endforeach;
-                                    else:?>
+        endforeach;
+    else:?>
                                         <p><?= $user_data['services'][0] ?></p>
                                         <p><?= Yii::t('top_info_block', 'other_services') ?></p>
                                     <?php endif; ?>
@@ -274,12 +295,12 @@ $this->registerJsFile(
                                 <div>
                                     <h4><?= Yii::t('top_info_block', 'active') ?></h4>
                                     <?php if (count($user_data['services_date']) <= 2):
-                                        foreach ($user_data['services_date'] as $k => $v):
-                                            ?>
+        foreach ($user_data['services_date'] as $k => $v):
+            ?>
                                             <p><?= $v ?></p>
                                             <?php
-                                        endforeach;
-                                    else:?>
+        endforeach;
+    else:?>
                                         <p><?= $user_data['services_date'][0] ?></p>
                                     <?php endif; ?>
 
@@ -376,31 +397,31 @@ $this->registerJsFile(
 
                     <?php
 
-                    echo Nav::widget([
-                        'options' => ['class' => 'nav nav-pills nav-stacked'],
-                        'items' => [
+        echo Nav::widget([
+            'options' => ['class' => 'nav nav-pills nav-stacked'],
+            'items' => [
 
-                            ['label' => Yii::t('sidebar_menu', 'total_data'), 'url' => ['/cabinet'], 'active' => (Yii::$app->request->url == "/$lang/cabinet" || Yii::$app->request->url == "/cabinet")],
-                            ['label' => Yii::t('sidebar_menu', 'account_manager'), 'url' => ['/upravlenie-kabinetom'], 'active' => (Yii::$app->request->url == "/$lang/upravlenie-kabinetom" || Yii::$app->request->url == "/upravlenie-kabinetom")],
-                            ['label' => Yii::t('sidebar_menu', 'payment'), 'url' => ['/oplata-uslug'], 'active' => (Yii::$app->request->url == "/$lang/oplata-uslug" || Yii::$app->request->url == "/oplata-uslug")],
-                            ['label' => Yii::t('sidebar_menu', 'payment_history'), 'url' => ['/istoriya-platezhey'], 'active' => (Yii::$app->request->url == "/$lang/istoriya-platezhey" || Yii::$app->request->url == "/istoriya-platezhey")],
-                            ['label' => Yii::t('sidebar_menu', 'technical_support'), 'url' => ['/tehnicheskaya-podderzhka'], 'active' => (Yii::$app->request->url == "/$lang/tehnicheskaya-podderzhka" || Yii::$app->request->url == "/tehnicheskaya-podderzhka")],
-                            ['label' => Yii::t('sidebar_menu', 'support_history'), 'url' => ['/istoriya-obrascheniy'], 'active' => (Yii::$app->request->url == "/$lang/istoriya-obrascheniy" || Yii::$app->request->url == "/$lang/istoriya-obrascheniy/*" || Yii::$app->request->url == "/istoriya-obrascheniy" || Yii::$app->request->url == "/istoriya-obrascheniy/*")],
-                            ['label' => Yii::t('sidebar_menu', 'feedback'), 'url' => ['/ostavit-otzyiv'], 'active' => (Yii::$app->request->url == "/$lang/ostavit-otzyiv" || Yii::$app->request->url == "/ostavit-otzyiv")],
-                            ['label' => Yii::t('sidebar_menu', 'tv'), 'url' => ['/televidenie'], 'active' => (Yii::$app->request->url == "/$lang/televidenie" || Yii::$app->request->url == "/televidenie")],
-                            ['label' => Yii::t('sidebar_menu', 'news_arhiv'), 'url' => ['/arhiv-novostei'], 'active' => (Yii::$app->request->url == "/$lang/arhiv-novostei" || Yii::$app->request->url == "/arhiv-novastei")],
-                        ],
-                    ]);
+                ['label' => Yii::t('sidebar_menu', 'total_data'), 'url' => ['/cabinet'], 'active' => (Yii::$app->request->url == "/$lang/cabinet" || Yii::$app->request->url == "/cabinet")],
+                ['label' => Yii::t('sidebar_menu', 'account_manager'), 'url' => ['/upravlenie-kabinetom'], 'active' => (Yii::$app->request->url == "/$lang/upravlenie-kabinetom" || Yii::$app->request->url == "/upravlenie-kabinetom")],
+                ['label' => Yii::t('sidebar_menu', 'payment'), 'url' => ['/oplata-uslug'], 'active' => (Yii::$app->request->url == "/$lang/oplata-uslug" || Yii::$app->request->url == "/oplata-uslug")],
+                ['label' => Yii::t('sidebar_menu', 'payment_history'), 'url' => ['/istoriya-platezhey'], 'active' => (Yii::$app->request->url == "/$lang/istoriya-platezhey" || Yii::$app->request->url == "/istoriya-platezhey")],
+                ['label' => Yii::t('sidebar_menu', 'technical_support'), 'url' => ['/tehnicheskaya-podderzhka'], 'active' => (Yii::$app->request->url == "/$lang/tehnicheskaya-podderzhka" || Yii::$app->request->url == "/tehnicheskaya-podderzhka")],
+                ['label' => Yii::t('sidebar_menu', 'support_history'), 'url' => ['/istoriya-obrascheniy'], 'active' => (Yii::$app->request->url == "/$lang/istoriya-obrascheniy" || Yii::$app->request->url == "/$lang/istoriya-obrascheniy/*" || Yii::$app->request->url == "/istoriya-obrascheniy" || Yii::$app->request->url == "/istoriya-obrascheniy/*")],
+                ['label' => Yii::t('sidebar_menu', 'feedback'), 'url' => ['/ostavit-otzyiv'], 'active' => (Yii::$app->request->url == "/$lang/ostavit-otzyiv" || Yii::$app->request->url == "/ostavit-otzyiv")],
+                ['label' => Yii::t('sidebar_menu', 'tv'), 'url' => ['/televidenie'], 'active' => (Yii::$app->request->url == "/$lang/televidenie" || Yii::$app->request->url == "/televidenie")],
+                ['label' => Yii::t('sidebar_menu', 'news_arhiv'), 'url' => ['/arhiv-novostei'], 'active' => (Yii::$app->request->url == "/$lang/arhiv-novostei" || Yii::$app->request->url == "/arhiv-novastei")],
+            ],
+        ]);
 
-                    ?>
+        ?>
 
                 </div>
             </div>
 
         <?php else:
-            echo $content;
-        endif;
-        ?>
+        echo $content;
+    endif;
+    ?>
 
     </div>
 </div>
@@ -414,6 +435,10 @@ $this->registerJsFile(
 </footer>
 
 <?php $this->endBody() ?>
+
+
+
+
 </body>
 </html>
 <?php $this->endPage() ?>

@@ -78,7 +78,7 @@ $this->title = Yii::t('bank', 'bank_title');
         <div class="panel-body">
 
 
-            <?php echo '';//Pjax::begin(['id' => 'rtf_print']); ?>
+
 
             <?php $rtf_print = ActiveForm::begin([
                 'id' => 'rtfPrintForm',

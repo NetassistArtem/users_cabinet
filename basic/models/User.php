@@ -136,12 +136,12 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         $sm_flags = get_acc_options($user_data_by_billing[UINFO_ACC_ID_IDX], -1); //функции api биллинга
 
 
-        //Debugger::PrintR($sm_flags);
+      //  Debugger::PrintR($sm_flags);
 
 
         $sms_mail_flags_arr = print_sm_options($sm_flags[4], "sm_flag", SM_FLAGS_CTL_ARR); //функции api биллинга
 
-        // Debugger::PrintR($sms_mail_flags_arr);
+      //   Debugger::PrintR($sms_mail_flags_arr);
 
         $array_sms_mail = array_chunk($sms_mail_flags_arr, 5);
 

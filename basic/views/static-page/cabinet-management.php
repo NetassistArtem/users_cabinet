@@ -7,12 +7,9 @@ use yii\bootstrap\ActiveForm;
 use yii\widgets\Pjax;
 use app\components\debugger\Debugger;
 use \yii\widgets\MaskedInput;
-use app\assets\AppAsset;
-use app\assets\AlfaBlackAsset;
-use app\assets\AlfaBlackCrtAsset;
-use app\assets\AlfaGrayAsset;
-use app\assets\AlfaWhiteAsset;
-use app\assets\KuziaAsset;
+
+
+
 
 $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
 
@@ -36,10 +33,7 @@ $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
 
             // $this->registerJs('$("#modal").modal("show");');
             echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_1.php', ['flash_message' => $flash_message]);
-            $this->registerJsFile(
-                'scripts/message.js',
-                ['depends' => 'app\assets\AppAsset']
-            );
+
         endif;
         ?>
 
@@ -57,13 +51,11 @@ $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
 
                 <?php
                 $flash_message = Yii::$app->session->getFlash('passwordChanged')['value'];
+
                 if (isset($flash_message)):
                     //$this->registerJs('$("#modal").modal("show");');
+                  //  Debugger::EhoBr($flash_message);
 
-                    $this->registerJsFile(
-                        'scripts/message.js',
-                        ['depends' => 'app\assets\AppAsset']
-                    );
 
                     echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_1.php', ['flash_message' => $flash_message]);
                 endif;
@@ -77,7 +69,7 @@ $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
 
             <?php $form_password_change = ActiveForm::begin([
                 'id' => 'passwordChangeForm',
-                'options' => ['data-pjax' => true],
+                'options' => ['data-pjax' => false],
                 'layout' => 'horizontal',
                 'fieldConfig' => [
                     'template' => "{label}\n<div class=\"col-lg-4 col-md-4 col-sm-4\">{input}</div>\n<div class=\"col-lg-4 col-md-4 col-sm-4\">{error}</div>",
@@ -290,10 +282,7 @@ $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
 
                     // $this->registerJs('$("#modal").modal("show");');
                     echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_1.php', ['flash_message' => $flash_message]);
-                    $this->registerJsFile(
-                        'scripts/message.js',
-                        ['depends' => 'app\assets\AppAsset']
-                    );
+
                 endif;
                 ?>
 
@@ -364,17 +353,14 @@ $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
                 <div>
 
                     <?php
-                    $flash_message = Yii::$app->session->getFlash('servicesChangedPause')['value'];
+                    $flash_message_2 = Yii::$app->session->getFlash('servicesChangedPause')['value'];
 
-                    if (isset($flash_message)):
+                    if (isset($flash_message_2)):
 
 
                         // $this->registerJs('$("#modal").modal("show");');
                         echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_1.php', ['flash_message' => $flash_message]);
-                        $this->registerJsFile(
-                            'scripts/message_with_redirect_2.js',
-                            ['depends' => 'app\assets\AppAsset']
-                        );
+
                     endif;
                     ?>
 
@@ -427,17 +413,14 @@ $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
                 <div>
 
                     <?php
-                    $flash_message = Yii::$app->session->getFlash('servicesChangedPause')['value'];
+                    $flash_message_2 = Yii::$app->session->getFlash('servicesChangedPause')['value'];
 
-                    if (isset($flash_message)):
+                    if (isset($flash_message_2)):
 
 
                         // $this->registerJs('$("#modal").modal("show");');
                         echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_1.php', ['flash_message' => $flash_message]);
-                        $this->registerJsFile(
-                            'scripts/message_with_redirect_2.js',
-                            ['depends' => 'app\assets\AppAsset']
-                        );
+
                     endif;
                     ?>
 
@@ -514,10 +497,7 @@ $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
 
                         // $this->registerJs('$("#modal").modal("show");');
                         echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_1.php', ['flash_message' => $flash_message]);
-                        $this->registerJsFile(
-                            'scripts/message.js',
-                            ['depends' => 'app\assets\AppAsset']
-                        );
+
                     endif;
                     ?>
 
@@ -570,3 +550,9 @@ $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
 
 
 </div>
+
+
+
+
+
+

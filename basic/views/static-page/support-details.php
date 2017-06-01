@@ -31,10 +31,7 @@ $this->title = Yii::t('support', 'technical_support');
                 if (isset($flash_message)):
                     $this->registerJs('$("#modal").modal("show");');
                     echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_1.php', ['flash_message' => $flash_message]);
-                    $this->registerJsFile(
-                        'scripts/message.js',
-                        ['depends' => 'app\assets\AppAsset']
-                    );
+
 
                 endif;
                 ?>

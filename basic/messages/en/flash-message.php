@@ -39,4 +39,15 @@ return [
     'new_skin_saved' => 'Custom style changed.',
     'new_skin_not_saved' => 'New user style failed to save.',
 
+    'password_changed' => 'A new password has been created.',
+    'not_change_password' => ' Failed to create new password',
+    'new_password_send_by_email' => 'A new password was sent to the e-mail.',
+    'new_password_send_by_sms' => 'You have been sent an SMS message with a new password.',
+    'try_other_email_phone' =>'Try another phone number or e-mail address',
+    'old_data_get_new_data' => 'The requested contact information has expired (have been removed). Enter other data.',
+    'user_with_this_contact_absent' =>'The user with the requested contact is not in the database. Enter other data.',
+    'send_code_by_email' => 'A confirmation code has been sent to your e-mail.',
+    'send_code_by_phone' => 'On this phone number has been sent SMS message with a confirmation code.',
+
+
 ];

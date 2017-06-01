@@ -54,12 +54,12 @@ class PhoneFirstChangeForm extends Model
                 $phone_del = $this->deletePhone1();
                 if ($phone_del) {
                     if ($phone_del === 2) {
-                        event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Error delete user contact (phone number)');//функция биллинга записывает инфу в лог
+                      //  event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Error delete user contact (phone number)');//функция биллинга записывает инфу в лог
                         Yii::$app->session->setFlash('phoneNotDelete', ['value' => Yii::t('flash-message', 'phone_not_delete')]);
                         return 3;
                     }
 
-                    event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Delete user contact (phone number)');//функция биллинга записывает инфу в лог
+                   // event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Delete user contact (phone number)');//функция биллинга записывает инфу в лог
                     Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'phone_1_delete')]);
                     return 2;
                 }
@@ -74,7 +74,7 @@ class PhoneFirstChangeForm extends Model
             //$this->insertNewPhone1();
             return true;
         } else {
-            event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Error change user contact (phone number)');//функция биллинга записывает инфу в лог
+           // event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Error change user contact (phone number)');//функция биллинга записывает инфу в лог
             Yii::$app->session->setFlash('phoneFirstChanged', ['value' => Yii::t('flash-message', 'unable_change_contact')]);
             return false;
         }
@@ -104,7 +104,7 @@ class PhoneFirstChangeForm extends Model
 
         del_restore_contact($user_contact_info[0][CONTACTS_RECORD_ID_IDX], 1);
 
-        event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'], -1, -1, -1);//функция биллинга записывает инфу в лог
+       // event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'], -1, -1, -1);//функция биллинга записывает инфу в лог
 
         $user_contact_info_all = get_user_contacts('', -1, -1, Yii::$app->user->id, -1, -1, -1, -1, "", -1, "", 0, PRINT_CONTACTS_GET_LIST_EX); //функция апи биллинга
 

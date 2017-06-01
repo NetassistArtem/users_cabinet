@@ -1,6 +1,4 @@
 <?php
-
-
 namespace app\models;
 
 use yii\base\Model;
@@ -10,19 +8,13 @@ use app\components\sms_handler\UserSms;
 use app\components\user_contacts_update\UserContactsUpdate;
 
 
-class PhoneFirstChangeConfirmForm extends Model
+class RenewPasswordConfirmForm extends Model
 {
 
     public $confirmcode;
-    public $normal_phone;
-    public $user_data;
+    public $user_name;
+    public $new_password;
 
-    public function __construct($config = [])
-    {
-        $this->normal_phone = Yii::$app->session->get('normal_phone');
-        $this->user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
-        parent::__construct($config);
-    }
 
 
     /**
@@ -38,7 +30,7 @@ class PhoneFirstChangeConfirmForm extends Model
         ];
     }
 
-    public function setConfirmCode()
+    public function setConfirmCode($contact_type, $contact_value)
     {
 
 
@@ -52,8 +44,8 @@ class PhoneFirstChangeConfirmForm extends Model
 
             if ($confirm) {
 
-               // Debugger::VarDamp($confirm);
-               // Debugger::testDie();
+                // Debugger::VarDamp($confirm);
+                // Debugger::testDie();
 
                 if ($confirm === 2) {
 
@@ -63,18 +55,41 @@ class PhoneFirstChangeConfirmForm extends Model
                     return 2;
                 }
 
+                $code_creator= new UserSms();
+                $new_password = $code_creator->codeCreate(
+                    Yii::$app->params['renew_password']['verification_cod_length'],
+                    Yii::$app->params['renew_password']['verification_cod_num'],
+                    Yii::$app->params['renew_password']['verification_cod_down_chars'],
+                    Yii::$app->params['renew_password']['verification_cod_up_chars']
+                );
+
+                $user_name = Yii::$app->session->get('username_password_renew');
+
+                $password_change = upd_htpwd($user_name, $new_password ,OPT_PWD_DB | OPT_PWD_VALIDATE );
+
+                if($password_change === 0){
+
+                        $this->sendNewPasswordMessage($contact_type, $contact_value,$user_name,$new_password);
+
+                }else{
+                    Yii::$app->session->setFlash('renewPassword', ['value' => Yii::t('flash-message', 'not_change_password')]);
+                }
+
+
+
+
                 //Debugger::PrintR($_SESSION);
-               // Debugger::Eho(Yii::$app->session->get('normal_phone'));
+                // Debugger::Eho(Yii::$app->session->get('normal_phone'));
 
-
+/**
                 $user_phone_new = (int)$this->normal_phone;
 
                 //Debugger::Eho($user_phone_new);
-              //  Debugger::Eho($user_phone_new);
-              //  Debugger::testDie();
+                //  Debugger::Eho($user_phone_new);
+                //  Debugger::testDie();
                 //  Debugger::Eho(Yii::$app->session->get('normal_phone'));
                 //Debugger::Eho('test');
-             //
+                //
 
                 if(!Yii::$app->session->get('add')){
                     $user_phone_old = Yii::$app->session->get('phone_to_change');
@@ -86,7 +101,7 @@ class PhoneFirstChangeConfirmForm extends Model
                 }else{
                     $user_contact_info = get_user_contacts('', -1, -1, Yii::$app->user->id, -1, -1, -1, -1, "", -1, "", 0, PRINT_CONTACTS_GET_LIST_EX);  //получить массив контактов ($contact_info)
                 }
-              //  Debugger::PrintR($user_contact_info);
+                //  Debugger::PrintR($user_contact_info);
 
 
                 update_user_contacts($user_phone_new,  //функция апи биллинга, добавляет контакт пользователя (но не добавляет в поле user_phone)
@@ -116,8 +131,8 @@ class PhoneFirstChangeConfirmForm extends Model
                 $phones_active = array_unique($phones_active);
                 //  Debugger::PrintR($phones_active);
 
-              //  Debugger::PrintR($this->user_data);
-              //  Debugger::testDie();
+                //  Debugger::PrintR($this->user_data);
+                //  Debugger::testDie();
                 global $acc_db;
                 global $acc_db_host;
                 global $acc_db_user;
@@ -134,22 +149,26 @@ class PhoneFirstChangeConfirmForm extends Model
 
                 // del_restore_contact($contact_id, 1); //функция биллинка - включает для сохраненного телефона пометку - ДОСТУПЕН
                 //  Debugger::testDie();
+
                 $update_phone_fields->updatePhoneFields($acc_db_host,$acc_db,$acc_db_user,$acc_db_pwd);
-               // $new_phones = $update_phone_fields->getNewContacts();
+
+                **/
+
+                // $new_phones = $update_phone_fields->getNewContacts();
 
 
-               // $_SESSION[Yii::$app->user->id]['phone_1'] = $new_phones['user_phone'];
-              //  $_SESSION[Yii::$app->user->id]['phone_2'] = $new_phones['user_phone2'];
-              //  $_SESSION[Yii::$app->user->id]['phone_1_array'] = $new_phones['phone_1_array'];
-              //  $_SESSION[Yii::$app->user->id]['phone_2_array'] = $new_phones['phone_2_array'];
-              //  $_SESSION[Yii::$app->user->id]['phone_all_array'] = $new_phones['phone_all_array'];
+                // $_SESSION[Yii::$app->user->id]['phone_1'] = $new_phones['user_phone'];
+                //  $_SESSION[Yii::$app->user->id]['phone_2'] = $new_phones['user_phone2'];
+                //  $_SESSION[Yii::$app->user->id]['phone_1_array'] = $new_phones['phone_1_array'];
+                //  $_SESSION[Yii::$app->user->id]['phone_2_array'] = $new_phones['phone_2_array'];
+                //  $_SESSION[Yii::$app->user->id]['phone_all_array'] = $new_phones['phone_all_array'];
 
 
-            //    Yii::$app->session->set([Yii::$app->user->id]['phone_1'],$new_phones['user_phone']);
-              //  Yii::$app->session->set([Yii::$app->user->id]['phone_2'],$new_phones['user_phone2']);
-               // Yii::$app->session->set([Yii::$app->user->id]['phone_1_array'],$new_phones['phone_1_array']);
-               // Yii::$app->session->set([Yii::$app->user->id]['phone_2_array'],$new_phones['phone_2_array']);
-               // Yii::$app->session->set([Yii::$app->user->id]['phone_all_array'],$new_phones['phone_all_array']);
+                //    Yii::$app->session->set([Yii::$app->user->id]['phone_1'],$new_phones['user_phone']);
+                //  Yii::$app->session->set([Yii::$app->user->id]['phone_2'],$new_phones['user_phone2']);
+                // Yii::$app->session->set([Yii::$app->user->id]['phone_1_array'],$new_phones['phone_1_array']);
+                // Yii::$app->session->set([Yii::$app->user->id]['phone_2_array'],$new_phones['phone_2_array']);
+                // Yii::$app->session->set([Yii::$app->user->id]['phone_all_array'],$new_phones['phone_all_array']);
 
 
 
@@ -175,12 +194,29 @@ class PhoneFirstChangeConfirmForm extends Model
 
 
         if (UserSms::checkCode($this->confirmcode)) {
+            if (Yii::$app->session->has('confirmcode')) {
+
+                Yii::$app->session->remove('confirmcode');
+            }
+            if (Yii::$app->session->has('renew_password_phone')) {
+
+                Yii::$app->session->remove('renew_password_phone');
+            }
+            if (Yii::$app->session->has('renew_password_email')) {
+
+                Yii::$app->session->remove('renew_password_email');
+            }
 
             return true;
         } else {
 
             return 2;
         }
+
+
+
+
+
         // Debugger::testDie();
         //  User::UserData();
         //    $phone_number = Yii::$app->request->post('CallRequestForm')['phone'];
@@ -226,6 +262,51 @@ class PhoneFirstChangeConfirmForm extends Model
             -1, $acc_id, -1);
 */
         return '';
+    }
+
+    public function sendNewPasswordMessage($contact_type, $contact_value, $user_name, $new_password){  //$contact_type = 'phone' || 'email'
+
+        if($contact_type == 'email'){
+            $email_text = Yii::t('sms_messages', 'login').$user_name.'; '.Yii::t('sms_messages', 'new_pass').$new_password;
+
+            $subject = Yii::t('sms_messages', 'new_password_subj');
+            global $_admin_mail;
+            $from_mail = $_admin_mail;
+            $server_name = Yii::$app->params['server_name'];
+            $domains_key = Yii::$app->params['domains'][$server_name];
+            $from_user = Yii::t('site','admin') . Yii::t('site', Yii::$app->params['sites_data'][$domains_key]['company_name']['lang_key']);
+
+
+            // turbosms_send($normal_phone, $full_sms_text, $org_id, 0, $acc_id); //Открпвка смс, функция биллинга
+
+            //$contact_value
+            my_mail( 'artemkuchma@gmail.com', iconv_safe('utf-8','koi8-u',$email_text), iconv_safe('utf-8','koi8-u',$subject), $from_mail, $from_user);
+
+            Yii::$app->session->setFlash('renewPassword', ['value' => Yii::t('flash-message', 'new_password_send_by_email')]);
+
+        }elseif($contact_type = 'phone'){
+
+            turbosms_init($verbose = 1);//функция из апи биллинга, инициализирует работу с смс сообщениями
+            ast_init();//функция из апи биллинга
+            $normal_phone = asterisk_normalize_phone($contact_value);//функция из апи биллинга, нормализирует телефон отправленный пользователем
+
+            $number_valid = ast_get_sms_route($normal_phone, 1);
+
+            if ($number_valid !== -1) { //функция из апи биллинга, проверяет номер на возможность отправки смс.
+
+                $sms_text = Yii::t('sms_messages', 'login').$user_name.'; '.Yii::t('sms_messages', 'new_pass').$new_password;
+
+//$normal_phone
+                turbosms_send('+380689828560', $sms_text, ''); //Открпвка смс, функция биллинга
+
+                Yii::$app->session->setFlash('renewPassword', ['value' => Yii::t('flash-message', 'new_password_send_by_sms')]);
+
+            }
+
+        }else{
+
+        }
+      //  Debugger::testDie();
     }
 
 }

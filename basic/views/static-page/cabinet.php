@@ -8,6 +8,8 @@ use app\components\debugger\Debugger;
 
 $this->title = Yii::t('cabinet', 'cabinet');
 
+
+
 ?>
 <div class="site-about" id="cabinet-table" >
     <div class="title_custom">

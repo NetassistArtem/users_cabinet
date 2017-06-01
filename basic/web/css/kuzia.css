@@ -278,6 +278,13 @@ div.navbar-header > a.navbar-brand {
 /* форма регистрации */
 
 
+
+a.btn-submit-custom {
+    color: white;
+    margin-top: 20px;
+}
+
+
 input.form-control, select.form-control{
     height: 44px;
     font-size: 16px;

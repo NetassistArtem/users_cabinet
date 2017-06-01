@@ -78,7 +78,7 @@ $this->title = Yii::t('contacts-change-confirm', 'confirm_contact_info');
 
                 ]); ?>
 
-                <div class=text-center>
+                <div class= " alert alert-success text-center">
                     <p><?= $text_info ?></p>
                     <p><?= Yii::t('contacts-change-confirm', 'info_text_2') ?></p>
                 </div>

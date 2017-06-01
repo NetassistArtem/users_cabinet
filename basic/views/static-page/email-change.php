@@ -6,7 +6,7 @@ use yii\bootstrap\ActiveForm;
 use yii\widgets\Pjax;
 use app\components\debugger\Debugger;
 use \yii\widgets\MaskedInput;
-use app\assets\AppAsset;
+
 
 $this->title = Yii::t('change-email', 'change_email');
 
@@ -36,10 +36,7 @@ $this->title = Yii::t('change-email', 'change_email');
                 if(isset($flash_message)):
 
 
-                    $this->registerJsFile(
-                        'scripts/message_with_redirect.js',
-                        ['depends'=>'app\assets\AppAsset']
-                    );
+
 
                     // $this->registerJs('$("#modal").modal("show");');
                     echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_1.php',['flash_message' => $flash_message]);

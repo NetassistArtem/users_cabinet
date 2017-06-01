@@ -84,6 +84,16 @@ $config = [
                     //'defaults' => ['page' => 1, 'tag' => ''],
                 ],
                 [
+                    'pattern' => 'renew-password',
+                    'route' => 'site/renew-password',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'renew-password-confirm',
+                    'route' => 'site/renew-password-confirm',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
                     'pattern' => 'contact',
                     'route' => 'site/contact',
                     //'defaults' => ['page' => 1, 'tag' => ''],

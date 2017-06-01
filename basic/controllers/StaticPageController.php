@@ -371,6 +371,9 @@ class StaticPageController extends Controller
 
         $selected_email_message_types = $user_data['email_message_type'];
         $selected_sms_message_types = $user_data['sms_message_type'];
+     //   Debugger::PrintR($user_data['email_message_type_all']);
+      //  Debugger::PrintR($user_data['sms_message_type_all']);
+
         $selected_skin_type = -2;
         foreach(Yii::$app->params['skin_types'] as $k => $v){
 
@@ -635,8 +638,11 @@ class StaticPageController extends Controller
 
     public function actionCallRequest()
     {
+        if (!Yii::$app->user->isGuest) {
+            User::UserData();
+        }
 
-        User::UserData();
+
         $modelCallRequest = new CallRequestForm();
 
 
@@ -859,10 +865,10 @@ class StaticPageController extends Controller
                     if (Yii::$app->session->has('add')) {
                         Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'phone_add')]);
                         Yii::$app->session->remove('add');
-                        event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Add new user contact (phone number)');//функция биллинга записывает инфу в лог
+                      //  event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Add new user contact (phone number)');//функция биллинга записывает инфу в лог
                     } else {
                         Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'phone_1_change')]);
-                        event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Changed user contact (phone number)');//функция биллинга записывает инфу в лог
+                       // event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Changed user contact (phone number)');//функция биллинга записывает инфу в лог
                     }
 
 
@@ -934,6 +940,8 @@ class StaticPageController extends Controller
         $email = Yii::$app->session->get('new_user_phone_or_email');
 
         $modelEmailChangeConfirm = new EmailChangeConfirmForm();
+
+
         // $confirm = $modelPhoneFirstChangeConfirm->setConfirmCode();
         // Debugger::Eho('</br>');
         //  Debugger::Eho('</br>');
@@ -946,6 +954,8 @@ class StaticPageController extends Controller
         if ($modelEmailChangeConfirm->load(Yii::$app->request->post())) {
 
             $confirm = $modelEmailChangeConfirm->setConfirmCode();
+           // Debugger::EhoBr( $modelEmailChangeConfirm->confirmcode);
+
             //Debugger::Eho($confirm);
             //          Debugger::Eho('test1');
             //        Debugger::testDie();
@@ -957,11 +967,11 @@ class StaticPageController extends Controller
                     return $this->redirect(['/email-change-confirm']);
                 } elseif ($confirm === true) {
                     if (Yii::$app->session->has('add')) {
-                        event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Add new user contact (e-mail)');//функция биллинга записывает инфу в лог
+                      //  event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Add new user contact (e-mail)');//функция биллинга записывает инфу в лог
                         Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'email_add')]);
                         Yii::$app->session->remove('add');
                     } else {
-                        event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Changed user contact (e-mail)');//функция биллинга записывает инфу в лог
+                     //   event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Changed user contact (e-mail)');//функция биллинга записывает инфу в лог
                         Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'email_change')]);
                     }
 
@@ -975,6 +985,8 @@ class StaticPageController extends Controller
         }
         $lang_arr = explode('-', Yii::$app->language);
         $lang = $lang_arr[0];
+
+//Debugger::EhoBr(Yii::$app->session->get('testt'));
 
         return $this->render('phone-first-change-confirm',
             ['modelPhoneFirstChangeConfirm' => $modelEmailChangeConfirm,

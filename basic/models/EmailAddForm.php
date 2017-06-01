@@ -91,6 +91,12 @@ class EmailAddForm extends Model
                 Yii::$app->params['email_send_conf']['verification_cod_up_chars']
             );
         $subject = Yii::t('sms_messages', 'subject');
+
+
+     //   Yii::$app->session->set('testt', $full_email_text);
+
+
+
         global $_admin_mail;
         $from_mail = $_admin_mail;
         $server_name = Yii::$app->params['server_name'];

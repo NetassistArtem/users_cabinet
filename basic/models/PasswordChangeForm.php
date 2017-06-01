@@ -42,10 +42,11 @@ class PasswordChangeForm extends Model
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
         if($this->validate()){
             $password_change = $this->insertNewPassword();
+            //Debugger::VarDamp($password_change);
             if($password_change === 0){ //валидация пароля на уровне биллинга
                 Yii::$app->session->setFlash('passwordChanged',['value' => Yii::t('flash-message', 'password_saved')]);
 
-                event_log('common.acl.inc.php', $user_data['net_id'], $user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'], -1, -1, 'Successful password change');//функция биллинга записывает инфу в лог
+             //   event_log('common.acl.inc.php', $user_data['net_id'], $user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'], -1, -1, 'Successful password change');//функция биллинга записывает инфу в лог
             }else{
                 Yii::$app->session->setFlash('bad_password',['value' => $password_change]);
 
@@ -53,7 +54,7 @@ class PasswordChangeForm extends Model
             return true;
         }else{
             Yii::$app->session->setFlash('passwordChanged',['value' => Yii::t('flash-message', 'password_not_changed')]);
-            event_log('common.acl.inc.php', $user_data['net_id'], $user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'], -1, -1, 'Password Change Error');//функция биллинга записывает инфу в лог
+          //  event_log('common.acl.inc.php', $user_data['net_id'], $user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'], -1, -1, 'Password Change Error');//функция биллинга записывает инфу в лог
             return false;
         }
     }

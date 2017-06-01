@@ -4,4 +4,5 @@ return [
     'login' => 'Login',
     'password' => 'Password',
     'enter' => 'Enter',
+    'renew-password' => 'Forgot your password?'
 ];
