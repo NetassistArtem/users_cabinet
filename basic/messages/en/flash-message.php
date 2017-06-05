@@ -48,6 +48,9 @@ return [
     'user_with_this_contact_absent' =>'The user with the requested contact is not in the database. Enter other data.',
     'send_code_by_email' => 'A confirmation code has been sent to your e-mail.',
     'send_code_by_phone' => 'On this phone number has been sent SMS message with a confirmation code.',
+    'limit_sms_send' => 'Failed to edit contact. The daily SMS sending limit has been exceeded.',
+    'not_good_number_format' => 'Wrong phone number format',
+    'limit_sms_send_renew_pass' => 'The daily SMS sending limit has been exceeded.',
 
 
 ];

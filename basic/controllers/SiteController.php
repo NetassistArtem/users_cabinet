@@ -102,6 +102,10 @@ class SiteController extends Controller
 
             Yii::$app->session->remove('username_password_renew');
         }
+        if (Yii::$app->session->has('userid_password_renew')) {
+
+            Yii::$app->session->remove('userid_password_renew');
+        }
 
 
 

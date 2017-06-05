@@ -132,7 +132,6 @@ switch ($styles) {
 }
 
 
-
 //echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_2.php');
 
 
@@ -200,8 +199,6 @@ switch ($styles) {
     <?php
 
 
-
-
     // папап подтверждений
 
     $this->registerJsFile(
@@ -222,12 +219,12 @@ switch ($styles) {
         'scripts/phone_delete_confirm.js',
         ['depends' => $asset]
     );
-    if(Yii::$app->session->hasFlash('servicesChangedPause')){
+    if (Yii::$app->session->hasFlash('servicesChangedPause')) {
         $this->registerJsFile(
             'scripts/message_with_redirect_2.js',
             ['depends' => $asset]
         );
-    }else{
+    } else {
         $this->registerJsFile(
             'scripts/message.js',
             ['depends' => $asset]
@@ -238,13 +235,12 @@ switch ($styles) {
 
     <div class="container">
         <?= Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]) ?>
 
 
         <?php
-    if (!Yii::$app->user->isGuest):
-        ?>
+        if (!Yii::$app->user->isGuest):?>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 account-data-block">
                     <p><?= $user_data['fio'] ?></p>
@@ -278,13 +274,22 @@ switch ($styles) {
                                 <div>
                                     <h4><?= Yii::t('top_info_block', 'services') ?></h4>
                                     <?php if (count($user_data['services']) <= 2):
-        foreach ($user_data['services'] as $k => $v):
-            ?>
-                                            <p><?= $v ?></p>
+                                        foreach ($user_data['services'] as $k => $v):
+                                            if ($v == 'Home LAN'):
+                                                ?>
+                                                <p><?= $user_data['services_tariff_name'][$k]; ?></p>
+                                            <?php else: ?>
+                                                <p><?= $v ?></p>
+                                            <?php endif; ?>
                                             <?php
-        endforeach;
-    else:?>
-                                        <p><?= $user_data['services'][0] ?></p>
+                                        endforeach;
+                                    else:
+                                        if ($user_data['services'][0] == 'Home LAN'):?>
+                                            <p><?= $user_data['ervices_tariff_name'][0] ?></p>
+                                        <?php else: ?>
+                                            <p><?= $user_data['services'][0] ?></p>
+                                        <?php endif; ?>
+
                                         <p><?= Yii::t('top_info_block', 'other_services') ?></p>
                                     <?php endif; ?>
                                 </div>
@@ -295,12 +300,12 @@ switch ($styles) {
                                 <div>
                                     <h4><?= Yii::t('top_info_block', 'active') ?></h4>
                                     <?php if (count($user_data['services_date']) <= 2):
-        foreach ($user_data['services_date'] as $k => $v):
-            ?>
+                                        foreach ($user_data['services_date'] as $k => $v):
+                                            ?>
                                             <p><?= $v ?></p>
                                             <?php
-        endforeach;
-    else:?>
+                                        endforeach;
+                                    else:?>
                                         <p><?= $user_data['services_date'][0] ?></p>
                                     <?php endif; ?>
 
@@ -321,70 +326,69 @@ switch ($styles) {
             </div>
 
 
-
             <?php if (($url_array[1] != 'arhiv-novostei') && ($url_array[2] != 'arhiv-novostei')): ?>
             <?php if (!empty($user_data['archive_news_not_reade'])): ?>
                 <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 news-data-block">
+                    <div class="col-lg-12 col-md-12 col-sm-12 news-data-block">
 
-                <div class=" alert alert-info alert-custom-2 ">
+                        <div class=" alert alert-info alert-custom-2 ">
 
-                    <div class="icon_info">
-                        <i class="fa fa-info-circle fa-3x" aria-hidden="true"></i>
+                            <div class="icon_info">
+                                <i class="fa fa-info-circle fa-3x" aria-hidden="true"></i>
+                            </div>
+                            <div class="text_mwssage">
+                                <p class="message-position"><?= !empty($user_data['archive_news_not_reade'][0]['short_text']) ? $user_data['archive_news_not_reade'][0]['short_text'] : $user_data['archive_news_not_reade'][0]['text']; ?></p>
+                            </div>
+                            <div class="batton_message">
+                                <p class="btn-custom">
+                                    <?php if (!empty($user_data['archive_news_not_reade'][0]['short_text'])): ?>
+                                        <a href="/<?= $lang ?>/arhiv-novostei/<?= $user_data['archive_news_not_reade'][0]['id'] ?>"><?= Yii::t('arhiv-news', 'reade_more') ?></a>
+                                    <?php else: ?>
+                                        <a href="/<?= $lang ?>/arhiv-novostei/reade/<?= $user_data['archive_news_not_reade'][0]['id'] ?>"><?= Yii::t('arhiv-news', 'reade_confirm') ?></a>
+                                    <?php endif; ?>
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <?php if ($user_data['archive_news_not_reade'][1]['text']): ?>
+                            <div class="alert alert-info alert-custom-2">
+
+                                <div class="icon_info">
+                                    <i class="fa fa-info-circle fa-3x" aria-hidden="true"></i>
+                                </div>
+                                <div class="text_mwssage">
+                                    <p class="message-position"><?= !empty($user_data['archive_news_not_reade'][1]['short_text']) ? $user_data['archive_news_not_reade'][1]['short_text'] : $user_data['archive_news_not_reade'][1]['text']; ?></p>
+                                </div>
+                                <div class="batton_message">
+                                    <p class="btn-custom">
+                                        <?php if (!empty($user_data['archive_news_not_reade'][1]['short_text'])): ?>
+                                            <a href="/<?= $lang ?>/arhiv-novostei/<?= $user_data['archive_news_not_reade'][1]['id'] ?>"><?= Yii::t('arhiv-news', 'reade_more') ?></a>
+                                        <?php else: ?>
+                                            <a href="/<?= $lang ?>/arhiv-novostei/reade/<?= $user_data['archive_news_not_reade'][1]['id'] ?>"><?= Yii::t('arhiv-news', 'reade_confirm') ?></a>
+                                        <?php endif; ?>
+                                    </p>
+                                </div>
+
+                            </div>
+                        <?php endif; ?>
+
+
+
+
+                        <?php if (count($user_data['archive_news_not_reade']) > 2): ?>
+                            <div class="battom_more_news">
+                                <div class="btn-custom">
+                                    <a href="/<?= $lang ?>/arhiv-novostei"><?= Yii::t('arhiv-news', 'not_reade_more') ?></a>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
                     </div>
-                    <div class="text_mwssage">
-                        <p class="message-position"><?= !empty($user_data['archive_news_not_reade'][0]['short_text']) ? $user_data['archive_news_not_reade'][0]['short_text'] : $user_data['archive_news_not_reade'][0]['text']; ?></p>
-                    </div>
-                    <div class="batton_message">
-                        <p class="btn-custom">
-                            <?php if (!empty($user_data['archive_news_not_reade'][0]['short_text'])): ?>
-                                <a href="/<?= $lang ?>/arhiv-novostei/<?= $user_data['archive_news_not_reade'][0]['id'] ?>"><?= Yii::t('arhiv-news', 'reade_more') ?></a>
-                            <?php else: ?>
-                                <a href="/<?= $lang ?>/arhiv-novostei/reade/<?= $user_data['archive_news_not_reade'][0]['id'] ?>"><?= Yii::t('arhiv-news', 'reade_confirm') ?></a>
-                            <?php endif; ?>
-                        </p>
-                    </div>
+
                 </div>
 
-
-                <?php if ($user_data['archive_news_not_reade'][1]['text']): ?>
-                    <div class="alert alert-info alert-custom-2">
-
-                        <div class="icon_info">
-                            <i class="fa fa-info-circle fa-3x" aria-hidden="true"></i>
-                        </div>
-                        <div class="text_mwssage">
-                            <p class="message-position"><?= !empty($user_data['archive_news_not_reade'][1]['short_text']) ? $user_data['archive_news_not_reade'][1]['short_text'] : $user_data['archive_news_not_reade'][1]['text']; ?></p>
-                        </div>
-                        <div class="batton_message">
-                            <p class="btn-custom">
-                                <?php if (!empty($user_data['archive_news_not_reade'][1]['short_text'])): ?>
-                                    <a href="/<?= $lang ?>/arhiv-novostei/<?= $user_data['archive_news_not_reade'][1]['id'] ?>"><?= Yii::t('arhiv-news', 'reade_more') ?></a>
-                                <?php else: ?>
-                                    <a href="/<?= $lang ?>/arhiv-novostei/reade/<?= $user_data['archive_news_not_reade'][1]['id'] ?>"><?= Yii::t('arhiv-news', 'reade_confirm') ?></a>
-                                <?php endif; ?>
-                            </p>
-                        </div>
-
-                    </div>
-                <?php endif; ?>
-
-
-
-
-            <?php if (count($user_data['archive_news_not_reade']) > 2): ?>
-                <div class="battom_more_news">
-                    <div class="btn-custom">
-                        <a href="/<?= $lang ?>/arhiv-novostei"><?= Yii::t('arhiv-news', 'not_reade_more') ?></a>
-                    </div>
-                </div>
             <?php endif; ?>
-
-            </div>
-
-            </div>
-
-        <?php endif; ?>
         <?php endif; ?>
 
 
@@ -397,31 +401,31 @@ switch ($styles) {
 
                     <?php
 
-        echo Nav::widget([
-            'options' => ['class' => 'nav nav-pills nav-stacked'],
-            'items' => [
+                    echo Nav::widget([
+                        'options' => ['class' => 'nav nav-pills nav-stacked'],
+                        'items' => [
 
-                ['label' => Yii::t('sidebar_menu', 'total_data'), 'url' => ['/cabinet'], 'active' => (Yii::$app->request->url == "/$lang/cabinet" || Yii::$app->request->url == "/cabinet")],
-                ['label' => Yii::t('sidebar_menu', 'account_manager'), 'url' => ['/upravlenie-kabinetom'], 'active' => (Yii::$app->request->url == "/$lang/upravlenie-kabinetom" || Yii::$app->request->url == "/upravlenie-kabinetom")],
-                ['label' => Yii::t('sidebar_menu', 'payment'), 'url' => ['/oplata-uslug'], 'active' => (Yii::$app->request->url == "/$lang/oplata-uslug" || Yii::$app->request->url == "/oplata-uslug")],
-                ['label' => Yii::t('sidebar_menu', 'payment_history'), 'url' => ['/istoriya-platezhey'], 'active' => (Yii::$app->request->url == "/$lang/istoriya-platezhey" || Yii::$app->request->url == "/istoriya-platezhey")],
-                ['label' => Yii::t('sidebar_menu', 'technical_support'), 'url' => ['/tehnicheskaya-podderzhka'], 'active' => (Yii::$app->request->url == "/$lang/tehnicheskaya-podderzhka" || Yii::$app->request->url == "/tehnicheskaya-podderzhka")],
-                ['label' => Yii::t('sidebar_menu', 'support_history'), 'url' => ['/istoriya-obrascheniy'], 'active' => (Yii::$app->request->url == "/$lang/istoriya-obrascheniy" || Yii::$app->request->url == "/$lang/istoriya-obrascheniy/*" || Yii::$app->request->url == "/istoriya-obrascheniy" || Yii::$app->request->url == "/istoriya-obrascheniy/*")],
-                ['label' => Yii::t('sidebar_menu', 'feedback'), 'url' => ['/ostavit-otzyiv'], 'active' => (Yii::$app->request->url == "/$lang/ostavit-otzyiv" || Yii::$app->request->url == "/ostavit-otzyiv")],
-                ['label' => Yii::t('sidebar_menu', 'tv'), 'url' => ['/televidenie'], 'active' => (Yii::$app->request->url == "/$lang/televidenie" || Yii::$app->request->url == "/televidenie")],
-                ['label' => Yii::t('sidebar_menu', 'news_arhiv'), 'url' => ['/arhiv-novostei'], 'active' => (Yii::$app->request->url == "/$lang/arhiv-novostei" || Yii::$app->request->url == "/arhiv-novastei")],
-            ],
-        ]);
+                            ['label' => Yii::t('sidebar_menu', 'total_data'), 'url' => ['/cabinet'], 'active' => (Yii::$app->request->url == "/$lang/cabinet" || Yii::$app->request->url == "/cabinet")],
+                            ['label' => Yii::t('sidebar_menu', 'account_manager'), 'url' => ['/upravlenie-kabinetom'], 'active' => (Yii::$app->request->url == "/$lang/upravlenie-kabinetom" || Yii::$app->request->url == "/upravlenie-kabinetom")],
+                            ['label' => Yii::t('sidebar_menu', 'payment'), 'url' => ['/oplata-uslug'], 'active' => (Yii::$app->request->url == "/$lang/oplata-uslug" || Yii::$app->request->url == "/oplata-uslug")],
+                            ['label' => Yii::t('sidebar_menu', 'payment_history'), 'url' => ['/istoriya-platezhey'], 'active' => (Yii::$app->request->url == "/$lang/istoriya-platezhey" || Yii::$app->request->url == "/istoriya-platezhey")],
+                            ['label' => Yii::t('sidebar_menu', 'technical_support'), 'url' => ['/tehnicheskaya-podderzhka'], 'active' => (Yii::$app->request->url == "/$lang/tehnicheskaya-podderzhka" || Yii::$app->request->url == "/tehnicheskaya-podderzhka")],
+                            ['label' => Yii::t('sidebar_menu', 'support_history'), 'url' => ['/istoriya-obrascheniy'], 'active' => (Yii::$app->request->url == "/$lang/istoriya-obrascheniy" || Yii::$app->request->url == "/$lang/istoriya-obrascheniy/*" || Yii::$app->request->url == "/istoriya-obrascheniy" || Yii::$app->request->url == "/istoriya-obrascheniy/*")],
+                            ['label' => Yii::t('sidebar_menu', 'feedback'), 'url' => ['/ostavit-otzyiv'], 'active' => (Yii::$app->request->url == "/$lang/ostavit-otzyiv" || Yii::$app->request->url == "/ostavit-otzyiv")],
+                            ['label' => Yii::t('sidebar_menu', 'tv'), 'url' => ['/televidenie'], 'active' => (Yii::$app->request->url == "/$lang/televidenie" || Yii::$app->request->url == "/televidenie")],
+                            ['label' => Yii::t('sidebar_menu', 'news_arhiv'), 'url' => ['/arhiv-novostei'], 'active' => (Yii::$app->request->url == "/$lang/arhiv-novostei" || Yii::$app->request->url == "/arhiv-novastei")],
+                        ],
+                    ]);
 
-        ?>
+                    ?>
 
                 </div>
             </div>
 
         <?php else:
-        echo $content;
-    endif;
-    ?>
+            echo $content;
+        endif;
+        ?>
 
     </div>
 </div>
@@ -435,8 +439,6 @@ switch ($styles) {
 </footer>
 
 <?php $this->endBody() ?>
-
-
 
 
 </body>

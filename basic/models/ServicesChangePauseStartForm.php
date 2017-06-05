@@ -43,6 +43,7 @@ class ServicesChangePauseStartForm extends Model
           //  Debugger::testDie();
             $t = 0;
             if(pause_svc($user_data['svc'][$services], $pause_ptime_stamp)){//функция биллинга, запускает паузу
+                event_log2('common.svc.php', $user_data['net_id'], $user_data['account_id'], Yii::$app->user->id, -1, $user_data['loc_id'],-1,-1,-1,-1,'Start pause');//функция биллинга записывает инфу в лог
                 Yii::$app->session->setFlash('servicesChangedPause',['value' => Yii::t('flash-message', 'pause_start').$pause_start_time]);
                 Yii::$app->session->setFlash('servicesChangedPauseInformation',['value' => Yii::t('flash-message', 'pause_information')]);
                 return true;

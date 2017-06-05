@@ -51,12 +51,12 @@ class EmailChangeForm extends Model
                 $email_del = $this->deleteEmail();
                 if ($email_del) {
                     if ($email_del === 2) {
-                        //event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Error delete user contact (e-mail)');//функция биллинга записывает инфу в лог
+                        event_log2('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,-1,-1,'Error delete user contact (e-mail)');//функция биллинга записывает инфу в лог
                         Yii::$app->session->setFlash('emailNotDelete', ['value' => Yii::t('flash-message', 'email_not_delete')]);
                         return 3;
                     }
 
-                    //event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Delete user contact (e-mail)');//функция биллинга записывает инфу в лог
+                    event_log2('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,-1,-1,'Delete user contact (e-mail)');//функция биллинга записывает инфу в лог
                     Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'email_delete')]);
                     return 2;
                 }
@@ -71,7 +71,7 @@ class EmailChangeForm extends Model
             //$this->insertNewPhone1();
             return true;
         } else {
-            //event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Error change user contact (e-mail)');//функция биллинга записывает инфу в лог
+            event_log2('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,-1,-1,'Error change user contact (e-mail)');//функция биллинга записывает инфу в лог
             Yii::$app->session->setFlash('phoneFirstChanged', ['value' => Yii::t('flash-message', 'unable_change_contact')]);
             return false;
         }
@@ -107,7 +107,7 @@ class EmailChangeForm extends Model
 
         del_restore_contact($contact_id, 1);//функция апи биллинга
 
-        //event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'], -1, -1, -1);//функция биллинга записывает инфу в лог
+        event_log2('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'], -1, -1,-1,-1, 'Delete contact (email)');//функция биллинга записывает инфу в лог
 
         $user_contact_info_all = get_user_contacts('', -1, $this->user_data['account_id'], -1, -1, -1, -1, -1, "", -1, "", 0, PRINT_CONTACTS_GET_LIST_EX); //функция апи биллинга
 

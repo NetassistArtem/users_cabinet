@@ -57,7 +57,7 @@ class PhoneFirstChangeConfirmForm extends Model
 
                 if ($confirm === 2) {
 
-                  //  event_log('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,'Error change/add user contacts (phone number).Wrong verification code.');//функция биллинга записывает инфу в лог
+                    event_log2('common.contacts.php', $this->user_data['net_id'], $this->user_data['account_id'], Yii::$app->user->id, -1, $this->user_data['loc_id'],-1,-1,-1,-1,'Error change/add user contacts (phone number).Wrong verification code.');//функция биллинга записывает инфу в лог
 
                     Yii::$app->session->setFlash('codeConfirm', ['value' => Yii::t('flash-message', 'wrong_code')]);
                     return 2;

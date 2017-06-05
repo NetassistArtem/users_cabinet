@@ -66,7 +66,8 @@ class CreditForm extends Model
                        // _is_admin();
 
                         $t = pay_make_credit($user_data['account_id'], $user_data['org_id'], $ptime_stamp, $comment, $many*1000, 0, $svc_code, 1);
-                       // Debugger::VarDamp($t);
+                        event_log2('bablo.php', $user_data['net_id'], $user_data['account_id'], Yii::$app->user->id, -1, $user_data['loc_id'], -1, -1,-1,-1, 'Try make credit');//функция биллинга записывает инфу в лог
+                        // Debugger::VarDamp($t);
                        // Debugger::testDie();
                         if($t != false){
                             Yii::$app->session->setFlash('credit', ['value' => Yii::t('flash-message', 'credit_ok').$many .' '. $user_data['account_currency']]);

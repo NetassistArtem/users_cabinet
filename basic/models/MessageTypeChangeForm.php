@@ -60,6 +60,7 @@ class MessageTypeChangeForm extends Model
 
     public function insertNewMessageType()
     {
+        $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
         $post_data = Yii::$app->request->post('MessageTypeChangeForm');
 
 
@@ -112,6 +113,8 @@ class MessageTypeChangeForm extends Model
       //  Debugger::EhoBr($sm_flags);
         //Debugger::testDie();
         apply_sm_flags($user_data['account_id'], $sm_flags);
+
+        event_log2('common.user.opt.inc.php', $user_data['net_id'], $user_data['account_id'], Yii::$app->user->id, -1, $user_data['loc_id'], -1, -1,-1,-1, 'Change sm options');//функция биллинга записывает инфу в лог
 
         Yii::$app->session->set('selected_options',$selected_array );
 

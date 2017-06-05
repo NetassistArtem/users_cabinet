@@ -9,6 +9,7 @@ use Yii;
 use app\components\debugger\Debugger;
 use yii\web\Controller;
 use app\components\sms_handler\UserSms;
+use app\components\user_contacts_update\SmsStatistics;
 
 class PhoneAddForm extends Model
 {
@@ -46,10 +47,15 @@ class PhoneAddForm extends Model
 
         if ($this->validate()) {
 
-            $this->addNewPhone();
+            ;
+            if($this->addNewPhone()){
+                return true;
+            }else{
+                return false;
+            }
             //Yii::$app->session->setFlash('phoneFirstChanged', ['value' => Yii::t('flash-message', 'contact_details_updated')]);
             //$this->insertNewPhone1();
-            return true;
+
         } else {
             Yii::$app->session->setFlash('phoneFirstChanged', ['value' => Yii::t('flash-message', 'unable_change_contact')]);
             return false;
@@ -117,7 +123,22 @@ class PhoneAddForm extends Model
            //  Debugger::Eho($acc_id);
            //  Debugger::testDie();
 
-             turbosms_send($normal_phone, $full_sms_text, $org_id, 0, $acc_id); //Открпвка смс, функция биллинга
+            global $acc_db_host;
+            global $acc_db;
+            global $acc_db_user;
+            global $acc_db_pwd;
+
+            $sms_statistics = new SmsStatistics($acc_db_host, $acc_db, $acc_db_user, $acc_db_pwd);
+            $sms_statistics->deleteOld(Yii::$app->params['sms_time_limit_delete']);
+            if($sms_statistics->smsLimit(Yii::$app->user->id, Yii::$app->params['sms_time_limit'],Yii::$app->params['sms_limit'])){
+                turbosms_send($normal_phone, $full_sms_text, $org_id, 0, $acc_id); //Открпвка смс, функция биллинга
+                $sms_statistics->insertData(Yii::$app->user->id);
+            }else{
+                Yii::$app->session->setFlash('phoneFirstChanged', ['value' => Yii::t('flash-message', 'limit_sms_send')]);
+                return false;
+            }
+
+
         } else {
             //создается туду на перезвон пользователю
             global $todo_ctx;
