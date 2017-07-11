@@ -22,6 +22,7 @@ use app\models\EmailAddForm;
 use app\models\CreditForm;
 use app\models\ServicesChangePauseStartForm;
 use app\models\ServicesChangePauseFinishForm;
+use app\models\ServicesTrafficLimitForm;
 use app\models\ArhivNews;
 
 use Yii;
@@ -71,7 +72,7 @@ class StaticPageController extends Controller
                     'terminals',
                     'email-change-confirm',
                     'email-change',
-                    'submit-call-request',
+
                     'support-details',
                 ],
 
@@ -98,7 +99,7 @@ class StaticPageController extends Controller
                             'terminals',
                             'email-change-confirm',
                             'email-change',
-                            'submit-call-request',
+
                             'support-details',
                         ],
                         'allow' => true,
@@ -126,7 +127,7 @@ class StaticPageController extends Controller
                             'terminals',
                             'email-change-confirm',
                             'email-change',
-                            'submit-call-request',
+
                             'support-details',
                         ],
                         'allow' => false,
@@ -356,6 +357,30 @@ class StaticPageController extends Controller
         }
 
 
+
+
+
+
+
+
+
+        $modelServicesTrafficLimit = new ServicesTrafficLimitForm();
+
+        if ($modelServicesTrafficLimit->load(Yii::$app->request->post()) && $modelServicesTrafficLimit->trafficLimitOnOff()) {
+          //  if (!Yii::$app->request->isPjax) {
+                return $this->redirect(['/upravlenie-kabinetom']);
+          //  }
+        }
+
+
+
+
+
+
+
+
+
+
         $email_message_types = array();
         foreach (Yii::$app->params['email_message_types'] as $k => $v) {
             $email_message_types[$k] = Yii::t('upravlenie-kabinetom', $v['lang_key']);
@@ -365,6 +390,11 @@ class StaticPageController extends Controller
         foreach (Yii::$app->params['sms_message_types'] as $k => $v) {
             $sms_message_types[$k] = Yii::t('upravlenie-kabinetom', $v['lang_key']);
         }
+        $message_lang = array();
+        foreach (Yii::$app->params['lang'] as $k => $v) {
+            $message_lang[$k] = Yii::t('upravlenie-kabinetom', $v['url']);
+    }
+
 
         $skin_types = array();
         foreach (Yii::$app->params['skin_types'] as $k => $v) {
@@ -395,10 +425,12 @@ class StaticPageController extends Controller
             'modelPhoneAddForm' => $modelPhoneAddForm,
             'modelEmailAddForm' => $modelEmailAddForm,
             'modelSkinsChange' => $modelSkinsChange,
+            'modelServicesTrafficLimit' => $modelServicesTrafficLimit,
             'modelServicesChangePauseStart' => $modelServicesChangePauseStart,
             'modelServicesChangePauseFinish' => $modelServicesChangePauseFinish,
             'email_message_types' => $email_message_types,
             'sms_message_types' => $sms_message_types,
+            'message_lang' => $message_lang,
             'skin_types' => $skin_types,
             'selected_email_message_types' => $selected_email_message_types,
             'selected_sms_message_types' => $selected_sms_message_types,
@@ -657,7 +689,9 @@ class StaticPageController extends Controller
     public function actionSubmitCallRequest()
     {
 
-        User::UserData();
+        if (!Yii::$app->user->isGuest) {
+            User::UserData();
+        }
         $modelCallRequest = new CallRequestForm();
         //  $modelCallRequest->load(Yii::$app->request->post());
 
@@ -1032,11 +1066,12 @@ class StaticPageController extends Controller
                     return $this->redirect(['/email-change-confirm']);
                 } elseif ($confirm === true) {
                     if (Yii::$app->session->has('add')) {
-                        event_log2('common.contacts.php', $user_data['net_id'], $user_data['account_id'], Yii::$app->user->id, -1, $user_data['loc_id'],-1,-1,'Add new user contact (e-mail)');//функция биллинга записывает инфу в лог
+                        //function event_log2($src, $net_id, $acc_id, $user_id, $sw_id, $loc_id, $admin_id, $ref_todo_id, $ref_inv_id, $etype, $comment)
+                        event_log2('common.contacts.php', $user_data['net_id'], $user_data['account_id'], Yii::$app->user->id, -1, $user_data['loc_id'],-1,-1,-1,-1,'Add new user contact (e-mail)');//функция биллинга записывает инфу в лог
                         Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'email_add')]);
                         Yii::$app->session->remove('add');
                     } else {
-                        event_log2('common.contacts.php', $user_data['net_id'], $user_data['account_id'], Yii::$app->user->id, -1, $user_data['loc_id'],-1,-1,'Changed user contact (e-mail)');//функция биллинга записывает инфу в лог
+                        event_log2('common.contacts.php', $user_data['net_id'], $user_data['account_id'], Yii::$app->user->id, -1, $user_data['loc_id'],-1,-1,-1,-1,'Changed user contact (e-mail)');//функция биллинга записывает инфу в лог
                         Yii::$app->session->setFlash('phoneFirstChangedConfirm', ['value' => Yii::t('flash-message', 'email_change')]);
                     }
 

@@ -116,8 +116,8 @@ class RenewPasswordForm extends Model
             foreach ($contact_id_array as $k => $v) {
                 $c_i = get_contact_info($k);
 
-                if ($c_i[CONTACTS_DEL_MARK_IDX] != 1 && $c_i[CONTACTS_USER_IDX] != -1) {
-                    $user_data = get_user_info_by_ids($c_i[CONTACTS_USER_IDX]);
+                if ($c_i[CONTACTS_DEL_MARK_IDX] != 1 && $c_i[CONTACTS_USER_ID_IDX] != -1) {
+                    $user_data = get_user_info_by_ids($c_i[CONTACTS_USER_ID_IDX]);
                     if ($user_data[UINFO_DEL_MARK_IDX] != 1) {
 
                         $contact_info[] = get_contact_info($k);
@@ -135,7 +135,7 @@ class RenewPasswordForm extends Model
                     $new_contact_info[] = $contact_info[0];
                     foreach ($contact_info as $key => $val) {
 
-                        if ($val[CONTACTS_USER_IDX] != $new_contact_info[0][CONTACTS_USER_IDX]) {
+                        if ($val[CONTACTS_USER_ID_IDX] != $new_contact_info[0][CONTACTS_USER_ID_IDX]) {
 
                             $new_contact_info[] = $val;
                         }
@@ -162,10 +162,10 @@ class RenewPasswordForm extends Model
 
 
                 } elseif ($phone) {
-                    if($this->sendSmsConfirm($contact_info[0][CONTACTS_USER_IDX])){
+                    if($this->sendSmsConfirm($contact_info[0][CONTACTS_USER_ID_IDX])){
                         Yii::$app->session->set('renew_password_phone', $phone);
                         Yii::$app->session->set('username_password_renew', $contact_info[0][CONTACTS_NICK_IDX]);
-                        Yii::$app->session->set('userid_password_renew', $contact_info[0][CONTACTS_USER_IDX]);
+                        Yii::$app->session->set('userid_password_renew', $contact_info[0][CONTACTS_USER_ID_IDX]);
                         return 'phone';
                     }else{
                         return 2;

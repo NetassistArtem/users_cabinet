@@ -52,5 +52,8 @@ return [
     'not_good_number_format' => 'Wrong phone number format',
     'limit_sms_send_renew_pass' => 'The daily SMS sending limit has been exceeded.',
 
+    'traffic_limit_change' => 'Traffic settings successfully changed',
+    'traffic_limit_not_change' => 'Traffic settings failed to change',
+
 
 ];

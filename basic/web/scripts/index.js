@@ -22,10 +22,22 @@ $('.request_call').click(function(event){ // нажатие на кнопку - 
             modalContainer.modal({show:true});
         }
     });
+
+
+
+
 });
 
+    $("#callrequestform-phone").focus(function(){
+        alert('test');
+        $("input#callrequestform-phone").inputmask("+380 (99) 999 99 99",{
+            "onincomplete": function(){ alert('Поле -Телефон- заполнено не до конца'); }
+        });
+
+    });
 
 $(document).on("submit", '.call-request-form', function (e) {
+
     e.preventDefault();
     var form = $(this);
     $.ajax({

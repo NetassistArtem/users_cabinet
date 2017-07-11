@@ -836,7 +836,7 @@ div.text-center{
 
 /* адаптивность */
 
-@media (min-width: 768px){
+@media (min-width: 767px){
 
 
     /* Верхнее меню*/
@@ -885,6 +885,11 @@ div.text-center{
        /* width: 90px;*/
         width: 16%;
         text-align: center;
+    }
+
+    .nav > li > a{
+        padding-right: 12px;
+        padding-left: 12px;
     }
     /*
     .navbar-header {
@@ -1133,7 +1138,7 @@ div.text-center{
 
 
 
-@media (max-width: 768px ) {
+@media (max-width: 767px ) {
 
     body {
         font-size: 10px;

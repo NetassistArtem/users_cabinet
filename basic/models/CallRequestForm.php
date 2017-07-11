@@ -33,6 +33,7 @@ class CallRequestForm extends Model
 
     public function setCallRequest()
     {
+
         if ($this->validate()) {
 
 
@@ -53,12 +54,15 @@ class CallRequestForm extends Model
 
     public function sendPhone()
     {
+
         global $opt_vars;
         global $todo_ctx;
-        User::UserData();
+        if (!Yii::$app->user->isGuest) {
+            User::UserData();
+        }
         $phone_number = Yii::$app->request->post('CallRequestForm')['phone'];
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
-        $user_name = isset($user_data['username']) ? $user_data['username'] : '';
+        $user_name = isset($user_data['username']) ? $user_data['username'] : 'Не зарегистрированный пользователь';
         $acc_id = isset($user_data['account_id']) ? $user_data['account_id'] : -1;
 /*
         $new_ctx = array(
@@ -84,6 +88,8 @@ class CallRequestForm extends Model
 
         todo_ctx_save(0, $todo_ctx, 0);
 */
+
+
         $todo_ctx = array(
             "subj" => transcode_utf8_to_internal('Обращение в тех-поддержку').' user: '. $user_name. ', ' .transcode_utf8_to_internal('запрос call-back'),
             "ref_acc_id" => $acc_id,

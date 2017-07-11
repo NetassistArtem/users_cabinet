@@ -23,12 +23,15 @@ $form_call_request = ActiveForm::begin([
         'labelOptions' => ['class' => 'col-lg-12 col-md-12 col-sm-12 control-label modal-label'],
     ],
 
-]); ?>
+]);
+
+
+ ?>
 
 
 
     <?= $form_call_request->field($modelCallRequest, 'phone')->
-    widget(MaskedInput::className(), ['mask' => '+380 (99) 999 99 99'])->label(Yii::t('call-request', 'enter_phone'))->input('phone') ?>
+    label(Yii::t('call-request', 'enter_phone'))->input('phone') ?>
 
 
     <div class="form-group">

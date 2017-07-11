@@ -14,7 +14,7 @@ use app\models\Lang;
 $this->title = Yii::t('login','title_login');
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
+<div class="site-login col-lg-offset-0 col-md-offset-0 col-sm-offset-0 col-xs-offset-2 col-lg-12 col-md-12 col-sm-12 col-xs-8">
     <h1 class="col-lg-offset-4 col-md-offset-4 col-sm-offset-3  login-title-position"><?= Html::encode($this->title) ?></h1>
 
     <?php Pjax::begin(['id' => 'login-page']); ?>

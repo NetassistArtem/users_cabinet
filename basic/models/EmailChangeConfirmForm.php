@@ -104,6 +104,7 @@ class EmailChangeConfirmForm extends Model
 
 //}
 
+
                 update_user_contacts('',  //функция апи биллинга, добавляет контакт пользователя (но не добавляет в поле user_phone)
                     CONTACT_USER . "," . CONTACT_REQ, CONTACT_USER, "", 0, UNDEL_CONTACT,
                     $this->user_data['username'], $this->user_data['real_name'], $this->user_data['address'], $this->user_data['account_id'], Yii::$app->user->id, $this->user_data['net_id'], $this->user_data['loc_id'], $this->user_data['req_id'], $email_new, -1, $user_contact_info[0][CONTACTS_PERSON_ID_IDX]);
@@ -152,7 +153,6 @@ class EmailChangeConfirmForm extends Model
 
 
                // update_contact_fields($acc_db_host, $acc_db, $acc_db_user, $acc_db_pwd, Yii::$app->user->id,array(), $email_active,1, 2);
-
 
 
 

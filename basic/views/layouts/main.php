@@ -56,7 +56,9 @@ foreach (Yii::$app->params['domains'] as $k => $v) {
     }
 }
 
-$alfa_style = $user_data['skin'];
+$alfa_style = $user_data ? $user_data['skin'] : Yii::$app->params['alfa-styles-default'] ;
+
+
 $server_name = Yii::$app->params['server_name'];
 $styles = Yii::$app->params['domains'][$server_name];
 global $sites_data;

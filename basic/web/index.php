@@ -1,8 +1,8 @@
 <?php
 
 // comment out the following two lines when deployed to production
-defined('YII_DEBUG') or define('YII_DEBUG', true);
-defined('YII_ENV') or define('YII_ENV', 'dev');
+//defined('YII_DEBUG') or define('YII_DEBUG', true);
+//defined('YII_ENV') or define('YII_ENV', 'dev');
 
 
 
@@ -24,6 +24,7 @@ require_once(__DIR__ . '/../components/billing_api/additional_api_functions.php'
 require_once(__DIR__ . '/../components/billing_api/inc/common.todo_list.inc.php');
 require_once(s_path("turbosms.php"));
 require_once(s_path("common.asterisk.php"));
+require_once(s_path("common.asterisk-aa.php"));
 require_once(s_path("msg_log.inc.php"));
 //require_once(__DIR__ . '/../components/billing_api/all_addr.php');
 //require_once(__DIR__ . '/../components/user_contacts_update/api/contacts_update_api.php');

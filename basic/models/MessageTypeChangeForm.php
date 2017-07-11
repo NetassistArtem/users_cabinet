@@ -8,12 +8,15 @@ use yii\base\Model;
 use Yii;
 use app\components\debugger\Debugger;
 
+
 class MessageTypeChangeForm extends Model
 {
 
     public $emailMessage;
 
     public $smsMessage;
+
+    public $messageLang;
 
 
 
@@ -61,8 +64,12 @@ class MessageTypeChangeForm extends Model
     public function insertNewMessageType()
     {
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
-        $post_data = Yii::$app->request->post('MessageTypeChangeForm');
 
+
+
+
+        $post_data = Yii::$app->request->post('MessageTypeChangeForm');
+        $this->setNewMessageLang($user_data, $post_data);
 
         $selected_array = array();
         if(is_array($post_data['emailMessage'])){
@@ -78,7 +85,7 @@ class MessageTypeChangeForm extends Model
 
 
 
-        $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
+       // $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
 
         foreach($user_data['email_message_type_all'] as $k => $v){
             if($k != 0){
@@ -120,6 +127,24 @@ class MessageTypeChangeForm extends Model
 
 
         return '';
+    }
+
+    public function setNewMessageLang($user_data,$post_data){
+        $billing_lang_id = Yii::$app->params['lang'][$post_data['messageLang']]['id_billing'];
+     //   Debugger::EhoBr($post_data['messageLang']);
+     //   Debugger::VarDamp($billing_lang_id);
+       // Debugger::EhoBr($user_data['message_lang']);
+
+        if($user_data['message_lang_billing_id'] != $billing_lang_id ){
+
+            set_skin_lang("*".$user_data['account_name'],$billing_lang_id);//функция биллинга, устанавливает язык рассылки
+           // Debugger::EhoBr(get_skin_lang("*".$user_data['account_name']));
+         //   Debugger::testDie();
+            ast_init();
+            ast_upd_contact_classes(0, $billing_lang_id, $user_data['account_id'],0,0);//функция биллинка, установливает язык голосовых сообщений
+           // Debugger::testDie();
+            event_log2('common.lang.php', $user_data['net_id'], $user_data['account_id'], Yii::$app->user->id, -1, $user_data['loc_id'], -1, -1,-1,-1, 'Change message lang');//функция биллинга записывает инфу в лог
+        }
     }
 
 }

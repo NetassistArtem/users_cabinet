@@ -7,6 +7,8 @@ use yii\base\Model;
 use Yii;
 use app\components\debugger\Debugger;
 use yii\web\UploadedFile;
+use yii\helpers\HtmlPurifier;
+use yii\helpers\Html;
 
 class FeedbackForm extends Model
 {
@@ -108,6 +110,10 @@ class FeedbackForm extends Model
         global $todo_ctx;
         User::UserData();
         $send_data = Yii::$app->request->post('FeedbackForm');
+//$tes= Html::encode($send_data['todo_desc']);
+     //   Debugger::EhoBr( $tes);
+
+      //  Debugger::testDie();
         $acc_id = isset($send_data['ref_acc_id']) ? $send_data['ref_acc_id'] : -1;
 
         $new_ctx = array(

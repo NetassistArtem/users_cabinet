@@ -241,7 +241,7 @@ div.text-center{
 
 /* адаптивность */
 
-@media (min-width: 768px){
+@media (min-width: 767px){
 
 
 /* Верхнее меню*/
@@ -287,6 +287,10 @@ div.text-center{
     #w1.nav > li.li_logout{
         width: 90px;
         text-align: center;
+    }
+    .nav > li > a{
+        padding-right: 12px;
+        padding-left: 12px;
     }
 
 
@@ -363,7 +367,7 @@ div.text-center{
 
 
 
-@media (max-width: 768px ) {
+@media (max-width: 767px ) {
 
     /* Верхнее меню*/
     #w1.nav {

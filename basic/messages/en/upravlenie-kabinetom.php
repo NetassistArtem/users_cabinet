@@ -55,5 +55,16 @@ return [
     'black_crt' => 'Black CRT',
     'white' => 'White',
 
+    'pause_title' => 'Pause services',
+    'traffic_limit_title' => 'Blocking of Yandex, VK, etc.',
+    'tariff_on_off' => 'Block resources',
+    'change' => 'Edit',
+
+    'message_lang' => 'Notification language',
+    'ru' => 'Russian',
+    'uk' => 'Ukrainian',
+    'en' => 'English',
+    'skin_lang' => 'Preferred language',
+
 
 ];

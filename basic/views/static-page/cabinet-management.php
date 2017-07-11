@@ -9,8 +9,6 @@ use app\components\debugger\Debugger;
 use \yii\widgets\MaskedInput;
 
 
-
-
 $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
 
 
@@ -54,7 +52,7 @@ $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
 
                 if (isset($flash_message)):
                     //$this->registerJs('$("#modal").modal("show");');
-                  //  Debugger::EhoBr($flash_message);
+                    //  Debugger::EhoBr($flash_message);
 
 
                     echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_1.php', ['flash_message' => $flash_message]);
@@ -81,9 +79,10 @@ $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
 
             <?= $form_password_change->field($modelPasswordChange, 'oldPassword')->passwordInput()->label(Yii::t('upravlenie-kabinetom', 'old_password')) ?>
 
-            <?= $form_password_change->field($modelPasswordChange, 'newPasswordRepeat')->passwordInput()->label(Yii::t('upravlenie-kabinetom', 'new_password')) ?>
+            <?= $form_password_change->field($modelPasswordChange, 'newPassword')->passwordInput()->label(Yii::t('upravlenie-kabinetom', 'new_password')) ?>
+            <?= $form_password_change->field($modelPasswordChange, 'newPasswordRepeat')->passwordInput()->label(Yii::t('upravlenie-kabinetom', 'password_confirmation')) ?>
 
-            <?= $form_password_change->field($modelPasswordChange, 'newPassword')->passwordInput()->label(Yii::t('upravlenie-kabinetom', 'password_confirmation')) ?>
+
             <div id="contact_change"></div>
             <div class="form-group">
                 <div class="col-lg-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-4">
@@ -315,6 +314,10 @@ $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
 
             <?= $form_message_type_change->field($modelMessageTypeChange, 'smsMessage')->label(Yii::t('upravlenie-kabinetom', 'receive_sms'))->checkboxList($sms_message_types); ?>
 
+            <?php $modelMessageTypeChange->messageLang = $user_data['message_lang_id'];
+
+            echo $form_message_type_change->field($modelMessageTypeChange, 'messageLang')->label(Yii::t('upravlenie-kabinetom', 'message_lang'))->radioList($message_lang); ?>
+
 
             <div class="form-group">
                 <div class="col-lg-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-4">
@@ -463,16 +466,79 @@ $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
                     </div>
                 <?php endif; ?>
                 <?php Pjax::end();
-            endif;
+            endif; ?>
 
-            if (empty($paused_services_array) && empty($active_services_array)):
-                ?>
+
+          <?php  if (empty($paused_services_array) && empty($active_services_array)):?>
+            <div class="change-contacts-section">
+                <div class="change-contacts-title">
+                    <p><?= Yii::t('upravlenie-kabinetom', 'pause_title') ?></p>
+                </div>
+
                 <div class="alert alert-success">
                     <p>
                         <?= Yii::t('upravlenie-kabinetom', 'no_data_to_change'); ?>
                     </p>
                 </div>
+            </div>
             <?php endif; ?>
+
+
+            <div class="change-contacts-section">
+                <div class="change-contacts-title">
+                    <p><?= Yii::t('upravlenie-kabinetom', 'traffic_limit_title') ?></p>
+                </div>
+
+                <?php Pjax::begin(['id' => 'services-traffic-limit']); ?>
+                <div>
+
+                    <?php
+                    $flash_message = Yii::$app->session->getFlash('servicesTrafficLimit')['value'];
+
+                    if (isset($flash_message)):
+
+
+                        // $this->registerJs('$("#modal").modal("show");');
+                        echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_1.php', ['flash_message' => $flash_message]);
+
+                    endif;
+                    ?>
+
+                </div>
+
+
+
+
+
+                <?php $form_services_traffic_limit = ActiveForm::begin([
+                    'id' => 'servicesTrafficLimitForm',
+                    'options' => ['data-pjax' => true],
+                    'layout' => 'horizontal',
+                    'fieldConfig' => [
+                        'template' => "{label}\n<div class=\"col-lg-4 col-md-4 col-sm-4\">{input}</div>\n<div class=\"col-lg-4 col-md-4 col-sm-4\">{error}</div>",
+                        'labelOptions' => ['class' => 'col-lg-4 col-md-4 col-sm-4 control-label'],
+                    ],
+
+
+                ]); ?>
+
+                <?php $modelServicesTrafficLimit->traffic_change = $user_data['yandex_filter'];
+                echo $form_services_traffic_limit->field($modelServicesTrafficLimit, 'traffic_change')->inline()->radioList([1 => Yii::t('support', 'yes'), 0 => Yii::t('support', 'no')])->label(Yii::t('upravlenie-kabinetom', 'tariff_on_off')); //->dropDownList($paused_services_array, ['prompt' => Yii::t('upravlenie-kabinetom', 'limit_anlimit')]) ?>
+
+                <div class="form-group">
+
+
+                    <div class="col-lg-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-4">
+                        <?= Html::submitButton(Yii::t('upravlenie-kabinetom', 'change'), ['class' => 'btn btn-primary btn-block btn-lg btn-submit-custom phone-1-change', 'name' => 'services-traffic-limit-button', 'value' => 1]) ?>
+                    </div>
+
+                </div>
+
+
+                <?php ActiveForm::end(); ?>
+
+                <?php Pjax::end(); ?>
+            </div>
 
 
         </div>
@@ -531,6 +597,9 @@ $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
 
 
                 <?= $form_skin_change->field($modelSkinsChange, 'skin')->label(Yii::t('upravlenie-kabinetom', 'skins'))->radioList($skin_types, ['value' => $selected_skin_type]); ?>
+                <?php $modelSkinsChange->skinLang = $user_data['skin_lang_id'];
+
+                echo $form_skin_change->field($modelSkinsChange, 'skinLang')->label(Yii::t('upravlenie-kabinetom', 'skin_lang'))->radioList($message_lang); ?>
 
 
                 <div class="form-group">

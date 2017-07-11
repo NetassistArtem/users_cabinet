@@ -13,7 +13,7 @@ return [
             ),
             'ico' => 'alfa.ico',
             'player_link' =>'http://iptv.alfa-inet.net/files/alfa-IpTvPlayer-setup.exe',
-            'tv_playlist' => 'https://alfa-inet.net/files/tv_playlist.m3u',
+            'tv_playlist' => 'https://alfa-inet.net/tv_playlist.m3u',
         ),
 
         'kuzia' => array(
@@ -31,7 +31,7 @@ return [
     'phone_1' => '223-333-7',
     'payment_code' => '39481498',
     'domains' => array(
-        'lk.alfa-inet.net' => 'kuzia',
+        'lk.alfa-inet.net' => 'alfa',
         'my.kuzia.net.ua' => 'kuzia',
         'my.alfa-inet.net' => 'alfa',
     ),
@@ -42,11 +42,12 @@ return [
         2 => "Black-CRT",
         3 => "White",
     ),
-    'alfa-styles-default' => 0,
+    'alfa-styles-default' => 1,
 
     'lang' => array(
         1 => array(
             'id' => 1,
+            'id_billing' => 0,
             'url' => 'ru',
             'local' => 'ru-RU',
             'default' => 1,
@@ -55,6 +56,7 @@ return [
         ),
         2 => array(
             'id' => 2,
+            'id_billing' => 2,
             'url' => 'en',
             'local' => 'en-EN',
             'default' => 0,
@@ -63,6 +65,7 @@ return [
         ),
         3 => array(
             'id' => 3,
+            'id_billing' => 1,
             'url' => 'uk',
             'local' => 'uk-UK',
             'default' => 0,
@@ -465,5 +468,9 @@ return [
     'sms_time_limit' =>86400, //3600 - час, 86400 - сутки
     'sms_time_limit_delete' => 2592000, //2592000 - 30 дней
     'sms_limit_pass_renew' => 4,
+
+
+    'security_key' =>'6u8G5TCDK78Se3kZ7Ygdr',
+    'get_session' => 1 //передача айди сессии авторизации пользователей с сайта биллинга через get. 1-доступно, -1 - не доступно
 
 ];

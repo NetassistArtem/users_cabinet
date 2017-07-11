@@ -112,11 +112,19 @@ class SiteController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
-
+//Debugger::EhoBr(md5(Yii::$app->request->get('ses_id').Yii::$app->params['security_key']));
+      //  Debugger::testDie();
+     //   Debugger::PrintR($_COOKIE);
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-
+        $security_key_get = false;
+        $security_key_post = false;
+        if(Yii::$app->request->get('ses_id') && Yii::$app->request->get('key')){
+            $security_key_get = md5(Yii::$app->request->get('ses_id').Yii::$app->params['security_key'])== Yii::$app->request->get('key');
+          //
+        }elseif(Yii::$app->request->post('ses_id') && Yii::$app->request->post('key')){
+            $security_key_post = md5(Yii::$app->request->post('ses_id').Yii::$app->params['security_key']) == Yii::$app->request->post('key');
+        }
+        if (($model->load(Yii::$app->request->post()) || (Yii::$app->request->get('ses_id') && $security_key_get ) || (Yii::$app->request->post('ses_id') && $security_key_post )) && $model->login()) {
 
             return $this->goBack();
         }
@@ -208,7 +216,7 @@ class SiteController extends Controller
                // Yii::$app->session->set('renew_password_email', Yii::$app->session->get('renew_password_email'));
             }elseif($contact_type == 'phone' && Yii::$app->request->get('phone')){
                 $modelRenewPassword = new RenewPasswordForm;
-                $modelRenewPassword->sendSmsConfirm();
+                $modelRenewPassword->sendSmsConfirm(Yii::$app->session->get('userid_password_renew'));
                 Yii::$app->session->setFlash('renewPasswordConfirm', ['value' => Yii::t('flash-message', 'code_resend_by_phone')]);
                // Yii::$app->session->set('renew_password_phone', Yii::$app->session->get('renew_password_phone'));
             }else{

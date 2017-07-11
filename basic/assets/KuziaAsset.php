@@ -24,7 +24,13 @@ class KuziaAsset extends AssetBundle
         '/css/font-awesome-4.7.0/css/font-awesome.min.css'
     ];
     public $js = [
-        'css/js/site.js'
+        'css/js/site.js',
+        'scripts/Inputmask-4.x/js/inputmask.js',
+        'scripts/Inputmask-4.x/js/inputmask.extensions.js',
+        'scripts/Inputmask-4.x/js/inputmask.phone.extensions.js',
+        'scripts/Inputmask-4.x/js/jquery.inputmask.js',
+        'scripts/phoneMaskCallReq.js',
+
     ];
     public $depends = [
         'yii\web\YiiAsset',

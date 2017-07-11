@@ -44,14 +44,19 @@ $credit_limit = $user_data['account_max_credit'];
         global $auth_user_id;             //= Yii::$app->user->id;
         global $auth_group_id;
         global $htpasswd_auth_ok;
+        global $lang_str;
+        global $supported_langs;
 
        // Debugger::PrintR($request_vars);
        // Debugger::PrintR($_SESSION);
        // Debugger::Eho($auth_user_name. 'test');
        // Debugger::Eho('</br>/n');
        // Debugger::Eho($auth_user_id. 'test');
-       // Debugger::Eho('</br>/n');
+      //  Debugger::EhoBr($lang_str);
+       // Debugger::PrintR($supported_langs);
+
        // Debugger::PrintR($_SESSION);
+
 
         include (dirname(dirname(__DIR__)) . '/components/billing_api/admin/wm.php');
 
@@ -121,7 +126,7 @@ $credit_limit = $user_data['account_max_credit'];
                 </div>
 
 
-            <?php if($user_data['account_max_credit'] != 0): ?>
+            <?php if(array_search(3, $user_data['services_status_num']) && $user_data['account_max_credit'] != 0): ?>
             <div class="alert alert-success">
                 <p>
                     <?= Yii::t('payment', 'amount_max_info'). $credit_limit.' '. $user_data['account_currency']; ?>

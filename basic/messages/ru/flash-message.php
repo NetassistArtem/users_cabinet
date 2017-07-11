@@ -52,6 +52,9 @@ return [
     'not_good_number_format' => 'Не правильный формат телефонного номера',
     'limit_sms_send_renew_pass' => 'Привышен дневной липит отправки смс сообщений',
 
+    'traffic_limit_change' => 'Настройки трафика успешно изменены',
+    'traffic_limit_not_change' => 'Настройки трафика не удалось изменить',
+
 
 
 

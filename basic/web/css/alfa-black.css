@@ -282,6 +282,9 @@ textarea.form-control{
     margin-bottom: 50px;
 
 }
+.site-login{
+    color: white;
+}
 
 /* Сайтбар*/
 
@@ -783,7 +786,7 @@ div.text-center{
 }
 /* адаптивность */
 
-@media (min-width: 768px){
+@media (min-width: 767px){
 
 
     /* Верхнее меню*/
@@ -836,6 +839,10 @@ div.text-center{
     .navbar-header {
         background-color: #cb251f;
         border-left: 4px solid white;
+    }
+    .nav > li > a{
+        padding-right: 12px;
+        padding-left: 12px;
     }
 
 
@@ -1077,7 +1084,7 @@ div.text-center{
 
 
 
-@media (max-width: 768px ) {
+@media (max-width: 767px ) {
 
     body {
         font-size: 10px;

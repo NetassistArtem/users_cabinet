@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use app\components\user_contacts_update\Conn_db;
 use app\components\debugger\Debugger;
 use app\models\ArhivNews;
 
@@ -45,21 +45,55 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public static function UserIdentityData()
     {
 
-        if (Yii::$app->request->isPost && isset(Yii::$app->request->post('LoginForm')['username'])) {
-            global $is_admin;
+        if(Yii::$app->request->isPost || (Yii::$app->request->isGet && Yii::$app->params['get_session'] == 1)){
 
-            $is_admin = _is_admin(Yii::$app->request->post('LoginForm')['username'], Yii::$app->request->post('LoginForm')['password']);
-            $user_id_data = array(
-                'id' => $GLOBALS['auth_user_id'],
-                'username' => $GLOBALS['auth_user_name'],
-                'password' => Yii::$app->request->post('LoginForm')['password'],
-                'orgId' => $GLOBALS['def_org_id'],
-            );
+            if (isset(Yii::$app->request->post('LoginForm')['username'])) {
+                global $is_admin;
+
+                $is_admin = _is_admin(Yii::$app->request->post('LoginForm')['username'], Yii::$app->request->post('LoginForm')['password']);
+                $user_id_data = array(
+                    'id' => $GLOBALS['auth_user_id'],
+                    'username' => $GLOBALS['auth_user_name'],
+                    'password' => Yii::$app->request->post('LoginForm')['password'],
+                    'orgId' => $GLOBALS['def_org_id'],
+                );
 
 
-            Yii::$app->session->set('user-data-id', $user_id_data);
-            Yii::$app->session->set('u_name', $GLOBALS['auth_user_name']);//нужно для работы billing api
+                Yii::$app->session->set('user-data-id', $user_id_data);
+                Yii::$app->session->set('u_name', $GLOBALS['auth_user_name']);//нужно для работы billing api
+            }elseif(isset($_POST['username'])){
+
+
+
+
+
+                global $use_sessions;
+                $use_sessions = 1;
+                Yii::$app->session->set('u_name', $_POST['username']);
+
+                 _is_admin();
+
+                $user_id_data = array(
+                    'id' => $GLOBALS['auth_user_id'],
+                    'username' => $GLOBALS['auth_user_name'],
+                    'password' => '',
+                    'orgId' => $GLOBALS['def_org_id'],
+                );
+           //     Debugger::PrintR($user_id_data);
+            //    Debugger::VarDamp($is_admin);
+            //    Debugger::EhoBr(Yii::$app->session->get('u_name'));
+            //    Debugger::testDie();
+
+                Yii::$app->session->set('user-data-id', $user_id_data);
+             //   Yii::$app->session->set('u_name', $GLOBALS['auth_user_name']);//нужно для работы billing api
+
+            }
+
+
+
+
         }
+
 
 
 
@@ -216,7 +250,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             $svc_name_str = db_unquote($svc[$t][$svc_log_offs + SVC_LIST_NAME_IDX]);
             $svc_enable_name_str = iconv_safe('koi8-u', 'utf-8', get_svc_state_name($svc[$t][SVC_LOG_ENABLE_IDX], $lang));// get_svc_state_name функция биллинга
             $svc_time_to_str = !empty($svc[$t][SVC_LOG_PTS2_IDX]) ? date("d.m.Y", strtotime(ptimestamp_to_str($svc[$t][SVC_LOG_PTS2_IDX], $sep = " ", $dsep = "-", $isep = ":"))) : Yii::t('cabinet', 'end_time');// ptimestamp_to_str функция биллинга
-            $svc_tariff_name_str = get_tariff_name($v[SVC_LOG_TARIFF_ID_IDX], $lang);
+            $svc_tariff_name_str =  get_tariff_name($v[SVC_LOG_TARIFF_ID_IDX], $lang);
             $svc_tariff_info_str = parse_tariff_info($v[SVC_LOG_TARIFF_ID_IDX]);
             $svc_activation_number_str = $v[SVC_LOG_PERIODS_IDX];
             $svc_pause_date_start_str = !empty($v[SVC_LOG_PAUSE_PTS1_IDX]) ? date("d.m.Y", strtotime(ptimestamp_to_str($v[SVC_LOG_PAUSE_PTS1_IDX], $sep = " ", $dsep = "-", $isep = ":"))) : 0;
@@ -294,6 +328,20 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             /* OUTPUT */
             $gw6, $netmask6, $cli_v6_net, $cli_v6_gw, $cli_v6_mask, $ipv6_dns, $rt_list);
 
+        $yandex_filter = get_access_filter($user_data_by_billing[UINFO_ACC_ID_IDX], FILTER_VKOK_ID); //функция биллинга
+//Debugger::EhoBr($yandex_filter);
+        $message_lang_billing_id = get_skin_lang("*".$user_data_by_billing[$user_acc_offset + AINFO_NAME_IDX]);
+        $message_lang_id = '';
+        $skin_lang_billing_id = get_skin_lang($user_name);
+        $skin_lang_id = '';
+        foreach(Yii::$app->params['lang'] as $k=>$v){
+            if($v['id_billing'] == $message_lang_billing_id){
+                $message_lang_id = $v['id'];
+            }
+            if($v['id_billing'] == $skin_lang_billing_id){
+                $skin_lang_id = $v['id'];
+            }
+        }
         
 
         $user_data = array(
@@ -313,11 +361,17 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                 'phone_2_array' => $phone_2_array,
                 'phone_all_array' => $phone_all_array,
                 'skin' => $user_skin == -1 ? Yii::$app->params['alfa_skin_default'] : $user_skin,
+                'skin_lang_id' => $skin_lang_id,
+                'skin_lang_billing_id' => $skin_lang_billing_id,
+                'message_lang_billing_id' => $message_lang_billing_id,
+                'message_lang_id' => $message_lang_id,
                 'account_id' => $user_data_by_billing[UINFO_ACC_ID_IDX],
+                'account_name' => $user_data_by_billing[$user_acc_offset + AINFO_NAME_IDX],
                 'account_balance' => $user_data_by_billing[$user_acc_offset + AINFO_MONEY_IDX] * 0.001,
                 'account_credit' => $user_data_by_billing[$user_acc_offset + AINFO_DEBT_IDX] * 0.001,
                 'account_max_credit' => $user_data_by_billing[$user_acc_offset + AINFO_MAX_DEBT_IDX] * 0.001,
                 'account_currency' => iconv_safe('koi8-u', 'utf-8', get_curr_name_by_cid($user_data_by_billing[$user_acc_offset + AINFO_C_ID_IDX])),
+                 'yandex_filter' => $yandex_filter, //функция биллинга
                 'services' => $svc_name,
                 'services_status_num' => $svc_enable_num,
                 'services_tariff_info' => $svc_tariff_info,
