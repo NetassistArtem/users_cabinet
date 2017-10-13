@@ -11,6 +11,7 @@ use app\models\ContactForm;
 use app\models\RenewPasswordConfirmForm;
 use app\models\RenewPasswordForm;
 use app\components\debugger\Debugger;
+use app\models\User;
 
 class SiteController extends Controller
 {
@@ -22,20 +23,20 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout','index','about','contact'],
+                'only' => ['logout','index','about','contact', 'payment-result'],
 
 
                 'rules' => [
                     [
                         'controllers' => ['site'],
-                        'actions' => ['logout','index','about','contact'],
+                        'actions' => ['logout','index','about','contact', 'payment-result'],
                         'allow' => true,
                         'roles' => ['@'],
 
                     ],
                     [
                         'controllers' => ['site'],
-                        'actions' => ['logout','about','index','contact'],
+                        'actions' => ['logout','about','index','contact', 'payment-result'],
                         'allow' => false,
                         'roles' => ['?'],
 
@@ -312,5 +313,59 @@ class SiteController extends Controller
         Debugger::PrintR(Yii::$app->session->get('user-data')[Yii::$app->user->id]);
 
         return $this->render('about');
+    }
+    public function actionPaymentResult()
+    {
+        User::UserData();
+
+        $status = Yii::$app->session->get('get-data');
+        $result = -1;
+        if($status){
+            if($status['fail']){
+                $result = -1;
+            }elseif($status['sent'] || $status['submit'] || $status['status']){
+                $result = 1;
+            }else{
+                $result = -1;
+            }
+        }
+
+
+        return $this->render('payment-result',[
+        'result' => $result,
+        ]);
+    }
+
+    public function actionPaymentResultRedirect()
+    {
+        User::UserData();
+
+        $sent = Yii::$app->request->get('sent');
+        $fail = Yii::$app->request->get('fail');
+        $submit = Yii::$app->request->get('submit');
+        $status = Yii::$app->request->get('status');
+
+
+        $get_data = array(
+            'sent' => $sent? $sent : '',
+            'fail' => $fail? $fail : '',
+            'submit' => $submit? $submit : '',
+            'status' => $status? $status : '',
+        );
+        Yii::$app->session->set('get-data', $get_data);
+
+
+        $this->redirect("/payment-result");
+    }
+    public function actionPaymentIsRequired()
+    {
+       // global $use_sessions;
+       // $use_sessions = 1;
+        $user_name= Yii::$app->request->get('user_name');
+        Yii::$app->session->set('u_name', $user_name);
+        User::UserData();
+
+        return $this->renderPartial('payment-is-required',
+            ['user_name'=> $user_name]);
     }
 }

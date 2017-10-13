@@ -11,7 +11,7 @@ $this->title = Yii::t('support', 'technical_support');
 
 
 ?>
-<div class="site-about">
+<div  class="site-about">
     <div class="title_custom">
         <h1><?= Html::encode($this->title) ?></h1>
     </div>

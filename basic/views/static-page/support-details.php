@@ -11,7 +11,7 @@ $this->title = Yii::t('support', 'technical_support');
 
 ?>
 <div class="site-about">
-    <div class="title_custom">
+    <div id="support_details_top" class="title_custom">
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
 
@@ -84,11 +84,11 @@ $this->title = Yii::t('support', 'technical_support');
 
             <?php elseif ($problem_type == 1): ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'problem_type')->hiddenInput(['value' => $problem_type])->label(false); ?>
-                <?= $form_technical_support->field($modelTechnicalSupport, 'problem_appeared')->textInput()->label(Yii::t('support', 'when_problem')) ?>
+                <?= $form_technical_support->field($modelTechnicalSupport, 'problem_appeared')->textInput(['autofocus' =>true, 'placeholder'=>''])->label(Yii::t('support', 'when_problem')) ?>
 
             <?php elseif ($problem_type == 2): ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'problem_type')->hiddenInput(['value' => $problem_type])->label(false); ?>
-                <?= $form_technical_support->field($modelTechnicalSupport, 'problem_appeared')->textInput()->label(Yii::t('support', 'when_problem')) ?>
+                <?= $form_technical_support->field($modelTechnicalSupport, 'problem_appeared')->textInput(['autofocus' =>true, 'placeholder'=>''])->label(Yii::t('support', 'when_problem')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'connect_type')->radioList([1 => Yii::t('support', Yii::$app->params['net_connection_type'][1]['lang_key']), 2 => Yii::t('support', Yii::$app->params['net_connection_type'][2]['lang_key']), 3 => Yii::t('support', Yii::$app->params['net_connection_type'][3]['lang_key'])])->label(Yii::t('support', 'net_connection')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'user_wifi_wan')->inline()->radioList([1 => Yii::t('support', 'yes'), -1 => Yii::t('support', 'no'), 0 => Yii::t('support', 'unknown')])->label(Yii::t('support', 'wifi_route_indication')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'user_wifi_reboot')->inline()->radioList([1 => Yii::t('support', 'yes'), -1 => Yii::t('support', 'no'), 0 => Yii::t('support', 'unknown')])->label(Yii::t('support', 'restarting_wifi_router')) ?>
@@ -96,35 +96,35 @@ $this->title = Yii::t('support', 'technical_support');
                 <?= $form_technical_support->field($modelTechnicalSupport, 'comp_ip')->textInput()->label(Yii::t('support', 'comp_ip')) ?>
             <?php elseif ($problem_type == 3): ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'problem_type')->hiddenInput(['value' => $problem_type])->label(false); ?>
-                <?= $form_technical_support->field($modelTechnicalSupport, 'problem_appeared')->textInput()->label(Yii::t('support', 'when_problem')) ?>
+                <?= $form_technical_support->field($modelTechnicalSupport, 'problem_appeared')->textInput(['autofocus' =>true, 'placeholder'=>''])->label(Yii::t('support', 'when_problem')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'user_speed')->dropDownList($user_speeds)->label(Yii::t('support', 'user_speed')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'connect_type')->radioList([1 => Yii::t('support', Yii::$app->params['net_connection_type'][1]['lang_key']), 2 => Yii::t('support', Yii::$app->params['net_connection_type'][2]['lang_key']), 3 => Yii::t('support', Yii::$app->params['net_connection_type'][3]['lang_key'])])->label(Yii::t('support', 'net_connection')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'user_wifi_reboot')->inline()->radioList([1 => Yii::t('support', 'yes'), -1 => Yii::t('support', 'no'), 0 => Yii::t('support', 'unknown')])->label(Yii::t('support', 'restarting_wifi_router')) ?>
 
             <?php elseif ($problem_type == 4): ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'problem_type')->hiddenInput(['value' => $problem_type])->label(false); ?>
-                <?= $form_technical_support->field($modelTechnicalSupport, 'problem_appeared')->textInput()->label(Yii::t('support', 'when_problem')) ?>
+                <?= $form_technical_support->field($modelTechnicalSupport, 'problem_appeared')->textInput(['autofocus' =>true, 'placeholder'=>''])->label(Yii::t('support', 'when_problem')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'new_equipment')->inline()->radioList([1 => Yii::t('support', 'yes'), -1 => Yii::t('support', 'no'), 0 => Yii::t('support', 'unknown')])->label(Yii::t('support', 'new_equipment')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'connect_type')->radioList([1 => Yii::t('support', Yii::$app->params['net_connection_type'][1]['lang_key']), 2 => Yii::t('support', Yii::$app->params['net_connection_type'][2]['lang_key']), 3 => Yii::t('support', Yii::$app->params['net_connection_type'][3]['lang_key'])])->label(Yii::t('support', 'net_connection')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'comp_ip')->textInput()->label(Yii::t('support', 'comp_ip')) ?>
 
             <?php elseif ($problem_type == 5): ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'problem_type')->hiddenInput(['value' => $problem_type])->label(false); ?>
-                <?= $form_technical_support->field($modelTechnicalSupport, 'problem_appeared')->textInput()->label(Yii::t('support', 'when_problem')) ?>
+                <?= $form_technical_support->field($modelTechnicalSupport, 'problem_appeared')->textInput(['autofocus' =>true, 'placeholder'=>''])->label(Yii::t('support', 'when_problem')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'new_equipment')->inline()->radioList([1 => Yii::t('support', 'yes'), -1 => Yii::t('support', 'no'), 0 => Yii::t('support', 'unknown')])->label(Yii::t('support', 'new_equipment')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'unavailable_sites')->textarea(['rows' => 3])->label(Yii::t('support', 'unavailable_sites')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'available_sites')->textarea(['rows' => 3])->label(Yii::t('support', 'available_sites')) ?>
 
                 <?php elseif ($problem_type == 6): ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'problem_type')->hiddenInput(['value' => $problem_type])->label(false); ?>
-                <?= $form_technical_support->field($modelTechnicalSupport, 'problem_appeared')->textInput()->label(Yii::t('support', 'when_problem')) ?>
+                <?= $form_technical_support->field($modelTechnicalSupport, 'problem_appeared')->textInput(['autofocus' =>true, 'placeholder'=>''])->label(Yii::t('support', 'when_problem')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'unavailable_site')->textarea(['rows' => 2])->label(Yii::t('support', 'unavailable_site')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'ping_answer')->inline()->radioList([1 => Yii::t('support', 'yes'), -1 => Yii::t('support', 'no'), 0 => Yii::t('support', 'unknown')])->label(Yii::t('support', 'ping_answer')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'dns')->textInput()->label(Yii::t('support', 'dns')) ?>
 
                  <?php elseif ($problem_type == 7): ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'problem_type')->hiddenInput(['value' => $problem_type])->label(false); ?>
-                <?= $form_technical_support->field($modelTechnicalSupport, 'problem_appeared')->textInput()->label(Yii::t('support', 'when_problem')) ?>
+                <?= $form_technical_support->field($modelTechnicalSupport, 'problem_appeared')->textInput(['autofocus' =>true, 'placeholder'=>''])->label(Yii::t('support', 'when_problem')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'os_type')->dropDownList($operation_systems)->label(Yii::t('support', 'operating_system')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'renew_os')->inline()->radioList([1 => Yii::t('support', 'yes'), -1 => Yii::t('support', 'no'), 0 => Yii::t('support', 'unknown')])->label(Yii::t('support', 'renew_os')) ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'change_avir')->inline()->radioList([1 => Yii::t('support', 'yes'), -1 => Yii::t('support', 'no'), 0 => Yii::t('support', 'unknown')])->label(Yii::t('support', 'install_update_anti-virus')) ?>

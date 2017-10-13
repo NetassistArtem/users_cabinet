@@ -39,7 +39,8 @@ return [
     'with' => ' з ',
     'client_address' => 'Внутрішні адреси, LAN',
     'client_router_address' => 'Внутрішній IPv6 адресу роутера',
-    'client_mask' => 'Внутрішня маска мережі'
+    'client_mask' => 'Внутрішня маска мережі',
+    'bonus_many' => 'Бонусні кошти',
 
 
 

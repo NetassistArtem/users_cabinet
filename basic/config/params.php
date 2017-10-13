@@ -14,6 +14,7 @@ return [
             'ico' => 'alfa.ico',
             'player_link' =>'http://iptv.alfa-inet.net/files/alfa-IpTvPlayer-setup.exe',
             'tv_playlist' => 'https://alfa-inet.net/tv_playlist.m3u',
+            'logo_no_internet' => '/css/images/logo/alfa_logo_b.gif'
         ),
 
         'kuzia' => array(
@@ -26,14 +27,16 @@ return [
             'ico' => 'kuzia.ico',
             'player_link' =>' http://kuzia.net.ua/IpTvPlayer-Kuzia-setup.exe',
             'tv_playlist' => 'http://kuzia.net.ua/tv_playlist.m3u',
+            'logo_no_internet' => '/css/images/logo/kuzia_logo_b.png'
         ),
     ),
     'phone_1' => '223-333-7',
     'payment_code' => '39481498',
     'domains' => array(
-        'lk.alfa-inet.net' => 'alfa',
+        'lk.alfa-inet.net' => 'kuzia',
         'my.kuzia.net.ua' => 'kuzia',
         'my.alfa-inet.net' => 'alfa',
+        'my.kuzia.ua' => 'kuzia',
     ),
     'alfa-styles' => array(
         -1 => 'Default',

@@ -6,6 +6,7 @@ namespace app\models;
 use yii\base\Model;
 use Yii;
 use app\components\debugger\Debugger;
+use app\components\SecureTextValidator;
 use yii\web\UploadedFile;
 use yii\helpers\HtmlPurifier;
 use yii\helpers\Html;
@@ -67,6 +68,7 @@ class FeedbackForm extends Model
             }],
 
             ['files', 'file', 'extensions' => ['png', 'jpg', 'gif','tiff','pdf','obt','doc','docs','txt'], 'maxFiles' =>4, 'maxSize' => 1024*1024*3],
+            ['todo_desc', SecureTextValidator::className()],
 
 
         ];
@@ -110,10 +112,10 @@ class FeedbackForm extends Model
         global $todo_ctx;
         User::UserData();
         $send_data = Yii::$app->request->post('FeedbackForm');
-//$tes= Html::encode($send_data['todo_desc']);
-     //   Debugger::EhoBr( $tes);
+//$tes= $send_data['todo_desc']);
+        //Debugger::EhoBr( $this->todo_desc);
 
-      //  Debugger::testDie();
+       // Debugger::testDie();
         $acc_id = isset($send_data['ref_acc_id']) ? $send_data['ref_acc_id'] : -1;
 
         $new_ctx = array(

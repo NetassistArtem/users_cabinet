@@ -329,10 +329,72 @@ switch ($styles) {
 
 
             <?php if (($url_array[1] != 'arhiv-novostei') && ($url_array[2] != 'arhiv-novostei')): ?>
-            <?php if (!empty($user_data['archive_news_not_reade'])): ?>
+            <?php if (!empty($user_data['archive_news_not_reade']) || $user_data['account_many_day_less']): ?>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 news-data-block">
+                    <?php if ($user_data['account_many_day_less']): ?>
+                        <?php if ($user_data['account_credit_data'][4] < 0 &&  $user_data['account_credit_data'][0] != -3 ): ?>
 
+
+
+
+                            <div class=" alert alert-danger alert-custom-2 ">
+
+                                <div class="icon_info">
+                                    <i class="fa fa-exclamation-circle fa-3x" aria-hidden="true"></i>
+                                </div>
+                                <div class="text_mwssage">
+                                    <p class="message-position">
+
+                                        <?= Yii::t('payment-is-required', 'not_many_in_account')?> <br>
+
+                                        <?= Yii::t('payment-is-required', 'your_debt') . ($user_data['account_credit_data'][4]/1000). ' '. Yii::t('arhiv-news', 'uan'). '.' ?>
+                                    </p>
+                                </div>
+                                <div class="batton_message">
+                                    <p class="btn-custom">
+                                            <a href="/<?= $lang ?>/oplata-uslug#title-h1-payment"><?= Yii::t('payment-is-required', 'pay')?></a>
+                                        <?php if ($user_data['account_credit_data'][0] == 0): ?>
+                                            <a href="/<?= $lang ?>/oplata-uslug#credit"><?= Yii::t('payment-is-required', 'credit')?></a>
+                                        <?php endif; ?>
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+
+                        <?php else: ?>
+
+
+                            <div class=" alert alert-warning alert-custom-2 ">
+
+                                <div class="icon_info">
+                                    <i class="fa fa-exclamation-circle fa-3x" aria-hidden="true"></i>
+                                </div>
+                                <div class="text_mwssage">
+                                    <p class="message-position">
+
+                                        <?= Yii::t('payment-is-required', 'not_many_for_service_activation')?>
+                                    </p>
+                                </div>
+                                <div class="batton_message">
+                                    <p class="btn-custom">
+                                        <a href="/<?= $lang ?>/oplata-uslug#title-h1-payment"><?= Yii::t('payment-is-required', 'pay')?></a>
+                                        <?php if ($user_data['account_credit_data'][0] == 0): ?>
+                                            <a href="/<?= $lang ?>/oplata-uslug#credit"><?= Yii::t('payment-is-required', 'credit')?></a>
+                                        <?php endif; ?>
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+
+                        <?php endif; ?>
+                    <?php endif; ?>
+
+                    <?php if (!empty($user_data['archive_news_not_reade'])): ?>
                         <div class=" alert alert-info alert-custom-2 ">
 
                             <div class="icon_info">
@@ -351,9 +413,9 @@ switch ($styles) {
                                 </p>
                             </div>
                         </div>
+                    <?php endif; ?>
 
-
-                        <?php if ($user_data['archive_news_not_reade'][1]['text']): ?>
+                        <?php if ($user_data['archive_news_not_reade'][1]['text'] && !$user_data['account_many_day_less']): ?>
                             <div class="alert alert-info alert-custom-2">
 
                                 <div class="icon_info">

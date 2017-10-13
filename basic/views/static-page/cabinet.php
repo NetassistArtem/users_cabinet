@@ -63,8 +63,8 @@ $this->title = Yii::t('cabinet', 'cabinet');
             </tr>
             <tr id="finance">
                 <td><?= Yii::t('cabinet', 'password') ?></td>
-                <td><?= $user_data['password'] ?></td>
-                <td class="btn-custom"><a
+
+                <td colspan="2" class="btn-custom"><a
                         href="/<?= $lang ?>/upravlenie-kabinetom#password_change"><?= Yii::t('cabinet', 'change_password') ?></a>
                 </td>
             </tr>
@@ -107,6 +107,10 @@ $this->title = Yii::t('cabinet', 'cabinet');
             <tr>
                 <td><?= Yii::t('cabinet', 'credit') ?></td>
                 <td><?= $user_data['account_credit'] ?> <?= $user_data['account_currency'] ?></td>
+            </tr>
+            <tr>
+                <td><?= Yii::t('cabinet', 'bonus_many') ?></td>
+                <td><?= $user_data['account_bonus_many'] ?> <?= $user_data['account_currency'] ?></td>
             </tr>
             </tbody>
 

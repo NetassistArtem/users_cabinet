@@ -78,6 +78,32 @@ $config = [
                     'route' => 'site/error',
                     //'defaults' => ['page' => 1, 'tag' => ''],
                 ],
+
+                [
+                'pattern' => 'payment-is-required',
+                'route' => 'site/payment-is-required',
+                //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'payment-result',
+                    'route' => 'site/payment-result',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'user/wm.php',     //костыль для работы с биллингом
+                    'route' => 'site/payment-result-redirect',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'payment-result-redirect',     //костыль для работы с биллингом
+                    'route' => 'site/payment-result-redirect',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
+                [
+                    'pattern' => 'admin/wm.php',     //костыль для работы с биллингом
+                    'route' => 'site/payment-result-redirect',
+                    //'defaults' => ['page' => 1, 'tag' => ''],
+                ],
                 [
                     'pattern' => 'about',
                     'route' => 'site/about',

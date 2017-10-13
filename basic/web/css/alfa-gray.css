@@ -124,6 +124,10 @@ i.message_main_text{
     text-align: center;
     font-size: 18px;
 }
+.logo-centre{
+    text-align: center;
+    margin-bottom: 25px;
+}
 
 
 /* Верхнее меню */
@@ -772,6 +776,12 @@ div.payment_next_information > form > select{
     border: 1px solid #ddd;
     border-radius: 0;
 
+}
+.icon_info_2, .text_mwssage_2{
+    display: inline-block;
+}
+.text_mwssage_2{
+    margin-left: 1%;
 }
 /*************Архив новостей************************/
 

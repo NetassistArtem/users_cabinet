@@ -116,7 +116,9 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
 
         );
 
-
+        //global $request_vars;
+       // Debugger::PrintR($_SESSION);
+        //Debugger::EhoBr($GLOBALS['auth_user_id']);
         if (!empty(self::$users)) {
             self::$users = $user_identity_data;
         }
@@ -342,6 +344,11 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                 $skin_lang_id = $v['id'];
             }
         }
+        $credit_allow_data = is_credit_denied($user_data_by_billing[UINFO_ACC_ID_IDX]);
+        $many_day_less = ($credit_allow_data[3]/30.5) > $credit_allow_data[4] ? 1 : 0;//если денег меньше чем нужно для активации услуги на слудующий день то == 1
+      //  Debugger::PrintR($credit_allow_data);
+      //  Debugger::PrintR(get_all_address());
+
         
 
         $user_data = array(
@@ -370,6 +377,9 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
                 'account_balance' => $user_data_by_billing[$user_acc_offset + AINFO_MONEY_IDX] * 0.001,
                 'account_credit' => $user_data_by_billing[$user_acc_offset + AINFO_DEBT_IDX] * 0.001,
                 'account_max_credit' => $user_data_by_billing[$user_acc_offset + AINFO_MAX_DEBT_IDX] * 0.001,
+                'account_bonus_many' => $user_data_by_billing[$user_acc_offset + AINFO_BONUS_IDX] * 0.001,
+                'account_credit_data' => $credit_allow_data,
+                'account_many_day_less' => $many_day_less,
                 'account_currency' => iconv_safe('koi8-u', 'utf-8', get_curr_name_by_cid($user_data_by_billing[$user_acc_offset + AINFO_C_ID_IDX])),
                  'yandex_filter' => $yandex_filter, //функция биллинга
                 'services' => $svc_name,
@@ -433,7 +443,10 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
 
         );
 //Debugger::PrintR($user_data);
+  //      Debugger::PrintR($_COOKIE);
 //Debugger::PrintR($user_data_by_billing);
+        global $request_vars;
+      //  Debugger::PrintR($request_vars);
         Yii::$app->session->set('user-data', $user_data);
 
     }
@@ -499,9 +512,10 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public static function TodoHistory($user_name, $account_id)
     {
         $todo_array = array();
-        $test= array();
+        $test= array();                                                  //
         $todo_filters = array("user_name" => $user_name, "user_only" => 1, "todo_type" => TODO_SUPPORT, "list_all" => 1 );
         $todo_records_result = list_todo(0, false, false, "upd", "upd", 0, $todo_filters);
+     //   Debugger::EhoBr($todo_records_result. 'test');
         if ($todo_records_result) {
             $todo_records = list_todo_enum($todo_records_result, $todo_filters, 0, 1000);
             if (is_array($todo_records)) {

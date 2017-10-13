@@ -12,6 +12,16 @@ $this->title = Yii::t('support_history','support_history');
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
 
+    <?php
+    $flash_message = Yii::$app->session->getFlash('TechnicalInfo')['value'];
+    if (isset($flash_message)):
+        $this->registerJs('$("#modal").modal("show");');
+        echo Yii::$app->view->renderFile('@app/views/static-page/modal/modal_1.php', ['flash_message' => $flash_message]);
+
+
+    endif;
+    ?>
+
 
     <div class="table-responsive" >
         <table class="table table-bordered table-border-custom table_support_history" >

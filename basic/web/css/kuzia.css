@@ -134,6 +134,10 @@ input:active, textarea:active {
     text-align: center;
     font-size: 18px;
 }
+.logo-centre{
+    text-align: center;
+    margin-bottom: 25px;
+}
 
 
 
@@ -801,6 +805,12 @@ div.payment_next_information > form > select{
     border: 1px solid #FF9000;
     border-radius: 10px;
 }
+.icon_info_2, .text_mwssage_2{
+    display: inline-block;
+}
+.text_mwssage_2{
+    margin-left: 1%;
+}
 
 /*************Архив новостей************************/
 
@@ -1117,6 +1127,8 @@ div.text-center{
         height: 37px;
         font-size: 14px;
     }
+
+
 
     /************TV и Архив новостей***************/
 

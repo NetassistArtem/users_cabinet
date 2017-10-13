@@ -21,7 +21,7 @@ return [
     'technical_support' => 'Техническая поддержка',
     'appl_form_support' => 'Форма заявки в техническую поддержку',
     'problem_type_title' => 'Возникшая проблема: ',
-    'problem_type' => 'Характер проблмы',
+    'problem_type' => 'Характер проблемы',
     'when_problem' => 'Когда началась проблема?',
     'operating_system' => 'Операционная система',
     'which_antivirus' => 'Какой антивирус установлен?',

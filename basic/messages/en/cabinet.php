@@ -39,7 +39,8 @@ return [
     'with' => ' with ',
     'client_address' => 'Internal addresses, LAN',
     'client_router_address' => 'Internal IPv6 router address',
-    'client_mask' => 'Internal network mask'
+    'client_mask' => 'Internal network mask',
+    'bonus_many' => 'Bonus money',
 
 
 

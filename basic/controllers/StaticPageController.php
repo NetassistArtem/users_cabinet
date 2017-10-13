@@ -446,26 +446,62 @@ class StaticPageController extends Controller
 
         User::UserData();
 
+
+
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
 
 
         $lang_arr = explode('-', Yii::$app->language);
         $lang = $lang_arr[0];
 
+
+
+
+       // $test = is_credit_denied($user_data['account_id']);
+//Debugger::EhoBr($activation_services);
+     //   Debugger::EhoBr('test');
+      //  Debugger::PrintR($test);
+       // Debugger::testDie();
+
+
+
         //  $this->enableCsrfValidation = false;
         $modelCredit = new CreditForm();
-
+     //   Debugger::EhoBr('test');
+       // Debugger::VarDamp($modelCredit->load(Yii::$app->request->post()));
+      //  Debugger::testDie();
         if ($modelCredit->load(Yii::$app->request->post()) && $modelCredit->setCredit()) {
+
             if (!Yii::$app->request->isPjax) {
                 return $this->redirect(['/oplata-uslug']);
             }
         }
+        $credit_status = $user_data['account_credit_data'][0];
+        $day_price = ($user_data['account_credit_data'][3]/30.5);
+        $max_days = $user_data['account_credit_data'][2];
+        $max_days0 = $user_data['account_credit_data'][1];
+        $delta = $user_data['account_credit_data'][4];
+        $max_credit = $credit_status == -6 ? ( ((int)($day_price*$max_days/10))/100 ) : '';
+        $one_day_credit = $credit_status == -6 ? ( ((int)(($delta-$day_price)/10))/100 ) : '';
+
+        $minus_many = $credit_status == -7 ? ( ((int)(($delta-$user_data['account_credit_data'][5])/10))/100 ) : '';
+        $max_credit_2 = $credit_status == -7 ? ( ((int)($day_price*$max_days/10))/100 ) : '';
 
 
         return $this->render('payment', [
             'modelCredit' => $modelCredit,
             'user_data' => $user_data,
             'lang' => $lang,
+            'credit_status' => $credit_status,
+            'max_days' => $max_days,
+            'max_days0' => $max_days0,
+            'delta' => $delta/1000,
+            'monthly' => $user_data['account_credit_data'][3]/1000,
+            'day_price' => $day_price/1000,
+            'max_credit' => $max_credit,
+            'one_day_credit' => $one_day_credit,
+            'minus_many' => $minus_many,
+            'max_credit_2' => $max_credit_2,
 
         ]);
     }
@@ -492,12 +528,14 @@ class StaticPageController extends Controller
     public function actionSupport()
     {
         User::UserData();
+
+
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
         $modelSupport = new SupportForm();
 
 
         if ($modelSupport->load(Yii::$app->request->post()) && $modelSupport->sendProblem()) {
-                return $this->redirect(['/tehnicheskaya-podderzhka/details']);
+                return $this->redirect(["/tehnicheskaya-podderzhka/details#support_details_top"]);
         }
 
 
@@ -519,20 +557,27 @@ class StaticPageController extends Controller
     {
         User::UserData();
 
+
+
         $user_data = Yii::$app->session->get('user-data')[Yii::$app->user->id];
         $modelTechnicalSupport = new TechnicalSupportForm();
 
         $problem_type = Yii::$app->session->get('problem') ? Yii::$app->session->get('problem') : -1;
+
+       // Debugger::EhoBr($problem_type);
         Yii::$app->session->remove('problem');
-        if($problem_type == -1){
-            return $this->redirect(['/tehnicheskaya-podderzhka']);
-        }
+
 
 
         if ($modelTechnicalSupport->load(Yii::$app->request->post()) && $modelTechnicalSupport->sendTechnicalInfo()) {
             if (!Yii::$app->request->isPjax) {
-                return $this->redirect(['/tehnicheskaya-podderzhka/details']);
+                return $this->redirect(["/tehnicheskaya-podderzhka/details"]);
             }
+        }
+
+        if($problem_type == -1){
+            // Debugger::testDie();
+            return $this->redirect(["/istoriya-obrascheniy"]);
         }
         /*
         $swith = array();
@@ -586,6 +631,7 @@ class StaticPageController extends Controller
         //Debugger::PrintR(User::TodoHistory($user_data['username']));
 
         $todo_history_array = User::TodoHistory($user_data['username'], $user_data['account_id']);
+      //  Debugger::PrintR($todo_history_array);
         $pages = new Pagination(['totalCount' => count($todo_history_array), 'pageSize' => Yii::$app->params['items_per_page']['todo_history']]);
         $pages->pageSizeParam = false;
 

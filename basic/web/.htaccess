@@ -4,6 +4,10 @@
 
 
  RewriteEngine on
+
+ RewriteCond %{HTTP_HOST} ^my\.kuzia\.net\.ua$ [NC]
+   RewriteRule ^(.*)$ https://my.kuzia.ua/$1 [R=301,L]
+
  RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule . index.php
