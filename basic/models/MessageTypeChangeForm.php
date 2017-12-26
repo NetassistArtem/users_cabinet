@@ -16,6 +16,8 @@ class MessageTypeChangeForm extends Model
 
     public $smsMessage;
 
+    public $telegramMessage;
+
     public $messageLang;
 
 
@@ -82,6 +84,11 @@ class MessageTypeChangeForm extends Model
                 $selected_array['sms'][] = $v;
             }
         }
+        if(is_array($post_data['telegramMessage'])){
+            foreach($post_data['telegramMessage'] as $k => $v){
+                $selected_array['telegram'][] = $v;
+            }
+        }
 
 
 
@@ -109,9 +116,29 @@ class MessageTypeChangeForm extends Model
 
             }
         }
+        foreach($user_data['telegram_message_type_all'] as $k => $v){
+            if($k != 0){
+                if(is_array($post_data['telegramMessage'])){
+                    if(array_search($k,$post_data['telegramMessage']) !== false){
+                        $_POST[$v[0]] = 1;
+                    }
+                }
 
+
+            }
+        }
+
+
+
+
+
+
+        if(!$user_data['telegram_info']){
+            unset($_POST['MessageTypeChangeForm']['telegramMessage']);
+        }
         $request_vars = $_POST;
-       // Debugger::PrintR($_POST);
+
+
 
         //Debugger::PrintR($request_vars);
 

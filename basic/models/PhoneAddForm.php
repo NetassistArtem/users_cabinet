@@ -47,24 +47,25 @@ class PhoneAddForm extends Model
 
         if ($this->validate()) {
 
-            ;
+
             if($this->addNewPhone()){
+                Debugger::EhoBr('test');
                 return true;
             }else{
                 return false;
             }
-            //Yii::$app->session->setFlash('phoneFirstChanged', ['value' => Yii::t('flash-message', 'contact_details_updated')]);
+            //Yii::$app->session->setFlash('phoneAdd', ['value' => Yii::t('flash-message', 'contact_details_updated')]);
             //$this->insertNewPhone1();
 
         } else {
-            Yii::$app->session->setFlash('phoneFirstChanged', ['value' => Yii::t('flash-message', 'unable_change_contact')]);
+            Yii::$app->session->setFlash('phoneAdd', ['value' => Yii::t('flash-message', 'unable_change_contact')]);
             return false;
         }
     }
 
     public function addNewPhone()
     {
-        $this->addChangePhone();
+       return $this->addChangePhone();
 
     }
 
@@ -116,12 +117,13 @@ class PhoneAddForm extends Model
             );
            //  Debugger::Eho($normal_phone);
            //  Debugger::Eho('</br>');
-           //  Debugger::Eho($full_sms_text);
+           //  Debugger::EhoBr($full_sms_text);
+           // Yii::$app->session->set('test', $full_sms_text);
            //  Debugger::Eho('</br>');
            //  Debugger::Eho($org_id);
            //  Debugger::Eho('</br>');
            //  Debugger::Eho($acc_id);
-           //  Debugger::testDie();
+            // Debugger::testDie();
 
             global $acc_db_host;
             global $acc_db;
@@ -130,12 +132,15 @@ class PhoneAddForm extends Model
 
             $sms_statistics = new SmsStatistics($acc_db_host, $acc_db, $acc_db_user, $acc_db_pwd);
             $sms_statistics->deleteOld(Yii::$app->params['sms_time_limit_delete']);
+       //     return true;
             if($sms_statistics->smsLimit(Yii::$app->user->id, Yii::$app->params['sms_time_limit'],Yii::$app->params['sms_limit'])){
                 turbosms_send($normal_phone, $full_sms_text, $org_id, 0, $acc_id); //Открпвка смс, функция биллинга
                 $sms_statistics->insertData(Yii::$app->user->id);
+                return true;
             }else{
-                Yii::$app->session->setFlash('phoneFirstChanged', ['value' => Yii::t('flash-message', 'limit_sms_send')]);
-                return false;
+
+                Yii::$app->session->setFlash('phoneAdd', ['value' => Yii::t('flash-message', 'limit_sms_send')]);
+                return false; //phoneFirstChanged
             }
 
 

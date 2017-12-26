@@ -302,17 +302,28 @@ $this->title = Yii::t('upravlenie-kabinetom', 'account_manage');
 
 
             <?php
+
             if (Yii::$app->session->has('selected_options')) {
                 $selected_email_message_types = Yii::$app->session->get('selected_options')['email'];
                 $selected_sms_message_types = Yii::$app->session->get('selected_options')['sms'];
+                $selected_telegram_message_types = Yii::$app->session->get('selected_options')['telegram'];
                 Yii::$app->session->close('selected_options');
             }
             $modelMessageTypeChange->emailMessage = $selected_email_message_types;// Массив с уже активными пунктами отправки на почту
             $modelMessageTypeChange->smsMessage = $selected_sms_message_types;// Массив с уже активными пунктами отправки sms
-            echo $form_message_type_change->field($modelMessageTypeChange, 'emailMessage')->label(Yii::t('upravlenie-kabinetom', 'mail_receiving'))->checkboxList($email_message_types) ?>
+            $modelMessageTypeChange->telegramMessage = $selected_telegram_message_types;// Массив с уже активными пунктами отправки сообщений на телеграм
+            echo $form_message_type_change->field($modelMessageTypeChange, 'emailMessage')->label(Yii::t('upravlenie-kabinetom', 'mail_receiving'))->checkboxList($email_message_types);
+            echo $form_message_type_change->field($modelMessageTypeChange, 'smsMessage')->label(Yii::t('upravlenie-kabinetom', 'receive_sms'))->checkboxList($sms_message_types);
+
+            if($telegram_registration){
+                $this->registerJs('$("input[name=\'MessageTypeChangeForm[telegramMessage][]\']").attr("disabled","true");');?>
+<div class ="alert alert-success" ><?= Yii::t('upravlenie-kabinetom', 'telegram_register') ?> </br> <a href="<?=$telegram_registration ?>"><?= Yii::t('upravlenie-kabinetom', 'telegram_register_link') ?></a></div>
+           <?php }
 
 
-            <?= $form_message_type_change->field($modelMessageTypeChange, 'smsMessage')->label(Yii::t('upravlenie-kabinetom', 'receive_sms'))->checkboxList($sms_message_types); ?>
+
+
+            echo $form_message_type_change->field($modelMessageTypeChange, 'telegramMessage')->checkboxList($telegram_message_types )->label(Yii::t('upravlenie-kabinetom', 'receive_telegram')); ?>
 
             <?php $modelMessageTypeChange->messageLang = $user_data['message_lang_id'];
 

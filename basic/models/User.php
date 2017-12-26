@@ -171,29 +171,50 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
 
         $sm_flags = get_acc_options($user_data_by_billing[UINFO_ACC_ID_IDX], -1); //функции api биллинга
 
-
+//Debugger::Br();
       //  Debugger::PrintR($sm_flags);
 
 
         $sms_mail_flags_arr = print_sm_options($sm_flags[4], "sm_flag", SM_FLAGS_CTL_ARR); //функции api биллинга
 
       //   Debugger::PrintR($sms_mail_flags_arr);
+       // Debugger::testDie();
+        $array_sms_mail = array();
+        $i_sm = -1;
+       foreach($sms_mail_flags_arr as $k=>$v){
+           if (!$v[0]) {
+               $i_sm ++;
+               $array_sms_mail[$i_sm][]= $v;
+           }else{
+               $array_sms_mail[$i_sm][]= $v;
+           }
 
-        $array_sms_mail = array_chunk($sms_mail_flags_arr, 5);
+       }
+      //  Debugger::PrintR($array_sms_mail);
+       // Debugger::testDie();
 
+      //  $array_sms_mail = array_chunk($sms_mail_flags_arr, 5);
+
+       // Debugger::PrintR($array_sms_mail);
         $array_sms_flags = array();
         $array_mail_flags = array();
+        $array_telegram_flags = array();
         foreach ($array_sms_mail[0] as $k => $v) {
             if ($v[1] != 0) {
                 $array_mail_flags[] = $k;
             }
         }
-
         foreach ($array_sms_mail[1] as $k => $v) {
             if ($v[1] != 0) {
                 $array_sms_flags[] = $k;
             }
         }
+        foreach ($array_sms_mail[2] as $k => $v) {
+            if ($v[1] != 0) {
+                $array_telegram_flags[] = $k;
+            }
+        }
+        $telegram_info = telegram_get_chat_info(ADMIN_ID_ANY, Yii::$app->user->id, $user_data_by_billing[UINFO_ACC_ID_IDX]);
 
 
         //   Debugger::Eho('</br>');
@@ -202,8 +223,9 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         //   Debugger::Eho('</br>');
         //   Debugger::Eho('</br>');
         //   Debugger::Eho('</br>');
-        //  Debugger::PrintR($user_data_by_billing);
+        //  Debugger::PrintR($telegram_info);
         //  Debugger::Eho($test);
+        //Debugger::testDie();
         global $user_acc_offset;
 
         // преобразование контактов из строки в массив
@@ -425,8 +447,11 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
 
                 'email_message_type' => $array_mail_flags,
                 'sms_message_type' => $array_sms_flags,
+                'telegram_message_type' => $array_telegram_flags,
                 'email_message_type_all' => $array_sms_mail[0],
                 'sms_message_type_all' => $array_sms_mail[1],
+                'telegram_message_type_all' => $array_sms_mail[2],
+                'telegram_info' => $telegram_info,
             ),
             '103' => array(
                 'username' => 'test',

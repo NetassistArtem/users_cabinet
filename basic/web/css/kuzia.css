@@ -751,7 +751,7 @@ table.invis>tbody>tr.trow>td>input[type="submit"]:hover, div.payment_next_inform
 .red {
     color: red;
 }
-div.payment_next_information > form > div > input[type="submit"], div.payment_next_information > form > input[type="submit"]{
+div.payment_next_information > form > div > input[type="submit"], div.payment_next_information > form > input[type="submit"], div.payment_next_information > a >input[type="button"] {
     border-radius: 10px !important;
     display: block;
     width: 30%;

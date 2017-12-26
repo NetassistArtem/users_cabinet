@@ -63,6 +63,7 @@ $this->title = Yii::t('contacts-change-confirm', 'confirm_contact_info');
 
 
             <?php
+           // Debugger::EhoBr(Yii::$app->session->get('test'));
 
             if (Yii::$app->session->has('new_user_phone_or_email') && !empty(Yii::$app->session->get('new_user_phone_or_email')) && Yii::$app->session->has('confirmcode')):
 

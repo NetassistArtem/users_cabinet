@@ -390,10 +390,29 @@ class StaticPageController extends Controller
         foreach (Yii::$app->params['sms_message_types'] as $k => $v) {
             $sms_message_types[$k] = Yii::t('upravlenie-kabinetom', $v['lang_key']);
         }
+        $telegram_message_types = array();
+        foreach (Yii::$app->params['telegram_message_types'] as $k => $v) {
+            $telegram_message_types[$k] = Yii::t('upravlenie-kabinetom', $v['lang_key']);
+        }
         $message_lang = array();
         foreach (Yii::$app->params['lang'] as $k => $v) {
             $message_lang[$k] = Yii::t('upravlenie-kabinetom', $v['url']);
     }
+       // Debugger::Br();
+       // Debugger::PrintR($user_data['telegram_info']);
+      //  Debugger::Eho($user_data['telegram_info']);
+       // Debugger::testDie();
+        $telegram_registration = 0;
+        if(!$user_data['telegram_info']){
+            global $request_vars;
+            $telegram_registration = telegram_invite_acc(-1, Yii::$app->user->id, $user_data['account_id']); // функция биллинга, возвращает ссылку на регистрацию в телеграмме
+     //  Debugger::EhoBr($telegram_registration);
+        }
+      //  Debugger::PrintR($user_data['telegram_info']);
+
+
+
+
 
 
         $skin_types = array();
@@ -403,6 +422,7 @@ class StaticPageController extends Controller
 
         $selected_email_message_types = $user_data['email_message_type'];
         $selected_sms_message_types = $user_data['sms_message_type'];
+        $selected_telegram_message_types = $user_data['telegram_message_type'];
      //   Debugger::PrintR($user_data['email_message_type_all']);
       //  Debugger::PrintR($user_data['sms_message_type_all']);
 
@@ -430,13 +450,16 @@ class StaticPageController extends Controller
             'modelServicesChangePauseFinish' => $modelServicesChangePauseFinish,
             'email_message_types' => $email_message_types,
             'sms_message_types' => $sms_message_types,
+            'telegram_message_types' => $telegram_message_types,
             'message_lang' => $message_lang,
             'skin_types' => $skin_types,
             'selected_email_message_types' => $selected_email_message_types,
             'selected_sms_message_types' => $selected_sms_message_types,
+            'selected_telegram_message_types' => $selected_telegram_message_types,
             'selected_skin_type' => $selected_skin_type,
             'active_services_array' => $active_services_array,
             'paused_services_array' => $paused_services_array,
+            'telegram_registration' => $telegram_registration,
             // 'delete_phone_1_confirm' => $delete_phone_1_confirm,
         ]);
     }
@@ -880,8 +903,18 @@ class StaticPageController extends Controller
                 }
             }
         }
+        $p_o = str_split(Yii::$app->session->get('phone_to_change'));
+        if(count($p_o) == 12){
+            $full_old_phone = '+'.$p_o[0].$p_o[1].$p_o[2].' ('.$p_o[3].$p_o[4].') '.$p_o[5].$p_o[6].$p_o[7].' '.$p_o[8].$p_o[9].' '.$p_o[10].$p_o[11];
+
+        } else{
+            $full_old_phone = Yii::$app->session->get('phone_to_change');
+        }
+        $phone_old_short = (int)substr(Yii::$app->session->get('phone_to_change'), -9);
 
         return $this->render('phone-change', [
+            'phone_old' => $full_old_phone,
+            'phone_old_short' => $phone_old_short,
             'user_data' => $user_data,
             'modelPhoneFirstChange' => $modelPhoneFirstChange,
 

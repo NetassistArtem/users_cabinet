@@ -143,7 +143,7 @@ $this->title = Yii::t('support', 'technical_support');
                 <p><?= Yii::t('feedback', 'text_documents') ?> <i class="message_main_text">.pdf, .doc, .docs, .txt,
                         .odt</i></p>
             </div>
-            <?= $form_technical_support->field($modelTechnicalSupport, 'import_file_name')->fileInput(['class' => 'send_file_buttons', 'multiple' => true,])->label(Yii::t('feedback', 'attach_file')) ?>
+            <?= $form_technical_support->field($modelTechnicalSupport, 'import_file_name[]')->fileInput(['class' => 'send_file_buttons', 'multiple' => true,])->label(Yii::t('feedback', 'attach_file')) ?>
             <div class="hiden-fields">
                 <?= $form_technical_support->field($modelTechnicalSupport, 'y1')->hiddenInput(['value' => Yii::$app->formatter->asDate('now', 'Y')])->label(false); ?>
                 <?= $form_technical_support->field($modelTechnicalSupport, 'm1')->hiddenInput(['value' => Yii::$app->formatter->asDate('now', 'M')])->label(false); ?>

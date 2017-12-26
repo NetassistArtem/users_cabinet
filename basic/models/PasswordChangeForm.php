@@ -29,7 +29,7 @@ class PasswordChangeForm extends Model
 
             [['oldPassword','newPasswordRepeat', 'newPassword' ], 'trim'],
 
-            ['newPassword', 'compare', 'compareAttribute' => 'newPasswordRepeat'],
+            ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
 
             ['oldPassword', 'compare', 'compareValue' => Yii::$app->user->identity->password, 'message' =>Yii::t('upravlenie-kabinetom','wrong_password')],
 

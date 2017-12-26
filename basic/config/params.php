@@ -25,8 +25,8 @@ return [
                 'lang_key' => 'kuzia',
             ),
             'ico' => 'kuzia.ico',
-            'player_link' =>' http://kuzia.net.ua/IpTvPlayer-Kuzia-setup.exe',
-            'tv_playlist' => 'http://kuzia.net.ua/tv_playlist.m3u',
+            'player_link' =>' https://kuzia.ua/IpTvPlayer-Kuzia-setup.exe',
+            'tv_playlist' => 'https://kuzia.ua/tv_playlist.m3u',
             'logo_no_internet' => '/css/images/logo/kuzia_logo_b.png'
         ),
     ),
@@ -34,6 +34,7 @@ return [
     'payment_code' => '39481498',
     'domains' => array(
         'lk.alfa-inet.net' => 'kuzia',
+        'lk2.alfa-inet.net' => 'kuzia',
         'my.kuzia.net.ua' => 'kuzia',
         'my.alfa-inet.net' => 'alfa',
         'my.kuzia.ua' => 'kuzia',
@@ -324,6 +325,18 @@ return [
 
 
     ),
+    'telegram_message_types' => array(
+
+        1 => array(
+            0 => 'Уведомления',
+            'lang_key' => 'notice'
+        ),
+        2 => array(
+            0 => 'Напоминания об оплате',
+            'lang_key' => 'reminders_payment'
+        ),
+
+    ),
 
     'skin_types' => array(
 
@@ -467,7 +480,7 @@ return [
         'verification_cod_up_chars' =>1, //использовать буквы верхнего регистра для формирования кода подтверждения, 1- использовать, 0 - не использовать
     ),
 
-    'sms_limit' => 2,
+    'sms_limit' => 12, //2
     'sms_time_limit' =>86400, //3600 - час, 86400 - сутки
     'sms_time_limit_delete' => 2592000, //2592000 - 30 дней
     'sms_limit_pass_renew' => 4,

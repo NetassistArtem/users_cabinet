@@ -138,6 +138,7 @@ class TechnicalSupportForm extends Model
 
 
         global $request_vars;
+       // global $opt_vars;
         global $todo_ctx;
 
 

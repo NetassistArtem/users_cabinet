@@ -54,6 +54,8 @@ return [
     'black' => 'Black',
     'black_crt' => 'Black CRT',
     'white' => 'White',
+    'phone_change_new' => 'New phone',
+    'old_phone_change' => 'Old phone',
 
     'pause_title' => 'Pause services',
     'traffic_limit_title' => 'Blocking of Yandex, VK, etc.',
@@ -65,6 +67,9 @@ return [
     'uk' => 'Ukrainian',
     'en' => 'English',
     'skin_lang' => 'Preferred language',
+    'receive_telegram' => 'Receiving in Telegram',
+    'telegram_register_link' => 'Activate account in telegram',
+    'telegram_register' => 'Для получения уведомлений через Телеграм, необходимо активировать аккаунт.',
 
 
 ];

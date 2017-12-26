@@ -33,6 +33,7 @@ class ArhivNews extends Model
             $log_message = array_reverse($log_message_reverse);
 
 
+
             foreach ($log_message as $k => $v) {
 
                 if (($v[USER_MSG_LOG_REF_MSG_ID_IDX] && $v[USER_MSG_LOG_REF_MSG_ID_IDX] !==0) || $v[USER_MSG_LOG_TXT_IDX]) {

@@ -59,6 +59,11 @@ class SmsStatistics
             'time_l' => $time_l,
         );
         $data = $connection->getDate($sql,$placeholders);
+       // Debugger::PrintR($data);
+       // Debugger::EhoBr(count($data));
+      //  Debugger::EhoBr($sms_limit);
+        //Debugger::testDie();
+
         if(!empty($data)){
             if(count($data) >= $sms_limit){
                 return false;

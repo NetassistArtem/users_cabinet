@@ -6,11 +6,21 @@
    // $("#modal").modal("show");
     //
 //<? Yii::t("flash-message","change_message_confirm") ?>;
-    function destroy_submit_phone()
+    function destroy_submit_phone(old_phone)
     {
        // $("#modal").modal("show");
-        if (confirm('Bы уверены, что хотите удалить телефон из ваших контаков?'))
+       // alert('test');
+
+        if (confirm('Bы уверены, что хотите удалить телефон из ваших контаков?')){
+            $('#phonefirstchangeform-phone1').attr("value",old_phone);
             return true;
-        else return false;
+        }else{
+            return false;
+        }
+
+
+
+
+
     }
 //});
